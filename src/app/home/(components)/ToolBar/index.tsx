@@ -11,7 +11,7 @@ const ToolBar: FC<ToolbarProps> = ({ containerRef }) => {
 
 
 	return (
-		<DraggableLayout refContainer={containerRef} headerName='Элементы'>
+		<DraggableLayout refContainer={containerRef} headerName='Элементы' className='left-5'>
 			Панель компонентов трубы
 		</DraggableLayout>
 	)

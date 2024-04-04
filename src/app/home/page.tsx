@@ -8,7 +8,7 @@ import { useRef } from 'react'
 export default function Home() {
 	const containerRef = useRef(null)
 	return (
-		<div ref={containerRef} className='flex relative w-full justify-center overflow-hidden h-full'>
+		<div ref={containerRef} className='flex relative w-full justify-center overflow-hidden h-full p-4'>
 			<ToolBar containerRef={containerRef} />
 			<ConditionsBar containerRef={containerRef} />
 			<h1>

@@ -4,6 +4,7 @@ import { useDraggable } from '@/utils/useDraggable'
 import { GripHorizontal, Maximize2 } from 'lucide-react'
 import { FC, RefObject, useRef, useState } from 'react'
 import { Button } from './button'
+import { Card, CardContent, CardHeader, CardTitle } from './card'
 
 interface DraggableLayoutProps {
 	refContainer: RefObject<HTMLElement>,
@@ -12,7 +13,7 @@ interface DraggableLayoutProps {
 	headerName: string
 }
 
-const DraggableLayout: FC<DraggableLayoutProps> = ({ refContainer, children, headerName, className = 'left-1' }) => {
+const DraggableLayout: FC<DraggableLayoutProps> = ({ refContainer, children, headerName, className }) => {
 	const toolBarRef = useRef(null)
 	const toolBarHeaderRef = useRef(null)
 	const [isOpen, setIsOpen] = useState(true)
@@ -20,15 +21,14 @@ const DraggableLayout: FC<DraggableLayoutProps> = ({ refContainer, children, hea
 	useDraggable({ refEventsElement: toolBarHeaderRef, refTransformElement: toolBarRef, refContainer })
 
 	return (
-		<aside ref={toolBarRef} className={`absolute h-fit w-fit rounded-md border bg-white ${className}`}>
-			<div
-
-				className='flex justify-between items-center border-b  gap-4 '
+		<Card ref={toolBarRef} className={`absolute h-fit w-fit rounded-md border bg-white ${className}`}>
+			<CardHeader
+				className='flex-row justify-between items-center border-b p-0  gap-4 space-y-0 m-1'
 			>
 				<GripHorizontal ref={toolBarHeaderRef} className='cursor-pointer ml-1' size={15} />
-				<span className='whitespace-nowrap'>
+				<CardTitle className='whitespace-nowrap'>
 					{headerName}
-				</span>
+				</CardTitle>
 				<Button
 					variant={'outline'}
 					className='border-none my-1 mr-1'
@@ -41,12 +41,13 @@ const DraggableLayout: FC<DraggableLayoutProps> = ({ refContainer, children, hea
 							: <Maximize2 size={14} />
 					}
 				</Button>
-			</div>
-
-			{isOpen &&
-				children
-			}
-		</aside>
+			</CardHeader>
+			<CardContent className={`${isOpen ? 'p-1' : 'p-0'}`}>
+				{isOpen &&
+					children
+				}
+			</CardContent>
+		</Card>
 	)
 }
 

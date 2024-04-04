@@ -12,9 +12,14 @@ interface coordsType {
 	lastX: number,
 	lastY: number
 }
+interface stylesType {
+	zIndex: string,
+	backgroundColor: string,
+}
 
 export const useDraggable = ({ refEventsElement, refTransformElement, refContainer }: props) => {
 	const isClicked = useRef<boolean>(false)
+	const styles = useRef<stylesType>({ zIndex: '0', backgroundColor: 'white' })
 	const coords = useRef<coordsType>({
 		startX: 0,
 		startY: 0,
@@ -23,16 +28,36 @@ export const useDraggable = ({ refEventsElement, refTransformElement, refContain
 	})
 
 	useEffect(() => {
+		if (refTransformElement.current) {
+			coords.current = {
+				startX: refTransformElement.current?.offsetLeft,
+				startY: refTransformElement.current?.offsetTop,
+				lastX: refTransformElement.current?.offsetLeft,
+				lastY: refTransformElement.current?.offsetTop
+			}
+			styles.current = {
+				zIndex: refTransformElement.current.style.zIndex,
+				backgroundColor: refTransformElement.current.style.backgroundColor
+			}
+		}
+	}, [refTransformElement])
+
+	useEffect(() => {
 		if (!refEventsElement.current || !refTransformElement.current || !refContainer.current) return
-		const eventElement = refEventsElement.current
-		const transformElement = refTransformElement.current
-		const container = refContainer.current
+		const eventElement: HTMLElement = refEventsElement.current
+		const transformElement: HTMLElement = refTransformElement.current
+		const container: HTMLElement = refContainer.current
 		const onMouseDown = (e: MouseEvent) => {
+			transformElement.style.zIndex = '1000'
+			// container.style.backgroundColor = 'rgba(52,62,64,0.1)'
 			coords.current.startX = e.clientX
 			coords.current.startY = e.clientY
 			isClicked.current = true
 		}
 		const onMouseUp = (e: MouseEvent) => {
+			transformElement.style.zIndex = styles.current.zIndex
+			// container.style.backgroundColor = styles.current.backgroundColor
+
 			isClicked.current = false
 			coords.current.lastX = transformElement.offsetLeft
 			coords.current.lastY = transformElement.offsetTop
@@ -43,21 +68,24 @@ export const useDraggable = ({ refEventsElement, refTransformElement, refContain
 
 			const nextX = e.clientX - coords.current.startX + coords.current.lastX
 			const nextY = e.clientY - coords.current.startY + coords.current.lastY
-
-			transformElement.style.top = `${nextY}px`
-			transformElement.style.left = `${nextX}px`
+			if (nextX > 0 && nextX + transformElement.offsetWidth < container.offsetWidth) {
+				transformElement.style.left = `${nextX}px`
+			}
+			if (nextY > 0 && nextY + transformElement.offsetHeight < container.offsetHeight) {
+				transformElement.style.top = `${nextY}px`
+			}
 		}
 
 
 		eventElement.addEventListener('mousedown', onMouseDown)
-		eventElement.addEventListener('mouseup', onMouseUp)
+		container.addEventListener('mouseup', onMouseUp)
 		container.addEventListener('mousemove', onMouseMove)
 		container.addEventListener('mouseleave', onMouseUp)
 
 
 		const cleanUp = () => {
 			eventElement.removeEventListener('mousedown', onMouseDown)
-			eventElement.removeEventListener('mouseup', onMouseUp)
+			container.removeEventListener('mouseup', onMouseUp)
 			container.removeEventListener('mousemove', onMouseMove)
 			container.removeEventListener('mouseleave', onMouseUp)
 		}
