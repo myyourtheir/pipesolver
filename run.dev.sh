@@ -8,7 +8,7 @@ else
 	cd nextjs/ 
 	npm run dev &
 	cd ../fastApi/
-	uvicorn main:app --reload
+	uvicorn app:app --reload
 fi
 
 

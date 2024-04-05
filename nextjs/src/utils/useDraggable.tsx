@@ -26,7 +26,6 @@ export const useDraggable = ({ refEventsElement, refTransformElement, refContain
 		lastX: 0,
 		lastY: 0
 	})
-
 	useEffect(() => {
 		if (refTransformElement.current) {
 			coords.current = {
