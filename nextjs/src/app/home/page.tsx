@@ -1,6 +1,6 @@
 'use client'
 import Image from "next/image"
-import ToolBar from './(components)/ToolBar'
+import ElementsBar from './(components)/ElementsBar'
 import ConditionsBar from './(components)/ConditionsBar'
 import { useEffect, useRef } from 'react'
 
@@ -12,7 +12,7 @@ export default function Home() {
 	// })
 	return (
 		<div ref={containerRef} className='flex relative w-full justify-center overflow-hidden h-full p-4'>
-			<ToolBar containerRef={containerRef} />
+			<ElementsBar containerRef={containerRef} />
 			<ConditionsBar containerRef={containerRef} />
 			<h1>
 				home

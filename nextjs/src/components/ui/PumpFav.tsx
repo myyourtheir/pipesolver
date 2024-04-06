@@ -1,0 +1,14 @@
+import { SVGProps } from 'react'
+
+const PumpFav = ({ ...props }: SVGProps<SVGSVGElement>) => {
+	return (
+		<svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+			<path fillRule="evenodd" clipRule="evenodd" d="M21 21V40.6C10.1752 40.6 1.4 31.8248 1.4 21H21ZM22 21V40.5749C32.3601 40.0543 40.6 31.4894 40.6 21H22ZM40.5749 20H22V1.42507C32.0289 1.92906 40.0709 9.97114 40.5749 20ZM42 21C42 32.2628 33.1336 41.4547 22 41.9766V42H21C9.40202 42 0 32.598 0 21V20H0.0233902C0.545343 8.86637 9.73725 0 21 0H22V0.0233902C32.8022 0.529808 41.4702 9.19775 41.9766 20H42V21ZM1.42507 20C1.9457 9.6399 10.5106 1.4 21 1.4V20H1.42507Z" fill="black" />
+			<path d="M40.5749 20H22V1.42507C32.0289 1.92906 40.0709 9.97114 40.5749 20Z" fill="#EAEBEB" />
+			<path d="M21 21V40.6C10.1752 40.6 1.4 31.8248 1.4 21H21Z" fill="#EAEBEB" />
+		</svg>
+
+	)
+}
+
+export default PumpFav
