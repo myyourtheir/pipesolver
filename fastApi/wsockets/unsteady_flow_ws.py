@@ -42,19 +42,9 @@ async def unsteady_flow_ws(websocket: WebSocket):
 #         "viscosity": 200
 #     },
 #     "pipeline": [
-#         {
-#             "type": "pipe",
-#             "diameter": 20,
-#             "length": 20
-#         },
-#         {
-#             "type": "pipe",
-#             "diameter": 20,
-#             "length": 20
-#         }
-#     ],
-#     "boundary_params": {
-#         "left": {"type": "speed", "value": 10},
-#         "right": {"type": "speed", "value": 10}
-#     }
+#         {"type": "provider", "mode": "speed", "value": 10},
+#             {"type": "pipe", "diameter": 1000, "length": 1},
+#             {"type": "pipe", "diameter": 20, "length": 20},
+#             {"type": "consumer", "mode": "speed", "value": 10}
+#     ]
 # }

@@ -12,7 +12,6 @@ from schemas.unsteady_flow_ws_scheme import (
     Pump_params,
     Gate_valve_params,
     Save_valve_params,
-    Boundary_params,
 )
 
 
@@ -34,13 +33,17 @@ def count_l_and_num_of_elems(
             acc.L += element.length * 1000
             acc.N += element.length
             acc.num_of_x_grid_nodes += element.length
+        elif element.type in ["provider", "consumer"]:
+            acc.L += 1000
+            acc.N += 1
+            acc.num_of_x_grid_nodes += 1
         else:
             acc.num_of_x_grid_nodes += 2
 
         return acc
 
-    initial_values = L_and_num_of_elems(**{"L": 2000, "N": 2, "num_of_x_grid_nodes": 1})
-    result = reduce(sum_element_props, elements, initial_values)  # 2 - граничные точки
+    initial_values = L_and_num_of_elems(**{"L": 0, "N": 0, "num_of_x_grid_nodes": 0})
+    result = reduce(sum_element_props, elements, initial_values)
     return (result.L, round(result.N), round(result.num_of_x_grid_nodes))
 
 
@@ -64,9 +67,6 @@ def make_x(elements: list[Elements_model], L, N):
 def calculate(data: Unsteady_data):
     cond_params: Cond_params = data.cond_params
     elements: list[Elements_model] = data.pipeline
-    bound_params: dict[Union[Literal["right", "left"]], Boundary_params] = (
-        data.boundary_params
-    )
     t = 0
     g = 9.81
     c = bf.c
@@ -99,24 +99,23 @@ def calculate(data: Unsteady_data):
         count_pipe_iter: int = 0
         iter = 0
         main = []
-        # left_boundary
-        main.append(
-            bf.left_boundary_method(
-                Davleniya,
-                Skorosty,
-                iter,
-                1 if bound_params["left"].type == "pressure" else 0,
-                bound_params["left"].value,
-                pipes[count_pipe_iter].diameter,
-                v,
-                ro,
-                T,
-            )
-        )
-        iter += 1
         for elem in elements:
-
-            if elem.type == "pump":
+            if elem.type == "provider":
+                main.append(
+                    bf.left_boundary_method(
+                        Davleniya,
+                        Skorosty,
+                        iter,
+                        1 if elem.mode == "pressure" else 0,
+                        elem.value,
+                        pipes[count_pipe_iter].diameter,
+                        v,
+                        ro,
+                        T,
+                    )
+                )
+                iter += 1
+            elif elem.type == "pump":
                 main.append(
                     bf.pump_method(
                         Davleniya,
@@ -250,21 +249,21 @@ def calculate(data: Unsteady_data):
                 )
                 # k_list.append(main[-1][3])
                 iter += 2
-            # right_boundary
-            main.append(
-                bf.right_boundary_method(
-                    Davleniya,
-                    Skorosty,
-                    iter,
-                    1 if bound_params["right"].type == "pressure" else 0,
-                    bound_params["right"].value,
-                    pipes[count_pipe_iter - 1].diameter,
-                    v,
-                    ro,
-                    T,
+            elif elem.type == "consumer":
+                main.append(
+                    bf.right_boundary_method(
+                        Davleniya,
+                        Skorosty,
+                        iter,
+                        1 if elem.mode == "pressure" else 0,
+                        elem.value,
+                        pipes[count_pipe_iter - 1].diameter,
+                        v,
+                        ro,
+                        T,
+                    )
                 )
-            )
-        iter += 1
+                iter += 1
         times.append(t)
         t += T
         """Распаковка main"""
@@ -279,7 +278,6 @@ def calculate(data: Unsteady_data):
         Davleniya.append(p_moment)
         Skorosty.append(V_moment)
         Napory.append(H_moment)
-
         yield {
             # 'x': xx,
             "Davleniya": [{"x": x, "y": y / 10**6} for x, y in zip(xx, p_moment)],
@@ -297,13 +295,11 @@ if __name__ == "__main__":
     params = Unsteady_data(
         cond_params={"time_to_iter": 500, "density": 200, "viscosity": 200},
         pipeline=[
-            {"type": "pipe", "diameter": 1000, "length": 20},
+            {"type": "provider", "mode": "speed", "value": 10},
+            {"type": "pipe", "diameter": 1000, "length": 1},
             # {"type": "pipe", "diameter": 20, "length": 20},
+            {"type": "consumer", "mode": "speed", "value": 10},
         ],
-        boundary_params={
-            "left": {"type": "speed", "value": 10},
-            "right": {"type": "speed", "value": 10},
-        },
     )
 
     generator = calculate(params)
