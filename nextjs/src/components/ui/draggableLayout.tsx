@@ -10,10 +10,11 @@ interface DraggableLayoutProps {
 	refContainer: RefObject<HTMLElement>,
 	children: React.ReactNode,
 	className?: string,
-	headerName: string
+	headerName: string,
+	hideable?: boolean
 }
 
-const DraggableLayout: FC<DraggableLayoutProps> = ({ refContainer, children, headerName, className }) => {
+const DraggableLayout: FC<DraggableLayoutProps> = ({ refContainer, children, headerName, className, hideable = true }) => {
 	const toolBarRef = useRef(null)
 	const toolBarHeaderRef = useRef(null)
 	const [isOpen, setIsOpen] = useState(true)
@@ -21,7 +22,7 @@ const DraggableLayout: FC<DraggableLayoutProps> = ({ refContainer, children, hea
 	useDraggable({ refEventsElement: toolBarHeaderRef, refTransformElement: toolBarRef, refContainer })
 
 	return (
-		<Card ref={toolBarRef} className={`absolute h-fit w-fit rounded-md border bg-white ${className}`}>
+		<Card ref={toolBarRef} className={`absolute h-fit w-fit rounded-md border bg-white ${className} ${isOpen ? 'p-1' : 'p-0 w-fit h-fit'}`}>
 			<CardHeader
 				className='flex-row justify-between items-center border-b p-0  gap-4 space-y-0 m-1'
 			>
@@ -29,20 +30,24 @@ const DraggableLayout: FC<DraggableLayoutProps> = ({ refContainer, children, hea
 				<CardTitle className='whitespace-nowrap'>
 					{headerName}
 				</CardTitle>
-				<Button
-					variant={'outline'}
-					className='border-none my-1 mr-1'
-					size={'xsm'}
-					onClick={() => setIsOpen(prev => !prev)}
-				>
-					{
-						isOpen
-							? '-'
-							: <Maximize2 size={14} />
-					}
-				</Button>
+				{hideable ?
+					<Button
+						variant={'outline'}
+						className='border-none my-1 mr-1'
+						size={'xsm'}
+						onClick={() => setIsOpen(prev => !prev)}
+					>
+						{
+							isOpen
+								? '-'
+								: <Maximize2 size={14} />
+						}
+					</Button> :
+					<span>
+					</span>
+				}
 			</CardHeader>
-			<CardContent className={`${isOpen ? 'p-1' : 'p-0'}`}>
+			<CardContent className={`${isOpen ? 'p-1' : 'p-0 w-0 h-0'} w-full h-[calc(100%-1em-8px)]`}>
 				{isOpen &&
 					children
 				}

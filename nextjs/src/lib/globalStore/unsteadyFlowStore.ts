@@ -1,9 +1,13 @@
 import { create } from 'zustand'
-import { UnsteadyInputData } from './types/stateTypes'
-import { UnsteadyFlowActions } from './types/actionTypes'
+import { UiConfig, UnsteadyInputData } from '../../../types/stateTypes'
+import { UnsteadyFlowActions } from '../../../types/actionTypes'
 import { produce } from "immer"
 
-
+const defaultUiConfig: UiConfig = {
+	uiConfig: {
+		selected: false
+	}
+}
 export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActions>()((set) => ({
 	cond_params: {
 		time_to_iter: 500,
@@ -11,38 +15,38 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 		viscosity: 10
 	},
 	pipeline: [],
-	boundary_params: {
-		left: {
-			type: 'pressure',
-			value: 0
-		},
-		right: {
-			type: 'pressure',
-			value: 0
-		}
-	},
 	updateCondParams(prop, value) {
 		return set(produce((state: UnsteadyInputData) => {
 			state.cond_params[prop] = value
 		}))
 	},
-	updateBoundaryParams(side, prop, value) {
-		// return set(produce((state: UnsteadyInputData) => {
-		// 	state.boundary_params[side][prop] = value
-		// }))
-		return set((state) => ({
-			boundary_params: {
-				...state.boundary_params,
-				[side]: {
-					...state.boundary_params[side],
-					[prop]: value
-				}
-			}
-		}))
-	},
 	addElement(element) {
+		const elementWithUiConfig = { ...element, ...defaultUiConfig }
 		return set(state => ({
-			pipeline: [...state.pipeline, element]
+			pipeline: [...state.pipeline, elementWithUiConfig]
 		}))
 	},
+	setIsSelected(idx) {
+		return set(produce((state: UnsteadyInputData) => {
+			state.pipeline.forEach((elem, i) => {
+				if (i !== idx) {
+					elem.uiConfig.selected = false
+				} else {
+					elem.uiConfig.selected = true
+				}
+			})
+		}))
+	},
+	deleteElement(idx) {
+		return set(state => ({
+			pipeline: state.pipeline.filter((_, i) => i !== idx
+			)
+		}))
+	},
+	deleteAll() {
+		return set(state => ({
+			pipeline: []
+		}))
+	}
+
 }))

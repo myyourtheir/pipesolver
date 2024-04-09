@@ -29,11 +29,27 @@ import { ElementContext } from './Element'
 
 const formSchema = z.object({
 	type: z.literal('pump'),
-	coef_a: z.number({ invalid_type_error: 'Вы ввели не число' }).nonnegative({ 'message': "Не может быть меньше 0" }),
-	coef_b: z.number({ invalid_type_error: 'Вы ввели не число' }).nonnegative({ 'message': "Не может быть меньше 0" }),
+	coef_a: z.preprocess(
+		(val) => Number(String(val)),
+		z.number({
+			invalid_type_error: "Вы ввели не число",
+		}).nonnegative("Число должно быть больше или равно нулю")),
+	coef_b: z.preprocess(
+		(val) => Number(String(val)),
+		z.number({
+			invalid_type_error: "Вы ввели не число",
+		}).nonnegative("Число должно быть больше или равно нулю")),
 	mode: z.union([z.literal('open'), z.literal('close')]),
-	start_time: z.number({ invalid_type_error: 'Вы ввели не число' }).nonnegative({ 'message': "Не может быть меньше 0" }),
-	duration: z.number({ invalid_type_error: 'Вы ввели не число' }).nonnegative({ 'message': "Не может быть меньше 0" }),
+	start_time: z.preprocess(
+		(val) => Number(String(val)),
+		z.number({
+			invalid_type_error: "Вы ввели не число",
+		}).nonnegative("Число должно быть больше или равно нулю")),
+	duration: z.preprocess(
+		(val) => Number(String(val)),
+		z.number({
+			invalid_type_error: "Вы ввели не число",
+		}).nonnegative("Число должно быть больше или равно нулю")),
 })
 
 

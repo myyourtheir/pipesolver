@@ -21,8 +21,16 @@ import { ElementContext } from './Element'
 
 const formSchema = z.object({
 	type: z.literal('pipe'),
-	length: z.number({ invalid_type_error: 'Вы ввели не число' }).nonnegative({ 'message': "Не может быть меньше 0" }),
-	diameter: z.number({ invalid_type_error: 'Вы ввели не число' }).nonnegative({ 'message': "Не может быть меньше 0" })
+	length: z.preprocess(
+		(val) => Number(String(val)),
+		z.number({
+			invalid_type_error: "Вы ввели не число",
+		}).nonnegative("Число должно быть больше или равно нулю")),
+	diameter: z.preprocess(
+		(val) => Number(String(val)),
+		z.number({
+			invalid_type_error: "Вы ввели не число",
+		}).nonnegative("Число должно быть больше или равно нулю"))
 })
 
 
@@ -33,7 +41,7 @@ const PipeElementContent = () => {
 		defaultValues: {
 			type: 'pipe',
 			length: 100,
-			diameter: 1000
+			diameter: 1000,
 		},
 	})
 

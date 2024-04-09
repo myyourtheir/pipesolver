@@ -30,9 +30,21 @@ import { useContext } from 'react'
 const formSchema = z.object({
 	type: z.literal('gate_valve'),
 	mode: z.union([z.literal('open'), z.literal('close')]),
-	start_time: z.number({ invalid_type_error: 'Вы ввели не число' }).nonnegative({ 'message': "Не может быть меньше 0" }),
-	duration: z.number({ invalid_type_error: 'Вы ввели не число' }).nonnegative({ 'message': "Не может быть меньше 0" }),
-	percentage: z.number({ invalid_type_error: 'Вы ввели не число' }).max(100, { 'message': 'Не более 100%' }).nonnegative({ 'message': "Не может быть меньше 0" }),
+	start_time: z.preprocess(
+		(val) => Number(String(val)),
+		z.number({
+			invalid_type_error: "Вы ввели не число",
+		}).nonnegative("Число должно быть больше или равно нулю")),
+	duration: z.preprocess(
+		(val) => Number(String(val)),
+		z.number({
+			invalid_type_error: "Вы ввели не число",
+		}).nonnegative("Число должно быть больше или равно нулю")),
+	percentage: z.preprocess(
+		(val) => Number(String(val)),
+		z.number({
+			invalid_type_error: "Вы ввели не число",
+		}).nonnegative("Число должно быть больше или равно нулю").max(100, { message: "Не более 100%" })),
 })
 
 

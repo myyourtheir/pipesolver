@@ -18,15 +18,12 @@ import {
 import { Input } from "@/components/ui/input"
 import { useContext } from 'react'
 import { ElementContext } from './Element'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
 const formSchema = z.object({
-	type: z.literal('safe_valve'),
-	coef_q: z.preprocess(
-		(val) => Number(String(val)),
-		z.number({
-			invalid_type_error: "Вы ввели не число",
-		}).nonnegative("Число должно быть больше или равно нулю")),
-	max_pressure: z.preprocess(
+	type: z.literal('provider'),
+	mode: z.union([z.literal('speed'), z.literal('pressure')]),
+	value: z.preprocess(
 		(val) => Number(String(val)),
 		z.number({
 			invalid_type_error: "Вы ввели не число",
@@ -34,14 +31,14 @@ const formSchema = z.object({
 })
 
 
-const SafeValveElementContent = () => {
+const ProviderElementContent = () => {
 	const { setOpen } = useContext(ElementContext)
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			type: 'safe_valve',
-			coef_q: 0.5,
-			max_pressure: 9
+			type: 'provider',
+			mode: 'pressure',
+			value: 0
 		},
 	})
 
@@ -56,29 +53,34 @@ const SafeValveElementContent = () => {
 				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
 					<FormField
 						control={form.control}
-						name="coef_q"
+						name="mode"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Коэффициент расхода</FormLabel>
-								<FormControl>
-									<div className='flex items-center gap-2'>
-										<Input placeholder="Введите значение" {...field} />
-									</div>
-								</FormControl>
+								<FormLabel>Условие</FormLabel>
+								<Select onValueChange={field.onChange} defaultValue={field.value}>
+									<FormControl>
+										<SelectTrigger>
+											<SelectValue placeholder="Выберите значение" />
+										</SelectTrigger>
+									</FormControl>
+									<SelectContent>
+										<SelectItem value="pressure">Давление</SelectItem>
+										<SelectItem value="speed">Скорость</SelectItem>
+									</SelectContent>
+								</Select>
 								<FormMessage />
 							</FormItem>
 						)}
 					/>
 					<FormField
 						control={form.control}
-						name="max_pressure"
+						name="value"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Давление срабатывания</FormLabel>
 								<FormControl>
 									<div className='flex items-center gap-2'>
 										<Input placeholder="Введите значение" {...field} />
-										<span>{'атм'}</span>
+										<span>{form.getValues().mode === 'pressure' ? 'кПа' : 'м/с'}</span>
 									</div>
 								</FormControl>
 								<FormMessage />
@@ -94,4 +96,4 @@ const SafeValveElementContent = () => {
 	)
 }
 
-export default SafeValveElementContent
+export default ProviderElementContent

@@ -1,0 +1,1 @@
+export interface ElemProps { start: [number, number, number], isSelected: boolean }

@@ -9,18 +9,12 @@ import {
 	HoverCardContent,
 	HoverCardTrigger,
 } from "@/components/ui/hover-card"
-import {
-	Tooltip,
-	TooltipContent,
-	TooltipProvider,
-	TooltipTrigger,
-} from "@/components/ui/tooltip"
-import { Badge } from "@/components/ui/badge"
 import { FC, createContext, useState } from 'react'
 interface ElementProps {
 	TriggerContent: any,
 	hoverTitle: string
 	children: React.ReactNode
+	disabled: boolean
 }
 export type ElementContextType = {
 	setOpen: (c: boolean) => void
@@ -28,12 +22,12 @@ export type ElementContextType = {
 
 export const ElementContext = createContext<ElementContextType>({ setOpen: () => { } })
 
-const Element: FC<ElementProps> = ({ TriggerContent, children, hoverTitle }) => {
+const Element: FC<ElementProps> = ({ TriggerContent, children, hoverTitle, disabled }) => {
 	const [open, setOpen] = useState(false)
 	return (
 		<ElementContext.Provider value={{ setOpen }}>
 			<Popover open={open} onOpenChange={setOpen}>
-				<PopoverTrigger className=''>
+				<PopoverTrigger className={`disabled:cursor-not-allowed`} disabled={disabled}>
 					<HoverCard openDelay={100} closeDelay={100}>
 						<HoverCardTrigger>
 							<TriggerContent />
@@ -42,16 +36,6 @@ const Element: FC<ElementProps> = ({ TriggerContent, children, hoverTitle }) => 
 							{hoverTitle}
 						</HoverCardContent>
 					</HoverCard>
-					{/* <TooltipProvider>
-						<Tooltip >
-							<TooltipTrigger asChild>
-								<TriggerContent />
-							</TooltipTrigger >
-							<TooltipContent asChild>
-								{hoverTitle}
-							</TooltipContent>
-						</Tooltip>
-					</TooltipProvider> */}
 				</PopoverTrigger>
 				<PopoverContent side='right'>
 					{children}
