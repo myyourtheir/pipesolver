@@ -10,11 +10,11 @@ const defaultUiConfig: UiConfig = {
 }
 export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActions>()((set) => ({
 	cond_params: {
-		time_to_iter: 500,
+		time_to_iter: 200,
 		density: 850,
 		viscosity: 10
 	},
-	pipeline: [],
+	pipeline: [{ "type": "provider", "mode": "pressure", "value": 0, "uiConfig": { "selected": false } }, { "type": "pump", "coef_a": 310, "coef_b": 0.000008, "mode": "open", "start_time": 0, "duration": 20, "uiConfig": { "selected": false } }, { "type": "pipe", "length": 100, "diameter": 1, "uiConfig": { "selected": false } }, { "type": "consumer", "mode": "pressure", "value": 0, "uiConfig": { "selected": false } }],
 	updateCondParams(prop, value) {
 		return set(produce((state: UnsteadyInputData) => {
 			state.cond_params[prop] = value
@@ -47,6 +47,6 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 		return set(state => ({
 			pipeline: []
 		}))
-	}
+	},
 
 }))

@@ -13,6 +13,7 @@ from schemas.unsteady_flow_ws_scheme import (
     Gate_valve_params,
     Save_valve_params,
 )
+from pprint import pprint
 
 
 class L_and_num_of_elems(BaseModel):
@@ -74,13 +75,12 @@ def calculate(data: Unsteady_data):
     v = cond_params.viscosity * 10 ** (-6)
     ro = cond_params.density
     t_rab = cond_params.time_to_iter
-
     L, N, num_of_x_grid_nodes = count_l_and_num_of_elems(elements)
     T = L / (N * c)
     # p10 = (0 - bf.vis_otm[0]) * ro * g
     # p20 = (0 - bf.vis_otm[N]) * ro * g
 
-    V_O = [0.00000001] * num_of_x_grid_nodes
+    V_O = [0] * num_of_x_grid_nodes
     H_O = [0] * num_of_x_grid_nodes
 
     Davleniya = [
@@ -126,8 +126,8 @@ def calculate(data: Unsteady_data):
                         1 if elem.mode == "open" else 2,
                         1,
                         pipes[count_pipe_iter].diameter,
-                        elem.start_time,
                         elem.duration,
+                        elem.start_time,
                         t,
                         v,
                         ro,
@@ -144,8 +144,8 @@ def calculate(data: Unsteady_data):
                         1 if elem.mode == "open" else 2,
                         2,
                         pipes[count_pipe_iter].diameter,
-                        elem.start_time,
                         elem.duration,
+                        elem.start_time,
                         t,
                         v,
                         ro,
@@ -190,8 +190,8 @@ def calculate(data: Unsteady_data):
                         1 if elem.mode == "open" else 2,
                         elem.start_time,
                         pipes[count_pipe_iter].diameter,
-                        elem.start_time,
                         elem.duration,
+                        elem.start_time,
                         t,
                         v,
                         ro,
@@ -207,8 +207,8 @@ def calculate(data: Unsteady_data):
                         1 if elem.mode == "open" else 2,
                         elem.start_time,
                         pipes[count_pipe_iter].diameter,
-                        elem.start_time,
                         elem.duration,
+                        elem.start_time,
                         t,
                         v,
                         ro,
@@ -264,6 +264,7 @@ def calculate(data: Unsteady_data):
                     )
                 )
                 iter += 1
+
         times.append(t)
         t += T
         """Распаковка main"""
@@ -273,37 +274,63 @@ def calculate(data: Unsteady_data):
         H_moment = []
         for i in range(len(main)):
             p_moment.append(main[i][0])
-            V_moment.append(main[i][1])
+            V_moment.append((main[i][1]))
             H_moment.append(main[i][2])
         Davleniya.append(p_moment)
         Skorosty.append(V_moment)
         Napory.append(H_moment)
-        yield {
+        res = {
             # 'x': xx,
-            "Davleniya": [{"x": x, "y": y / 10**6} for x, y in zip(xx, p_moment)],
-            "Skorosty": [{"x": x, "y": y} for x, y in zip(xx, V_moment)],
-            "Napory": [{"x": x, "y": y} for x, y in zip(xx, H_moment)],
+            "Davleniya": [
+                {"x": x, "y": round(y / 10**6, 2)} for x, y in zip(xx, p_moment)
+            ],
+            "Skorosty": [{"x": x, "y": round(y, 2)} for x, y in zip(xx, V_moment)],
+            "Napory": [{"x": x, "y": round(y, 2)} for x, y in zip(xx, H_moment)],
             "t": t,
             # 'max_val': (np.max(H_moment), np.max(p_moment), np.max(V_moment)),
             # 'min_val': (np.min(H_moment), np.min(p_moment), np.min(V_moment))
         }
-        # time.sleep(1)
+        yield res
 
 
 if __name__ == "__main__":
 
     params = Unsteady_data(
-        cond_params={"time_to_iter": 500, "density": 200, "viscosity": 200},
+        cond_params={"time_to_iter": 50, "density": 800, "viscosity": 10},
         pipeline=[
-            {"type": "provider", "mode": "speed", "value": 10},
-            {"type": "pipe", "diameter": 1000, "length": 1},
-            # {"type": "pipe", "diameter": 20, "length": 20},
-            {"type": "consumer", "mode": "speed", "value": 10},
+            {
+                "type": "provider",
+                "mode": "pressure",
+                "value": 1000000,
+                "uiConfig": {"selected": False},
+            },
+            # {
+            #     "type": "pump",
+            #     "coef_a": 310,
+            #     "coef_b": 0.000008,
+            #     "mode": "open",
+            #     "start_time": 0,
+            #     "duration": 20,
+            #     "uiConfig": {"selected": False},
+            # },
+            {
+                "type": "pipe",
+                "length": 100,
+                "diameter": 1,
+                "uiConfig": {"selected": False},
+            },
+            {
+                "type": "consumer",
+                "mode": "pressure",
+                "value": 0,
+                "uiConfig": {"selected": False},
+            },
         ],
     )
 
     generator = calculate(params)
     while True:
         a = next(generator)
+
 
 # python3 -m services.unsteady_flow_calculation

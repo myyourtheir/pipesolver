@@ -27,7 +27,6 @@ const ElementsController = () => {
 					const length = elem.length / ratio
 					const startX = x + length / 2
 					x += length
-					console.log(elem.uiConfig?.selected)
 					return <Pipe start={[startX, y, z]} end={[startX + length, y, z]} isSelected={elem.uiConfig?.selected} key={i} />
 				}
 				else if (elem.type === 'pump') {

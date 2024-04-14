@@ -12,7 +12,6 @@ export interface ElementsProps {
 const ElementsBar: FC<ElementsProps> = ({ containerRef }) => {
 
 	const pipeline = useUnsteadyInputStore(state => state.pipeline)
-	console.log(pipeline)
 	return (
 		<DraggableLayout refContainer={containerRef} headerName='Элементы' className='left-5 w-fit self-start'>
 			<ElementsList />

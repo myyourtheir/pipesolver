@@ -58,3 +58,22 @@ export interface UnsteadyInputData {
 }
 
 export type ElementsType = PipeParams['type'] | PumpParams['type'] | GateValveParams['type'] | SafeValveParams['type'] | ConsumerParams['type'] | ProviderParmas['type']
+
+
+// Results 
+
+export interface NestedXY {
+	x: number,
+	y: number,
+}
+
+export interface UnsteadyChartData {
+	Davleniya: NestedXY[],
+	Skorosty: NestedXY[],
+	Napory: NestedXY[],
+	t: number
+}
+
+export interface ResultsData {
+	chartData: Array<UnsteadyChartData>
+}

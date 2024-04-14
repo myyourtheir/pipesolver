@@ -18,15 +18,12 @@ const SCanvas = () => {
 					enablePan={true}
 					enableRotate={true}
 				/>
-				<spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI} />
-				<pointLight position={[10, 10, 10]} decay={0} intensity={Math.PI} />
+				<spotLight position={[1, -2, 10]} angle={2} penumbra={1} decay={0} intensity={Math.PI} />
+				<spotLight position={[50, -2, -10]} angle={2} penumbra={1} decay={0} intensity={Math.PI} />
+				<spotLight position={[-5, 4, 10]} angle={2} penumbra={1} decay={0} intensity={Math.PI} />
+				<spotLight position={[50, 2, -10]} angle={2} penumbra={1} decay={0} intensity={Math.PI} />
 				<axesHelper args={[5]} />
-				{/* <ambientLight intensity={Math.PI / 2} />
-				<spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI} />
-				<pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
-				<Line points={[[-2, -1]]} color="black" lineWidth={10} />
-				<Line points={[[0, 1, 1], [1, 1, 1]]} color="black" lineWidth={10} />
-				<Box position={[1.2, 1, 0]} /> */}
+
 				<ElementsController />
 			</Suspense>
 

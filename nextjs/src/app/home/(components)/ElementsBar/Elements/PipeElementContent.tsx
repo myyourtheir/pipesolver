@@ -47,7 +47,7 @@ const PipeElementContent = () => {
 
 	const addElement = useUnsteadyInputStore(state => state.addElement)
 	const onSubmit = (values: z.infer<typeof formSchema>) => {
-		addElement(values)
+		addElement({ ...values, diameter: values.diameter / 1000 })
 		setOpen(false)
 	}
 	return (
@@ -63,7 +63,7 @@ const PipeElementContent = () => {
 								<FormControl>
 									<div className='flex items-center gap-2'>
 										<Input placeholder="Введите значение" {...field} />
-										<span>{'мм'}</span>
+										<span>{'км'}</span>
 									</div>
 								</FormControl>
 								<FormMessage />

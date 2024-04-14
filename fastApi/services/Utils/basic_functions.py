@@ -18,12 +18,14 @@ with open(
     text_z.close()
 
 
-def find_lyam(Re, eps, d):
+def find_lyam(Re, eps):
+    if Re == 0:
+        return 0
     if Re < 2320:
         lyam1 = 68 / Re
-    elif (10 * eps) > Re >= 2320:
+    elif (10 / eps) > Re >= 2320:
         lyam1 = 0.3164 / Re**0.25
-    elif (10 * eps) <= Re < (500 * d / o):
+    elif (10 / eps) <= Re < (500 / eps):
         lyam1 = 0.11 * (eps + 68 / Re) ** 0.25
     else:
         lyam1 = 0.11 * (eps) ** 0.25
@@ -33,7 +35,7 @@ def find_lyam(Re, eps, d):
 def find_Jb(Davleniya, Skorosty, d, i, v, ro, T):
     Vjb = Skorosty
     Re = abs(Vjb) * d / v
-    lyamjb = find_lyam(Re, o / d, d)
+    lyamjb = find_lyam(Re, o / d)
     Jb = (
         Davleniya
         - ro * c * Skorosty
@@ -46,7 +48,7 @@ def find_Jb(Davleniya, Skorosty, d, i, v, ro, T):
 def find_Ja(Davleniya, Skorosty, d, i, v, ro, T):
     Vja = Skorosty
     Re = abs(Vja) * d / v
-    lyamja = find_lyam(Re, o / d, d)
+    lyamja = find_lyam(Re, o / d)
     Ja = (
         Davleniya
         + ro * c * Skorosty
@@ -67,6 +69,7 @@ def pump_method(P, V, i, a, b, char, chto_vivodim, d, t_vkl, t_char, t, v, ro, T
     if char == 0:
         w = w0
     elif char == 1:  # Включение на tt сек
+
         if t_char <= t <= t_char + t_vkl:
             w = w0 / t_vkl * (t - t_char)
         elif t < t_char:
@@ -82,7 +85,6 @@ def pump_method(P, V, i, a, b, char, chto_vivodim, d, t_vkl, t_char, t, v, ro, T
             w = 0
     else:
         w = 0
-
     a = (w / w0) ** 2 * a  # 302.06   Характеристика насоса # b = 8 * 10 ** (-7)
     S = np.pi * (d / 2) ** 2
     Ja = find_Ja(P[-1][i - 1], V[-1][i - 1], d, i, v, ro, T)
@@ -93,6 +95,7 @@ def pump_method(P, V, i, a, b, char, chto_vivodim, d, t_vkl, t_char, t, v, ro, T
     ) / (b * (S * 3600) ** 2)
     p1 = Ja - ro * c * VV
     p2 = Jb + ro * c * VV
+
     H1 = count_H(p1, i, VV, ro)
     H2 = count_H(p2, i, VV, ro)
 

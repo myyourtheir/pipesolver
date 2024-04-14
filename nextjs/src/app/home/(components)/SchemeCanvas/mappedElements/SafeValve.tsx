@@ -7,6 +7,7 @@ const SafeValve: FC<ElemProps> = ({ start, isSelected }) => {
 	const { radius, segments, boxDepth, boxHeight, boxWidth } = defaultElementsConfig.safeValve
 	return (
 		<group>
+			{/* <ambientLight /> */}
 			<Sphere args={[radius, segments, segments]} position={start}>
 				{
 					isSelected

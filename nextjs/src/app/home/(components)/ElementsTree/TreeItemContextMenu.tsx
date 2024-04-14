@@ -24,6 +24,7 @@ const TreeItemContextMenu: FC<ContextProps> = ({ children, idx, element, classNa
 			deleteElement(idx)
 		}
 	}
+
 	return (
 		<ContextMenu>
 			<ContextMenuTrigger className={`w-full flex items-center justify-center bg-red ${className}`}>

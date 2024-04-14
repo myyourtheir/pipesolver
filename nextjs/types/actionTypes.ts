@@ -1,4 +1,4 @@
-import { BoundaryParams, CondParams, ConsumerParams, GateValveParams, PipeParams, ProviderParmas, PumpParams, SafeValveParams } from './stateTypes'
+import { BoundaryParams, CondParams, ConsumerParams, GateValveParams, PipeParams, ProviderParmas, PumpParams, SafeValveParams, UnsteadyChartData } from './stateTypes'
 
 export interface UnsteadyFlowActions {
 	updateCondParams: (prop: keyof CondParams, value: CondParams[keyof CondParams]) => void
@@ -6,4 +6,9 @@ export interface UnsteadyFlowActions {
 	deleteElement: (idx: number) => void
 	deleteAll: () => void
 	setIsSelected: (idx: number) => void
+}
+
+export interface ResultsActions {
+	pushNewData: (newData: UnsteadyChartData) => void
+	resetResult: () => void
 }

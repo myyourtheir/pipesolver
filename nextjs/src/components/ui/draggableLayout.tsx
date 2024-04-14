@@ -11,13 +11,14 @@ interface DraggableLayoutProps {
 	children: React.ReactNode,
 	className?: string,
 	headerName: string,
-	hideable?: boolean
+	hideable?: boolean,
+	defaultState?: boolean
 }
 
-const DraggableLayout: FC<DraggableLayoutProps> = ({ refContainer, children, headerName, className, hideable = true }) => {
+const DraggableLayout: FC<DraggableLayoutProps> = ({ refContainer, children, headerName, className, hideable = true, defaultState = true }) => {
 	const toolBarRef = useRef(null)
 	const toolBarHeaderRef = useRef(null)
-	const [isOpen, setIsOpen] = useState(true)
+	const [isOpen, setIsOpen] = useState(defaultState)
 
 	useDraggable({ refEventsElement: toolBarHeaderRef, refTransformElement: toolBarRef, refContainer })
 
