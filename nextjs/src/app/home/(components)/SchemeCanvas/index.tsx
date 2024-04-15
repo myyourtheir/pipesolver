@@ -10,7 +10,7 @@ export interface ElementsProps {
 }
 const SchemeCanvas: FC<ElementsProps> = ({ containerRef }) => {
 	return (
-		<DraggableLayout refContainer={containerRef} headerName='Схема' className='w-[70%] h-[70%] ' hideable={false}>
+		<DraggableLayout refContainer={containerRef} headerName='Схема' className='w-[70%] h-[70%] ' hideable={false} resizable={true}>
 			<SCanvas />
 		</DraggableLayout>
 	)

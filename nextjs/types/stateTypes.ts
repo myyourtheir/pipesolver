@@ -75,5 +75,6 @@ export interface UnsteadyChartData {
 }
 
 export interface ResultsData {
-	chartData: Array<UnsteadyChartData>
+	chartData: Array<UnsteadyChartData>,
+	iter: number
 }

@@ -10,5 +10,6 @@ export interface UnsteadyFlowActions {
 
 export interface ResultsActions {
 	pushNewData: (newData: UnsteadyChartData) => void
-	resetResult: () => void
+	resetResult: () => void,
+	setIter: (a: number) => void
 }

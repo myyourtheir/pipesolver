@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import TopLayout from './(components)/TopLayout'
+
 function HomeLayout({ children }: Readonly<{ children: React.ReactNode }>) {
 
 	return (

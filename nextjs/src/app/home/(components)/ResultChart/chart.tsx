@@ -1,25 +1,39 @@
 import { useResultsStore } from '@/lib/globalStore/resultsStore'
 import { Chart, Scatter } from 'react-chartjs-2'
-import { chartOptions } from './chartOprions'
+import { DavleniyaOptions, NaporyOptions, SkorostyOptions } from './chartOprions'
 import { ChartData, } from 'chart.js'
 import { UnsteadyChartData } from '../../../../../types/stateTypes'
 import { FC } from 'react'
 import {
 	Chart as ChartJS,
+	CategoryScale,
 	LinearScale,
 	PointElement,
 	LineElement,
+	Title,
 	Tooltip,
 	Legend,
+	registerables
 } from 'chart.js'
-ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend)
+
+ChartJS.register(
+	...registerables,
+	CategoryScale,
+	LinearScale,
+	PointElement,
+	LineElement,
+	Title,
+	Tooltip,
+	Legend,
+)
 
 
 interface chartProps {
 	data: UnsteadyChartData
 }
+
 const MyChart: FC<chartProps> = ({ data }) => {
-	const naporiData: ChartData<"scatter"> = {
+	const naporyData: ChartData<"scatter"> = {
 		datasets: [
 			{
 				type: 'scatter',
@@ -28,7 +42,8 @@ const MyChart: FC<chartProps> = ({ data }) => {
 				borderColor: 'red',
 				backgroundColor: 'red'
 			},
-		]
+		],
+
 	}
 	const davleniyaData: ChartData<"scatter"> = {
 		datasets: [
@@ -48,7 +63,7 @@ const MyChart: FC<chartProps> = ({ data }) => {
 				data: data.Skorosty,
 				label: "Скорость",
 				borderColor: 'green',
-				backgroundColor: 'green'
+				backgroundColor: 'green',
 			},
 		]
 	}
@@ -57,13 +72,13 @@ const MyChart: FC<chartProps> = ({ data }) => {
 	return (
 		<>
 			<Scatter
-				options={chartOptions}
-				data={naporiData} />
+				options={NaporyOptions}
+				data={naporyData} />
 			<Scatter
-				options={chartOptions}
+				options={DavleniyaOptions}
 				data={davleniyaData} />
 			<Scatter
-				options={chartOptions}
+				options={SkorostyOptions}
 				data={skorostyData} />
 
 		</>

@@ -12,18 +12,19 @@ interface DraggableLayoutProps {
 	className?: string,
 	headerName: string,
 	hideable?: boolean,
-	defaultState?: boolean
+	defaultState?: boolean,
+	resizable?: boolean
 }
 
-const DraggableLayout: FC<DraggableLayoutProps> = ({ refContainer, children, headerName, className, hideable = true, defaultState = true }) => {
+const DraggableLayout: FC<DraggableLayoutProps> = ({ refContainer, children, headerName, className, hideable = true, defaultState = true, resizable = false }) => {
 	const toolBarRef = useRef(null)
 	const toolBarHeaderRef = useRef(null)
 	const [isOpen, setIsOpen] = useState(defaultState)
 
-	useDraggable({ refEventsElement: toolBarHeaderRef, refTransformElement: toolBarRef, refContainer })
+	useDraggable({ refEventsElement: toolBarHeaderRef, refTransformElement: toolBarRef, refContainer, })
 
 	return (
-		<Card ref={toolBarRef} className={`absolute h-fit w-fit rounded-md border bg-white ${className} ${isOpen ? 'p-1' : 'p-0 w-fit h-fit'}`}>
+		<Card ref={toolBarRef} className={`absolute h-fit w-fit rounded-md border bg-white   ${className}  ${resizable && isOpen ? 'resize overflow-hidden' : 'resize-none'} ${isOpen ? 'p-1' : 'p-0 w-fit h-fit'}`}>
 			<CardHeader
 				className='flex-row justify-between items-center border-b p-0  gap-4 space-y-0 m-1'
 			>

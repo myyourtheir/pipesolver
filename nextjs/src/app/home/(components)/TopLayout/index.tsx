@@ -11,6 +11,7 @@ interface TopLayoutProps {
 }
 
 const TopLayout: FC<TopLayoutProps> = ({ className }) => {
+	const { setIter } = useResultsStore()
 	const [calcUnsteadyFlow] = useCallUnsteadyFlowWs()
 	return (
 		<header className={`flex justify-start items-center bg-slate-50 shadow-[0_8px_8px_-10px_rgba(0,_0,_0,_.15)] border-none py-2 min-h-[52px]  ${className}`}>
@@ -19,7 +20,14 @@ const TopLayout: FC<TopLayoutProps> = ({ className }) => {
 			<div className='px-4'>
 				<Button
 					className='w-fit'
-					onClick={calcUnsteadyFlow}
+					onClick={() => {
+						const promise = new Promise((res, rej) => {
+							res(setIter(0))
+						})
+						promise.then(() =>
+							calcUnsteadyFlow()
+						)
+					}}
 				>
 					Расчитать
 				</Button>
