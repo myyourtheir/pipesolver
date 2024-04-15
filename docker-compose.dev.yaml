@@ -1,0 +1,24 @@
+version: '3'
+services:
+  pipesolver-client:
+    image: node:20-alpine
+    container_name: pipesolver-client
+    restart: on-failure
+    depends_on:
+      - pipesolver-server
+    ports:
+      - "4040:4040"
+    volumes:
+      - "./nextjs:/app"
+    working_dir: /app
+    command: sh -c "npm install -g npm@10.2.3;npm install; npm run dev"
+
+  pipesolver-server:
+    build: ./fastApi
+    container_name: pipesolver-server
+    restart: on-failure
+    volumes:
+      - "./fastApi:/app"
+    ports:
+      - "8000:8000"
+    command: uvicorn --host 0.0.0.0 app:app --reload

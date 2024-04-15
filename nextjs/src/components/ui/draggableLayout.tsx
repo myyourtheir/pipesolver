@@ -49,7 +49,7 @@ const DraggableLayout: FC<DraggableLayoutProps> = ({ refContainer, children, hea
 					</span>
 				}
 			</CardHeader>
-			<CardContent className={`${isOpen ? 'p-1' : 'p-0 w-0 h-0'} w-full h-[calc(100%-1em-8px)]`}>
+			<CardContent className={` w-full h-[calc(100%-1em-8px)] ${isOpen ? 'p-1' : 'hidden p-0 w-0 h-0'}`}>
 				{isOpen &&
 					children
 				}
