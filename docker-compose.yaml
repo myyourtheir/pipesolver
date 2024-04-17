@@ -7,7 +7,7 @@ services:
     container_name: ps_prod_client
     restart: on-failure
     depends_on:
-      - server
+      - ps_prod_server
     ports:
       - "80:80"
     networks:
