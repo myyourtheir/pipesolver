@@ -1,0 +1,27 @@
+version: '3'
+services:
+  ps_prod_client:
+    build:
+      context: ./nextjs
+      dockerfile: Dockerfile
+    container_name: ps_prod_client
+    restart: on-failure
+    depends_on:
+      - server
+    ports:
+      - "80:80"
+    networks:
+      - ps_client_server
+
+  ps_prod_server:
+    build: ./fastApi
+    container_name: ps_prod_server
+    restart: on-failure
+    command: uvicorn --host 0.0.0.0 app:app --reload
+    networks:
+      - ps_client_server
+
+networks:
+  ps_client_server:
+    name: ps_client_server
+    driver: bridge

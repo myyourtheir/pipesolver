@@ -7,5 +7,5 @@ COPY . .
 RUN npm run build
 
 FROM nginx:1.25.3-alpine
-COPY --from=build /app/dist /opt/site
+COPY --from=build /app/dist /var/www/out
 COPY nginx.conf /etc/nginx/nginx.conf

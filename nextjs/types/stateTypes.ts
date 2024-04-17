@@ -20,37 +20,37 @@ export interface BoundaryParams {
 	value: number
 }
 
-export interface ProviderParmas extends BoundaryParams, UiConfig {
+export interface ProviderParmas extends BoundaryParams {
 	type: 'provider'
 }
-export interface ConsumerParams extends BoundaryParams, UiConfig {
+export interface ConsumerParams extends BoundaryParams {
 	type: 'consumer'
 }
 
-export interface PipeParams extends UiConfig {
+export interface PipeParams {
 	type: 'pipe'
 	length: number
 	diameter: number
 }
 
-export interface PumpParams extends UnsteadyBaseParams, UiConfig {
+export interface PumpParams extends UnsteadyBaseParams {
 	type: 'pump'
 	coef_a: number
 	coef_b: number
 }
 
-export interface GateValveParams extends UnsteadyBaseParams, UiConfig {
+export interface GateValveParams extends UnsteadyBaseParams {
 	type: 'gate_valve'
 	percentage: number
 }
 
-export interface SafeValveParams extends UiConfig {
+export interface SafeValveParams {
 	type: 'safe_valve'
 	coef_q: number
 	max_pressure: number
 }
 
-export type ElementParamsUnion = PipeParams | PumpParams | GateValveParams | SafeValveParams | ConsumerParams | ProviderParmas
+export type ElementParamsUnion = (PipeParams | PumpParams | GateValveParams | SafeValveParams | ConsumerParams | ProviderParmas) & UiConfig
 
 export interface UnsteadyInputData {
 	cond_params: CondParams
