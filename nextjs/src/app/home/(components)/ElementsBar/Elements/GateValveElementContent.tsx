@@ -23,7 +23,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select"
-import { ElementContext } from './Element'
+import { ElementContext } from '../../../../../components/Element'
 import { useContext } from 'react'
 
 

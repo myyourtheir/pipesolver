@@ -28,7 +28,7 @@ const DraggableLayout: FC<DraggableLayoutProps> = ({ refContainer, children, hea
 			<CardHeader
 				className='flex-row justify-between items-center border-b p-0  gap-4 space-y-0 m-1'
 			>
-				<GripHorizontal ref={toolBarHeaderRef} className='cursor-pointer ml-1' size={15} />
+				<GripHorizontal ref={toolBarHeaderRef} className='cursor-pointer ml-1 touch-none' size={15} />
 				<CardTitle className='whitespace-nowrap'>
 					{headerName}
 				</CardTitle>

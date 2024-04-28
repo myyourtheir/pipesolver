@@ -24,7 +24,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select"
 import { useContext } from 'react'
-import { ElementContext } from './Element'
+import { ElementContext } from '../../../../../components/Element'
 
 
 const formSchema = z.object({
