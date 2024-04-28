@@ -50,11 +50,13 @@ export interface SafeValveParams {
 	max_pressure: number
 }
 
-export type ElementParamsUnion = (PipeParams | PumpParams | GateValveParams | SafeValveParams | ConsumerParams | ProviderParams) & UiConfig
+export type ElementParamsUnion = PipeParams | PumpParams | GateValveParams | SafeValveParams | ConsumerParams | ProviderParams
+
+export type ElementParamsUnionWithUI = (ElementParamsUnion) & UiConfig
 
 export interface UnsteadyInputData {
 	cond_params: CondParams
-	pipeline: ElementParamsUnion[]
+	pipeline: ElementParamsUnionWithUI[]
 }
 
 export type ElementsType = PipeParams['type'] | PumpParams['type'] | GateValveParams['type'] | SafeValveParams['type'] | ConsumerParams['type'] | ProviderParams['type']

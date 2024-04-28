@@ -14,6 +14,7 @@ import GateValveElementContent from '@/components/ElementsContent/GateValveEleme
 import SafeValveElementContent from '@/components/ElementsContent/SafeValveElementContent'
 import Element, { ElementContext } from '@/components/Element'
 import { useContext } from 'react'
+import { ElementParamsUnion } from '../../../../../types/stateTypes'
 
 const height = 60
 const width = 60
@@ -35,7 +36,9 @@ const ElementsList = () => {
 	}, { isProvider: false, isConsumer: false, isPipe: false })
 	const submitButtonTitle = 'Добавить'
 	const { isConsumer, isProvider, isPipe } = isBoundaryElements
-
+	const onSubmit = (values: ElementParamsUnion) => {
+		addElement(values)
+	}
 	return (
 		<div className='grid grid-cols-1  md:grid-cols-2 gap-2 items-center content-center'>
 			<div className='w-full flex items-center justify-center'>
@@ -46,9 +49,7 @@ const ElementsList = () => {
 							mode: 'pressure',
 							value: 0
 						}}
-						onSubmit={(values) => {
-							addElement(values)
-						}}
+						onSubmit={onSubmit}
 						submitButtonTitle={submitButtonTitle}
 					/>
 				</Element>
@@ -61,9 +62,7 @@ const ElementsList = () => {
 							mode: 'pressure',
 							value: 0
 						}}
-						onSubmit={(values) => {
-							addElement(values)
-						}}
+						onSubmit={onSubmit}
 						submitButtonTitle={submitButtonTitle}
 					/>
 				</Element>
@@ -76,9 +75,7 @@ const ElementsList = () => {
 							length: 100,
 							diameter: 1000,
 						}}
-						onSubmit={(values) => {
-							addElement(values)
-						}}
+						onSubmit={onSubmit}
 						submitButtonTitle={submitButtonTitle}
 					/>
 				</Element>
@@ -94,9 +91,7 @@ const ElementsList = () => {
 							start_time: 0,
 							duration: 20,
 						}}
-						onSubmit={(values) => {
-							addElement(values)
-						}}
+						onSubmit={onSubmit}
 						submitButtonTitle={submitButtonTitle}
 					/>
 				</Element>
@@ -111,9 +106,7 @@ const ElementsList = () => {
 							duration: 100,
 							percentage: 100
 						}}
-						onSubmit={(values) => {
-							addElement(values)
-						}}
+						onSubmit={onSubmit}
 						submitButtonTitle={submitButtonTitle}
 					/>
 				</Element>
@@ -126,9 +119,7 @@ const ElementsList = () => {
 							coef_q: 0.5,
 							max_pressure: 9
 						}}
-						onSubmit={(values) => {
-							addElement(values)
-						}}
+						onSubmit={onSubmit}
 						submitButtonTitle={submitButtonTitle}
 					/>
 				</Element>
