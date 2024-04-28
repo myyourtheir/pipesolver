@@ -37,22 +37,20 @@ const TreeItemContextMenu: FC<ContextProps> = ({ children, idx, element, classNa
 			<Popover
 				open={popoverOpen}
 				onOpenChange={(val) => {
-					console.log(val)
 					if (val === false) {
 						setPopoverOpen(false)
 					}
 				}}
+				modal={true}
 			>
 
-				<ContextMenu>
+				<ContextMenu modal={true}>
 					<PopoverTrigger
 						onDoubleClick={(e) => {
-							console.log(e)
 							setPopoverOpen(true)
 						}}
 						className={`w-full flex items-center justify-center bg-red ${className}`}
 					>
-
 						<ContextMenuTrigger >
 							{trigger}
 						</ContextMenuTrigger>
