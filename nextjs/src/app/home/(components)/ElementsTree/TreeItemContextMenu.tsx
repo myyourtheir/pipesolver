@@ -62,9 +62,16 @@ const TreeItemContextMenu: FC<ContextProps> = ({ children, idx, element, classNa
 						<ContextMenuItem onClick={hanldeDelete}>Удалить</ContextMenuItem>
 					</ContextMenuContent>
 				</ContextMenu>
-				<PopoverContent side='left'>
-					{children}
-				</PopoverContent>
+				{window.screen.availWidth >= 768
+					?
+					<PopoverContent side='left'>
+						{children}
+					</PopoverContent>
+					:
+					<PopoverContent side='bottom'>
+						{children}
+					</PopoverContent>
+				}
 			</Popover>
 		</ElementContext.Provider>
 	)
