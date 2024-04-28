@@ -31,6 +31,11 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 			pipeline: [...state.pipeline, elementWithUiConfig]
 		}))
 	},
+	updateElement(element, idx) {
+		return set(produce((state: UnsteadyInputData) => {
+			state.pipeline[idx] = { ...state.pipeline[idx], ...element }
+		}))
+	},
 	setIsSelected(idx) {
 		return set(produce((state: UnsteadyInputData) => {
 			state.pipeline.forEach((elem, i) => {

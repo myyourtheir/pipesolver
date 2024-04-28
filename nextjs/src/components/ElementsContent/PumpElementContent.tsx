@@ -23,8 +23,9 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select"
-import { useContext } from 'react'
-import { ElementContext } from '../../../../../components/Element'
+import { FC, useContext } from 'react'
+import { ElementContext } from '../Element'
+import { ElementContentType } from './ContentType'
 
 
 const formSchema = z.object({
@@ -53,29 +54,22 @@ const formSchema = z.object({
 })
 
 
-const PumpElementContent = () => {
-	const { setOpen } = useContext(ElementContext)
+const PumpElementContent: FC<ElementContentType> = ({ defaultValues, onSubmit, submitButtonTitle }) => {
+
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
-		defaultValues: {
-			type: 'pump',
-			coef_a: 310,
-			coef_b: 0.000008,
-			mode: 'open',
-			start_time: 0,
-			duration: 20,
-		},
+		defaultValues
 	})
-
-	const addElement = useUnsteadyInputStore(state => state.addElement)
-	const onSubmit = (values: z.infer<typeof formSchema>) => {
-		addElement(values)
-		setOpen(false)
-	}
+	const { setOpen } = useContext(ElementContext)
 	return (
 		<>
 			<Form {...form}>
-				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+				<form
+					onSubmit={form.handleSubmit((value) => {
+						onSubmit(value)
+						setOpen(false)
+					})}
+					className="space-y-2">
 					<FormField
 						control={form.control}
 						name="coef_a"
@@ -160,7 +154,7 @@ const PumpElementContent = () => {
 						)}
 					/>
 					<div className='w-full flex justify-end'>
-						<Button type="submit">Добавить</Button>
+						<Button type="submit">{submitButtonTitle}</Button>
 					</div>
 				</form>
 			</Form>

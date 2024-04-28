@@ -10,17 +10,19 @@ import {
 	PopoverTrigger,
 } from "@/components/ui/popover"
 import { useUnsteadyInputStore } from '@/lib/globalStore/unsteadyFlowStore'
-import React, { FC, useState } from 'react'
+import React, { FC, ReactNode, useState } from 'react'
 import { TreeItemProps } from './TreeList'
 import { toast } from 'sonner'
+import { ElementContext } from '@/components/Element'
 
 interface ContextProps extends TreeItemProps {
-	children: React.ReactNode,
+	children: ReactNode,
 	className: string,
 	idx: number,
+	trigger: JSX.Element
 }
 
-const TreeItemContextMenu: FC<ContextProps> = ({ children, idx, element, className }) => {
+const TreeItemContextMenu: FC<ContextProps> = ({ children, idx, element, className, trigger }) => {
 	const { deleteElement, pipeline } = useUnsteadyInputStore(state => state)
 	const hanldeDelete = () => {
 		if (pipeline.length > 1 && element.type === 'provider') {
@@ -31,38 +33,40 @@ const TreeItemContextMenu: FC<ContextProps> = ({ children, idx, element, classNa
 	}
 	const [popoverOpen, setPopoverOpen] = useState(false)
 	return (
-		<Popover
-			open={popoverOpen}
-			onOpenChange={(val) => {
-				console.log(val)
-				if (val === false) {
-					setPopoverOpen(false)
-				}
-			}}
-		>
+		<ElementContext.Provider value={{ setOpen: setPopoverOpen }}>
+			<Popover
+				open={popoverOpen}
+				onOpenChange={(val) => {
+					console.log(val)
+					if (val === false) {
+						setPopoverOpen(false)
+					}
+				}}
+			>
 
-			<ContextMenu>
-				<PopoverTrigger
-					onDoubleClick={(e) => {
-						console.log(e)
-						setPopoverOpen(true)
-					}}
-					className={`w-full flex items-center justify-center bg-red ${className}`}
-				>
+				<ContextMenu>
+					<PopoverTrigger
+						onDoubleClick={(e) => {
+							console.log(e)
+							setPopoverOpen(true)
+						}}
+						className={`w-full flex items-center justify-center bg-red ${className}`}
+					>
 
-					<ContextMenuTrigger >
-						{children}
-					</ContextMenuTrigger>
-				</PopoverTrigger>
-				<ContextMenuContent>
-					<ContextMenuItem onClick={() => setPopoverOpen(true)}>Параметры</ContextMenuItem>
-					<ContextMenuItem onClick={hanldeDelete}>Удалить</ContextMenuItem>
-				</ContextMenuContent>
-			</ContextMenu>
-			<PopoverContent side='left'>
-				GHbdtn
-			</PopoverContent>
-		</Popover>
+						<ContextMenuTrigger >
+							{trigger}
+						</ContextMenuTrigger>
+					</PopoverTrigger>
+					<ContextMenuContent>
+						<ContextMenuItem onClick={() => setPopoverOpen(true)}>Параметры</ContextMenuItem>
+						<ContextMenuItem onClick={hanldeDelete}>Удалить</ContextMenuItem>
+					</ContextMenuContent>
+				</ContextMenu>
+				<PopoverContent side='left'>
+					{children}
+				</PopoverContent>
+			</Popover>
+		</ElementContext.Provider>
 	)
 }
 

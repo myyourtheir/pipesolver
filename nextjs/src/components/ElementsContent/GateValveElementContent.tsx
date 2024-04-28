@@ -1,15 +1,12 @@
 "use client"
-import { useUnsteadyInputStore } from '@/lib/globalStore/unsteadyFlowStore'
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { literal, z } from "zod"
-
+import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import {
 	Form,
 	FormControl,
-	FormDescription,
 	FormField,
 	FormItem,
 	FormLabel,
@@ -23,8 +20,9 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select"
-import { ElementContext } from '../../../../../components/Element'
-import { useContext } from 'react'
+import { FC, useContext } from 'react'
+import { ElementContentType } from './ContentType'
+import { ElementContext } from '../Element'
 
 
 const formSchema = z.object({
@@ -48,28 +46,21 @@ const formSchema = z.object({
 })
 
 
-const GateValveElementContent = () => {
-	const { setOpen } = useContext(ElementContext)
+const GateValveElementContent: FC<ElementContentType> = ({ defaultValues, onSubmit, submitButtonTitle }) => {
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
-		defaultValues: {
-			type: 'gate_valve',
-			mode: 'open',
-			start_time: 0,
-			duration: 100,
-			percentage: 100
-		},
+		defaultValues: defaultValues,
 	})
-
-	const addElement = useUnsteadyInputStore(state => state.addElement)
-	const onSubmit = (values: z.infer<typeof formSchema>) => {
-		addElement(values)
-		setOpen(false)
-	}
+	const { setOpen } = useContext(ElementContext)
 	return (
 		<>
 			<Form {...form}>
-				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+				<form
+					onSubmit={form.handleSubmit((value) => {
+						onSubmit(value)
+						setOpen(false)
+					})}
+					className="space-y-2">
 					<FormField
 						control={form.control}
 						name="mode"
@@ -140,7 +131,7 @@ const GateValveElementContent = () => {
 						)}
 					/>
 					<div className='w-full flex justify-end'>
-						<Button type="submit">Добавить</Button>
+						<Button type="submit">{submitButtonTitle}</Button>
 					</div>
 				</form>
 			</Form>

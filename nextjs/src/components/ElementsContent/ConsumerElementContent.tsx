@@ -1,5 +1,4 @@
 "use client"
-import { useUnsteadyInputStore } from '@/lib/globalStore/unsteadyFlowStore'
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
@@ -9,19 +8,21 @@ import { Button } from "@/components/ui/button"
 import {
 	Form,
 	FormControl,
-	FormDescription,
 	FormField,
 	FormItem,
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { useContext } from 'react'
-import { ElementContext } from '../../../../../components/Element'
+import { FC, useContext } from 'react'
+
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
+import { ElementContentType } from './ContentType'
+import { ElementContext } from '../Element'
+
 const formSchema = z.object({
-	type: z.literal('provider'),
+	type: z.literal('consumer'),
 	mode: z.union([z.literal('speed'), z.literal('pressure')]),
 	value: z.preprocess(
 		(val) => Number(String(val)),
@@ -31,26 +32,21 @@ const formSchema = z.object({
 })
 
 
-const ProviderElementContent = () => {
-	const { setOpen } = useContext(ElementContext)
+const ConsumerElementContent: FC<ElementContentType> = ({ defaultValues, onSubmit, submitButtonTitle }) => {
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
-		defaultValues: {
-			type: 'provider',
-			mode: 'pressure',
-			value: 0
-		},
+		defaultValues
 	})
-
-	const addElement = useUnsteadyInputStore(state => state.addElement)
-	const onSubmit = (values: z.infer<typeof formSchema>) => {
-		addElement(values)
-		setOpen(false)
-	}
+	const { setOpen } = useContext(ElementContext)
 	return (
 		<>
 			<Form {...form}>
-				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+				<form
+					onSubmit={form.handleSubmit((value) => {
+						onSubmit(value)
+						setOpen(false)
+					})}
+					className="space-y-2">
 					<FormField
 						control={form.control}
 						name="mode"
@@ -88,7 +84,7 @@ const ProviderElementContent = () => {
 						)}
 					/>
 					<div className='w-full flex justify-end'>
-						<Button type="submit">Добавить</Button>
+						<Button type="submit">{submitButtonTitle}</Button>
 					</div>
 				</form>
 			</Form>
@@ -96,4 +92,4 @@ const ProviderElementContent = () => {
 	)
 }
 
-export default ProviderElementContent
+export default ConsumerElementContent

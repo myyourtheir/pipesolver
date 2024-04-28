@@ -1,21 +1,47 @@
 import { useUnsteadyInputStore } from '@/lib/globalStore/unsteadyFlowStore'
-import { FC, memo, useMemo } from 'react'
+import React, { FC, ReactElement, memo, useMemo } from 'react'
 import { ElementParamsUnion, ElementsType, UnsteadyInputData } from '../../../../../types/stateTypes'
 import TreeItemContextMenu from './TreeItemContextMenu'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import PipeElementContent from '@/components/ElementsContent/PipeElementContent'
+import ProviderElementContent from '@/components/ElementsContent/ProviderElementContent'
+import ConsumerElementContent from '@/components/ElementsContent/ConsumerElementContent'
+import PumpElementContent from '@/components/ElementsContent/PumpElementContent'
+import GateValveElementContent from '@/components/ElementsContent/GateValveElementContent'
+import SafeValveElementContent from '@/components/ElementsContent/SafeValveElementContent'
+import { ElementContentType } from '@/components/ElementsContent/ContentType'
 
-const typeToTitles: Record<ElementsType, string> = {
-	pipe: 'Труба',
-	pump: 'Насос',
-	consumer: 'Потребитель',
-	provider: 'Поставщик',
-	gate_valve: 'Задвижка',
-	safe_valve: 'Клапан'
+const TypeToTitles: Record<ElementsType, { title: string, form: FC<ElementContentType> }> = {
+	pipe: {
+		title: 'Труба',
+		form: (props) => <PipeElementContent {...props} />
+	},
+	pump: {
+		title: 'Насос',
+		form: (props) => <PumpElementContent {...props} />
+	},
+	consumer: {
+		title: 'Потребитель',
+		form: (props) => <ConsumerElementContent {...props} />
+	},
+	provider: {
+		title: 'Поставщик',
+		form: (props) => <ProviderElementContent {...props} />
+	},
+	gate_valve: {
+		title: 'Задвижка',
+		form: (props) => <GateValveElementContent {...props} />
+	},
+	safe_valve: {
+		title: 'Клапан',
+		form: (props) => <SafeValveElementContent {...props} />
+	}
 }
 
 const TreeList = () => {
 	const { pipeline: elements, setIsSelected } = useUnsteadyInputStore(state => state)
 	const elementsMemo = useMemo(() => elements, [elements])
+	const { updateElement } = useUnsteadyInputStore(state => state)
 	return (
 		<ScrollArea className='w-full h-full'>
 			{
@@ -28,8 +54,15 @@ const TreeList = () => {
 									className={`${element.uiConfig.selected ? 'border-purple-700 border-1' : 'border-0'}`}
 									element={element}
 									idx={idx}
+									trigger={<TreeItem element={element} onClick={() => setIsSelected(idx)} />}
 								>
-									<TreeItem element={element} onClick={() => setIsSelected(idx)} />
+									{
+										TypeToTitles[element.type].form({
+											defaultValues: element,
+											submitButtonTitle: "Изменить",
+											onSubmit: (values) => { updateElement(values, idx) }
+										})
+									}
 								</TreeItemContextMenu>
 							))
 						}
@@ -56,7 +89,7 @@ const TreeItem: FC<TreeItemProps> = ({ element, onClick }) => {
 
 	return (
 		<li onClick={onClick}>
-			{typeToTitles[element.type]}
+			{TypeToTitles[element.type].title}
 		</li>
 	)
 }

@@ -16,17 +16,18 @@ import {
 	FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { useContext } from 'react'
-import { ElementContext } from '../../../../../components/Element'
+import { FC, useContext } from 'react'
+import { ElementContext } from '../Element'
+import { ElementContentType } from './ContentType'
 
 const formSchema = z.object({
-	type: z.literal('pipe'),
-	length: z.preprocess(
+	type: z.literal('safe_valve'),
+	coef_q: z.preprocess(
 		(val) => Number(String(val)),
 		z.number({
 			invalid_type_error: "Вы ввели не число",
 		}).nonnegative("Число должно быть больше или равно нулю")),
-	diameter: z.preprocess(
+	max_pressure: z.preprocess(
 		(val) => Number(String(val)),
 		z.number({
 			invalid_type_error: "Вы ввели не число",
@@ -34,36 +35,30 @@ const formSchema = z.object({
 })
 
 
-const PipeElementContent = () => {
-	const { setOpen } = useContext(ElementContext)
+const SafeValveElementContent: FC<ElementContentType> = ({ defaultValues, onSubmit, submitButtonTitle }) => {
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
-		defaultValues: {
-			type: 'pipe',
-			length: 100,
-			diameter: 1000,
-		},
+		defaultValues
 	})
-
-	const addElement = useUnsteadyInputStore(state => state.addElement)
-	const onSubmit = (values: z.infer<typeof formSchema>) => {
-		addElement({ ...values, diameter: values.diameter / 1000 })
-		setOpen(false)
-	}
+	const { setOpen } = useContext(ElementContext)
 	return (
 		<>
 			<Form {...form}>
-				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+				<form
+					onSubmit={form.handleSubmit((value) => {
+						onSubmit(value)
+						setOpen(false)
+					})}
+					className="space-y-2">
 					<FormField
 						control={form.control}
-						name="length"
+						name="coef_q"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Длина</FormLabel>
+								<FormLabel>Коэффициент расхода</FormLabel>
 								<FormControl>
 									<div className='flex items-center gap-2'>
 										<Input placeholder="Введите значение" {...field} />
-										<span>{'км'}</span>
 									</div>
 								</FormControl>
 								<FormMessage />
@@ -72,14 +67,14 @@ const PipeElementContent = () => {
 					/>
 					<FormField
 						control={form.control}
-						name="diameter"
+						name="max_pressure"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Диаметр</FormLabel>
+								<FormLabel>Давление срабатывания</FormLabel>
 								<FormControl>
 									<div className='flex items-center gap-2'>
 										<Input placeholder="Введите значение" {...field} />
-										<span>{'мм'}</span>
+										<span>{'атм'}</span>
 									</div>
 								</FormControl>
 								<FormMessage />
@@ -87,7 +82,7 @@ const PipeElementContent = () => {
 						)}
 					/>
 					<div className='w-full flex justify-end'>
-						<Button type="submit">Добавить</Button>
+						<Button type="submit">{submitButtonTitle}</Button>
 					</div>
 				</form>
 			</Form>
@@ -95,4 +90,4 @@ const PipeElementContent = () => {
 	)
 }
 
-export default PipeElementContent
+export default SafeValveElementContent

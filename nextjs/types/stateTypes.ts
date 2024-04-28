@@ -20,7 +20,7 @@ export interface BoundaryParams {
 	value: number
 }
 
-export interface ProviderParmas extends BoundaryParams {
+export interface ProviderParams extends BoundaryParams {
 	type: 'provider'
 }
 export interface ConsumerParams extends BoundaryParams {
@@ -50,14 +50,14 @@ export interface SafeValveParams {
 	max_pressure: number
 }
 
-export type ElementParamsUnion = (PipeParams | PumpParams | GateValveParams | SafeValveParams | ConsumerParams | ProviderParmas) & UiConfig
+export type ElementParamsUnion = (PipeParams | PumpParams | GateValveParams | SafeValveParams | ConsumerParams | ProviderParams) & UiConfig
 
 export interface UnsteadyInputData {
 	cond_params: CondParams
 	pipeline: ElementParamsUnion[]
 }
 
-export type ElementsType = PipeParams['type'] | PumpParams['type'] | GateValveParams['type'] | SafeValveParams['type'] | ConsumerParams['type'] | ProviderParmas['type']
+export type ElementsType = PipeParams['type'] | PumpParams['type'] | GateValveParams['type'] | SafeValveParams['type'] | ConsumerParams['type'] | ProviderParams['type']
 
 
 // Results 

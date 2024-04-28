@@ -1,32 +1,31 @@
 "use client"
-import { useUnsteadyInputStore } from '@/lib/globalStore/unsteadyFlowStore'
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-
 import { Button } from "@/components/ui/button"
 import {
 	Form,
 	FormControl,
-	FormDescription,
 	FormField,
 	FormItem,
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { useContext } from 'react'
-import { ElementContext } from '../../../../../components/Element'
+import { FC, useContext } from 'react'
+import { ElementContentType } from './ContentType'
+import { ElementContext } from '../Element'
+
 
 const formSchema = z.object({
-	type: z.literal('safe_valve'),
-	coef_q: z.preprocess(
+	type: z.literal('pipe'),
+	length: z.preprocess(
 		(val) => Number(String(val)),
 		z.number({
 			invalid_type_error: "Вы ввели не число",
 		}).nonnegative("Число должно быть больше или равно нулю")),
-	max_pressure: z.preprocess(
+	diameter: z.preprocess(
 		(val) => Number(String(val)),
 		z.number({
 			invalid_type_error: "Вы ввели не число",
@@ -34,35 +33,31 @@ const formSchema = z.object({
 })
 
 
-const SafeValveElementContent = () => {
-	const { setOpen } = useContext(ElementContext)
+const PipeElementContent: FC<ElementContentType> = ({ defaultValues, onSubmit, submitButtonTitle }) => {
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
-		defaultValues: {
-			type: 'safe_valve',
-			coef_q: 0.5,
-			max_pressure: 9
-		},
+		defaultValues,
 	})
-
-	const addElement = useUnsteadyInputStore(state => state.addElement)
-	const onSubmit = (values: z.infer<typeof formSchema>) => {
-		addElement(values)
-		setOpen(false)
-	}
+	const { setOpen } = useContext(ElementContext)
 	return (
 		<>
 			<Form {...form}>
-				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+				<form
+					onSubmit={form.handleSubmit((value) => {
+						onSubmit(value)
+						setOpen(false)
+					})}
+					className="space-y-2">
 					<FormField
 						control={form.control}
-						name="coef_q"
+						name="length"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Коэффициент расхода</FormLabel>
+								<FormLabel>Длина</FormLabel>
 								<FormControl>
 									<div className='flex items-center gap-2'>
 										<Input placeholder="Введите значение" {...field} />
+										<span>{'км'}</span>
 									</div>
 								</FormControl>
 								<FormMessage />
@@ -71,14 +66,14 @@ const SafeValveElementContent = () => {
 					/>
 					<FormField
 						control={form.control}
-						name="max_pressure"
+						name="diameter"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Давление срабатывания</FormLabel>
+								<FormLabel>Диаметр</FormLabel>
 								<FormControl>
 									<div className='flex items-center gap-2'>
 										<Input placeholder="Введите значение" {...field} />
-										<span>{'атм'}</span>
+										<span>{'мм'}</span>
 									</div>
 								</FormControl>
 								<FormMessage />
@@ -86,7 +81,7 @@ const SafeValveElementContent = () => {
 						)}
 					/>
 					<div className='w-full flex justify-end'>
-						<Button type="submit">Добавить</Button>
+						<Button type="submit">{submitButtonTitle}</Button>
 					</div>
 				</form>
 			</Form>
@@ -94,4 +89,4 @@ const SafeValveElementContent = () => {
 	)
 }
 
-export default SafeValveElementContent
+export default PipeElementContent
