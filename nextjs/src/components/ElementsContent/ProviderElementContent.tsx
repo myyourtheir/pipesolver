@@ -76,7 +76,7 @@ const ProviderElementContent: FC<ElementContentType> = ({ defaultValues, onSubmi
 								<FormControl>
 									<div className='flex items-center gap-2'>
 										<Input placeholder="Введите значение" {...field} />
-										<span>{form.getValues().mode === 'pressure' ? 'кПа' : 'м/с'}</span>
+										<span>{form.getValues().mode === 'pressure' ? 'Па' : 'м/с'}</span>
 									</div>
 								</FormControl>
 								<FormMessage />

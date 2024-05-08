@@ -275,7 +275,7 @@ def calculate(data: Unsteady_data):
             p_moment.append(main[i][0])
             V_moment.append((main[i][1]))
             H_moment.append(main[i][2])
-        pprint(main)
+
         Davleniya.append(p_moment)
         Skorosty.append(V_moment)
         Napory.append(H_moment)
@@ -330,7 +330,6 @@ if __name__ == "__main__":
     generator = calculate(params)
     while True:
         a = next(generator)
-        # pprint(a)
 
 
 # python3 -m services.unsteady_flow_calculation
