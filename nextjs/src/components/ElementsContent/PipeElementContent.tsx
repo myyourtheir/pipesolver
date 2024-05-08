@@ -73,7 +73,7 @@ const PipeElementContent: FC<ElementContentType> = ({ defaultValues, onSubmit, s
 								<FormControl>
 									<div className='flex items-center gap-2'>
 										<Input placeholder="Введите значение" {...field} />
-										<span>{'мм'}</span>
+										<span>{'м'}</span>
 									</div>
 								</FormControl>
 								<FormMessage />

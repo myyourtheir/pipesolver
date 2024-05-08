@@ -73,7 +73,7 @@ const ElementsList = () => {
 						defaultValues={{
 							type: 'pipe',
 							length: 100,
-							diameter: 1000,
+							diameter: 1,
 						}}
 						onSubmit={onSubmit}
 						submitButtonTitle={submitButtonTitle}

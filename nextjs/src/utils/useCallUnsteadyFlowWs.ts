@@ -30,14 +30,15 @@ export const useCallUnsteadyFlowWs = () => {
 			ws.onerror = (ev) => {
 				console.error
 			}
-
+			const message = JSON.stringify(
+				{
+					cond_params,
+					pipeline: pipeline.nodes.map(node => node.value)
+				}
+			)
+			console.log(message)
 			ws.onopen = (ev) => {
-				ws.send(JSON.stringify(
-					{
-						cond_params,
-						pipeline: pipeline.nodes.map(node => node.value)
-					}
-				))
+				ws.send(message)
 			}
 			ws.onmessage = (ev) => {
 				pushNewData(JSON.parse(ev.data))

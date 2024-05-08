@@ -268,7 +268,6 @@ def calculate(data: Unsteady_data):
         times.append(t)
         t += T
         """Распаковка main"""
-
         p_moment = []
         V_moment = []
         H_moment = []
@@ -276,6 +275,7 @@ def calculate(data: Unsteady_data):
             p_moment.append(main[i][0])
             V_moment.append((main[i][1]))
             H_moment.append(main[i][2])
+        pprint(main)
         Davleniya.append(p_moment)
         Skorosty.append(V_moment)
         Napory.append(H_moment)
@@ -290,14 +290,13 @@ def calculate(data: Unsteady_data):
             # 'max_val': (np.max(H_moment), np.max(p_moment), np.max(V_moment)),
             # 'min_val': (np.min(H_moment), np.min(p_moment), np.min(V_moment))
         }
-        pprint(res)
         yield res
 
 
 if __name__ == "__main__":
 
     params = Unsteady_data(
-        cond_params={"time_to_iter": 50, "density": 800, "viscosity": 10},
+        cond_params={"time_to_iter": 100, "density": 800, "viscosity": 10},
         pipeline=[
             {
                 "type": "provider",
@@ -305,29 +304,20 @@ if __name__ == "__main__":
                 "value": 100000,
                 "uiConfig": {"selected": False},
             },
-            {
-                "type": "pump",
-                "coef_a": 310,
-                "coef_b": 0.000008,
-                "mode": "open",
-                "start_time": 0,
-                "duration": 20,
-                # "uiConfig": {"selected": False},
-            },
+            # {
+            #     "type": "pump",
+            #     "coef_a": 310,
+            #     "coef_b": 0.000008,
+            #     "mode": "open",
+            #     "start_time": 0,
+            #     "duration": 20,
+            #     # "uiConfig": {"selected": False},
+            # },
             {
                 "type": "pipe",
                 "length": 100,
                 "diameter": 1,
                 "uiConfig": {"selected": False},
-            },
-            {
-                "type": "pump",
-                "coef_a": 310,
-                "coef_b": 0.000008,
-                "mode": "open",
-                "start_time": 0,
-                "duration": 20,
-                # "uiConfig": {"selected": False},
             },
             {
                 "type": "consumer",
@@ -337,10 +327,10 @@ if __name__ == "__main__":
             },
         ],
     )
-
     generator = calculate(params)
     while True:
         a = next(generator)
+        # pprint(a)
 
 
 # python3 -m services.unsteady_flow_calculation
