@@ -25,7 +25,7 @@ interface ContextProps extends TreeItemProps {
 const TreeItemContextMenu: FC<ContextProps> = ({ children, idx, element, className, trigger }) => {
 	const { deleteElement, pipeline } = useUnsteadyInputStore(state => state)
 	const hanldeDelete = () => {
-		if (pipeline.length > 1 && element.type === 'provider') {
+		if (pipeline.nodes.length > 1 && element.type === 'provider') {
 			toast.warning("Невозможно удалить поставщика")
 		} else {
 			deleteElement(idx)

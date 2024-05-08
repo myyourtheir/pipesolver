@@ -30,10 +30,7 @@ export const useCallUnsteadyFlowWs = () => {
 			ws.onerror = (ev) => {
 				console.error
 			}
-			console.log({
-				cond_params,
-				pipeline: pipeline.nodes.map(node => node.value)
-			})
+
 			ws.onopen = (ev) => {
 				ws.send(JSON.stringify(
 					{

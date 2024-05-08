@@ -66,7 +66,6 @@ def make_x(elements: list[Elements_model], L, N):
 
 
 def calculate(data: Unsteady_data):
-    print(data)
     cond_params: Cond_params = data.cond_params
     elements: list[Elements_model] = data.pipeline
     t = 0
@@ -179,7 +178,7 @@ def calculate(data: Unsteady_data):
                         )
                     )
                     iter += 1
-                count_pipe_iter += 1
+                count_pipe_iter += 1 if len(pipes) - 1 != count_pipe_iter else 0
 
             elif elem.type == "gate_valve":
                 main.append(
@@ -291,6 +290,7 @@ def calculate(data: Unsteady_data):
             # 'max_val': (np.max(H_moment), np.max(p_moment), np.max(V_moment)),
             # 'min_val': (np.min(H_moment), np.min(p_moment), np.min(V_moment))
         }
+        pprint(res)
         yield res
 
 
@@ -302,23 +302,32 @@ if __name__ == "__main__":
             {
                 "type": "provider",
                 "mode": "pressure",
-                "value": 1000000,
+                "value": 100000,
                 "uiConfig": {"selected": False},
             },
-            # {
-            #     "type": "pump",
-            #     "coef_a": 310,
-            #     "coef_b": 0.000008,
-            #     "mode": "open",
-            #     "start_time": 0,
-            #     "duration": 20,
-            #     "uiConfig": {"selected": False},
-            # },
+            {
+                "type": "pump",
+                "coef_a": 310,
+                "coef_b": 0.000008,
+                "mode": "open",
+                "start_time": 0,
+                "duration": 20,
+                # "uiConfig": {"selected": False},
+            },
             {
                 "type": "pipe",
                 "length": 100,
                 "diameter": 1,
                 "uiConfig": {"selected": False},
+            },
+            {
+                "type": "pump",
+                "coef_a": 310,
+                "coef_b": 0.000008,
+                "mode": "open",
+                "start_time": 0,
+                "duration": 20,
+                # "uiConfig": {"selected": False},
             },
             {
                 "type": "consumer",

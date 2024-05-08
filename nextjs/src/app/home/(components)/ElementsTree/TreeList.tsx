@@ -57,7 +57,7 @@ const TreeList = () => {
 								>
 									{
 										TypeToTitles[element.value.type].form({
-											defaultValues: element,
+											defaultValues: element.value,
 											submitButtonTitle: "Изменить",
 											onSubmit: (values) => { updateElement(values, idx) }
 										})

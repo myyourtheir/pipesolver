@@ -36,26 +36,42 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 		})
 	},
 	updateElement(element, idx) {
-		return set(produce((state: UnsteadyInputData) => {
+		return set((state: UnsteadyInputData) => {
 			const elementWithUiConfig = { ...element, ...defaultUiConfig }
 			const newElement = new GraphNode(elementWithUiConfig)
 			state.pipeline.nodes[idx] = newElement
-		}))
+			return {
+				...state,
+				pipeline: state.pipeline
+			}
+		})
 	},
 	setIsSelected(idx) {
 		return set((state) => {
 			state.pipeline.nodes.forEach((elem, i) => {
+				console.log(elem)
 				if (i !== idx) {
-					elem.value.uiConfig.selected = false
+					elem.value = {
+						...elem.value, uiConfig: {
+							...elem.value.uiConfig,
+							selected: false
+						}
+					}
 				} else {
-					elem.value.uiConfig.selected = true
+					elem.value = {
+						...elem.value, uiConfig: {
+							...elem.value.uiConfig,
+							selected: true
+						}
+					}
 				}
 			})
 			return {
 				...state,
 				pipeline: state.pipeline
 			}
-		})
+		}
+		)
 	},
 	deleteElement(idx) {
 		return set((state) => {
