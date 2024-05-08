@@ -17,10 +17,13 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 		viscosity: 10
 	},
 	pipeline: new Graph(),
-	updateCondParams(prop, value) {
-		return set(produce((state: UnsteadyInputData) => {
-			state.cond_params[prop] = value
-		}))
+	updateCondParams(cond_params) {
+		return set((state) => ({
+			...state,
+			cond_params: cond_params
+		})
+
+		)
 	},
 	addElement(element, sourceNode) {
 		const elementWithUiConfig = { ...element, ...defaultUiConfig }

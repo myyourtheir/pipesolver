@@ -20,7 +20,7 @@ export default function Home() {
 			<ElementsBar containerRef={containerRef} />
 			<ElementsTree containerRef={containerRef} />
 			<ResultChart containerRef={containerRef} />
-			{/* <ConditionsBar containerRef={containerRef} /> */}
+			<ConditionsBar containerRef={containerRef} />
 		</div >
 	)
 

@@ -2,6 +2,8 @@
 
 import DraggableLayout from '@/components/ui/draggableLayout'
 import { FC, RefObject } from 'react'
+import ConditionsContent from './ConditionsContent'
+import { useUnsteadyInputStore } from '@/lib/globalStore/unsteadyFlowStore'
 
 interface ConditionsBarProps {
 	containerRef: RefObject<HTMLElement>
@@ -9,10 +11,10 @@ interface ConditionsBarProps {
 
 const ConditionsBar: FC<ConditionsBarProps> = ({ containerRef }) => {
 
-
+	const { cond_params, updateCondParams } = useUnsteadyInputStore(state => state)
 	return (
-		<DraggableLayout refContainer={containerRef} className='right-1' headerName='Окружающие условия'>
-			Условия работы
+		<DraggableLayout refContainer={containerRef} className='left-auto top-4 bottom-full' headerName='Окружающие условия'>
+			<ConditionsContent defaultValues={cond_params} onSubmit={updateCondParams} />
 		</DraggableLayout>
 	)
 }

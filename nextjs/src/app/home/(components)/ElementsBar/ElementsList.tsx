@@ -13,7 +13,6 @@ import PumpElementContent from '@/components/ElementsContent/PumpElementContent'
 import GateValveElementContent from '@/components/ElementsContent/GateValveElementContent'
 import SafeValveElementContent from '@/components/ElementsContent/SafeValveElementContent'
 import Element, { ElementContext } from '@/components/Element'
-import { useContext } from 'react'
 import { ElementParamsUnion } from '../../../../../types/stateTypes'
 
 const height = 60
