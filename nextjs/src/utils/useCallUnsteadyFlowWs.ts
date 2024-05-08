@@ -9,11 +9,11 @@ export const useCallUnsteadyFlowWs = () => {
 	const { cond_params, pipeline } = useUnsteadyInputStore(state => state)
 	const { pushNewData, resetResult } = useResultsStore(state => state)
 
-	const isValidPipeline = pipeline.reduce((acc, item) => {
-		if (item.type === 'pipe') {
+	const isValidPipeline = pipeline.nodes.reduce((acc, item) => {
+		if (item.value.type === 'pipe') {
 			acc.isPipe = true
 		}
-		if (item.type === 'consumer') {
+		if (item.value.type === 'consumer') {
 			acc.isConusmer = true
 		}
 		return acc

@@ -1,8 +1,9 @@
+import { GraphNode } from '@/utils/graph/GraphNode'
 import { CondParams, ConsumerParams, ElementParamsUnion, GateValveParams, PipeParams, ProviderParams, PumpParams, SafeValveParams, UnsteadyChartData } from './stateTypes'
 
 export interface UnsteadyFlowActions {
 	updateCondParams: (prop: keyof CondParams, value: CondParams[keyof CondParams]) => void
-	addElement: (element: ElementParamsUnion) => void
+	addElement: (element: ElementParamsUnion, sourceNode: GraphNode) => void
 	updateElement: (element: ElementParamsUnion, idx: number) => void
 	deleteElement: (idx: number) => void
 	deleteAll: () => void

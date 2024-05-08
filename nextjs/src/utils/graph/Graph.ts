@@ -2,19 +2,46 @@ import { ElementParamsUnionWithUI } from '../../../types/stateTypes'
 import { GraphNode } from './GraphNode'
 
 export class Graph {
-	nodes: Record<GraphNode['id'], GraphNode>
+	nodes: GraphNode[]
 
 	constructor() {
-		this.nodes = {}
+		this.nodes = []
 	}
 
-	addNode(value: ElementParamsUnionWithUI) {
-		const node = new GraphNode(value)
-		this.nodes[node.id] = node
+	addNode(node: GraphNode) {
+		this.nodes.push(node)
 	}
 
-	addEdge(sourceId: string, destinationId: string) {
-		this.nodes[sourceId].addChild(destinationId)
-		this.nodes[destinationId].addParent(sourceId)
+	addEdge(sourceNode: GraphNode, destinationNode: GraphNode) {
+		if (sourceNode) {
+			sourceNode.addChild(destinationNode)
+			destinationNode.addParent(sourceNode)
+		}
+	}
+	deleteNode(idx: number) {
+		const selectedNode = this.nodes[idx]
+		this.nodes = this.nodes.filter((_, i) => i !== idx)
+		selectedNode.children.forEach(childNode => {
+			childNode.parents = childNode.parents.filter(parent => parent !== selectedNode)
+		})
+		selectedNode.parents.forEach(parentNode => {
+			parentNode.children = parentNode.children.filter(child => child !== selectedNode)
+		})
 	}
 }
+
+export const gr = new Graph()
+
+const providerNode = new GraphNode({
+	type: 'provider',
+	'mode': 'pressure',
+	'value': 10,
+	'uiConfig': {
+		'selected': false,
+	}
+})
+gr.addNode(providerNode)
+const pumpNode = new GraphNode({ "type": "pump", "coef_a": 310, "coef_b": 0.000008, "mode": "open", "start_time": 0, "duration": 20, "uiConfig": { "selected": false } })
+gr.addNode(pumpNode)
+
+gr.addEdge(providerNode, pumpNode)

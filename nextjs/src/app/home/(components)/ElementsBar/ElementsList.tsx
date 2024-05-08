@@ -22,14 +22,14 @@ const width = 60
 const ElementsList = () => {
 
 	const { pipeline, addElement } = useUnsteadyInputStore(state => state)
-	const isBoundaryElements = pipeline.reduce((acc, item) => {
-		if (item.type === 'provider') {
+	const isBoundaryElements = pipeline.nodes.reduce((acc, item) => {
+		if (item.value.type === 'provider') {
 			acc.isProvider = true
 		}
-		if (item.type === 'consumer') {
+		if (item.value.type === 'consumer') {
 			acc.isConsumer = true
 		}
-		if (item.type === 'pipe') {
+		if (item.value.type === 'pipe') {
 			acc.isPipe = true
 		}
 		return acc
@@ -37,7 +37,7 @@ const ElementsList = () => {
 	const submitButtonTitle = 'Добавить'
 	const { isConsumer, isProvider, isPipe } = isBoundaryElements
 	const onSubmit = (values: ElementParamsUnion) => {
-		addElement(values)
+		addElement(values, pipeline.nodes[pipeline.nodes.length - 1])
 	}
 	return (
 		<div className='grid grid-cols-1  md:grid-cols-2 gap-2 items-center content-center'>

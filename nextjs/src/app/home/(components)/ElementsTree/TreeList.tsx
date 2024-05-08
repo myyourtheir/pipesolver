@@ -39,25 +39,24 @@ const TypeToTitles: Record<ElementsType, { title: string, form: FC<ElementConten
 }
 
 const TreeList = () => {
-	const { pipeline: elements, setIsSelected } = useUnsteadyInputStore(state => state)
-	const elementsMemo = useMemo(() => elements, [elements])
+	const { pipeline, setIsSelected } = useUnsteadyInputStore(state => state)
 	const { updateElement } = useUnsteadyInputStore(state => state)
 	return (
 		<ScrollArea className='w-full h-full'>
 			{
-				elements.length !== 0 ? (
+				pipeline.nodes.length !== 0 ? (
 					<ul >
 						{
-							elementsMemo.map((element, idx) => (
+							pipeline.nodes.map((element, idx) => (
 								<TreeItemContextMenu
 									key={idx}
-									className={`${element.uiConfig.selected ? 'border-purple-700 border-1' : 'border-0'}`}
-									element={element}
+									className={`${element.value.uiConfig.selected ? 'border-purple-700 border-1' : 'border-0'}`}
+									element={element.value}
 									idx={idx}
-									trigger={<TreeItem element={element} onClick={() => setIsSelected(idx)} />}
+									trigger={<TreeItem element={element.value} onClick={() => setIsSelected(idx)} />}
 								>
 									{
-										TypeToTitles[element.type].form({
+										TypeToTitles[element.value.type].form({
 											defaultValues: element,
 											submitButtonTitle: "Изменить",
 											onSubmit: (values) => { updateElement(values, idx) }

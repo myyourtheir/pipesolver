@@ -3,20 +3,20 @@ import { ElementParamsUnionWithUI } from '../../../types/stateTypes'
 export class GraphNode {
 	id: string
 	value: ElementParamsUnionWithUI
-	children: string[]
-	parents: string[]
+	children: GraphNode[]
+	parents: GraphNode[]
 
 	constructor(value: ElementParamsUnionWithUI) {
-		this.id = new Date().getTime().toString()
+		this.id = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`
 		this.value = value
 		this.children = []
 		this.parents = []
 	}
 
-	addChild(nodeId: string) {
-		this.children.push(nodeId)
+	addChild(node: GraphNode) {
+		this.children.push(node)
 	}
-	addParent(nodeId: string) {
-		this.parents.push(nodeId)
+	addParent(node: GraphNode) {
+		this.parents.push(node)
 	}
 }

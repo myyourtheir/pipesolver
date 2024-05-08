@@ -1,3 +1,5 @@
+import { Graph } from '@/utils/graph/Graph'
+
 export interface UnsteadyBaseParams {
 	mode: 'open' | 'close'
 	start_time: number
@@ -56,7 +58,7 @@ export type ElementParamsUnionWithUI = (ElementParamsUnion) & UiConfig
 
 export interface UnsteadyInputData {
 	cond_params: CondParams
-	pipeline: ElementParamsUnionWithUI[]
+	pipeline: Graph
 }
 
 export type ElementsType = PipeParams['type'] | PumpParams['type'] | GateValveParams['type'] | SafeValveParams['type'] | ConsumerParams['type'] | ProviderParams['type']

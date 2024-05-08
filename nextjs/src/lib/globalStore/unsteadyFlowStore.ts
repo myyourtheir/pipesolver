@@ -2,6 +2,8 @@ import { create } from 'zustand'
 import { UiConfig, UnsteadyInputData } from '../../../types/stateTypes'
 import { UnsteadyFlowActions } from '../../../types/actionTypes'
 import { produce } from "immer"
+import { Graph } from '@/utils/graph/Graph'
+import { GraphNode } from '@/utils/graph/GraphNode'
 
 const defaultUiConfig: UiConfig = {
 	uiConfig: {
@@ -14,49 +16,63 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 		density: 850,
 		viscosity: 10
 	},
-	pipeline: [
-		{ "type": "provider", "mode": "pressure", "value": 0, "uiConfig": { "selected": false } },
-		{ "type": "pump", "coef_a": 310, "coef_b": 0.000008, "mode": "open", "start_time": 0, "duration": 20, "uiConfig": { "selected": false } },
-		{ "type": "pipe", "length": 100, "diameter": 1, "uiConfig": { "selected": false } },
-		{ "type": "consumer", "mode": "pressure", "value": 0, "uiConfig": { "selected": false } }
-	],
+	pipeline: new Graph(),
 	updateCondParams(prop, value) {
 		return set(produce((state: UnsteadyInputData) => {
 			state.cond_params[prop] = value
 		}))
 	},
-	addElement(element) {
+	addElement(element, sourceNode) {
 		const elementWithUiConfig = { ...element, ...defaultUiConfig }
-		return set(state => ({
-			pipeline: [...state.pipeline, elementWithUiConfig]
-		}))
+		const newElement = new GraphNode(elementWithUiConfig)
+		return set(state => {
+
+			state.pipeline.addNode(newElement)
+			state.pipeline.addEdge(sourceNode, newElement)
+			return {
+				...state,
+				pipeline: state.pipeline
+			}
+		})
 	},
 	updateElement(element, idx) {
 		return set(produce((state: UnsteadyInputData) => {
-			state.pipeline[idx] = { ...state.pipeline[idx], ...element }
+			const elementWithUiConfig = { ...element, ...defaultUiConfig }
+			const newElement = new GraphNode(elementWithUiConfig)
+			state.pipeline.nodes[idx] = newElement
 		}))
 	},
 	setIsSelected(idx) {
-		return set(produce((state: UnsteadyInputData) => {
-			state.pipeline.forEach((elem, i) => {
+		return set((state) => {
+			state.pipeline.nodes.forEach((elem, i) => {
 				if (i !== idx) {
-					elem.uiConfig.selected = false
+					elem.value.uiConfig.selected = false
 				} else {
-					elem.uiConfig.selected = true
+					elem.value.uiConfig.selected = true
 				}
 			})
-		}))
+			return {
+				...state,
+				pipeline: state.pipeline
+			}
+		})
 	},
 	deleteElement(idx) {
-		return set(state => ({
-			pipeline: state.pipeline.filter((_, i) => i !== idx
-			)
-		}))
+		return set((state) => {
+			state.pipeline.deleteNode(idx)
+			return {
+				...state,
+				pipeline: state.pipeline
+			}
+		})
 	},
 	deleteAll() {
-		return set(state => ({
-			pipeline: []
-		}))
+		return set((state) => {
+			state.pipeline = new Graph()
+			return {
+				...state,
+				pipeline: state.pipeline
+			}
+		})
 	},
-
 }))
