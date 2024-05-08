@@ -66,6 +66,7 @@ def make_x(elements: list[Elements_model], L, N):
 
 
 def calculate(data: Unsteady_data):
+    print(data)
     cond_params: Cond_params = data.cond_params
     elements: list[Elements_model] = data.pipeline
     t = 0

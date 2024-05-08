@@ -30,18 +30,4 @@ export class Graph {
 	}
 }
 
-export const gr = new Graph()
 
-const providerNode = new GraphNode({
-	type: 'provider',
-	'mode': 'pressure',
-	'value': 10,
-	'uiConfig': {
-		'selected': false,
-	}
-})
-gr.addNode(providerNode)
-const pumpNode = new GraphNode({ "type": "pump", "coef_a": 310, "coef_b": 0.000008, "mode": "open", "start_time": 0, "duration": 20, "uiConfig": { "selected": false } })
-gr.addNode(pumpNode)
-
-gr.addEdge(providerNode, pumpNode)
