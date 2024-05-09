@@ -37,7 +37,7 @@ const MyChart: FC<chartProps> = ({ data }) => {
 		datasets: [
 			{
 				type: 'scatter',
-				data: data.Napory,
+				data: data?.Napory,
 				label: "Напор",
 				borderColor: 'red',
 				backgroundColor: 'red'
@@ -49,7 +49,7 @@ const MyChart: FC<chartProps> = ({ data }) => {
 		datasets: [
 			{
 				type: 'scatter',
-				data: data.Davleniya,
+				data: data?.Davleniya,
 				label: "Давление",
 				borderColor: 'blue',
 				backgroundColor: 'blue'
@@ -60,7 +60,7 @@ const MyChart: FC<chartProps> = ({ data }) => {
 		datasets: [
 			{
 				type: 'scatter',
-				data: data.Skorosty,
+				data: data?.Skorosty,
 				label: "Скорость",
 				borderColor: 'green',
 				backgroundColor: 'green',
@@ -70,7 +70,7 @@ const MyChart: FC<chartProps> = ({ data }) => {
 
 
 	return (
-		<>
+		<div>
 			<Scatter
 				options={NaporyOptions}
 				data={naporyData} />
@@ -81,7 +81,7 @@ const MyChart: FC<chartProps> = ({ data }) => {
 				options={SkorostyOptions}
 				data={skorostyData} />
 
-		</>
+		</div>
 	)
 }
 

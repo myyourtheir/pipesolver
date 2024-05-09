@@ -21,7 +21,7 @@ export default function RootLayout({
 	return (
 		<html lang="ru">
 			<body className={cn(
-				"min-h-screen bg-[rgba(52,_62,_64,_0.1)] font-sans antialiased select-none",
+				"min-h-screen bg-[rgba(52,_62,_64,_0.1)] font-sans antialiased select-none font-normal text-sm leading-none",
 				fontSans.variable
 			)}>
 				<>

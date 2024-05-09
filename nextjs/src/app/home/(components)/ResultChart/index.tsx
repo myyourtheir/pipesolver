@@ -55,7 +55,7 @@ const ResultChart: FC<ElementsProps> = ({ containerRef }) => {
 
 	if (chartData.length !== 0) {
 		return (
-			<DraggableLayout refContainer={containerRef} headerName='Результаты расчета' className='top-5 self-center' hideable={true} defaultState={true} resizable={true}>
+			<DraggableLayout refContainer={containerRef} headerName='Результаты расчета' className='top-auto  self-center' hideable={true} defaultState={true} resizable={true}>
 				<div className='flex justify-between items-center w-full'>
 					<div className='flex gap-2 items-center'>
 						<Button
@@ -84,7 +84,7 @@ const ResultChart: FC<ElementsProps> = ({ containerRef }) => {
 						</SelectContent>
 					</Select>
 					<div className='w-16'>
-						{chartData[iter].t} c
+						{chartData[iter]?.t} c
 					</div>
 				</div>
 				<MyChart data={chartData[iter]} />

@@ -110,7 +110,7 @@ const ConditionsContent: FC<FCParams> = ({ defaultValues, onSubmit }) => {
 							</FormItem>
 						)}
 					/>
-					<div className='w-full flex justify-end'>
+					<div className='w-full flex justify-end lg:self-end mt-2 lg:mt-0 lg:ml-2'>
 						<Button type="submit">Изменить</Button>
 					</div>
 				</form>

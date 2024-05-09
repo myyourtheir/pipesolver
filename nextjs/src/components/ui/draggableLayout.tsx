@@ -1,8 +1,8 @@
 'use client'
 
 import { useDraggable } from '@/utils/useDraggable'
-import { GripHorizontal, Maximize2 } from 'lucide-react'
-import { FC, RefObject, useRef, useState } from 'react'
+import { GripHorizontal, Maximize2, Weight } from 'lucide-react'
+import { FC, RefObject, useEffect, useRef, useState } from 'react'
 import { Button } from './button'
 import { Card, CardContent, CardHeader, CardTitle } from './card'
 
@@ -17,8 +17,17 @@ interface DraggableLayoutProps {
 }
 
 const DraggableLayout: FC<DraggableLayoutProps> = ({ refContainer, children, headerName, className, hideable = true, defaultState = true, resizable = false }) => {
-	const toolBarRef = useRef(null)
+	const toolBarRef = useRef<HTMLDivElement>(null)
 	const toolBarHeaderRef = useRef(null)
+	const HeaderRef = useRef<HTMLDivElement>(null)
+	const lastSize = useRef<{ height: string; width: string }>({ height: '0px', width: '0px' })
+	useEffect(() => {
+		if (toolBarRef.current)
+			lastSize.current = {
+				height: `${toolBarRef.current.style.height}px`,
+				width: `${toolBarRef.current.style.width}px`
+			}
+	}, [])
 	const [isOpen, setIsOpen] = useState(defaultState)
 
 	useDraggable({ refEventsElement: toolBarHeaderRef, refTransformElement: toolBarRef, refContainer, })
@@ -26,10 +35,11 @@ const DraggableLayout: FC<DraggableLayoutProps> = ({ refContainer, children, hea
 	return (
 		<Card ref={toolBarRef} className={`absolute h-fit w-fit rounded-md border bg-white   ${className}  ${resizable && isOpen ? 'resize overflow-hidden' : 'resize-none'} ${isOpen ? 'p-1' : 'p-0 w-fit h-fit'}`}>
 			<CardHeader
-				className='flex-row justify-between items-center border-b p-0  gap-4 space-y-0 m-1'
+				className='flex-row justify-between items-center border-b p-0  gap-4 space-y-0 m'
+				ref={HeaderRef}
 			>
 				<GripHorizontal ref={toolBarHeaderRef} className='cursor-pointer ml-1 touch-none' size={15} />
-				<CardTitle className='whitespace-nowrap'>
+				<CardTitle className='whitespace-nowrap text-base'>
 					{headerName}
 				</CardTitle>
 				{hideable ?
@@ -37,7 +47,23 @@ const DraggableLayout: FC<DraggableLayoutProps> = ({ refContainer, children, hea
 						variant={'outline'}
 						className='border-none my-1 mr-1'
 						size={'xsm'}
-						onClick={() => setIsOpen(prev => !prev)}
+						onClick={() => {
+							if (toolBarRef.current) {
+								if (isOpen) {
+									lastSize.current = {
+										height: `${toolBarRef.current.style.height}`,
+										width: `${toolBarRef.current.style.width}`
+									}
+									toolBarRef.current.style.height = `${HeaderRef.current?.clientHeight}px`
+									toolBarRef.current.style.width = `${HeaderRef.current?.clientWidth}px`
+								} else {
+									toolBarRef.current.style.height = lastSize.current.height
+									toolBarRef.current.style.width = lastSize.current.width
+								}
+							}
+							setIsOpen(prev => !prev)
+						}
+						}
 					>
 						{
 							isOpen
