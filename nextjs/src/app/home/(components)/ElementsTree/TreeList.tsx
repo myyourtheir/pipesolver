@@ -7,6 +7,7 @@ import PipeElementContent from '@/components/ElementsContent/PipeElementContent'
 import ProviderElementContent from '@/components/ElementsContent/ProviderElementContent'
 import ConsumerElementContent from '@/components/ElementsContent/ConsumerElementContent'
 import PumpElementContent from '@/components/ElementsContent/PumpElementContent'
+
 import GateValveElementContent from '@/components/ElementsContent/GateValveElementContent'
 import SafeValveElementContent from '@/components/ElementsContent/SafeValveElementContent'
 import { ElementContentType } from '@/components/ElementsContent/ContentType'

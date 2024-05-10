@@ -24,8 +24,9 @@ import {
 	SelectValue,
 } from "@/components/ui/select"
 import { FC, useContext } from 'react'
-import { ElementContext } from '../Element'
-import { ElementContentType } from './ContentType'
+import { ElementContext } from '../../Element'
+import { ElementContentType } from '../ContentType'
+import PumpCoefsPopover from './PumpCoefsPopover'
 
 
 const formSchema = z.object({
@@ -70,36 +71,40 @@ const PumpElementContent: FC<ElementContentType> = ({ defaultValues, onSubmit, s
 						setOpen(false)
 					})}
 					className="space-y-2">
-					<FormField
-						control={form.control}
-						name="coef_a"
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>Коэфициент аппроксимации а:</FormLabel>
-								<FormControl>
-									<div className='flex items-center gap-2'>
-										<Input placeholder="Введите значение" {...field} />
-									</div>
-								</FormControl>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
-					<FormField
-						control={form.control}
-						name="coef_b"
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>Коэфициент аппроксимации b:</FormLabel>
-								<FormControl>
-									<div className='flex items-center gap-2'>
-										<Input placeholder="Введите значение" {...field} />
-									</div>
-								</FormControl>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
+					<div className='grid grid-cols-2 grid-rows-2'>
+						<FormField
+							control={form.control}
+							name="coef_a"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>а:</FormLabel>
+									<FormControl>
+										<div className='flex items-center gap-2'>
+											<Input placeholder="Введите значение" {...field} />
+										</div>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<span className='self-center justify-self-center'>H=a-b(Q^2)</span>
+						<FormField
+							control={form.control}
+							name="coef_b"
+							render={({ field }) => (
+								<FormItem className='row-start-2 mt-1'>
+									<FormLabel>b:</FormLabel>
+									<FormControl>
+										<div className='flex items-center gap-2'>
+											<Input placeholder="Введите значение" {...field} />
+										</div>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<PumpCoefsPopover />
+					</div>
 					<FormField
 						control={form.control}
 						name="mode"

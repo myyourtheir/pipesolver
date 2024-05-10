@@ -9,11 +9,12 @@ import { useUnsteadyInputStore } from '@/lib/globalStore/unsteadyFlowStore'
 import ProviderElementContent from '@/components/ElementsContent/ProviderElementContent'
 import ConsumerElementContent from '@/components/ElementsContent/ConsumerElementContent'
 import PipeElementContent from '@/components/ElementsContent/PipeElementContent'
-import PumpElementContent from '@/components/ElementsContent/PumpElementContent'
+
 import GateValveElementContent from '@/components/ElementsContent/GateValveElementContent'
 import SafeValveElementContent from '@/components/ElementsContent/SafeValveElementContent'
 import Element, { ElementContext } from '@/components/Element'
 import { ElementParamsUnion } from '../../../../../types/stateTypes'
+import PumpElementContent from '@/components/ElementsContent/PumpElementContent'
 
 const height = 60
 const width = 60

@@ -1,7 +1,7 @@
 import { toast } from 'sonner'
-import { UnsteadyChartData } from '../../types/stateTypes'
-import { useResultsStore } from '../lib/globalStore/resultsStore'
-import { useUnsteadyInputStore } from '../lib/globalStore/unsteadyFlowStore'
+import { UnsteadyChartData } from '../../../types/stateTypes'
+import { useResultsStore } from '../../lib/globalStore/resultsStore'
+import { useUnsteadyInputStore } from '../../lib/globalStore/unsteadyFlowStore'
 
 
 const url = process.env.BASE_URL
@@ -36,7 +36,6 @@ export const useCallUnsteadyFlowWs = () => {
 					pipeline: pipeline.nodes.map(node => node.value)
 				}
 			)
-			console.log(message)
 			ws.onopen = (ev) => {
 				ws.send(message)
 			}

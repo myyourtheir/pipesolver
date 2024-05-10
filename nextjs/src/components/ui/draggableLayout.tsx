@@ -1,10 +1,11 @@
 'use client'
 
-import { useDraggable } from '@/utils/useDraggable'
+
 import { GripHorizontal, Maximize2, Weight } from 'lucide-react'
 import { FC, RefObject, useEffect, useRef, useState } from 'react'
 import { Button } from './button'
 import { Card, CardContent, CardHeader, CardTitle } from './card'
+import { useDraggable } from '@/utils/hooks/useDraggable'
 
 interface DraggableLayoutProps {
 	refContainer: RefObject<HTMLElement>,
