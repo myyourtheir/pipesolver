@@ -8,6 +8,7 @@ import {
 	ColumnDef,
 	OnChangeFn,
 	SortingState,
+	RowData,
 } from "@tanstack/react-table"
 
 import {
@@ -29,7 +30,7 @@ import { ScrollArea, ScrollBar } from './scroll-area'
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[]
 	data: TData[]
-	functions?: Record<string, (a: any) => void>[],
+	functions?: Record<string, (a: any) => void>,
 	pagination?: boolean,
 	showPageNumber?: boolean,
 	filter?: boolean,
@@ -38,7 +39,11 @@ interface DataTableProps<TData, TValue> {
 	withoutHeader?: boolean,
 	pageSize?: number
 }
-
+declare module '@tanstack/react-table' {
+	interface TableMeta<TData extends RowData> {
+		functions: Record<string, (a: any) => void> | undefined
+	}
+}
 export function DataTable<TData, TValue>({ functions, columns, data, pagination, showPageNumber = false, filter = false, visibility, border, withoutHeader, pageSize = 10 }: DataTableProps<TData, TValue>) {
 
 	const [sorting, setSorting] = useState<SortingState>([])

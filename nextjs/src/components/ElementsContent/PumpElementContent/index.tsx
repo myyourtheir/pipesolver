@@ -87,7 +87,7 @@ const PumpElementContent: FC<ElementContentType> = ({ defaultValues, onSubmit, s
 								</FormItem>
 							)}
 						/>
-						<span className='self-center justify-self-center'>H=a-b(Q^2)</span>
+						<span className='self-center justify-self-center'>H=a-b*Q^2</span>
 						<FormField
 							control={form.control}
 							name="coef_b"
@@ -103,7 +103,7 @@ const PumpElementContent: FC<ElementContentType> = ({ defaultValues, onSubmit, s
 								</FormItem>
 							)}
 						/>
-						<PumpCoefsPopover />
+						<PumpCoefsPopover form={form} />
 					</div>
 					<FormField
 						control={form.control}

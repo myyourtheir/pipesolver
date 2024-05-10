@@ -1,4 +1,4 @@
-import { Column, Getter, Table } from '@tanstack/react-table'
+import { Column, Getter, Row, RowData, Table } from '@tanstack/react-table'
 import { QH } from './QHTable'
 import { ChangeEvent, FC, useState, FocusEvent } from 'react'
 import { Input } from '@/components/ui/input'
@@ -8,7 +8,8 @@ import useInput from '@/utils/hooks/useInput'
 interface QHCellProps {
 	getValue: Getter<any>,
 	table: Table<QH>,
-	column: Column<QH, any>
+	column: Column<QH, any>,
+	row: Row<QH>
 }
 
 const validator = z.preprocess(
@@ -17,7 +18,7 @@ const validator = z.preprocess(
 		invalid_type_error: "Вы ввели не число",
 	}).nonnegative("Число должно быть больше или равно нулю"))
 
-const QHCell: FC<QHCellProps> = ({ getValue, table, column }) => {
+const QHCell: FC<QHCellProps> = ({ getValue, table, column, row }) => {
 	const initialValue = getValue()
 	const { value, handleChange } = useInput(initialValue)
 	const [isValid, setIsValid] = useState(true)
@@ -34,7 +35,11 @@ const QHCell: FC<QHCellProps> = ({ getValue, table, column }) => {
 	const onBlur = (e: FocusEvent<HTMLInputElement>) => {
 		if (isValid) {
 			//TODO логика для обновления глобального стора с графиком
-			console.log('обновился')
+			table.options.meta?.functions?.updateState({
+				index: row.index,
+				paramTitle: column.id,
+				value: parseFloat(value)
+			})
 		} else {
 			return
 		}

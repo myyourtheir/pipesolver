@@ -1,6 +1,6 @@
 
 import { ColumnDef } from '@tanstack/react-table'
-import { FC, useMemo } from 'react'
+import { Dispatch, FC, SetStateAction, useMemo } from 'react'
 import QHCell from './QHCell'
 import { DataTable } from '@/components/ui/data-table'
 
@@ -10,26 +10,36 @@ export type QH = {
 }
 
 interface PumpQHTableProps {
-	data: QH[]
+	data: QH[],
+	setData: Dispatch<SetStateAction<{
+		Q: number
+		H: number
+	}[]>>
 }
-const PumpQHTable: FC<PumpQHTableProps> = ({ data }) => {
+const PumpQHTable: FC<PumpQHTableProps> = ({ data, setData }) => {
 
 	const columns = useMemo<ColumnDef<QH, any>[]>(() => [
 		{
 			accessorKey: 'Q',
 			header: 'Расход, м3/с',
-			cell: ({ getValue, table, column }) => <QHCell getValue={getValue} column={column} table={table} />,
+			cell: ({ getValue, table, column, row }) => <QHCell getValue={getValue} column={column} table={table} row={row} />,
 		},
 		{
 			accessorKey: 'H',
 			header: 'Напор, м',
-			cell: ({ getValue, table, column }) => <QHCell getValue={getValue} column={column} table={table} />,
+			cell: ({ getValue, table, column, row }) => <QHCell getValue={getValue} column={column} table={table} row={row} />,
 		},
 	],
 		[])
-
+	const functions = {
+		updateState: ({ index, paramTitle, value }: { index: number, paramTitle: keyof QH, value: number }) => {
+			const newArr = JSON.parse(JSON.stringify(data))
+			newArr[index][paramTitle] = value
+			setData(newArr)
+		}
+	}
 	return (
-		<DataTable data={data} columns={columns} />
+		<DataTable data={data} columns={columns} functions={functions} />
 	)
 }
 

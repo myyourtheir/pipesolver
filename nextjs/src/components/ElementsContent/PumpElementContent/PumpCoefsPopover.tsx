@@ -1,16 +1,25 @@
-import { Button } from '@/components/ui/button'
 import {
 	Popover,
 	PopoverContent,
 	PopoverTrigger,
 } from "@/components/ui/popover"
-import QHList from './QHList'
 import PumpQHTable from './QHTable'
-import { useState } from 'react'
+import { FC, useState } from 'react'
+import ABCalculator from './ABCalculator'
+import { UseFormReturn } from 'react-hook-form'
 
+export interface PumpFormProps {
+	form: UseFormReturn<{
+		type: "pump"
+		mode: "open" | "close"
+		duration: number
+		coef_a: number
+		coef_b: number
+		start_time: number
+	}, any, undefined>
+}
 
-
-const PumpCoefsPopover = () => {
+const PumpCoefsPopover: FC<PumpFormProps> = ({ form }) => {
 	const [data, setData] = useState(
 		[{
 			Q: 8000,
@@ -33,13 +42,15 @@ const PumpCoefsPopover = () => {
 			H: 204
 		},
 		])
+
 	return (
 		<Popover>
 			<PopoverTrigger className='text-sm'>
 				Задать расходами
 			</PopoverTrigger>
 			<PopoverContent side='right' className='w-fit' align='start'>
-				<PumpQHTable data={data} />
+				<PumpQHTable data={data} setData={setData} />
+				<ABCalculator data={data} form={form} />
 			</PopoverContent>
 		</Popover>
 	)
