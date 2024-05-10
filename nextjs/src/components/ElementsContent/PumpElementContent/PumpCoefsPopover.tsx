@@ -5,8 +5,9 @@ import {
 } from "@/components/ui/popover"
 import PumpQHTable from './QHTable'
 import { FC, useState } from 'react'
-import ABCalculator from './ABCalculator'
+import ABCalculator from './QHTable/ABCalculator'
 import { UseFormReturn } from 'react-hook-form'
+import QHChart from './QHChart'
 
 export interface PumpFormProps {
 	form: UseFormReturn<{
@@ -42,15 +43,17 @@ const PumpCoefsPopover: FC<PumpFormProps> = ({ form }) => {
 			H: 204
 		},
 		])
-
+	const { coef_a, coef_b } = form.getValues()
+	const [coefs, setCoefs] = useState({ a: coef_a, b: coef_b })
 	return (
-		<Popover>
+		<Popover modal>
 			<PopoverTrigger className='text-sm'>
 				Задать расходами
 			</PopoverTrigger>
 			<PopoverContent side='right' className='w-fit' align='start'>
+				<QHChart coefs={coefs} />
 				<PumpQHTable data={data} setData={setData} />
-				<ABCalculator data={data} form={form} />
+				<ABCalculator data={data} form={form} setCoefs={setCoefs} />
 			</PopoverContent>
 		</Popover>
 	)

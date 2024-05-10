@@ -43,7 +43,6 @@ const MyChart: FC<chartProps> = ({ data }) => {
 				backgroundColor: 'red'
 			},
 		],
-
 	}
 	const davleniyaData: ChartData<"scatter"> = {
 		datasets: [

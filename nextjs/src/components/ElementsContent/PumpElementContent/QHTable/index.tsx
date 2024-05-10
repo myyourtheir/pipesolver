@@ -1,6 +1,6 @@
 
 import { ColumnDef } from '@tanstack/react-table'
-import { Dispatch, FC, SetStateAction, useMemo } from 'react'
+import { Dispatch, FC, SetStateAction, memo, useMemo } from 'react'
 import QHCell from './QHCell'
 import { DataTable } from '@/components/ui/data-table'
 
@@ -33,7 +33,13 @@ const PumpQHTable: FC<PumpQHTableProps> = ({ data, setData }) => {
 		[])
 	const functions = {
 		updateState: ({ index, paramTitle, value }: { index: number, paramTitle: keyof QH, value: number }) => {
-			const newArr = JSON.parse(JSON.stringify(data))
+			// const newArr = JSON.parse(JSON.stringify(data))
+			const newArr = data.map((obj, i) => {
+				if (i === index) {
+					obj[paramTitle] = value
+				}
+				return obj
+			})
 			newArr[index][paramTitle] = value
 			setData(newArr)
 		}
@@ -43,4 +49,4 @@ const PumpQHTable: FC<PumpQHTableProps> = ({ data, setData }) => {
 	)
 }
 
-export default PumpQHTable
+export default memo(PumpQHTable)

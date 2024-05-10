@@ -1,5 +1,5 @@
 import { Column, Getter, Row, RowData, Table } from '@tanstack/react-table'
-import { QH } from './QHTable'
+import { QH } from '.'
 import { ChangeEvent, FC, useState, FocusEvent } from 'react'
 import { Input } from '@/components/ui/input'
 import { z } from 'zod'
@@ -46,12 +46,14 @@ const QHCell: FC<QHCellProps> = ({ getValue, table, column, row }) => {
 	}
 
 	return (
-		<Input
-			className={`w-24 h-6 ${!isValid ? ' outline-none ring-2 ring-red-500 ring-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2' : 'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50'}`}
-			value={value}
-			onChange={onChange}
-			onBlur={onBlur}
-		/>
+		<div className='w-full flex justify-center'>
+			<Input
+				className={`w-24 h-6 text-center ${!isValid ? ' outline-none ring-2 ring-red-500 ring-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2' : 'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50'}`}
+				value={value}
+				onChange={onChange}
+				onBlur={onBlur}
+			/>
+		</div>
 	)
 }
 

@@ -86,7 +86,7 @@ const ElementsList = () => {
 						defaultValues={{
 							type: 'pump',
 							coef_a: 310,
-							coef_b: 0.000008,
+							coef_b: 0.0000008,
 							mode: 'open',
 							start_time: 0,
 							duration: 20,
