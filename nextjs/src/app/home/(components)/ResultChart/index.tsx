@@ -27,13 +27,14 @@ const ResultChart: FC<ElementsProps> = ({ containerRef }) => {
 		if (intervalRef.current)
 			clearInterval(intervalRef.current)
 		intervalRef.current = setInterval(() => {
-			if (iter + 1 >= duration) {
-				setIsPlaying(false)
-			} else {
-				if (isPlaying) {
-					setIter(prevIter => prevIter + 1)
-				}
+			// console.log(iter)
+			// if (chartData[iter].t >= duration) {
+			// 	setIsPlaying(false)
+			// } else {
+			if (isPlaying) {
+				setIter(prevIter => prevIter + 1)
 			}
+			// }
 		}, ms)
 	}
 
@@ -43,7 +44,12 @@ const ResultChart: FC<ElementsProps> = ({ containerRef }) => {
 			setIsPlaying(true)
 		}
 	}, [chartData.length, duration])
-
+	// Проверка на конец итераций
+	useEffect(() => {
+		if (chartData.length !== 0 && chartData[iter]?.t >= duration) {
+			setIsPlaying(false)
+		}
+	}, [chartData, duration, iter])
 	// переход к след значениям
 	useEffect(() => {
 		if (isPlaying) {
