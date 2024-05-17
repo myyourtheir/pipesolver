@@ -11,10 +11,17 @@ const defaultUiConfig: UiConfig = {
 export const useResultsStore = create<ResultsData & ResultsActions>()((set) => ({
 	chartData: [],
 	iter: 0,
-	setIter: (number) => {
-		return set(() => ({
-			iter: number
-		}))
+	setIter: (numberOrFn) => {
+		return set((state) => {
+			if (typeof numberOrFn === 'function') {
+				return {
+					iter: numberOrFn(state.iter)
+				}
+			}
+			return {
+				iter: numberOrFn
+			}
+		})
 	},
 	pushNewData(timeChartData) {
 		return set(state => ({
@@ -23,7 +30,8 @@ export const useResultsStore = create<ResultsData & ResultsActions>()((set) => (
 	},
 	resetResult() {
 		return set(() => ({
-			chartData: []
+			chartData: [],
+			iter: 0
 		}))
 	}
 

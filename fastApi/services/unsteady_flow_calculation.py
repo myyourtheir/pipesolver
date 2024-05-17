@@ -62,6 +62,9 @@ def make_x(elements: list[Elements_model], L, N):
             for j in range(round(elem.length)):
                 xx.append(x)
                 x += dx
+        else:
+            xx.append(x)
+            x += dx
     return xx
 
 
@@ -225,8 +228,8 @@ def calculate(data: Unsteady_data):
                         1,
                         elem.coef_q,
                         elem.max_pressure,
+                        pipes[count_pipe_iter - 1].diameter,
                         pipes[count_pipe_iter].diameter,
-                        pipes[count_pipe_iter + 1].diameter,
                         v,
                         ro,
                         T,
@@ -240,8 +243,8 @@ def calculate(data: Unsteady_data):
                         2,
                         elem.coef_q,
                         elem.max_pressure,
+                        pipes[count_pipe_iter - 1].diameter,
                         pipes[count_pipe_iter].diameter,
-                        pipes[count_pipe_iter + 1].diameter,
                         v,
                         ro,
                         T,
@@ -296,26 +299,67 @@ def calculate(data: Unsteady_data):
 if __name__ == "__main__":
 
     params = Unsteady_data(
-        cond_params={"time_to_iter": 100, "density": 800, "viscosity": 10},
+        cond_params={"time_to_iter": 500, "density": 800, "viscosity": 10},
         pipeline=[
             {
                 "type": "provider",
                 "mode": "pressure",
-                "value": 100000,
+                "value": 0,
                 "uiConfig": {"selected": False},
             },
-            # {
-            #     "type": "pump",
-            #     "coef_a": 310,
-            #     "coef_b": 0.000008,
-            #     "mode": "open",
-            #     "start_time": 0,
-            #     "duration": 20,
-            #     # "uiConfig": {"selected": False},
-            # },
+            {
+                "type": "pump",
+                "coef_a": 310,
+                "coef_b": 8e-7,
+                "mode": "open",
+                "start_time": 0,
+                "duration": 20,
+                "uiConfig": {"selected": False},
+            },
             {
                 "type": "pipe",
                 "length": 100,
+                "diameter": 1,
+                "uiConfig": {"selected": False},
+            },
+            {
+                "type": "gate_valve",
+                "mode": "close",
+                "start_time": 100,
+                "duration": 100,
+                "percentage": 100,
+                "uiConfig": {"selected": False},
+            },
+            {
+                "type": "pipe",
+                "length": 30,
+                "diameter": 1,
+                "uiConfig": {"selected": False},
+            },
+            {
+                "type": "pump",
+                "coef_a": 302.06,
+                "coef_b": 8.88e-7,
+                "mode": "open",
+                "start_time": 0,
+                "duration": 20,
+                "uiConfig": {"selected": False},
+            },
+            {
+                "type": "pipe",
+                "length": 10,
+                "diameter": 1,
+                "uiConfig": {"selected": False},
+            },
+            {
+                "type": "safe_valve",
+                "coef_q": 0.5,
+                "max_pressure": 7,
+                "uiConfig": {"selected": False},
+            },
+            {
+                "type": "pipe",
+                "length": 30,
                 "diameter": 1,
                 "uiConfig": {"selected": False},
             },

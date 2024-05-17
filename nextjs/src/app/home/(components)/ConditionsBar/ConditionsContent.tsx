@@ -25,7 +25,7 @@ const formSchema = z.object({
 		(val) => Number(String(val)),
 		z.number({
 			invalid_type_error: "Вы ввели не число",
-		}).nonnegative("Число должно быть больше или равно нулю")),
+		}).nonnegative("Число должно быть больше или равно нулю").max(1000, '> 1000')),
 	density: z.preprocess(
 		(val) => Number(String(val)),
 		z.number({

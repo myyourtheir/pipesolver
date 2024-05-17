@@ -9,9 +9,9 @@ export interface UnsteadyFlowActions {
 	deleteAll: () => void
 	setIsSelected: (idx: number) => void
 }
-
+type fnOrValue<T> = T | ((prev: T) => T)
 export interface ResultsActions {
 	pushNewData: (newData: UnsteadyChartData) => void
 	resetResult: () => void,
-	setIter: (a: number) => void
+	setIter: (val: fnOrValue<number>) => void
 }

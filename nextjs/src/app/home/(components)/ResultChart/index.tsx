@@ -19,10 +19,10 @@ import {
 const ResultChart: FC<ElementsProps> = ({ containerRef }) => {
 	const { chartData, iter, setIter } = useResultsStore(state => state)
 	const intervalRef = useRef<NodeJS.Timeout>()
-	const [isPlaying, setIsPlaying] = useState(true)
+	// const [iter, setIter] = useState(0)
+	const [isPlaying, setIsPlaying] = useState(false)
 	const [speed, setSpeed] = useState(100)
 	const { time_to_iter: duration } = useUnsteadyInputStore(state => state.cond_params)
-
 	const startTimer = (ms: number) => {
 		if (intervalRef.current)
 			clearInterval(intervalRef.current)
@@ -31,26 +31,31 @@ const ResultChart: FC<ElementsProps> = ({ containerRef }) => {
 				setIsPlaying(false)
 			} else {
 				if (isPlaying) {
-					setIter(iter + 1)
+					setIter(prevIter => prevIter + 1)
 				}
 			}
 		}, ms)
 	}
+
+	// Для первого запуска
 	useEffect(() => {
-		if (chartData.length > duration * 0.2)
-			startTimer(speed)
-	})
-
-
-
-	const handlePlayPauseClick = () => {
-		if (isPlaying) {
-			clearInterval(intervalRef.current)
-			setIsPlaying(false)
-		} else {
-			startTimer(speed)
+		if (chartData.length === Math.floor(0.2 * duration)) {
 			setIsPlaying(true)
 		}
+	}, [chartData.length, duration])
+
+	// переход к след значениям
+	useEffect(() => {
+		if (isPlaying) {
+			startTimer(speed)
+		} else {
+			clearInterval(intervalRef.current)
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isPlaying, speed])
+
+	const handlePlayPauseClick = () => {
+		setIsPlaying(prev => !prev)
 	}
 
 	if (chartData.length !== 0) {
