@@ -33,7 +33,11 @@ interface chartProps {
 }
 
 const MyChart: FC<chartProps> = ({ data }) => {
+	const labels = data.Davleniya.map(obj => {
+		return `${obj.x} м`
+	})
 	const naporyData: ChartData<"scatter"> = {
+		labels,
 		datasets: [
 			{
 				type: 'scatter',
@@ -45,6 +49,7 @@ const MyChart: FC<chartProps> = ({ data }) => {
 		],
 	}
 	const davleniyaData: ChartData<"scatter"> = {
+		labels,
 		datasets: [
 			{
 				type: 'scatter',
@@ -56,6 +61,7 @@ const MyChart: FC<chartProps> = ({ data }) => {
 		]
 	}
 	const skorostyData: ChartData<"scatter"> = {
+		labels,
 		datasets: [
 			{
 				type: 'scatter',

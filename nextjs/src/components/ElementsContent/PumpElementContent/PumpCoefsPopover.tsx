@@ -8,6 +8,7 @@ import { FC, useState } from 'react'
 import ABCalculator from './QHTable/ABCalculator'
 import { UseFormReturn } from 'react-hook-form'
 import QHChart from './QHChart'
+import { Badge } from '@/components/ui/badge'
 
 export interface PumpFormProps {
 	form: UseFormReturn<{
@@ -47,8 +48,10 @@ const PumpCoefsPopover: FC<PumpFormProps> = ({ form }) => {
 	const [coefs, setCoefs] = useState({ a: coef_a, b: coef_b })
 	return (
 		<Popover modal>
-			<PopoverTrigger className='text-sm'>
-				Задать расходами
+			<PopoverTrigger className='text-sm p-4'>
+				<Badge>
+					Задать расходами
+				</Badge>
 			</PopoverTrigger>
 			<PopoverContent side='right' className='w-fit' align='start'>
 				<QHChart coefs={coefs} />

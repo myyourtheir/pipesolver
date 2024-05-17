@@ -1,7 +1,10 @@
-import { ChartOptions } from 'chart.js'
+import { ChartOptions, layouts } from 'chart.js'
 
 const globalOptions: ChartOptions<'scatter'> = {
 	animation: false,
+	layout: {
+		autoPadding: true
+	},
 	responsive: true,
 	elements: {
 		point: {
@@ -25,7 +28,8 @@ export const DavleniyaOptions: ChartOptions<'scatter'> = {
 				maxRotation: 0,
 				autoSkip: true,
 			},
-			offset: false
+			offset: false,
+			bounds: 'data',
 		},
 		y: {
 			ticks: {
@@ -64,7 +68,8 @@ export const NaporyOptions: ChartOptions<'scatter'> = {
 				maxRotation: 0,
 				autoSkip: true,
 			},
-			offset: false
+			offset: false,
+			bounds: 'data',
 		},
 		y: {
 			ticks: {
@@ -102,7 +107,8 @@ export const SkorostyOptions: ChartOptions<'scatter'> = {
 				maxRotation: 0,
 				autoSkip: true,
 			},
-			offset: false
+			offset: false,
+			bounds: 'data',
 		},
 		y: {
 			ticks: {
