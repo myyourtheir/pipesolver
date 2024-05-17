@@ -51,7 +51,7 @@ def count_l_and_num_of_elems(
 def make_x(elements: list[Elements_model], L, N):
 
     dx = L / N
-    x = dx
+    x = 0
     xx = []
     for elem in elements:
         type_ = elem.type
