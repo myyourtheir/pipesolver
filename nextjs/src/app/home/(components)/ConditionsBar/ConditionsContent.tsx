@@ -87,7 +87,7 @@ const ConditionsContent: FC<FCParams> = ({ defaultValues, onSubmit }) => {
 								<FormControl>
 									<div className='flex items-center gap-1'>
 										<Input className='w-24' placeholder="Введите значение" {...field} />
-										<span>{'кг/м3'}</span>
+										<span className='w-8'>кг/м<sup>3</sup></span>
 									</div>
 								</FormControl>
 								<FormMessage />

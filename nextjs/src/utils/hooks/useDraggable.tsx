@@ -1,3 +1,4 @@
+import { useMaxZIndexStore } from '@/lib/globalStore/maxZIndexStore'
 import { RefObject, useEffect, useRef, useState } from 'react'
 
 interface props {
@@ -18,6 +19,7 @@ interface stylesType {
 }
 
 export const useDraggable = ({ refEventsElement, refTransformElement, refContainer }: props) => {
+	const { maxZ, setMaxZ: setMaxZToStore } = useMaxZIndexStore(state => state)
 	const isClicked = useRef<boolean>(false)
 	const styles = useRef<stylesType>({ zIndex: '0', backgroundColor: 'white' })
 	const coords = useRef<coordsType>({
@@ -42,34 +44,35 @@ export const useDraggable = ({ refEventsElement, refTransformElement, refContain
 		}
 	}, [refTransformElement])
 
+
 	useEffect(() => {
 		if (!refEventsElement.current || !refTransformElement.current || !refContainer.current) return
 		const eventElement: HTMLElement = refEventsElement.current
 		const transformElement: HTMLElement = refTransformElement.current
 		const container: HTMLElement = refContainer.current
 
+		const setMaxZ = () => {
+			const newMaxZ = maxZ + 1
+			transformElement.style.zIndex = newMaxZ.toString()
+			setMaxZToStore(newMaxZ)
+		}
+
 		const onMouseDown = (e: MouseEvent) => {
-			transformElement.style.zIndex = '1000'
-			// container.style.backgroundColor = 'rgba(52,62,64,0.1)'
 			coords.current.startX = e.clientX
 			coords.current.startY = e.clientY
 			isClicked.current = true
 		}
 		const onTouchStart = (e: TouchEvent) => {
-			transformElement.style.zIndex = '1000'
 			coords.current.startX = e.touches[0].clientX
 			coords.current.startY = e.touches[0].clientY
 			isClicked.current = true
 		}
 		const onMouseUp = (e: MouseEvent) => {
-			transformElement.style.zIndex = styles.current.zIndex
-			// container.style.backgroundColor = styles.current.backgroundColor
 			isClicked.current = false
 			coords.current.lastX = transformElement.offsetLeft
 			coords.current.lastY = transformElement.offsetTop
 		}
 		const onTouchEnd = (e: TouchEvent) => {
-			transformElement.style.zIndex = styles.current.zIndex
 			isClicked.current = false
 			coords.current.lastX = transformElement.offsetLeft
 			coords.current.lastY = transformElement.offsetTop
@@ -103,6 +106,8 @@ export const useDraggable = ({ refEventsElement, refTransformElement, refContain
 
 
 		eventElement.addEventListener('mousedown', onMouseDown)
+		transformElement.addEventListener('mousedown', setMaxZ)
+		transformElement.addEventListener('touchstart', setMaxZ)
 		container.addEventListener('mouseup', onMouseUp)
 		container.addEventListener('mousemove', onMouseMove)
 		container.addEventListener('mouseleave', onMouseUp)
@@ -119,8 +124,11 @@ export const useDraggable = ({ refEventsElement, refTransformElement, refContain
 			container.removeEventListener('touchend', onTouchEnd)
 			container.removeEventListener('touchmove', onTouchMove)
 			container.removeEventListener('mouseleave', onMouseUp)
+			transformElement.removeEventListener('mousedown', setMaxZ)
+			transformElement.removeEventListener('touchstart', setMaxZ)
 		}
 		return cleanUp
 
-	}, [refContainer, refEventsElement, refTransformElement])
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [maxZ, refContainer, refEventsElement, refTransformElement])
 }
