@@ -71,46 +71,56 @@ const PumpElementContent: FC<ElementContentType> = ({ defaultValues, onSubmit, s
 						setOpen(false)
 					})}
 					className="space-y-2">
-					<div className='grid grid-cols-2 grid-rows-2'>
+					<div className='grid grid-cols-2 grid-rows-2 '>
 						<FormField
 							control={form.control}
 							name="coef_a"
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>а:</FormLabel>
+									<FormLabel>Параметр а</FormLabel>
 									<FormControl>
 										<div className='flex items-center gap-2'>
-											<Input placeholder="Введите значение" {...field} />
+											<Input placeholder="Введите значение" {...field} className='w-16' />
+											<span>м</span>
 										</div>
 									</FormControl>
 									<FormMessage />
 								</FormItem>
 							)}
 						/>
-						<span className='self-center justify-self-center'>H=a-b*Q^2</span>
+						<div className='flex flex-col gap-1 justify-center items-center pt-3'>
+							<FormLabel className='text-xs'>
+								Тип характеристики:
+							</FormLabel>
+							<span className='self-center justify-self-center'>ΔH = a - b ∙ Q<sup>2</sup></span>
+						</div>
 						<FormField
 							control={form.control}
 							name="coef_b"
 							render={({ field }) => (
 								<FormItem className='row-start-2 mt-1'>
-									<FormLabel>b:</FormLabel>
+									<FormLabel>Параметр b</FormLabel>
 									<FormControl>
+
 										<div className='flex items-center gap-2'>
-											<Input placeholder="Введите значение" {...field} />
+											<Input placeholder="Введите значение" {...field} className='w-16' />
+											<span>ч<sup>2</sup>&frasl;м<sup>5</sup></span>
 										</div>
 									</FormControl>
 									<FormMessage />
 								</FormItem>
 							)}
 						/>
-						<PumpCoefsPopover form={form} />
+						<div className='flex justify-center items-end'>
+							<PumpCoefsPopover form={form} />
+						</div>
 					</div>
 					<FormField
 						control={form.control}
 						name="mode"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Режим</FormLabel>
+								<FormLabel>Состояние</FormLabel>
 								<Select onValueChange={field.onChange} defaultValue={field.value}>
 									<FormControl>
 										<SelectTrigger>
@@ -118,8 +128,8 @@ const PumpElementContent: FC<ElementContentType> = ({ defaultValues, onSubmit, s
 										</SelectTrigger>
 									</FormControl>
 									<SelectContent>
-										<SelectItem value="open">Открывается</SelectItem>
-										<SelectItem value="close">Закрывается</SelectItem>
+										<SelectItem value="open">Запуск насоса</SelectItem>
+										<SelectItem value="close">Остановка насоса</SelectItem>
 									</SelectContent>
 								</Select>
 								<FormMessage />
@@ -131,7 +141,7 @@ const PumpElementContent: FC<ElementContentType> = ({ defaultValues, onSubmit, s
 						name="start_time"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Время начала {form.getValues().mode == 'open' ? 'открытия' : 'закрытия'}</FormLabel>
+								<FormLabel>Момент начала {form.getValues().mode == 'open' ? 'запуска' : 'остановки'}</FormLabel>
 								<FormControl>
 									<div className='flex items-center gap-2'>
 										<Input placeholder="Введите значение" {...field} />
@@ -147,7 +157,7 @@ const PumpElementContent: FC<ElementContentType> = ({ defaultValues, onSubmit, s
 						name="duration"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Время выбега:</FormLabel>
+								<FormLabel>Длительность {form.getValues().mode == 'open' ? 'запуска' : 'остановки'}</FormLabel>
 								<FormControl>
 									<div className='flex items-center gap-2'>
 										<Input placeholder="Введите значение" {...field} />

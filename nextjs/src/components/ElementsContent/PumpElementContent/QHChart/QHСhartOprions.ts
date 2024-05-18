@@ -1,6 +1,7 @@
 import { ChartOptions } from 'chart.js'
 
 export const QHChartOptions: ChartOptions<'scatter'> = {
+
 	animation: false,
 	responsive: true,
 	elements: {
@@ -18,7 +19,7 @@ export const QHChartOptions: ChartOptions<'scatter'> = {
 	scales: {
 		x: {
 			ticks: {
-				callback: (value) => `${value} м3/ч`,
+				callback: (value) => `${value} м³/ч`,
 				maxRotation: 0,
 				autoSkip: true,
 			},
@@ -26,11 +27,14 @@ export const QHChartOptions: ChartOptions<'scatter'> = {
 		},
 		y: {
 			ticks: {
-				callback: (value) => `${typeof value === 'number' && value.toFixed(1)} м`
+				callback: (value) => `${typeof value === 'number' && value.toFixed()} м`
 			},
 		}
 	},
 	plugins: {
+		legend: {
+			display: false,
+		},
 		tooltip: {
 			enabled: true,
 			mode: 'index',

@@ -21,12 +21,12 @@ const PumpQHTable: FC<PumpQHTableProps> = ({ data, setData }) => {
 	const columns = useMemo<ColumnDef<QH, any>[]>(() => [
 		{
 			accessorKey: 'Q',
-			header: 'Расход, м3/с',
+			header: () => <span className='font-normal'>Расход, м<sup>3</sup>&frasl;ч</span>,
 			cell: ({ getValue, table, column, row }) => <QHCell getValue={getValue} column={column} table={table} row={row} />,
 		},
 		{
 			accessorKey: 'H',
-			header: 'Напор, м',
+			header: () => <span className='font-normal'>Напор, м</span>,
 			cell: ({ getValue, table, column, row }) => <QHCell getValue={getValue} column={column} table={table} row={row} />,
 		},
 	],
@@ -45,7 +45,9 @@ const PumpQHTable: FC<PumpQHTableProps> = ({ data, setData }) => {
 		}
 	}
 	return (
+
 		<DataTable data={data} columns={columns} functions={functions} />
+
 	)
 }
 

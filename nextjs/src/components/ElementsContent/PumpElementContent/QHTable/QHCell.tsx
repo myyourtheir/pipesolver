@@ -38,7 +38,7 @@ const QHCell: FC<QHCellProps> = ({ getValue, table, column, row }) => {
 			table.options.meta?.functions?.updateState({
 				index: row.index,
 				paramTitle: column.id,
-				value: parseFloat(value)
+				value: parseFloat(value) | 0
 			})
 		} else {
 			return
@@ -46,9 +46,9 @@ const QHCell: FC<QHCellProps> = ({ getValue, table, column, row }) => {
 	}
 
 	return (
-		<div className='w-full flex justify-center'>
+		<div className='w-full flex justify-center '>
 			<Input
-				className={`w-24 h-6 text-center ${!isValid ? ' outline-none ring-2 ring-red-500 ring-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2' : 'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50'}`}
+				className={`w-24 h-6 text-center ${!isValid ? ' outline-none ring-2 ring-red-500 ring-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2' : 'focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50'}  font-light `}
 				value={value}
 				onChange={onChange}
 				onBlur={onBlur}

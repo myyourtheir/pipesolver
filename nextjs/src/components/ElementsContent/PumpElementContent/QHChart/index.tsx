@@ -4,15 +4,17 @@ import { Line, Scatter } from 'react-chartjs-2'
 import makeQHData from './makeQHData'
 import { ChartData } from 'chart.js'
 import { QHChartOptions } from './QHСhartOprions'
+import { Label } from '@/components/ui/label'
+import { QH } from '../QHTable'
 
 interface QHChartProps {
-	coefs: { a: number, b: number }
+	coefs: { a: number, b: number },
+	tableData: QH[]
 }
-const QHChart: FC<QHChartProps> = ({ coefs }) => {
+const QHChart: FC<QHChartProps> = ({ coefs, tableData }) => {
 	const { a, b } = coefs
-	console.log(a, b)
-	const QHData = makeQHData(a, b)
-	const labels = QHData.map(item => `${item.x} м3/ч`)
+	const QHData = makeQHData(a, b, tableData)
+	const labels = QHData.map(item => `${item.x} м³/ч`)
 	const data: ChartData<"scatter"> = {
 		labels: labels,
 		datasets: [
@@ -28,6 +30,11 @@ const QHChart: FC<QHChartProps> = ({ coefs }) => {
 	}
 	return (
 		<div>
+			<div className='flex justify-center'>
+				<Label className=' font-normal'>
+					Характеристика насоса
+				</Label>
+			</div>
 			<Scatter data={data} options={QHChartOptions} />
 		</div>
 	)

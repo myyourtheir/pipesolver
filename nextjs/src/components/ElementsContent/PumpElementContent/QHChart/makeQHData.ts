@@ -1,17 +1,21 @@
-const makeQHData = (a: number, b: number) => {
+import { QH } from '../QHTable'
+
+const makeQHData = (a: number, b: number, tableData: QH[]) => {
 	const calcH = (Q: number) => {
-		return a - b * Q ** 2
+		return Number((a - b * Q ** 2).toFixed(1))
 	}
-	let i = 0
+	const maxQ = tableData.reduce((acc, item) => {
+		return item.Q > acc ? item.Q : acc
+	}, 0)
 	const arr = []
 	let Q = 0
-	while (i <= 150) {
-		Q = i * 100
+	const dQ = maxQ / 200
+	while (Q <= maxQ * 1.2) {
 		arr.push({
-			x: Q,
+			x: Number(Q.toFixed(1)),
 			y: calcH(Q)
 		})
-		i += 2
+		Q += dQ
 	}
 	return arr
 }

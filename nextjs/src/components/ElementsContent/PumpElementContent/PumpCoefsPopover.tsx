@@ -4,11 +4,12 @@ import {
 	PopoverTrigger,
 } from "@/components/ui/popover"
 import PumpQHTable from './QHTable'
-import { FC, useState } from 'react'
-import ABCalculator from './QHTable/ABCalculator'
+import { FC, useEffect, useState } from 'react'
 import { UseFormReturn } from 'react-hook-form'
 import QHChart from './QHChart'
 import { Badge } from '@/components/ui/badge'
+import calculatePumpAB from './QHTable/calculatePumpAB'
+import ABFormSetter from './QHTable/ABFormSetter'
 
 export interface PumpFormProps {
 	form: UseFormReturn<{
@@ -44,19 +45,24 @@ const PumpCoefsPopover: FC<PumpFormProps> = ({ form }) => {
 			H: 204
 		},
 		])
-	const { coef_a, coef_b } = form.getValues()
-	const [coefs, setCoefs] = useState({ a: coef_a, b: coef_b })
+	const { a, b } = calculatePumpAB(data)
+	const [coefs, setCoefs] = useState({ a: a, b: b })
+	useEffect(() => {
+		setCoefs({
+			a, b
+		})
+	}, [a, b])
 	return (
 		<Popover modal>
-			<PopoverTrigger className='text-sm p-4'>
-				<Badge>
-					Задать расходами
+			<PopoverTrigger className='text-sm '>
+				<Badge variant={'outline'} className='bg-gray-50 hover:bg-[rgba(52,_62,_64,_0.1)]	'>
+					Рассчитать параметры
 				</Badge>
 			</PopoverTrigger>
 			<PopoverContent side='right' className='w-fit' align='start'>
-				<QHChart coefs={coefs} />
+				<QHChart tableData={data} coefs={coefs} />
 				<PumpQHTable data={data} setData={setData} />
-				<ABCalculator data={data} form={form} setCoefs={setCoefs} />
+				<ABFormSetter coefs={coefs} form={form} />
 			</PopoverContent>
 		</Popover>
 	)
