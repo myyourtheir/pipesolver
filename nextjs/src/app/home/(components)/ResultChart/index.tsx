@@ -94,20 +94,23 @@ const ResultChart: FC<ElementsProps> = ({ containerRef }) => {
 							<SelectItem value={'1000'}>1:1</SelectItem>
 						</SelectContent>
 					</Select>
-					<div className='w-16'>
-						{chartData[iter]?.t} c
+					<div className='w-[102px]'>
+						Время: {chartData[iter]?.t} c
 					</div>
 				</div>
+				<div className='h-3 flex items-end'>
+					{
+						chartData.length >= duration &&
+						<Slider value={[iter]}
+							onValueChange={(value) => {
+								setIter(value[0])
+							}}
+							max={duration}
+							step={1} />
+					}
+				</div>
 				<MyChart data={chartData[iter]} />
-				{
-					chartData.length >= duration &&
-					<Slider value={[iter]}
-						onValueChange={(value) => {
-							setIter(value[0])
-						}}
-						max={duration}
-						step={1} />
-				}
+
 			</DraggableLayout>
 		)
 	}

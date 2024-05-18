@@ -29,14 +29,14 @@ const Element: FC<ElementProps> = ({ TriggerContent, children, hoverTitle, disab
 	return (
 		<ElementContext.Provider value={{ setOpen }}>
 			<Popover open={open} onOpenChange={setOpen}>
-				<PopoverTrigger disabled={disabled} >
+				<PopoverTrigger disabled={disabled} className='disabled:cursor-not-allowed'>
 					{
 						isHover ?
 							<HoverCard openDelay={100} closeDelay={100}>
-								<HoverCardTrigger>
+								<HoverCardTrigger >
 									<TriggerContent />
 								</HoverCardTrigger>
-								<HoverCardContent className='w-fit h-fit text-sm text-[#F5F5F5] p-1 bg-[#333333] border-none shadow-none' side='left' align='start'>
+								<HoverCardContent className=' w-fit h-fit text-sm text-[#F5F5F5] p-1 bg-[#333333] border-none shadow-none' side='left' align='start'>
 									{hoverTitle}
 								</HoverCardContent>
 							</HoverCard>

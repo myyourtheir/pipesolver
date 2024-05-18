@@ -33,7 +33,7 @@ export const DavleniyaOptions: ChartOptions<'scatter'> = {
 		},
 		y: {
 			ticks: {
-				callback: (value) => `${typeof value === 'number' && value.toFixed(1)} Мпа`
+				callback: (value) => `${typeof value === 'number' && value.toFixed(1)} МПа`
 			},
 		}
 	},
