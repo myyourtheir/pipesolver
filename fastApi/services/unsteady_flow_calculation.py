@@ -95,10 +95,11 @@ def calculate(data: Unsteady_data):
     t = 0
     times = []
     xx = make_x(elements, L, N)
+    pipes: list[Pipe_params] = list(filter(lambda elem: elem.type == "pipe", elements))
+    for elem in pipes:
+        elem.diameter = elem.diameter / 1000
+    print(pipes)
     while t <= t_rab:
-        pipes: list[Pipe_params] = list(
-            filter(lambda elem: elem.type == "pipe", elements)
-        )
         count_pipe_iter: int = 0
         iter = 0
         main = []
@@ -110,7 +111,7 @@ def calculate(data: Unsteady_data):
                         Skorosty,
                         iter,
                         1 if elem.mode == "pressure" else 0,
-                        elem.value,
+                        elem.value * 1000,
                         pipes[count_pipe_iter].diameter,
                         v,
                         ro,
@@ -259,7 +260,7 @@ def calculate(data: Unsteady_data):
                         Skorosty,
                         iter,
                         1 if elem.mode == "pressure" else 0,
-                        elem.value,
+                        elem.value * 1000,
                         pipes[count_pipe_iter - 1].diameter,
                         v,
                         ro,
@@ -319,7 +320,7 @@ if __name__ == "__main__":
             {
                 "type": "pipe",
                 "length": 100,
-                "diameter": 1,
+                "diameter": 1000,
                 "uiConfig": {"selected": False},
             },
             {
@@ -333,7 +334,7 @@ if __name__ == "__main__":
             {
                 "type": "pipe",
                 "length": 30,
-                "diameter": 1,
+                "diameter": 1000,
                 "uiConfig": {"selected": False},
             },
             {
@@ -348,7 +349,7 @@ if __name__ == "__main__":
             {
                 "type": "pipe",
                 "length": 10,
-                "diameter": 1,
+                "diameter": 1000,
                 "uiConfig": {"selected": False},
             },
             {
@@ -360,7 +361,7 @@ if __name__ == "__main__":
             {
                 "type": "pipe",
                 "length": 30,
-                "diameter": 1,
+                "diameter": 1000,
                 "uiConfig": {"selected": False},
             },
             {

@@ -29,7 +29,7 @@ const formSchema = z.object({
 		(val) => Number(String(val)),
 		z.number({
 			invalid_type_error: "Вы ввели не число",
-		}).nonnegative("Число должно быть больше или равно нулю"))
+		}).nonnegative("Число должно быть больше или равно нулю").min(100, 'Должно быть больше 100 мм').max(2000, "Должно быть меньше 2000"))
 })
 
 
@@ -73,7 +73,7 @@ const PipeElementContent: FC<ElementContentType> = ({ defaultValues, onSubmit, s
 								<FormControl>
 									<div className='flex items-center gap-2'>
 										<Input placeholder="Введите значение" {...field} />
-										<span>{'м'}</span>
+										<span>{'мм'}</span>
 									</div>
 								</FormControl>
 								<FormMessage />

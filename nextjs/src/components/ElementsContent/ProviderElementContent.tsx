@@ -60,8 +60,8 @@ const ProviderElementContent: FC<ElementContentType> = ({ defaultValues, onSubmi
 										</SelectTrigger>
 									</FormControl>
 									<SelectContent>
-										<SelectItem value="pressure">Давление</SelectItem>
-										<SelectItem value="speed">Скорость</SelectItem>
+										<SelectItem value="pressure">Задать давление</SelectItem>
+										<SelectItem value="speed">Задать скорость</SelectItem>
 									</SelectContent>
 								</Select>
 								<FormMessage />
@@ -75,8 +75,8 @@ const ProviderElementContent: FC<ElementContentType> = ({ defaultValues, onSubmi
 							<FormItem>
 								<FormControl>
 									<div className='flex items-center gap-2'>
-										<Input placeholder="Введите значение" {...field} />
-										<span>{form.getValues().mode === 'pressure' ? 'Па' : 'м/с'}</span>
+										<Input placeholder="Введите значение" {...field} className='w-32' />
+										<span>{form.getValues().mode === 'pressure' ? 'кПа' : 'м/с'}</span>
 									</div>
 								</FormControl>
 								<FormMessage />
