@@ -72,11 +72,17 @@ const PumpElementContent: FC<ElementContentType> = ({ defaultValues, onSubmit, s
 					})}
 					className="space-y-2">
 					<div className='grid grid-cols-2 grid-rows-2 '>
+						<div className='flex flex-col gap-1 justify-center items-center '>
+							<FormLabel className='text-xs'>
+								Тип характеристики:
+							</FormLabel>
+							<span className='self-center justify-self-center'>ΔH = a - b ∙ Q<sup>2</sup></span>
+						</div>
 						<FormField
 							control={form.control}
 							name="coef_a"
 							render={({ field }) => (
-								<FormItem>
+								<FormItem className='pl-4'>
 									<FormLabel>Параметр а</FormLabel>
 									<FormControl>
 										<div className='flex items-center gap-2'>
@@ -88,21 +94,18 @@ const PumpElementContent: FC<ElementContentType> = ({ defaultValues, onSubmit, s
 								</FormItem>
 							)}
 						/>
-						<div className='flex flex-col gap-1 justify-center items-center pt-3'>
-							<FormLabel className='text-xs'>
-								Тип характеристики:
-							</FormLabel>
-							<span className='self-center justify-self-center'>ΔH = a - b ∙ Q<sup>2</sup></span>
+						<div className='flex justify-center items-start'>
+							<PumpCoefsPopover form={form} />
 						</div>
 						<FormField
 							control={form.control}
 							name="coef_b"
 							render={({ field }) => (
-								<FormItem className='row-start-2 mt-1'>
+								<FormItem className=' mt-1 pl-4'>
 									<FormLabel>Параметр b</FormLabel>
 									<FormControl>
 
-										<div className='flex items-center gap-2'>
+										<div className='flex items-center gap-2 '>
 											<Input placeholder="Введите значение" {...field} className='w-16' />
 											<span>ч<sup>2</sup>&frasl;м<sup>5</sup></span>
 										</div>
@@ -111,9 +114,7 @@ const PumpElementContent: FC<ElementContentType> = ({ defaultValues, onSubmit, s
 								</FormItem>
 							)}
 						/>
-						<div className='flex justify-center items-end'>
-							<PumpCoefsPopover form={form} />
-						</div>
+
 					</div>
 					<FormField
 						control={form.control}

@@ -30,7 +30,7 @@ const TopLayout: FC<TopLayoutProps> = ({ className }) => {
 						)
 					}}
 				>
-					Расчитать
+					Расcчитать
 				</Button>
 			</div>
 		</header>

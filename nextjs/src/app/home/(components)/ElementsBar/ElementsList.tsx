@@ -40,9 +40,13 @@ const ElementsList = () => {
 		addElement(values, pipeline.nodes[pipeline.nodes.length - 1])
 	}
 	return (
-		<div className='grid grid-cols-1  md:grid-cols-2 gap-2 items-center content-center'>
-			<div className='w-full flex items-center justify-center'>
-				<Element hoverTitle='Поставщик' disabled={isProvider} TriggerContent={() => <ChevronsRight width={width} height={height} />}>
+		<div className='grid grid-cols-1  md:grid-cols-2 gap-2 items-center content-center [&>*]:h-full '>
+			<div className='w-full flex items-center justify-center hover:ring-1 hover:ring-ring rounded-sm'>
+				<Element
+					hoverTitle='Поставщик'
+					disabled={isProvider}
+					TriggerContent={({ className }: { className: string }) => <ChevronsRight width={width} height={height} className={className} />}
+				>
 					<ProviderElementContent
 						defaultValues={{
 							type: 'provider',
@@ -54,8 +58,12 @@ const ElementsList = () => {
 					/>
 				</Element>
 			</div>
-			<div className='w-full flex items-center justify-center'>
-				<Element hoverTitle='Потребитель' disabled={!isProvider || isConsumer || !isPipe} TriggerContent={() => <ChevronsLeft width={width} height={height} />}>
+			<div className='w-full flex items-center justify-center hover:ring-1 hover:ring-ring rounded-sm'>
+				<Element
+					hoverTitle='Потребитель'
+					disabled={!isProvider || isConsumer || !isPipe}
+					TriggerContent={({ className }: { className: string }) => <ChevronsLeft width={width} height={height} className={className} />}
+				>
 					<ConsumerElementContent
 						defaultValues={{
 							type: 'consumer',
@@ -67,8 +75,12 @@ const ElementsList = () => {
 					/>
 				</Element>
 			</div>
-			<div className='w-full flex items-center justify-center'>
-				<Element hoverTitle='Труба' disabled={!isProvider || isConsumer} TriggerContent={() => <PipeFav width={width} height={height} />}>
+			<div className='w-full flex items-center justify-center hover:ring-1 hover:ring-ring rounded-sm'>
+				<Element
+					hoverTitle='Труба'
+					disabled={!isProvider || isConsumer}
+					TriggerContent={({ className }: { className: string }) => <PipeFav width={width} height={height} className={className} />}
+				>
 					<PipeElementContent
 						defaultValues={{
 							type: 'pipe',
@@ -80,8 +92,12 @@ const ElementsList = () => {
 					/>
 				</Element>
 			</div>
-			<div className='w-full flex items-center justify-center'>
-				<Element hoverTitle='Насос' disabled={!isProvider || isConsumer} TriggerContent={() => <PumpFav width={45} height={45} />}>
+			<div className='w-full flex items-center justify-center hover:ring-1 hover:ring-ring rounded-sm'>
+				<Element
+					hoverTitle='Насос'
+					disabled={!isProvider || isConsumer}
+					TriggerContent={({ className }: { className: string }) => <PumpFav width={45} height={45} className={className} />}
+				>
 					<PumpElementContent
 						defaultValues={{
 							type: 'pump',
@@ -96,8 +112,12 @@ const ElementsList = () => {
 					/>
 				</Element>
 			</div>
-			<div className='w-full flex items-center justify-center'>
-				<Element hoverTitle='Задвижка' disabled={!isProvider || isConsumer} TriggerContent={() => <GateValveFav width={width} height={height} />}>
+			<div className='w-full flex items-center justify-center hover:ring-1 hover:ring-ring rounded-sm'>
+				<Element
+					hoverTitle='Задвижка'
+					disabled={!isProvider || isConsumer}
+					TriggerContent={({ className }: { className: string }) => <GateValveFav width={width} height={height} className={className} />}
+				>
 					<GateValveElementContent
 						defaultValues={{
 							type: 'gate_valve',
@@ -111,8 +131,12 @@ const ElementsList = () => {
 					/>
 				</Element>
 			</div>
-			<div className='w-full flex items-center justify-center'>
-				<Element hoverTitle='Предохранительный клапан' disabled={!isProvider || isConsumer} TriggerContent={() => <SafeValveFav width={55} height={55} />}>
+			<div className='w-full flex items-center justify-center hover:ring-1 hover:ring-ring rounded-sm'>
+				<Element
+					hoverTitle='Предохранительный клапан'
+					disabled={!isProvider || isConsumer}
+					TriggerContent={({ className }: { className: string }) => <SafeValveFav width={55} height={55} className={className} />}
+				>
 					<SafeValveElementContent
 						defaultValues={{
 							type: 'safe_valve',

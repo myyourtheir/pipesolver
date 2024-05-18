@@ -14,7 +14,7 @@ const ElementsTree: FC<ElementsProps> = ({ containerRef }) => {
 		<DraggableLayout refContainer={containerRef} headerName='Дерево элементов' className='right-5 self-start w-64 h-96 min-w-64' hideable={true}>
 			{pipeline.nodes.length !== 0 &&
 				<div className='w-full'>
-					<Button className='w-full' size={'xsm'} onClick={handleDeleteAll}>Очистить все</Button>
+					<Button className='w-full' size={'xsm'} onClick={handleDeleteAll}>Удалить все элементы</Button>
 				</div>
 			}
 			<TreeList />

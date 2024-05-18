@@ -66,7 +66,7 @@ const GateValveElementContent: FC<ElementContentType> = ({ defaultValues, onSubm
 						name="mode"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Режим</FormLabel>
+								<FormLabel>Состояние</FormLabel>
 								<Select onValueChange={field.onChange} defaultValue={field.value}>
 									<FormControl>
 										<SelectTrigger>
@@ -74,8 +74,8 @@ const GateValveElementContent: FC<ElementContentType> = ({ defaultValues, onSubm
 										</SelectTrigger>
 									</FormControl>
 									<SelectContent>
-										<SelectItem value="open">Открывается</SelectItem>
-										<SelectItem value="close">Закрывается</SelectItem>
+										<SelectItem value="open">Открытие задвижки</SelectItem>
+										<SelectItem value="close">Закрытие задвижки</SelectItem>
 									</SelectContent>
 								</Select>
 								<FormMessage />
@@ -87,7 +87,7 @@ const GateValveElementContent: FC<ElementContentType> = ({ defaultValues, onSubm
 						name="start_time"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Время начала {form.getValues().mode == 'open' ? 'открытия' : 'закрытия'}</FormLabel>
+								<FormLabel>Момент начала {form.getValues().mode == 'open' ? 'открытия' : 'закрытия'}</FormLabel>
 								<FormControl>
 									<div className='flex items-center gap-2'>
 										<Input placeholder="Введите значение" {...field} />
@@ -103,7 +103,7 @@ const GateValveElementContent: FC<ElementContentType> = ({ defaultValues, onSubm
 						name="duration"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Время {form.getValues().mode == 'open' ? 'открытия' : 'закрытия'}</FormLabel>
+								<FormLabel>Длительность {form.getValues().mode == 'open' ? 'открытия' : 'закрытия'}</FormLabel>
 								<FormControl>
 									<div className='flex items-center gap-2'>
 										<Input placeholder="Введите значение" {...field} />

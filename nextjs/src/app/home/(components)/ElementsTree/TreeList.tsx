@@ -46,7 +46,7 @@ const TreeList = () => {
 		<ScrollArea className='w-full h-full mt-2'>
 			{
 				pipeline.nodes.length !== 0 ? (
-					<ul >
+					<ul className='space-y-1 mt-1'>
 						{
 							pipeline.nodes.map((element, idx) => (
 								<TreeItemContextMenu
@@ -88,7 +88,7 @@ export interface TreeItemProps {
 const TreeItem: FC<TreeItemProps> = ({ element, onClick }) => {
 
 	return (
-		<li onClick={onClick} className='text-sm'>
+		<li onClick={onClick} className='text-sm hover:ring-1 hover:ring-ring rounded-md w-full'>
 			{TypeToTitles[element.type].title}
 		</li>
 	)
