@@ -20,7 +20,7 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 	updateCondParams(cond_params) {
 		return set((state) => ({
 			...state,
-			cond_params: cond_params
+			cond_params: { ...state.cond_params, cond_params }
 		})
 
 		)

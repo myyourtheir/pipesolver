@@ -36,7 +36,7 @@ const Element: FC<ElementProps> = ({ TriggerContent, children, hoverTitle, disab
 								<HoverCardTrigger >
 									<TriggerContent />
 								</HoverCardTrigger>
-								<HoverCardContent className=' w-fit h-fit text-sm text-[#F5F5F5] p-1 bg-[#333333] border-none shadow-none' side='left' align='start'>
+								<HoverCardContent className=' w-fit py-0 px-1 text-xs text-[#F5F5F5]  bg-[#333333] border-none shadow-none h-fit' side='bottom' align='center'>
 									{hoverTitle}
 								</HoverCardContent>
 							</HoverCard>

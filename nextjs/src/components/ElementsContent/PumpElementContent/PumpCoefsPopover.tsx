@@ -59,7 +59,7 @@ const PumpCoefsPopover: FC<PumpFormProps> = ({ form }) => {
 					Рассчитать параметры
 				</Badge>
 			</PopoverTrigger>
-			<PopoverContent side='right' className='w-fit' align='start'>
+			<PopoverContent side='left' className='w-fit' align='start'>
 				<QHChart tableData={data} coefs={coefs} />
 				<PumpQHTable data={data} setData={setData} />
 				<ABFormSetter coefs={coefs} form={form} />

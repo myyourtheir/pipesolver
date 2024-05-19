@@ -21,11 +21,11 @@ import { toast } from 'sonner'
 
 const formSchema = z.object({
 
-	time_to_iter: z.preprocess(
-		(val) => Number(String(val)),
-		z.number({
-			invalid_type_error: "Вы ввели не число",
-		}).nonnegative("Число должно быть больше или равно нулю").max(1000, '> 1000')),
+	// time_to_iter: z.preprocess(
+	// 	(val) => Number(String(val)),
+	// 	z.number({
+	// 		invalid_type_error: "Вы ввели не число",
+	// 	}).nonnegative("Число должно быть больше или равно нулю").max(1000, '> 1000')),
 	density: z.preprocess(
 		(val) => Number(String(val)),
 		z.number({
@@ -39,30 +39,22 @@ const formSchema = z.object({
 })
 
 interface FCParams {
-	defaultValues: CondParams,
-	onSubmit: (values: CondParams) => void,
+	defaultValues: Omit<CondParams, 'time_to_iter'>,
+	onSubmit: (values: Omit<CondParams, 'time_to_iter'>) => void,
 }
 const ConditionsContent: FC<FCParams> = ({ defaultValues, onSubmit }) => {
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
-		defaultValues
+		defaultValues,
+		mode: 'onBlur',
 	})
 	return (
 		<>
 			<Form {...form}>
 				<form
-					onSubmit={form.handleSubmit((value) => {
-						try {
-							onSubmit(value)
-							toast("Данные успешно обновлены")
-						}
-						catch {
-							toast.warning("Ошибка при удалении")
-						}
 
-					})}
-					className="lg:flex lg:gap-2 lg:items-center text-nowrap">
-					<FormField
+					className="flex gap-2 items-center text-nowrap">
+					{/* <FormField
 						control={form.control}
 						name="time_to_iter"
 						render={({ field }) => (
@@ -77,7 +69,7 @@ const ConditionsContent: FC<FCParams> = ({ defaultValues, onSubmit }) => {
 								<FormMessage />
 							</FormItem>
 						)}
-					/>
+					/> */}
 					<FormField
 						control={form.control}
 						name="density"
@@ -110,9 +102,9 @@ const ConditionsContent: FC<FCParams> = ({ defaultValues, onSubmit }) => {
 							</FormItem>
 						)}
 					/>
-					<div className='w-full flex justify-end lg:self-end mt-2 lg:mt-0 lg:ml-2'>
+					{/* <div className='w-full flex justify-end lg:self-end mt-2 lg:mt-0 lg:ml-2'>
 						<Button type="submit">Изменить</Button>
-					</div>
+					</div> */}
 				</form>
 			</Form>
 		</>

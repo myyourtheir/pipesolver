@@ -13,7 +13,7 @@ const ConditionsBar: FC<ConditionsBarProps> = ({ containerRef }) => {
 
 	const { cond_params, updateCondParams } = useUnsteadyInputStore(state => state)
 	return (
-		<DraggableLayout refContainer={containerRef} className='left-auto top-4 bottom-full' headerName='Окружающие условия'>
+		<DraggableLayout refContainer={containerRef} className='left-auto top-4 bottom-full' headerName='Свойства жидкости'>
 			<ConditionsContent defaultValues={cond_params} onSubmit={updateCondParams} />
 		</DraggableLayout>
 	)
