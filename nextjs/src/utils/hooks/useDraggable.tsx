@@ -49,27 +49,22 @@ export const useDraggable = ({ refEventsElement, refTransformElement, refContain
 		const container: HTMLElement = refContainer.current
 
 		const onMouseDown = (e: MouseEvent) => {
-			transformElement.style.zIndex = '1000'
-			// container.style.backgroundColor = 'rgba(52,62,64,0.1)'
 			coords.current.startX = e.clientX
 			coords.current.startY = e.clientY
 			isClicked.current = true
 		}
 		const onTouchStart = (e: TouchEvent) => {
-			transformElement.style.zIndex = '1000'
+
 			coords.current.startX = e.touches[0].clientX
 			coords.current.startY = e.touches[0].clientY
 			isClicked.current = true
 		}
 		const onMouseUp = (e: MouseEvent) => {
-			transformElement.style.zIndex = styles.current.zIndex
-			// container.style.backgroundColor = styles.current.backgroundColor
 			isClicked.current = false
 			coords.current.lastX = transformElement.offsetLeft
 			coords.current.lastY = transformElement.offsetTop
 		}
 		const onTouchEnd = (e: TouchEvent) => {
-			transformElement.style.zIndex = styles.current.zIndex
 			isClicked.current = false
 			coords.current.lastX = transformElement.offsetLeft
 			coords.current.lastY = transformElement.offsetTop
@@ -100,6 +95,14 @@ export const useDraggable = ({ refEventsElement, refTransformElement, refContain
 			}
 		}
 
+		const setMaxZ = (e: MouseEvent | TouchEvent) => {
+			transformElement.style.zIndex = '10'
+		}
+		const setMinZ = (e: MouseEvent | TouchEvent) => {
+			if (transformElement && !transformElement.contains(e.target as Node)) {
+				transformElement.style.zIndex = '0'
+			}
+		}
 
 
 		eventElement.addEventListener('mousedown', onMouseDown)
@@ -110,6 +113,11 @@ export const useDraggable = ({ refEventsElement, refTransformElement, refContain
 		container.addEventListener('touchend', onTouchEnd)
 		container.addEventListener('touchmove', onTouchMove)
 
+		transformElement.addEventListener('mousedown', setMaxZ)
+		container.addEventListener('mousedown', setMinZ)
+		transformElement.addEventListener('touchstart', setMaxZ)
+		container.addEventListener('touchstart', setMinZ)
+
 
 		const cleanUp = () => {
 			eventElement.removeEventListener('mousedown', onMouseDown)
@@ -119,6 +127,11 @@ export const useDraggable = ({ refEventsElement, refTransformElement, refContain
 			container.removeEventListener('touchend', onTouchEnd)
 			container.removeEventListener('touchmove', onTouchMove)
 			container.removeEventListener('mouseleave', onMouseUp)
+
+			transformElement.removeEventListener('mousedown', setMaxZ)
+			container.removeEventListener('mousedown', setMinZ)
+			transformElement.removeEventListener('touchstart', setMaxZ)
+			container.removeEventListener('touchstart', setMinZ)
 		}
 		return cleanUp
 
