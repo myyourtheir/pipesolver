@@ -46,13 +46,21 @@ const ConditionsContent: FC<FCParams> = ({ defaultValues, onSubmit }) => {
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues,
-		mode: 'onBlur',
+		mode: 'onBlur'
 	})
 	return (
 		<>
 			<Form {...form}>
 				<form
-
+					onBlur={form.handleSubmit((value) => {
+						try {
+							onSubmit(value)
+							toast("Данные успешно обновлены")
+						}
+						catch {
+							toast.warning("Ошибка при удалении")
+						}
+					})}
 					className="flex gap-2 items-center text-nowrap">
 					{/* <FormField
 						control={form.control}
