@@ -44,13 +44,13 @@ export const useCallUnsteadyFlowWs = () => {
 			const message2 = JSON.stringify(
 				{
 					cond_params,
-					pipeline: pipeline.parseJSON()
+					pipeline: pipeline.toObj()
 				}
 			)
 			console.dir(JSON.parse(message2))
 			// ------------------------------------------------------------------------------------
 			ws.onopen = (ev) => {
-				ws.send(message)
+				ws.send(message2)
 			}
 			ws.onmessage = (ev) => {
 				pushNewData(JSON.parse(ev.data))

@@ -3,6 +3,7 @@ from schemas.unsteady_flow_ws_scheme import Unsteady_data
 from services.unsteady_flow_calculation import calculate
 from pprint import pprint
 from wsockets import ConnectionManager
+from logger_config import logger
 
 router = APIRouter()
 
@@ -15,6 +16,7 @@ async def unsteady_flow_ws(websocket: WebSocket):
     await manager.connect(websocket)
     try:
         json_data = await websocket.receive_json()
+        logger.info(json_data)
     except:
         await manager.send_json({"message": "Неверный формат json"}, websocket)
         manager.disconnect(websocket)
@@ -25,14 +27,14 @@ async def unsteady_flow_ws(websocket: WebSocket):
         await manager.send_json({"message": "Валидация данных не пройдена"}, websocket)
         manager.disconnect(websocket)
         return
-    generator = calculate(valid_data)
-    while True:
-        try:
-            await manager.send_json(next(generator), websocket)
-        except Exception as e:
-            print(e)
-            manager.disconnect(websocket)
-            return
+    # generator = calculate(valid_data)
+    # while True:
+    #     try:
+    #         await manager.send_json(next(generator), websocket)
+    #     except Exception as e:
+    #         print(e)
+    #         manager.disconnect(websocket)
+    #         return
 
 
 # {

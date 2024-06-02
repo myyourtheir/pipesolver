@@ -21,4 +21,4 @@ services:
       - "./fastApi:/app"
     ports:
       - "8000:8000"
-    command: uvicorn --host 0.0.0.0 app:app --reload
+    command: python3 app.py
