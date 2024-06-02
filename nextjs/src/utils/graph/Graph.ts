@@ -1,5 +1,12 @@
-import { ElementParamsUnionWithUI } from '../../../types/stateTypes'
+import { ElementParamsUnion, ElementParamsUnionWithUI } from '../../../types/stateTypes'
 import { GraphNode } from './GraphNode'
+
+type PreparedElementsObjectForRequest = {
+	id: string,
+	value: ElementParamsUnion,
+	children: string[],
+	parents: string[]
+}
 
 export class Graph {
 	nodes: GraphNode[]
@@ -30,13 +37,13 @@ export class Graph {
 	}
 
 
-	private getNodeValueWithoutUiConfig(elementsValue: ElementParamsUnionWithUI) {
+	private getNodeValueWithoutUiConfig(elementsValue: ElementParamsUnionWithUI): ElementParamsUnion {
 		const { uiConfig, ...rest } = elementsValue
 		return rest
 	}
 
 	toObj() {
-		return this.nodes.reduce((acc: Record<string, any>, node) => {
+		return this.nodes.reduce((acc: Record<string, PreparedElementsObjectForRequest>, node) => {
 			acc[node.id] = {
 				id: node.id,
 				value: this.getNodeValueWithoutUiConfig(node.value),

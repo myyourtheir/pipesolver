@@ -23,18 +23,19 @@ async def unsteady_flow_ws(websocket: WebSocket):
         return
     try:
         valid_data = Unsteady_data(**json_data)
+        logger.info("data is valid")
     except Exception:
         await manager.send_json({"message": "Валидация данных не пройдена"}, websocket)
         manager.disconnect(websocket)
         return
-    # generator = calculate(valid_data)
-    # while True:
-    #     try:
-    #         await manager.send_json(next(generator), websocket)
-    #     except Exception as e:
-    #         print(e)
-    #         manager.disconnect(websocket)
-    #         return
+    generator = calculate(valid_data)
+    while True:
+        try:
+            await manager.send_json(next(generator), websocket)
+        except Exception as e:
+            print(e)
+            manager.disconnect(websocket)
+            return
 
 
 # {
