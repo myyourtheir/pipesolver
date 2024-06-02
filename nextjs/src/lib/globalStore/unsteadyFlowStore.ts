@@ -41,7 +41,10 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 	updateElement(element, idx) {
 		return set((state: UnsteadyInputData) => {
 			const elementWithUiConfig = { ...element, ...defaultUiConfig }
+			const { children, parents } = state.pipeline.nodes[idx]
 			const newElement = new GraphNode(elementWithUiConfig)
+			newElement.children = children
+			newElement.parents = parents
 			state.pipeline.nodes[idx] = newElement
 			return {
 				...state,
