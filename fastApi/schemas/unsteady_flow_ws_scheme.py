@@ -70,20 +70,17 @@ class Recieved_element(BaseModel):
     parents: list[str]
 
 
-class x_y_dict(BaseModel):
+class One_section_response(BaseModel):
     x: float
-    y: float
-
-
-class Response_value_model(BaseModel):
-    Davleniya: list[x_y_dict]
-    Skorosty: list[x_y_dict]
-    Napory: list[x_y_dict]
+    p: float
+    V: float
+    H: float
 
 
 class Response_element(BaseModel):
     id: str
-    value: Response_value_model
+    type: str
+    value: list[One_section_response]
     children: list[str]
     parents: list[str]
 
