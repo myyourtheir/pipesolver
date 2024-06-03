@@ -22,4 +22,4 @@ class Unsteady_flow_core:
                 diameter = current_node.value.diameter
                 break
             current_node = pipeline[current_node.children[0]]
-        return diameter
+        return diameter / 1000

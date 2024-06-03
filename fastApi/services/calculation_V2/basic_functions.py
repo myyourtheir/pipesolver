@@ -1,3 +1,4 @@
+import numpy as np
 from services.calculation_V2.constants import Constants as C
 from services.calculation_V2.vis_otm import Vis_otm
 from services.calculation_V2.unsteady_flow_core import Unsteady_flow_core
@@ -6,6 +7,9 @@ from schemas.unsteady_flow_ws_scheme import (
     Response_element,
     Cond_params,
     One_section_response,
+    Pump_params,
+    Gate_valve_params,
+    Safe_valve_params,
 )
 from typing import Literal
 from functools import reduce
@@ -108,7 +112,7 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
             * self._dt
             * C.c
             / (2 * self._current_diameter)
-            + self._current_time
+            + self._dt
             * self._density
             * C.c
             * C.g
@@ -131,7 +135,7 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
             * self._density
             * Vja
             * abs(Vja)
-            * self._current_time
+            * self._dt
             * C.c
             / (2 * self._current_diameter)
             - self._dt
@@ -192,7 +196,7 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
     ) -> Response_element:
         current_element = current_node.value
 
-        self._current_diameter = current_element.diameter
+        self._current_diameter = current_element.diameter / 1000
         sections_number = int(current_element.length * 1000 / self._dx)
         response_value: list[One_section_response] = []
 
@@ -262,8 +266,84 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
             value=response_value,
         )
 
-    def _pump_method(self) -> Response_element:
-        pass
+    def _pump_method(
+        self,
+        current_node: Recieved_element,
+        child_element: list[One_section_response],
+        parent_element: list[One_section_response],
+    ) -> Response_element:
+        current_element: Pump_params = current_node.value
+        start_time = current_element.start_time
+        duration = current_element.duration
+
+        # if current_element.mode == "open":  # Включение на tt сек
+        #     if start_time <= self._current_time <= start_time + duration:
+        #         w = C.C.w0 / duration * (self._current_time - start_time)
+        #     elif self._current_time < start_time:
+        #         w = 0
+        #     else:
+        #         w = C.C.w0
+        # elif current_element.mode == "close":  # Выключение на ttt сек
+        #     if self._current_time < start_time:
+        #         w = C.C.w0
+        #     elif start_time <= self._current_time <= (start_time + duration):
+        #         w = C.C.w0 - C.C.w0 / start_time * (self._current_time - start_time)
+        #     else:
+        #         w = 0
+        # else:
+        #     w = 0
+
+        w = C.w0
+        if current_element.mode == "open":  # Включение на tt сек
+            if start_time <= self._current_time <= start_time + duration:
+                w = C.w0 / duration * (self._current_time - start_time)
+            elif self._current_time < start_time:
+                w = 0
+            else:
+                w = C.w0
+        elif current_element.mode == "close":  # Выключение на ttt сек
+            if self._current_time < start_time:
+                w = C.w0
+            elif start_time <= self._current_time <= (start_time + duration):
+                w = C.w0 - C.w0 / duration * (self._current_time - start_time)
+            else:
+                w = 0
+        else:
+            w = 0
+
+        a = (
+            w / C.w0
+        ) ** 2 * current_element.coef_a  # 302.06   Характеристика насоса # b = 8 * 10 ** (-7)
+        S = np.pi * (self._current_diameter / 2) ** 2
+        Ja = self.__find_Ja(parent_element[-1].p, parent_element[-1].V)
+        Jb = self.__find_Jb(child_element[0].p, child_element[0].V)
+        V = (
+            -C.c / C.g
+            + (
+                (C.c / C.g) ** 2
+                - current_element.coef_b
+                * (S * 3600) ** 2
+                * ((Jb - Ja) / (self._density * C.g) - a)
+            )
+            ** 0.5
+        ) / (current_element.coef_b * (S * 3600) ** 2)
+        p1 = Ja - self._density * C.c * V
+        p2 = Jb + self._density * C.c * V
+
+        H1 = self.__count_H(p1, V)
+        H2 = self.__count_H(p2, V)
+        response_value = [
+            One_section_response(x=self._current_x, p=p1, V=V, H=H1),
+            One_section_response(x=self._current_x, p=p2, V=V, H=H2),
+        ]
+        self._current_x += self._dx
+        return Response_element(
+            id=current_node.id,
+            type=current_element.type,
+            children=current_node.children,
+            parents=current_node.parents,
+            value=response_value,
+        )
 
     def _gate_valve_method(self) -> Response_element:
         pass

@@ -71,7 +71,11 @@ class Unsteady_flow_solver(Basic_functions):
 
             # TODO Добавить расчеты элементов
             elif current_element.type == "pump":
-                element_result = self._pump_method()
+                element_result = self._pump_method(
+                    current_node,
+                    child_element=self._prev_res[current_node.children[0]].value,
+                    parent_element=self._prev_res[current_node.parents[0]].value,
+                )
 
             elif current_element.type == "gate_valve":
                 element_result = self._gate_valve_method()
@@ -96,25 +100,38 @@ class Unsteady_flow_solver(Basic_functions):
 if __name__ == "__main__":
     data = Unsteady_data(
         **{
-            "cond_params": {"time_to_iter": 10, "density": 850, "viscosity": 10},
+            "cond_params": {"time_to_iter": 200, "density": 850, "viscosity": 10},
             "pipeline": {
-                "lwxzoque-a4ythgzt96p": {
-                    "id": "lwxzoque-a4ythgzt96p",
-                    "value": {"type": "provider", "mode": "pressure", "value": 100000},
-                    "children": ["lwxzosx0-uopbfhdjxir"],
+                "lwyttwhg-z1eoi6zlr5": {
+                    "id": "lwyttwhg-z1eoi6zlr5",
+                    "value": {"type": "provider", "mode": "pressure", "value": 0},
+                    "children": ["lwyttxvo-dbpjm8hbd0l"],
                     "parents": [],
                 },
-                "lwxzosx0-uopbfhdjxir": {
-                    "id": "lwxzosx0-uopbfhdjxir",
-                    "value": {"type": "pipe", "length": 10, "diameter": 1000},
-                    "children": ["lwxzoton-3g063o9ba9o"],
-                    "parents": ["lwxzoque-a4ythgzt96p"],
+                "lwyttxvo-dbpjm8hbd0l": {
+                    "id": "lwyttxvo-dbpjm8hbd0l",
+                    "value": {
+                        "type": "pump",
+                        "coef_a": 310,
+                        "coef_b": 8e-07,
+                        "mode": "open",
+                        "start_time": 0,
+                        "duration": 20,
+                    },
+                    "children": ["lwyttytm-53x9tmwoh2p"],
+                    "parents": ["lwyttwhg-z1eoi6zlr5"],
                 },
-                "lwxzoton-3g063o9ba9o": {
-                    "id": "lwxzoton-3g063o9ba9o",
+                "lwyttytm-53x9tmwoh2p": {
+                    "id": "lwyttytm-53x9tmwoh2p",
+                    "value": {"type": "pipe", "length": 100, "diameter": 1000},
+                    "children": ["lwytu0g9-v0qafperlhs"],
+                    "parents": ["lwyttxvo-dbpjm8hbd0l"],
+                },
+                "lwytu0g9-v0qafperlhs": {
+                    "id": "lwytu0g9-v0qafperlhs",
                     "value": {"type": "consumer", "mode": "pressure", "value": 0},
                     "children": [],
-                    "parents": ["lwxzosx0-uopbfhdjxir"],
+                    "parents": ["lwyttytm-53x9tmwoh2p"],
                 },
             },
         }
