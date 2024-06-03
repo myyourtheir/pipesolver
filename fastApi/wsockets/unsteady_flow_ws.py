@@ -32,7 +32,7 @@ async def unsteady_flow_ws(websocket: WebSocket):
     generator = unstedy_flow_solver.solve()
     while True:
         try:
-            await manager.send_json(next(generator).model_dump_json(), websocket)
+            await manager.send_json(next(generator).model_dump(), websocket)
         except Exception as e:
             logger.error(e)
             manager.disconnect(websocket)

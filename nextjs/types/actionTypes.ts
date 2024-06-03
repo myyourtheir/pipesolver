@@ -1,5 +1,5 @@
 import { GraphNode } from '@/utils/graph/GraphNode'
-import { CondParams, ConsumerParams, ElementParamsUnion, GateValveParams, PipeParams, ProviderParams, PumpParams, SafeValveParams, UnsteadyChartData } from './stateTypes'
+import { CondParams, ElementParamsUnion, ResultMomentData } from './stateTypes'
 
 export interface UnsteadyFlowActions {
 	updateCondParams: (value: Partial<CondParams>) => void
@@ -11,7 +11,7 @@ export interface UnsteadyFlowActions {
 }
 type fnOrValue<T> = T | ((prev: T) => T)
 export interface ResultsActions {
-	pushNewData: (newData: UnsteadyChartData) => void
+	pushNewData: (newData: ResultMomentData) => void
 	resetResult: () => void,
 	setIter: (val: fnOrValue<number>) => void
 }

@@ -14,6 +14,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select"
+import { getAllMomentDataPerIndex } from '@/utils/getAllMomentDataPerIndex'
 
 
 const ResultChart: FC<ElementsProps> = ({ containerRef }) => {
@@ -109,7 +110,8 @@ const ResultChart: FC<ElementsProps> = ({ containerRef }) => {
 							step={1} />
 					}
 				</div>
-				<MyChart data={chartData[iter]} />
+
+				<MyChart data={getAllMomentDataPerIndex({ data: chartData, index: iter })} />
 
 			</DraggableLayout>
 		)

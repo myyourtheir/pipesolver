@@ -1,5 +1,4 @@
 import { toast } from 'sonner'
-import { UnsteadyChartData } from '../../../types/stateTypes'
 import { useResultsStore } from '../../lib/globalStore/resultsStore'
 import { useUnsteadyInputStore } from '../../lib/globalStore/unsteadyFlowStore'
 import { GraphNode } from '../graph/GraphNode'
