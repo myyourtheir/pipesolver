@@ -34,7 +34,7 @@ interface chartProps {
 }
 
 const MyChart: FC<chartProps> = ({ data }) => {
-	const labels = data.map(obj => {
+	const labels = data?.map(obj => {
 		return `${obj?.x} м`
 	})
 	const naporyData: ChartData<"scatter", OneSectionResponse[]> = {

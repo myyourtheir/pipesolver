@@ -5,8 +5,7 @@ interface FuncProps {
 	index: number
 }
 export function getAllMomentDataPerIndex({ data, index }: FuncProps): Array<OneSectionResponse> {
-	const { moment_result } = data[index]
-	const result = moment_result && Object.values(moment_result).reduce<Array<OneSectionResponse>>((acc, obj) => {
+	const result = data[index]?.moment_result && Object.values(data[index]?.moment_result).reduce<Array<OneSectionResponse>>((acc, obj) => {
 		acc.push(...obj.value)
 		return acc
 	}, [])

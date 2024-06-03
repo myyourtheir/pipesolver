@@ -46,7 +46,6 @@ export const useCallUnsteadyFlowWs = () => {
 					pipeline: pipeline.toObj()
 				}
 			)
-			console.dir(JSON.parse(message2))
 			// ------------------------------------------------------------------------------------
 			ws.onopen = (ev) => {
 				ws.send(message2)

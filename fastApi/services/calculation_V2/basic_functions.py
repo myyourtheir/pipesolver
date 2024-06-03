@@ -207,7 +207,7 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
         ) -> dict[Literal["p", "V", "H"], float]:
             Ja = self.__find_Ja(prev_p, prev_V)
             Jb = self.__find_Jb(next_p, next_V)
-            p = (Ja + Jb) / (2)
+            p = (Ja + Jb) / 2
             V = (Ja - Jb) / (2 * self._density * C.c)
             H = self.__count_H(p, V)
             # print(

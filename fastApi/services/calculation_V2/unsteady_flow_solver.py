@@ -44,9 +44,9 @@ class Unsteady_flow_solver(Basic_functions):
             self.result = Result_unsteady_data(
                 t=self._current_time, moment_result=self._moment_result
             )
-
+            res_with_pa = self.transform_pressure_to_Pa(self.result)
             self._current_time += self._dt
-            yield self.result
+            yield res_with_pa
 
     def __calculate_the_entire_graph_one_time(self):
         # TODO Добавить логику обхода по сложному трубопроводу
