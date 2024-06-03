@@ -78,10 +78,18 @@ class Unsteady_flow_solver(Basic_functions):
                 )
 
             elif current_element.type == "gate_valve":
-                element_result = self._gate_valve_method()
+                element_result = self._gate_valve_method(
+                    current_node,
+                    child_element=self._prev_res[current_node.children[0]].value,
+                    parent_element=self._prev_res[current_node.parents[0]].value,
+                )
 
             elif current_element.type == "safe_valve":
-                element_result = self._safe_valve_method()
+                element_result = self._safe_valve_method(
+                    current_node,
+                    child_element=self._prev_res[current_node.children[0]].value,
+                    parent_element=self._prev_res[current_node.parents[0]].value,
+                )
 
             # _________________________________________________
 
@@ -102,14 +110,20 @@ if __name__ == "__main__":
         **{
             "cond_params": {"time_to_iter": 200, "density": 850, "viscosity": 10},
             "pipeline": {
-                "lwyttwhg-z1eoi6zlr5": {
-                    "id": "lwyttwhg-z1eoi6zlr5",
+                "lwyvdjnf-nr9nx2zzpg9": {
+                    "id": "lwyvdjnf-nr9nx2zzpg9",
                     "value": {"type": "provider", "mode": "pressure", "value": 0},
-                    "children": ["lwyttxvo-dbpjm8hbd0l"],
+                    "children": ["lwyvdkbl-r627xx5l48"],
                     "parents": [],
                 },
-                "lwyttxvo-dbpjm8hbd0l": {
-                    "id": "lwyttxvo-dbpjm8hbd0l",
+                "lwyvdkbl-r627xx5l48": {
+                    "id": "lwyvdkbl-r627xx5l48",
+                    "value": {"type": "pipe", "length": 10, "diameter": 1000},
+                    "children": ["lwyvdl4p-7oi0a666t12"],
+                    "parents": ["lwyvdjnf-nr9nx2zzpg9"],
+                },
+                "lwyvdl4p-7oi0a666t12": {
+                    "id": "lwyvdl4p-7oi0a666t12",
                     "value": {
                         "type": "pump",
                         "coef_a": 310,
@@ -118,20 +132,38 @@ if __name__ == "__main__":
                         "start_time": 0,
                         "duration": 20,
                     },
-                    "children": ["lwyttytm-53x9tmwoh2p"],
-                    "parents": ["lwyttwhg-z1eoi6zlr5"],
+                    "children": ["lwyve72o-sp5b10odv9h"],
+                    "parents": ["lwyvdkbl-r627xx5l48"],
                 },
-                "lwyttytm-53x9tmwoh2p": {
-                    "id": "lwyttytm-53x9tmwoh2p",
-                    "value": {"type": "pipe", "length": 100, "diameter": 1000},
-                    "children": ["lwytu0g9-v0qafperlhs"],
-                    "parents": ["lwyttxvo-dbpjm8hbd0l"],
+                "lwyve72o-sp5b10odv9h": {
+                    "id": "lwyve72o-sp5b10odv9h",
+                    "value": {"type": "pipe", "length": 10, "diameter": 1000},
+                    "children": ["lwyve9gb-tiev149jgu"],
+                    "parents": ["lwyvdl4p-7oi0a666t12"],
                 },
-                "lwytu0g9-v0qafperlhs": {
-                    "id": "lwytu0g9-v0qafperlhs",
+                "lwyve9gb-tiev149jgu": {
+                    "id": "lwyve9gb-tiev149jgu",
+                    "value": {
+                        "type": "gate_valve",
+                        "mode": "open",
+                        "start_time": 0,
+                        "duration": 100,
+                        "percentage": 100,
+                    },
+                    "children": ["lwyveas0-8oa733bpy0x"],
+                    "parents": ["lwyve72o-sp5b10odv9h"],
+                },
+                "lwyveas0-8oa733bpy0x": {
+                    "id": "lwyveas0-8oa733bpy0x",
+                    "value": {"type": "pipe", "length": 15, "diameter": 1000},
+                    "children": ["lwyveciu-96naj57bhj7"],
+                    "parents": ["lwyve9gb-tiev149jgu"],
+                },
+                "lwyveciu-96naj57bhj7": {
+                    "id": "lwyveciu-96naj57bhj7",
                     "value": {"type": "consumer", "mode": "pressure", "value": 0},
                     "children": [],
-                    "parents": ["lwyttytm-53x9tmwoh2p"],
+                    "parents": ["lwyveas0-8oa733bpy0x"],
                 },
             },
         }

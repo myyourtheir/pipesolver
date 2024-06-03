@@ -276,23 +276,6 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
         start_time = current_element.start_time
         duration = current_element.duration
 
-        # if current_element.mode == "open":  # Включение на tt сек
-        #     if start_time <= self._current_time <= start_time + duration:
-        #         w = C.C.w0 / duration * (self._current_time - start_time)
-        #     elif self._current_time < start_time:
-        #         w = 0
-        #     else:
-        #         w = C.C.w0
-        # elif current_element.mode == "close":  # Выключение на ttt сек
-        #     if self._current_time < start_time:
-        #         w = C.C.w0
-        #     elif start_time <= self._current_time <= (start_time + duration):
-        #         w = C.C.w0 - C.C.w0 / start_time * (self._current_time - start_time)
-        #     else:
-        #         w = 0
-        # else:
-        #     w = 0
-
         w = C.w0
         if current_element.mode == "open":  # Включение на tt сек
             if start_time <= self._current_time <= start_time + duration:
@@ -345,8 +328,98 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
             value=response_value,
         )
 
-    def _gate_valve_method(self) -> Response_element:
-        pass
+    def _gate_valve_method(
+        self,
+        current_node: Recieved_element,
+        child_element: list[One_section_response],
+        parent_element: list[One_section_response],
+    ) -> Response_element:
+        current_element: Gate_valve_params = current_node.value
+        start_time = current_element.start_time
+        duration = current_element.duration
+        procent = current_element.percentage
+
+        def find_zet(nu):
+            if 0 <= nu < 10:
+                zet = (0.32 / 10) * nu + 0.04
+            elif 10 <= nu < 20:
+                zet = (1.6 - 0.36) / 10 * (nu - 10) + 0.36
+            elif 20 <= nu < 30:
+                zet = (5 - 1.6) / 10 * (nu - 20) + 1.6
+            elif 30 <= nu < 40:
+                zet = (15 - 5) / 10 * (nu - 30) + 5
+            elif 40 <= nu < 50:
+                zet = (42.5 - 15) / 10 * (nu - 40) + 15
+            elif 50 <= nu < 60:
+                zet = (130 - 42.5) / 10 * (nu - 50) + 42.5
+            elif 60 <= nu < 70:
+                zet = (800 - 130) / 10 * (nu - 60) + 130
+            elif 70 <= nu < 80:
+                zet = (2500 - 800) / 10 * (nu - 70) + 800
+            elif 80 <= nu < 85:
+                zet = (6000 - 2500) / 10 * (nu - 80) + 2500
+            else:  # 85 <= nu <= 100:
+                zet = (10000000 - 6000) / 15 * (nu - 85) + 6000
+            return zet
+
+        nu = 0
+        zet = find_zet(nu)
+        if current_element.mode == "open":  # открытие на tt сек
+            if start_time <= self._current_time <= (start_time + duration):
+                nu = 100 - procent / duration * (self._current_time - start_time)
+                zet = find_zet(nu)
+            elif self._current_time < start_time:
+                nu = 100
+                zet = find_zet(nu)
+            else:
+                nu = 100 - procent
+                zet = find_zet(nu)
+        elif current_element.mode == "close":  # закрытие на ttt сек
+            if self._current_time < start_time:
+                nu = 0
+                zet = find_zet(nu)
+            elif start_time <= self._current_time <= (start_time + duration):
+                nu = procent / duration * (self._current_time - start_time)
+                zet = find_zet(nu)
+            else:
+                nu = procent
+                zet = find_zet(nu)
+        else:
+            nu = 100
+            zet = find_zet(nu)
+
+        Ja = self.__find_Ja(parent_element[-1].p, parent_element[-1].V)
+        Jb = self.__find_Jb(child_element[0].p, child_element[0].V)
+        V = (
+            -2 * C.c * self._density
+            + (
+                abs(
+                    4 * (self._density * C.c) ** 2 - 2 * zet * self._density * (Jb - Ja)
+                )
+            )
+            ** 0.5
+        ) / (zet * self._density)
+        if (4 * (self._density * C.c) ** 2 - 2 * zet * self._density * (Jb - Ja)) < 0:
+            V = -V
+        else:
+            V = V
+        p1 = Ja - self._density * C.c * V
+        p2 = Jb + self._density * C.c * V
+
+        H1 = self.__count_H(p1, V)
+        H2 = self.__count_H(p2, V)
+        response_value = [
+            One_section_response(x=self._current_x, p=p1, V=V, H=H1),
+            One_section_response(x=self._current_x, p=p2, V=V, H=H2),
+        ]
+        self._current_x += self._dx
+        return Response_element(
+            id=current_node.id,
+            type=current_element.type,
+            children=current_node.children,
+            parents=current_node.parents,
+            value=response_value,
+        )
 
     def _safe_valve_method(self) -> Response_element:
         pass
