@@ -76,6 +76,12 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
         return initial_distribution
 
     def __find_lyam(self, Re: int, eps: float):
+        # print(
+        #     f"""
+        #   eps: {eps}
+        #   Re: {Re}
+        # """
+        # )
         lyam: float
         if Re == 0:
             return 0
@@ -102,8 +108,13 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
 
     def __find_Jb(self, p: float, V: float):
         Vjb = V
-        Re = abs(Vjb) * self._density / self._viscosity
+        Re = abs(Vjb) * self._current_diameter / self._viscosity
         lyamjb = self.__find_lyam(Re, C.o / self._current_diameter)
+        # print(
+        #     f"""
+        #   lyamjb: {lyamjb}
+        # """
+        # )
         Jb = (
             p
             - self._density * C.c * Vjb
@@ -122,14 +133,19 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
                 self._vis_otm[self._vis_otm_iter + 1]
                 - self._vis_otm[self._vis_otm_iter]
             )
-            / 1000
+            / self._dx
         )
         return Jb
 
     def __find_Ja(self, p: float, V: float):
         Vja = V
-        Re = abs(Vja) * self._density / self._viscosity
+        Re = abs(Vja) * self._current_diameter / self._viscosity
         lyamja = self.__find_lyam(Re, C.o / self._current_diameter)
+        # print(
+        #     f"""
+        #   lyamja: {lyamja}
+        # """
+        # )
         Ja = (
             p
             + self._density * C.c * Vja
@@ -148,7 +164,7 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
                 self._vis_otm[self._vis_otm_iter]
                 - self._vis_otm[self._vis_otm_iter - 1]
             )
-            / 1000
+            / self._dx
         )
         return Ja
 
@@ -159,7 +175,7 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
         current_element = current_node.value
         Jb = self.__find_Jb(child_element[0].p, child_element[0].V)
         if current_element.mode == "pressure":
-            p = current_element.value
+            p = current_element.value * 1000
             V = (p - Jb) / (self._density * C.c)
         else:
             if current_element.value == 0:
@@ -525,7 +541,7 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
         current_element = current_node.value
         Ja = self.__find_Ja(parent_element[-1].p, parent_element[-1].V)
         if current_element.mode == "pressure":
-            p = current_element.value
+            p = current_element.value * 1000
             V = (Ja - p) / (self._density * C.c)
         else:
             if current_element.value == 0:

@@ -22,7 +22,7 @@ class Unsteady_flow_solver(Basic_functions):
         cond_params = data.cond_params
         self._time_to_iter = cond_params.time_to_iter
         self._density = cond_params.density
-        self._viscosity = cond_params.viscosity
+        self._viscosity = cond_params.viscosity * 10 ** (-6)
         self._pipeline = data.pipeline
         self.start_element_ids = reduce(
             self.find_elements_without_parents, data.pipeline.values(), []
@@ -42,7 +42,7 @@ class Unsteady_flow_solver(Basic_functions):
             self._moment_result = {}
             self.__calculate_the_entire_graph_one_time()
             self.result = Result_unsteady_data(
-                t=self._current_time, moment_result=self._moment_result
+                t=round(self._current_time, 2), moment_result=self._moment_result
             )
             res_with_pa = self.transform_pressure_to_Pa(self.result)
             self._current_time += self._dt
