@@ -2,17 +2,9 @@ from services.calculation_V2.constants import Constants as C
 from services.calculation_V2.vis_otm import Vis_otm
 from services.calculation_V2.unsteady_flow_core import Unsteady_flow_core
 from schemas.unsteady_flow_ws_scheme import (
-    Unsteady_data,
     Recieved_element,
-    Result_unsteady_data,
     Response_element,
     Cond_params,
-    Provider,
-    Consumer,
-    Pipe_params,
-    Pump_params,
-    Gate_valve_params,
-    Safe_valve_params,
     One_section_response,
 )
 from typing import Literal
