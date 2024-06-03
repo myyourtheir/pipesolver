@@ -23,13 +23,16 @@ class Unsteady_flow_solver(Basic_functions):
         self._time_to_iter = cond_params.time_to_iter
         self._density = cond_params.density
         self._viscosity = cond_params.viscosity
-        self.pipeline = data.pipeline
+        self._pipeline = data.pipeline
         self.start_element_ids = reduce(
             self.find_elements_without_parents, data.pipeline.values(), []
         )  # Учитываем пока как будто в массиве 1 стартовый id
         self._dt = self._dx / C.c
         self._moment_result = self._make_initial_distribution(data.pipeline)
-        self._current_diameter = self.find_first_pipe_diameter(data.pipeline)
+        self._current_diameter = self.find_next_pipe_diameter(
+            data.pipeline,
+            reduce(self.find_elements_without_parents, data.pipeline.values(), [])[0],
+        )
 
     def solve(self):
         while self._current_time <= self._time_to_iter:
@@ -48,11 +51,11 @@ class Unsteady_flow_solver(Basic_functions):
     def __calculate_the_entire_graph_one_time(self):
         # TODO Добавить логику обхода по сложному трубопроводу
         start_element = self.start_element_ids[0]
-        current_node = self.pipeline[start_element]
+        current_node = self._pipeline[start_element]
         count = 0
         while True:
             if count != 0:
-                current_node = self.pipeline[current_node.children[0]]
+                current_node = self._pipeline[current_node.children[0]]
 
             current_element = current_node.value
             element_result: Response_element
@@ -110,20 +113,14 @@ if __name__ == "__main__":
         **{
             "cond_params": {"time_to_iter": 200, "density": 850, "viscosity": 10},
             "pipeline": {
-                "lwyvdjnf-nr9nx2zzpg9": {
-                    "id": "lwyvdjnf-nr9nx2zzpg9",
+                "lwyxg5d6-kyvd56z7yv": {
+                    "id": "lwyxg5d6-kyvd56z7yv",
                     "value": {"type": "provider", "mode": "pressure", "value": 0},
-                    "children": ["lwyvdkbl-r627xx5l48"],
+                    "children": ["lwyxg7qe-cwdi5buw95k"],
                     "parents": [],
                 },
-                "lwyvdkbl-r627xx5l48": {
-                    "id": "lwyvdkbl-r627xx5l48",
-                    "value": {"type": "pipe", "length": 10, "diameter": 1000},
-                    "children": ["lwyvdl4p-7oi0a666t12"],
-                    "parents": ["lwyvdjnf-nr9nx2zzpg9"],
-                },
-                "lwyvdl4p-7oi0a666t12": {
-                    "id": "lwyvdl4p-7oi0a666t12",
+                "lwyxg7qe-cwdi5buw95k": {
+                    "id": "lwyxg7qe-cwdi5buw95k",
                     "value": {
                         "type": "pump",
                         "coef_a": 310,
@@ -132,17 +129,48 @@ if __name__ == "__main__":
                         "start_time": 0,
                         "duration": 20,
                     },
-                    "children": ["lwyve72o-sp5b10odv9h"],
-                    "parents": ["lwyvdkbl-r627xx5l48"],
+                    "children": ["lwyxgcp3-h088yt7hw0w"],
+                    "parents": ["lwyxg5d6-kyvd56z7yv"],
                 },
-                "lwyve72o-sp5b10odv9h": {
-                    "id": "lwyve72o-sp5b10odv9h",
+                "lwyxgcp3-h088yt7hw0w": {
+                    "id": "lwyxgcp3-h088yt7hw0w",
                     "value": {"type": "pipe", "length": 10, "diameter": 1000},
-                    "children": ["lwyve9gb-tiev149jgu"],
-                    "parents": ["lwyvdl4p-7oi0a666t12"],
+                    "children": ["lwyxgpop-skskibkbzj"],
+                    "parents": ["lwyxg7qe-cwdi5buw95k"],
                 },
-                "lwyve9gb-tiev149jgu": {
-                    "id": "lwyve9gb-tiev149jgu",
+                "lwyxgpop-skskibkbzj": {
+                    "id": "lwyxgpop-skskibkbzj",
+                    "value": {"type": "safe_valve", "coef_q": 0.5, "max_pressure": 4},
+                    "children": ["lwyxgsqi-3joyj6t24s2"],
+                    "parents": ["lwyxgcp3-h088yt7hw0w"],
+                },
+                "lwyxgsqi-3joyj6t24s2": {
+                    "id": "lwyxgsqi-3joyj6t24s2",
+                    "value": {"type": "pipe", "length": 10, "diameter": 1000},
+                    "children": ["lwyxw3ok-z2l5vp7j2bc"],
+                    "parents": ["lwyxgpop-skskibkbzj"],
+                },
+                "lwyxw3ok-z2l5vp7j2bc": {
+                    "id": "lwyxw3ok-z2l5vp7j2bc",
+                    "value": {
+                        "type": "pump",
+                        "coef_a": 310,
+                        "coef_b": 8e-07,
+                        "mode": "open",
+                        "start_time": 0,
+                        "duration": 20,
+                    },
+                    "children": ["lwyxwb8j-tl3ylyg2xx"],
+                    "parents": ["lwyxgsqi-3joyj6t24s2"],
+                },
+                "lwyxwb8j-tl3ylyg2xx": {
+                    "id": "lwyxwb8j-tl3ylyg2xx",
+                    "value": {"type": "pipe", "length": 20, "diameter": 1000},
+                    "children": ["lwyxwcue-m76nnq5hg8g"],
+                    "parents": ["lwyxw3ok-z2l5vp7j2bc"],
+                },
+                "lwyxwcue-m76nnq5hg8g": {
+                    "id": "lwyxwcue-m76nnq5hg8g",
                     "value": {
                         "type": "gate_valve",
                         "mode": "open",
@@ -150,20 +178,20 @@ if __name__ == "__main__":
                         "duration": 100,
                         "percentage": 100,
                     },
-                    "children": ["lwyveas0-8oa733bpy0x"],
-                    "parents": ["lwyve72o-sp5b10odv9h"],
+                    "children": ["lwyxwgpo-e37kt2ix0di"],
+                    "parents": ["lwyxwb8j-tl3ylyg2xx"],
                 },
-                "lwyveas0-8oa733bpy0x": {
-                    "id": "lwyveas0-8oa733bpy0x",
-                    "value": {"type": "pipe", "length": 15, "diameter": 1000},
-                    "children": ["lwyveciu-96naj57bhj7"],
-                    "parents": ["lwyve9gb-tiev149jgu"],
+                "lwyxwgpo-e37kt2ix0di": {
+                    "id": "lwyxwgpo-e37kt2ix0di",
+                    "value": {"type": "pipe", "length": 2, "diameter": 1000},
+                    "children": ["lwyxwip6-v35hiov3t"],
+                    "parents": ["lwyxwcue-m76nnq5hg8g"],
                 },
-                "lwyveciu-96naj57bhj7": {
-                    "id": "lwyveciu-96naj57bhj7",
+                "lwyxwip6-v35hiov3t": {
+                    "id": "lwyxwip6-v35hiov3t",
                     "value": {"type": "consumer", "mode": "pressure", "value": 0},
                     "children": [],
-                    "parents": ["lwyveas0-8oa733bpy0x"],
+                    "parents": ["lwyxwgpo-e37kt2ix0di"],
                 },
             },
         }

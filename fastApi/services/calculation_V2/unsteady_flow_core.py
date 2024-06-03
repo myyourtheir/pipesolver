@@ -12,10 +12,9 @@ class Unsteady_flow_core:
         return acc
 
     @classmethod
-    def find_first_pipe_diameter(cls, pipeline: dict[str, Recieved_element]):
-        start_element_id = reduce(
-            cls.find_elements_without_parents, pipeline.values(), []
-        )[0]
+    def find_next_pipe_diameter(
+        cls, pipeline: dict[str, Recieved_element], start_element_id
+    ):
         current_node = pipeline[start_element_id]
         while len(current_node.children) != 0:
             if current_node.value.type == "pipe":

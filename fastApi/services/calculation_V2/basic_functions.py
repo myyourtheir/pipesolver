@@ -13,6 +13,7 @@ from schemas.unsteady_flow_ws_scheme import (
 )
 from typing import Literal
 from functools import reduce
+import math
 
 
 class Basic_functions(Vis_otm, Unsteady_flow_core):
@@ -28,6 +29,7 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
     _dx: int
     _dt: int
     _prev_res: dict[str, Response_element] = {}
+    _pipeline: dict[str, Recieved_element]
 
     def _make_initial_distribution(
         self, pipeline: dict[str, Recieved_element]
@@ -421,8 +423,101 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
             value=response_value,
         )
 
-    def _safe_valve_method(self) -> Response_element:
-        pass
+    def _safe_valve_method(
+        self,
+        current_node: Recieved_element,
+        child_element: list[One_section_response],
+        parent_element: list[One_section_response],
+    ) -> Response_element:
+        current_element: Safe_valve_params = current_node.value
+        p_otkr = current_element.max_pressure
+        Kvmax = current_element.coef_q
+        Ja = self.__find_Ja(parent_element[-1].p, parent_element[-1].V)
+        Jb = self.__find_Jb(child_element[0].p, child_element[0].V)
+        p = (Ja + Jb) / (2)
+        V = (Ja - Jb) / (2 * self._density * C.c)
+        H = self.__count_H(p, V)
+        response_value: list[One_section_response]
+        if p < p_otkr:
+            response_value = [
+                One_section_response(x=self._current_x, p=p, V=V, H=H),
+                One_section_response(x=self._current_x, p=p, V=V, H=H),
+            ]
+        else:
+            p_poln_otkr = 1.3 * p_otkr
+            p = 10**5
+            S1 = math.pi * self._current_diameter**2 / 4
+            next_diameter = self.find_next_pipe_diameter(
+                pipeline=self._pipeline, start_element_id=current_node.id
+            )
+            S2 = math.pi * next_diameter**2 / 4
+            A_param = ((S1 + S2) / self._density / C.c) ** 2  # Коэфициенты неправильные
+            B_param = (
+                -(2 * (Ja * S1 + Jb * S2) * (S1 + S2)) / self._density**2 / C.c**2
+                - 2 * Kvmax**2 / self._density
+            )
+            C_param = (
+                (Ja * S1 + Jb * S2) / self._density / C.c
+            ) ** 2 + 2 * Kvmax**2 * p / self._density
+
+            D = B_param**2 - 4 * A_param * C_param
+            p = (-B_param - D**0.5) / 2 / A_param
+
+            if p >= p_poln_otkr:
+                V1 = (Ja - p) / self._density / C.c
+                V2 = (-Jb + p) / self._density / C.c
+                H1 = self.__count_H(p, V1)
+                H2 = self.__count_H(p, V2)
+                response_value = [
+                    One_section_response(x=self._current_x, p=p, V=V1, H=H1),
+                    One_section_response(x=self._current_x, p=p, V=V2, H=H2),
+                ]
+            else:
+                # k =(pp-p_otkr)/( p_poln_otkr-p_otkr) * Kvmax
+                def F12(Pm):
+                    def F1(Pm):
+                        return (Ja - Pm) / self._density / C.c * S1 + (
+                            Pm - Jb
+                        ) / self._density / C.c * S2
+
+                    def F2(Pm):
+                        return (
+                            (Pm - p_otkr)
+                            / (p_poln_otkr - p_otkr)
+                            * Kvmax
+                            * ((2 * Pm - 10**5) / self._density) ** 0.5
+                        )
+
+                    return F1(Pm) - F2(Pm)
+
+                def find_root(f, a, b, eps):
+                    while abs(b - a) > eps:
+                        c = (a + b) / 2.0
+                        if f(a) * f(c) < 0:
+                            b = c
+                        else:
+                            a = c
+                    return (a + b) / 2.0
+
+                p = find_root(F12, p_otkr, p_poln_otkr, 3 * 10**3)
+
+                k = (p - p_otkr) / (p_poln_otkr - p_otkr)
+                V1 = (Ja - p) / self._density / C.c
+                V2 = (-Jb + p) / self._density / C.c
+                H1 = self.__count_H(p, V1)
+                H2 = self.__count_H(p, V2)
+                response_value = [
+                    One_section_response(x=self._current_x, p=p, V=V1, H=H1),
+                    One_section_response(x=self._current_x, p=p, V=V2, H=H2),
+                ]
+        self._current_x += self._dx
+        return Response_element(
+            id=current_node.id,
+            type=current_element.type,
+            children=current_node.children,
+            parents=current_node.parents,
+            value=response_value,
+        )
 
     def _consumer_method(
         self, current_node: Recieved_element, parent_element: list[One_section_response]
