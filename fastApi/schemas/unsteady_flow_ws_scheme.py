@@ -44,7 +44,7 @@ class Gate_valve_params(Unstedy_base_params):
     percentage: float
 
 
-class Save_valve_params(BaseModel):
+class Safe_valve_params(BaseModel):
     type: Literal["safe_valve"]
     coef_q: float
     max_pressure: float
@@ -55,7 +55,7 @@ Elements_model = Annotated[
         Pipe_params,
         Pump_params,
         Gate_valve_params,
-        Save_valve_params,
+        Safe_valve_params,
         Provider,
         Consumer,
     ],
@@ -63,9 +63,36 @@ Elements_model = Annotated[
 ]
 
 
+class Recieved_element(BaseModel):
+    id: str
+    value: Elements_model
+    children: list[str]
+    parents: list[str]
+
+
+class One_section_response(BaseModel):
+    x: float
+    p: float
+    V: float
+    H: float
+
+
+class Response_element(BaseModel):
+    id: str
+    type: str
+    value: list[One_section_response]
+    children: list[str]
+    parents: list[str]
+
+
 class Unsteady_data(BaseModel):
     cond_params: Cond_params
-    pipeline: list[Elements_model]
+    pipeline: dict[str, Recieved_element]
+
+
+class Result_unsteady_data(BaseModel):
+    moment_result: dict[str, Response_element]  # key is an id of element
+    t: float
 
 
 if __name__ == "__main__":

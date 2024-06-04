@@ -66,19 +66,25 @@ export type ElementsType = PipeParams['type'] | PumpParams['type'] | GateValvePa
 
 // Results 
 
-export interface NestedXY {
+export interface OneSectionResponse {
 	x: number,
-	y: number,
+	p: number,
+	V: number,
+	H: number,
 }
-
-export interface UnsteadyChartData {
-	Davleniya: NestedXY[],
-	Skorosty: NestedXY[],
-	Napory: NestedXY[],
+export interface ResonseElement {
+	id: string
+	type: string
+	value: Array<OneSectionResponse>
+	children: Array<string>
+	parents: Array<string>
+}
+export interface ResultMomentData {
+	moment_result: Record<string, ResonseElement>
 	t: number
 }
 
 export interface ResultsData {
-	chartData: Array<UnsteadyChartData>,
+	chartData: Array<ResultMomentData>,
 	iter: number
 }

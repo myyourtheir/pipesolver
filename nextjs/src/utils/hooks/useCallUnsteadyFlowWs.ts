@@ -1,10 +1,12 @@
 import { toast } from 'sonner'
-import { UnsteadyChartData } from '../../../types/stateTypes'
 import { useResultsStore } from '../../lib/globalStore/resultsStore'
 import { useUnsteadyInputStore } from '../../lib/globalStore/unsteadyFlowStore'
+import { GraphNode } from '../graph/GraphNode'
 
 
 const url = process.env.BASE_URL
+
+
 export const useCallUnsteadyFlowWs = () => {
 	const { cond_params, pipeline } = useUnsteadyInputStore(state => state)
 	const { pushNewData, resetResult } = useResultsStore(state => state)
@@ -36,8 +38,17 @@ export const useCallUnsteadyFlowWs = () => {
 					pipeline: pipeline.nodes.map(node => node.value)
 				}
 			)
+			// ------------------------------------------------------------------------------------
+
+			const message2 = JSON.stringify(
+				{
+					cond_params,
+					pipeline: pipeline.toObj()
+				}
+			)
+			// ------------------------------------------------------------------------------------
 			ws.onopen = (ev) => {
-				ws.send(message)
+				ws.send(message2)
 			}
 			ws.onmessage = (ev) => {
 				pushNewData(JSON.parse(ev.data))

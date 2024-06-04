@@ -1,8 +1,11 @@
 from fastapi import APIRouter, WebSocket
 from schemas.unsteady_flow_ws_scheme import Unsteady_data
-from services.unsteady_flow_calculation import calculate
+
+# from services.unsteady_flow_calculation import calculate
+from services.calculation_V2.unsteady_flow_solver import Unsteady_flow_solver
 from pprint import pprint
 from wsockets import ConnectionManager
+from logger_config import logger
 
 router = APIRouter()
 
@@ -25,26 +28,12 @@ async def unsteady_flow_ws(websocket: WebSocket):
         await manager.send_json({"message": "Валидация данных не пройдена"}, websocket)
         manager.disconnect(websocket)
         return
-    generator = calculate(valid_data)
+    unstedy_flow_solver = Unsteady_flow_solver(valid_data)
+    generator = unstedy_flow_solver.solve()
     while True:
         try:
-            await manager.send_json(next(generator), websocket)
+            await manager.send_json(next(generator).model_dump(), websocket)
         except Exception as e:
-            print(e)
+            logger.error(e)
             manager.disconnect(websocket)
             return
-
-
-# {
-#     "cond_params": {
-#         "time_to_iter": 20,
-#         "density": 200,
-#         "viscosity": 200
-#     },
-#     "pipeline": [
-#         {"type": "provider", "mode": "speed", "value": 10},
-#             {"type": "pipe", "diameter": 1000, "length": 1},
-#             {"type": "pipe", "diameter": 20, "length": 20},
-#             {"type": "consumer", "mode": "speed", "value": 10}
-#     ]
-# }
