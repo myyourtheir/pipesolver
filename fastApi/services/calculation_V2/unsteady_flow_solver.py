@@ -52,10 +52,8 @@ class Unsteady_flow_solver(Basic_functions):
         # TODO Добавить логику обхода по сложному трубопроводу
         start_element = self.start_element_ids[0]
         current_node = self._pipeline[start_element]
-        count = 0
+
         while True:
-            if count != 0:
-                current_node = self._pipeline[current_node.children[0]]
 
             current_element = current_node.value
             element_result: Response_element
@@ -72,7 +70,6 @@ class Unsteady_flow_solver(Basic_functions):
                     parent_element=self._prev_res[current_node.parents[0]].value,
                 )
 
-            # TODO Добавить расчеты элементов
             elif current_element.type == "pump":
                 element_result = self._pump_method(
                     current_node,
@@ -94,8 +91,6 @@ class Unsteady_flow_solver(Basic_functions):
                     parent_element=self._prev_res[current_node.parents[0]].value,
                 )
 
-            # _________________________________________________
-
             elif current_element.type == "consumer":
                 element_result = self._consumer_method(
                     current_node,
@@ -103,9 +98,11 @@ class Unsteady_flow_solver(Basic_functions):
                 )
             # Сохраняем в результаты текущего времени с id элемента
             self._moment_result[current_node.id] = element_result
-            count += 1
+
             if len(current_node.children) == 0:
                 break
+
+            current_node = self._pipeline[current_node.children[0]]
 
 
 if __name__ == "__main__":

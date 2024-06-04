@@ -86,7 +86,9 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
         if Re == 0:
             return 0
         if Re < 2320:
-            lyam = 68 / Re
+            lyam = 64 / Re
+            if lyam > 0.1:  # TODO Обратить внимание
+                lyam = 0.1
         elif (10 / eps) > Re >= 2320:
             lyam = 0.3164 / Re**0.25
         elif (10 / eps) <= Re < (500 / eps):
