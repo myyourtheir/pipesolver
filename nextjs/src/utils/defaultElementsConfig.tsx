@@ -1,7 +1,7 @@
 
 
 import { PlotConfig } from '../../types/plotConfigTypes'
-import { ElemProps } from '@/app/home/(components)/SchemeCanvas/mappedElements/types'
+import { ElemProps } from '@/app/home/(components)/SchemeCanvas/3dCanvas/mappedElements/types'
 
 interface ValuesProps extends ElemProps {
 	key: any

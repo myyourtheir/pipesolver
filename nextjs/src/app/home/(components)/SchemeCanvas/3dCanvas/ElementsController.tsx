@@ -1,5 +1,5 @@
 
-import Pump from '@/app/home/(components)/SchemeCanvas/mappedElements/Pump'
+import Pump from '@/app/home/(components)/SchemeCanvas/3dCanvas/mappedElements/Pump'
 import { useUnsteadyInputStore } from '@/lib/globalStore/unsteadyFlowStore'
 import Pipe from './mappedElements/Pipe'
 

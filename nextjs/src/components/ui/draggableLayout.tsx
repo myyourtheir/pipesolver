@@ -12,12 +12,13 @@ interface DraggableLayoutProps {
 	children: React.ReactNode,
 	className?: string,
 	headerName: string,
+	extraHeaderElement?: React.ReactNode
 	hideable?: boolean,
 	defaultState?: boolean,
-	resizable?: boolean
+	resizable?: boolean,
 }
 
-const DraggableLayout: FC<DraggableLayoutProps> = ({ refContainer, children, headerName, className, hideable = true, defaultState = true, resizable = false }) => {
+const DraggableLayout: FC<DraggableLayoutProps> = ({ refContainer, children, extraHeaderElement, headerName, className, hideable = true, defaultState = true, resizable = false, }) => {
 	const toolBarRef = useRef<HTMLDivElement>(null)
 	const toolBarHeaderRef = useRef(null)
 	const HeaderRef = useRef<HTMLDivElement>(null)
@@ -36,13 +37,16 @@ const DraggableLayout: FC<DraggableLayoutProps> = ({ refContainer, children, hea
 	return (
 		<Card ref={toolBarRef} className={`absolute h-fit w-fit rounded-md border bg-white   ${className}  ${resizable && isOpen ? 'resize overflow-hidden' : 'resize-none'} ${isOpen ? 'p-1' : 'p-0 w-fit h-fit'}`}>
 			<CardHeader
-				className='flex-row justify-between items-center border-b p-0  gap-4 space-y-0 m'
+				className='flex-row justify-between items-center border-b p-0  gap-4 space-y-0 pb-1'
 				ref={HeaderRef}
 			>
 				<GripHorizontal ref={toolBarHeaderRef} className='cursor-pointer ml-1 touch-none' size={15} />
 				<CardTitle className='whitespace-nowrap text-base'>
 					{headerName}
 				</CardTitle>
+				{
+					extraHeaderElement
+				}
 				{hideable ?
 					<Button
 						variant={'outline'}
@@ -72,8 +76,8 @@ const DraggableLayout: FC<DraggableLayoutProps> = ({ refContainer, children, hea
 								: <Maximize2 size={14} />
 						}
 					</Button> :
-					<span>
-					</span>
+					<>
+					</>
 				}
 			</CardHeader>
 			<CardContent className={` w-full h-[calc(100%-1em-8px)] ${isOpen ? 'p-1' : 'hidden p-0 w-0 h-0'}`}>
