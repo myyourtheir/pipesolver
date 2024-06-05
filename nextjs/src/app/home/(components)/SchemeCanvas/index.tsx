@@ -19,7 +19,7 @@ const SchemeCanvas: FC<ElementsProps> = ({ containerRef }) => {
 			refContainer={containerRef}
 			headerName='Схема'
 			className='w-[70%] h-[70%] '
-			hideable={false}
+			hideable={true}
 			resizable={true}
 			extraHeaderElement={
 				<ToggleGroup
