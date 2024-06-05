@@ -75,102 +75,49 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
             current_node = pipeline[current_node.children[0]]
         return initial_distribution
 
-    def __find_lyam(self, Re: int, eps: float):
-        # print(
-        #     f"""
-        #   eps: {eps}
-        #   Re: {Re}
-        # """
-        # )
-        lyam: float
-        if Re == 0:
-            return 0
-        if Re < 2320:
-            lyam = 64 / Re
-            if lyam > 0.1:  # TODO Обратить внимание
-                lyam = 0.1
-        elif (10 / eps) > Re >= 2320:
-            lyam = 0.3164 / Re**0.25
-        elif (10 / eps) <= Re < (500 / eps):
-            lyam = 0.11 * (eps + 68 / Re) ** 0.25
-        else:
-            lyam = 0.11 * (eps) ** 0.25
-        return lyam
-
-    def __count_H(
-        self,
-        p: float,
-        V: float,
-    ):
-        return (
-            p / (self._density * C.g)
-            + self._vis_otm[self._vis_otm_iter]
-            + (V**2) / (2 * C.g)
-        )
-
-    def __find_Jb(self, p: float, V: float):
-        Vjb = V
-        Re = abs(Vjb) * self._current_diameter / self._viscosity
-        lyamjb = self.__find_lyam(Re, C.o / self._current_diameter)
-        # print(
-        #     f"""
-        #   lyamjb: {lyamjb}
-        # """
-        # )
-        Jb = (
-            p
-            - self._density * C.c * Vjb
-            + lyamjb
-            * self._density
-            * Vjb
-            * abs(Vjb)
-            * self._dt
-            * C.c
-            / (2 * self._current_diameter)
-            + self._dt
-            * self._density
-            * C.c
-            * C.g
-            * (
-                self._vis_otm[self._vis_otm_iter + 1]
-                - self._vis_otm[self._vis_otm_iter]
+    def _select_solve_method(self, current_node):
+        current_element = current_node.value
+        if current_element.type == "provider":
+            element_result = self.__provider_method(
+                current_node,
+                child_element=self._prev_res[current_node.children[0]].value,
             )
-            / self._dx
-        )
-        return Jb
-
-    def __find_Ja(self, p: float, V: float):
-        Vja = V
-        Re = abs(Vja) * self._current_diameter / self._viscosity
-        lyamja = self.__find_lyam(Re, C.o / self._current_diameter)
-        # print(
-        #     f"""
-        #   lyamja: {lyamja}
-        # """
-        # )
-        Ja = (
-            p
-            + self._density * C.c * Vja
-            - lyamja
-            * self._density
-            * Vja
-            * abs(Vja)
-            * self._dt
-            * C.c
-            / (2 * self._current_diameter)
-            - self._dt
-            * self._density
-            * C.c
-            * C.g
-            * (
-                self._vis_otm[self._vis_otm_iter]
-                - self._vis_otm[self._vis_otm_iter - 1]
+        elif current_element.type == "pipe":
+            element_result = self.__pipe_method(
+                current_node,
+                child_element=self._prev_res[current_node.children[0]].value,
+                parent_element=self._prev_res[current_node.parents[0]].value,
             )
-            / self._dx
-        )
-        return Ja
 
-    def _provider_method(
+        elif current_element.type == "pump":
+            element_result = self.__pump_method(
+                current_node,
+                child_element=self._prev_res[current_node.children[0]].value,
+                parent_element=self._prev_res[current_node.parents[0]].value,
+            )
+
+        elif current_element.type == "gate_valve":
+            element_result = self.__gate_valve_method(
+                current_node,
+                child_element=self._prev_res[current_node.children[0]].value,
+                parent_element=self._prev_res[current_node.parents[0]].value,
+            )
+
+        elif current_element.type == "safe_valve":
+            element_result = self.__safe_valve_method(
+                current_node,
+                child_element=self._prev_res[current_node.children[0]].value,
+                parent_element=self._prev_res[current_node.parents[0]].value,
+            )
+
+        elif current_element.type == "consumer":
+            element_result = self.__consumer_method(
+                current_node,
+                parent_element=self._prev_res[current_node.parents[0]].value,
+            )
+        return element_result
+
+    def __provider_method(
         self, current_node: Recieved_element, child_element: list[One_section_response]
     ) -> Response_element:
 
@@ -208,7 +155,7 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
             value=response_value,
         )
 
-    def _pipe_method(
+    def __pipe_method(
         self,
         current_node: Recieved_element,
         child_element: list[One_section_response],
@@ -257,7 +204,9 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
                     prev_p=self._prev_res[current_node.id].value[i - 1].p,
                     prev_V=self._prev_res[current_node.id].value[i - 1].V,
                     next_p=child_element[0].p,
-                    next_V=child_element[0].V,
+                    next_V=child_element[
+                        0
+                    ].V,  # next_V=child_element[0][current_node.id].V,
                 )
 
             else:
@@ -286,7 +235,7 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
             value=response_value,
         )
 
-    def _pump_method(
+    def __pump_method(
         self,
         current_node: Recieved_element,
         child_element: list[One_section_response],
@@ -348,7 +297,7 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
             value=response_value,
         )
 
-    def _gate_valve_method(
+    def __gate_valve_method(
         self,
         current_node: Recieved_element,
         child_element: list[One_section_response],
@@ -441,7 +390,7 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
             value=response_value,
         )
 
-    def _safe_valve_method(
+    def __safe_valve_method(
         self,
         current_node: Recieved_element,
         child_element: list[One_section_response],
@@ -537,7 +486,7 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
             value=response_value,
         )
 
-    def _consumer_method(
+    def __consumer_method(
         self, current_node: Recieved_element, parent_element: list[One_section_response]
     ) -> Response_element:
         current_element = current_node.value
@@ -571,3 +520,98 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
             parents=current_node.parents,
             value=response_value,
         )
+
+    def __find_lyam(self, Re: int, eps: float):
+        # print(
+        #     f"""
+        #   eps: {eps}
+        #   Re: {Re}
+        # """
+        # )
+        lyam: float
+        if Re == 0:
+            return 0
+        if Re < 2320:
+            lyam = 64 / Re
+            if lyam > 0.1:  # TODO Обратить внимание
+                lyam = 0.1
+        elif (10 / eps) > Re >= 2320:
+            lyam = 0.3164 / Re**0.25
+        elif (10 / eps) <= Re < (500 / eps):
+            lyam = 0.11 * (eps + 68 / Re) ** 0.25
+        else:
+            lyam = 0.11 * (eps) ** 0.25
+        return lyam
+
+    def __count_H(
+        self,
+        p: float,
+        V: float,
+    ):
+        return (
+            p / (self._density * C.g)
+            + self._vis_otm[self._vis_otm_iter]
+            + (V**2) / (2 * C.g)
+        )
+
+    def __find_Jb(self, p: float, V: float):
+        Vjb = V
+        Re = abs(Vjb) * self._current_diameter / self._viscosity
+        lyamjb = self.__find_lyam(Re, C.o / self._current_diameter)
+        # print(
+        #     f"""
+        #   lyamjb: {lyamjb}
+        # """
+        # )
+        Jb = (
+            p
+            - self._density * C.c * Vjb
+            + lyamjb
+            * self._density
+            * Vjb
+            * abs(Vjb)
+            * self._dt
+            * C.c
+            / (2 * self._current_diameter)
+            + self._dt
+            * self._density
+            * C.c
+            * C.g
+            * (
+                self._vis_otm[self._vis_otm_iter + 1]
+                - self._vis_otm[self._vis_otm_iter]
+            )
+            / self._dx
+        )
+        return Jb
+
+    def __find_Ja(self, p: float, V: float):
+        Vja = V
+        Re = abs(Vja) * self._current_diameter / self._viscosity
+        lyamja = self.__find_lyam(Re, C.o / self._current_diameter)
+        # print(
+        #     f"""
+        #   lyamja: {lyamja}
+        # """
+        # )
+        Ja = (
+            p
+            + self._density * C.c * Vja
+            - lyamja
+            * self._density
+            * Vja
+            * abs(Vja)
+            * self._dt
+            * C.c
+            / (2 * self._current_diameter)
+            - self._dt
+            * self._density
+            * C.c
+            * C.g
+            * (
+                self._vis_otm[self._vis_otm_iter]
+                - self._vis_otm[self._vis_otm_iter - 1]
+            )
+            / self._dx
+        )
+        return Ja

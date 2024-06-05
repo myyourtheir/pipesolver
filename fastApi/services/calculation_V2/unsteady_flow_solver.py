@@ -54,48 +54,7 @@ class Unsteady_flow_solver(Basic_functions):
         current_node = self._pipeline[start_element]
 
         while True:
-
-            current_element = current_node.value
-            element_result: Response_element
-
-            if current_element.type == "provider":
-                element_result = self._provider_method(
-                    current_node,
-                    child_element=self._prev_res[current_node.children[0]].value,
-                )
-            elif current_element.type == "pipe":
-                element_result = self._pipe_method(
-                    current_node,
-                    child_element=self._prev_res[current_node.children[0]].value,
-                    parent_element=self._prev_res[current_node.parents[0]].value,
-                )
-
-            elif current_element.type == "pump":
-                element_result = self._pump_method(
-                    current_node,
-                    child_element=self._prev_res[current_node.children[0]].value,
-                    parent_element=self._prev_res[current_node.parents[0]].value,
-                )
-
-            elif current_element.type == "gate_valve":
-                element_result = self._gate_valve_method(
-                    current_node,
-                    child_element=self._prev_res[current_node.children[0]].value,
-                    parent_element=self._prev_res[current_node.parents[0]].value,
-                )
-
-            elif current_element.type == "safe_valve":
-                element_result = self._safe_valve_method(
-                    current_node,
-                    child_element=self._prev_res[current_node.children[0]].value,
-                    parent_element=self._prev_res[current_node.parents[0]].value,
-                )
-
-            elif current_element.type == "consumer":
-                element_result = self._consumer_method(
-                    current_node,
-                    parent_element=self._prev_res[current_node.parents[0]].value,
-                )
+            element_result = self._select_solve_method(current_node)  # solver
             # Сохраняем в результаты текущего времени с id элемента
             self._moment_result[current_node.id] = element_result
 
