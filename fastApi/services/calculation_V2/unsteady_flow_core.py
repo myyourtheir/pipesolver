@@ -9,6 +9,31 @@ import logging
 
 
 class Unsteady_flow_core:
+    _dx: int
+
+    def get_iters_count(self, node: Recieved_element):
+        elements_with_two_sections = ["safe_valve", "gate_valve", "pump"]
+        element = node.value
+        if element.type == "pipe":
+            return int(element.length * 1000 / self._dx)
+        elif element.type in elements_with_two_sections:
+            return 2
+        else:
+            return 1
+
+    @staticmethod
+    def get_neighbours_of_node(node: Recieved_element):
+        return [*node.parents, *node.children]
+
+    @classmethod
+    def get_dont_visited_neighbours(cls, current_node, visited_nodes):
+        neighbours = cls.get_neighbours_of_node(node=current_node)
+        dont_visited_neighbours = []
+        for neighbour in neighbours:
+            if neighbour not in visited_nodes:
+                dont_visited_neighbours.append(neighbour)
+        return dont_visited_neighbours
+
     @staticmethod
     def find_elements_without_parents(acc: list[str], elem: Recieved_element):
         if len(elem.parents) == 0:

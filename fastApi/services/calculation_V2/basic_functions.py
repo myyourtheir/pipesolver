@@ -14,6 +14,7 @@ from schemas.unsteady_flow_ws_scheme import (
 from typing import Literal
 from functools import reduce
 import math
+from services.Utils.stack import Stack
 
 
 class Basic_functions(Vis_otm, Unsteady_flow_core):
@@ -34,15 +35,6 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
     def _make_initial_distribution(
         self, pipeline: dict[str, Recieved_element]
     ) -> dict[str, Response_element]:
-        def get_iters_count(node: Recieved_element):
-            elements_with_two_sections = ["safe_valve", "gate_valve", "pump"]
-            element = node.value
-            if element.type == "pipe":
-                return int(element.length * 1000 / self._dx)
-            elif element.type in elements_with_two_sections:
-                return 2
-            else:
-                return 1
 
         initial_distribution = {}
         start_element_id = reduce(
@@ -50,29 +42,46 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
         )[0]
         current_node = pipeline[start_element_id]
         current_x = 0
+        visited_nodes: set[str] = set()
+        stack = Stack()
         while True:
             res_value: list[One_section_response] = []
-            for i in range(get_iters_count(current_node)):
+
+            for i in range(self.get_iters_count(current_node)):
                 res_value.append(One_section_response(x=current_x, p=0, V=0, H=0))
                 if (
                     current_node.value.type == "pipe"
-                    and i != get_iters_count(current_node) - 1
+                    and i != self.get_iters_count(current_node) - 1
                 ):
                     current_x += self._dx
 
-            initial_distribution[current_node.id] = Response_element(
-                **{
-                    "id": current_node.id,
-                    "type": current_node.value.type,
-                    "value": res_value,
-                    "children": current_node.children,
-                    "parents": current_node.parents,
-                }
+            initial_distribution[current_node.id] = self.make_response_element(
+                current_node=current_node, value=res_value
             )
             current_x += self._dx
-            if len(current_node.children) == 0:
-                break
-            current_node = pipeline[current_node.children[0]]
+            # Добавляем элемент в посещенные
+            visited_nodes.add(current_node.id)
+
+            dont_visited_neighbours = self.get_dont_visited_neighbours(
+                current_node=current_node, visited_nodes=visited_nodes
+            )
+            # логика обхода
+            if len(dont_visited_neighbours) == 0:
+                if len(stack) == 0:
+                    break
+                else:
+                    current_node = pipeline[stack.head()]
+            elif len(dont_visited_neighbours) == 1:
+                if not stack.is_empty() and current_node.id == stack.head():
+                    stack.remove()
+                current_node = pipeline[dont_visited_neighbours[0]]
+            else:
+                stack.add(current_node.id)
+                current_node = pipeline[dont_visited_neighbours[0]]
+
+            # if len(current_node.children) == 0:  # Тут поменять
+            #     break
+            # current_node = pipeline[current_node.children[0]]  # Тут поменять
         return initial_distribution
 
     def _select_solve_method(self, current_node):
@@ -120,7 +129,6 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
     def __provider_method(
         self, current_node: Recieved_element, child_element: list[One_section_response]
     ) -> Response_element:
-
         current_element = current_node.value
         Jb = self.__find_Jb(child_element[0].p, child_element[0].V)
         if current_element.mode == "pressure":

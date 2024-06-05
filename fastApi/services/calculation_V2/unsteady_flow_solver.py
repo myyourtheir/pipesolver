@@ -12,6 +12,7 @@ from schemas.unsteady_flow_ws_scheme import (
 from functools import reduce
 from pprint import pprint
 import json
+import logging
 
 
 class Unsteady_flow_solver(Basic_functions):
@@ -33,6 +34,7 @@ class Unsteady_flow_solver(Basic_functions):
             data.pipeline,
             reduce(self.find_elements_without_parents, data.pipeline.values(), [])[0],
         )
+        print(self._make_initial_distribution(data.pipeline))
 
     def solve(self):
         while self._current_time <= self._time_to_iter:
