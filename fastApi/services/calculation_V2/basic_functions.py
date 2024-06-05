@@ -79,9 +79,6 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
                 stack.add(current_node.id)
                 current_node = pipeline[dont_visited_neighbours[0]]
 
-            # if len(current_node.children) == 0:  # Тут поменять
-            #     break
-            # current_node = pipeline[current_node.children[0]]  # Тут поменять
         return initial_distribution
 
     def _select_solve_method(self, current_node):

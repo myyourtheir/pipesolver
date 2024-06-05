@@ -13,6 +13,7 @@ from functools import reduce
 from pprint import pprint
 import json
 import logging
+from services.Utils.stack import Stack
 
 
 class Unsteady_flow_solver(Basic_functions):
@@ -55,15 +56,32 @@ class Unsteady_flow_solver(Basic_functions):
         start_element = self.start_element_ids[0]
         current_node = self._pipeline[start_element]
 
+        visited_nodes: set[str] = set()
+        stack = Stack()
+
         while True:
             element_result = self._select_solve_method(current_node)  # solver
             # Сохраняем в результаты текущего времени с id элемента
             self._moment_result[current_node.id] = element_result
 
-            if len(current_node.children) == 0:
-                break
+            visited_nodes.add(current_node.id)
 
-            current_node = self._pipeline[current_node.children[0]]
+            dont_visited_neighbours = self.get_dont_visited_neighbours(
+                current_node=current_node, visited_nodes=visited_nodes
+            )
+            # логика обхода
+            if len(dont_visited_neighbours) == 0:
+                if len(stack) == 0:
+                    break
+                else:
+                    current_node = self._pipeline[stack.head()]
+            elif len(dont_visited_neighbours) == 1:
+                if not stack.is_empty() and current_node.id == stack.head():
+                    stack.remove()
+                current_node = self._pipeline[dont_visited_neighbours[0]]
+            else:
+                stack.add(current_node.id)
+                current_node = self._pipeline[dont_visited_neighbours[0]]
 
 
 if __name__ == "__main__":
