@@ -1,5 +1,11 @@
 from functools import reduce
-from schemas.unsteady_flow_ws_scheme import Recieved_element, Result_unsteady_data
+from schemas.unsteady_flow_ws_scheme import (
+    Recieved_element,
+    Result_unsteady_data,
+    Response_element,
+    One_section_response,
+)
+import logging
 
 
 class Unsteady_flow_core:
@@ -8,6 +14,15 @@ class Unsteady_flow_core:
         if len(elem.parents) == 0:
             acc.append(elem.id)
         return acc
+
+    @staticmethod
+    def make_response_element(
+        current_node: Recieved_element, value: list[One_section_response]
+    ):
+        dict = current_node.model_dump()
+        dict["value"] = value
+        dict["type"] = current_node.value.type
+        return Response_element(**dict)
 
     @classmethod
     def find_next_pipe_diameter(

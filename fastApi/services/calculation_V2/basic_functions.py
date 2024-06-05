@@ -147,12 +147,8 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
         # )
         self._current_x += self._dx
 
-        return Response_element(
-            id=current_node.id,
-            type=current_element.type,
-            children=current_node.children,
-            parents=current_node.parents,
-            value=response_value,
+        return self.make_response_element(
+            current_node=current_node, value=response_value
         )
 
     def __pipe_method(
@@ -227,12 +223,8 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
             )
             self._current_x += self._dx
 
-        return Response_element(
-            id=current_node.id,
-            type=current_element.type,
-            children=current_node.children,
-            parents=current_node.parents,
-            value=response_value,
+        return self.make_response_element(
+            current_node=current_node, value=response_value
         )
 
     def __pump_method(
@@ -289,12 +281,8 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
             One_section_response(x=self._current_x, p=p2, V=V, H=H2),
         ]
         self._current_x += self._dx
-        return Response_element(
-            id=current_node.id,
-            type=current_element.type,
-            children=current_node.children,
-            parents=current_node.parents,
-            value=response_value,
+        return self.make_response_element(
+            current_node=current_node, value=response_value
         )
 
     def __gate_valve_method(
@@ -382,12 +370,8 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
             One_section_response(x=self._current_x, p=p2, V=V, H=H2),
         ]
         self._current_x += self._dx
-        return Response_element(
-            id=current_node.id,
-            type=current_element.type,
-            children=current_node.children,
-            parents=current_node.parents,
-            value=response_value,
+        return self.make_response_element(
+            current_node=current_node, value=response_value
         )
 
     def __safe_valve_method(
@@ -478,12 +462,8 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
                     One_section_response(x=self._current_x, p=p, V=V2, H=H2),
                 ]
         self._current_x += self._dx
-        return Response_element(
-            id=current_node.id,
-            type=current_element.type,
-            children=current_node.children,
-            parents=current_node.parents,
-            value=response_value,
+        return self.make_response_element(
+            current_node=current_node, value=response_value
         )
 
     def __consumer_method(
@@ -513,12 +493,8 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
         #       ______________________________________________________
         #       """
         # )
-        return Response_element(
-            id=current_node.id,
-            type=current_element.type,
-            children=current_node.children,
-            parents=current_node.parents,
-            value=response_value,
+        return self.make_response_element(
+            current_node=current_node, value=response_value
         )
 
     def __find_lyam(self, Re: int, eps: float):
