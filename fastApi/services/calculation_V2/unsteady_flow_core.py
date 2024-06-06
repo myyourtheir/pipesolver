@@ -10,6 +10,8 @@ import logging
 from services.calculation_V2.constants import Constants as C
 from services.Utils.stack import Stack
 from typing import Literal
+from pprint import pprint
+from time import sleep
 
 
 class Unsteady_flow_core:
@@ -105,7 +107,6 @@ class Unsteady_flow_core:
                     )
 
                 self._current_x += self._dx
-
             return self.make_response_element(
                 current_node=current_node, value=response_value
             )
@@ -214,34 +215,33 @@ class Unsteady_flow_core:
 
         def tee_method(
             current_node: Recieved_element,
-            first_neighbour_node: Response_element,
+            first_neighbor_node: Response_element,
             second_nieghbour: Response_element,
-            third_neighbour: Response_element,
+            third_neighbor: Response_element,
         ) -> Response_element:
-            response_value = (
-                [
-                    {
-                        first_neighbour_node.id: One_section_response(
-                            x=self._current_x,
-                            p=0,
-                            V=0,
-                            H=0,
-                        ),
-                        second_nieghbour.id: One_section_response(
-                            x=self._current_x,
-                            p=0,
-                            V=0,
-                            H=0,
-                        ),
-                        third_neighbour.id: One_section_response(
-                            x=self._current_x,
-                            p=0,
-                            V=0,
-                            H=0,
-                        ),
-                    }
-                ],
-            )
+            response_value = [
+                {
+                    first_neighbor_node.id: One_section_response(
+                        x=self._current_x,
+                        p=0,
+                        V=0,
+                        H=0,
+                    ),
+                    second_nieghbour.id: One_section_response(
+                        x=self._current_x,
+                        p=0,
+                        V=0,
+                        H=0,
+                    ),
+                    third_neighbor.id: One_section_response(
+                        x=self._current_x,
+                        p=0,
+                        V=0,
+                        H=0,
+                    ),
+                }
+            ]
+
             self._current_x += self._dx
             return self.make_response_element(
                 current_node=current_node, value=response_value
@@ -288,12 +288,12 @@ class Unsteady_flow_core:
                     parent_node=pipeline[current_node.parents[0]],
                 )
             elif current_element.type == "tee":
-                neighours = self.get_neighbours_of_node(current_node)
+                neighours = self.get_neighbors_of_node(current_node)
                 element_result = tee_method(
                     current_node=current_node,
-                    first_neighbour_node=pipeline[neighours[0]],
+                    first_neighbor_node=pipeline[neighours[0]],
                     second_nieghbour=pipeline[neighours[1]],
-                    third_neighbour=pipeline[neighours[2]],
+                    third_neighbor=pipeline[neighours[2]],
                 )
             return element_result
 
@@ -306,7 +306,6 @@ class Unsteady_flow_core:
         visited_nodes: set[str] = set()
         stack = Stack()
         while True:
-            res_value: list[ExtendedOneSectionResponse] = []
             element_result = select_initial_distribution_method(
                 current_node=current_node
             )
@@ -316,22 +315,22 @@ class Unsteady_flow_core:
             # Добавляем элемент в посещенные
             visited_nodes.add(current_node.id)
 
-            dont_visited_neighbours = self.get_dont_visited_neighbours(
+            dont_visited_neighbors = self.get_dont_visited_neighbors(
                 current_node=current_node, visited_nodes=visited_nodes
             )
             # логика обхода
-            if len(dont_visited_neighbours) == 0:
+            if len(dont_visited_neighbors) == 0:
                 if len(stack) == 0:
                     break
                 else:
                     current_node = pipeline[stack.head()]
-            elif len(dont_visited_neighbours) == 1:
+            elif len(dont_visited_neighbors) == 1:
                 if not stack.is_empty() and current_node.id == stack.head():
                     stack.remove()
-                current_node = pipeline[dont_visited_neighbours[0]]
+                current_node = pipeline[dont_visited_neighbors[0]]
             else:
                 stack.add(current_node.id)
-                current_node = pipeline[dont_visited_neighbours[0]]
+                current_node = pipeline[dont_visited_neighbors[0]]
 
         return initial_distribution
 
@@ -346,19 +345,19 @@ class Unsteady_flow_core:
             return 1
 
     @staticmethod
-    def get_neighbours_of_node(node: Recieved_element):
+    def get_neighbors_of_node(node: Recieved_element):
         return [*node.parents, *node.children]
 
     @classmethod
-    def get_dont_visited_neighbours(
+    def get_dont_visited_neighbors(
         cls, current_node: Recieved_element, visited_nodes: set
     ):
-        neighbours = cls.get_neighbours_of_node(node=current_node)
-        dont_visited_neighbours = []
-        for neighbour in neighbours:
-            if neighbour not in visited_nodes:
-                dont_visited_neighbours.append(neighbour)
-        return dont_visited_neighbours
+        neighbors = cls.get_neighbors_of_node(node=current_node)
+        dont_visited_neighbors = []
+        for neighbor in neighbors:
+            if neighbor not in visited_nodes:
+                dont_visited_neighbors.append(neighbor)
+        return dont_visited_neighbors
 
     @staticmethod
     def find_elements_without_parents(acc: list[str], elem: Recieved_element):

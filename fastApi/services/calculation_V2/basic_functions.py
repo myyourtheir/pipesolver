@@ -31,54 +31,63 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
     _dt: int
     _prev_res: dict[str, Response_element] = {}
     _pipeline: dict[str, Recieved_element]
+    _visited_nodes: set[str] = set()
 
     def _select_solve_method(self, current_node: Recieved_element):
         current_element = current_node.value
+
+        neighbors = self.get_neighbors_of_node(node=current_node)
+        dont_visited_neighbors = self.get_dont_visited_neighbors(
+            current_node=current_node, visited_nodes=self._visited_nodes
+        )
+        visited_neighbor = np.setxor1d(neighbors, dont_visited_neighbors)
+
         if current_element.type == "provider":
             element_result = self.__provider_method(
                 current_node,
-                child_node=self._prev_res[current_node.children[0]],
+                child_node=self._prev_res[neighbors[0]],
             )
         elif current_element.type == "pipe":
             element_result = self.__pipe_method(
                 current_node,
-                child_node=self._prev_res[current_node.children[0]],
-                parent_node=self._prev_res[current_node.parents[0]],
+                child_node=self._prev_res[dont_visited_neighbors[0]],
+                parent_node=self._prev_res[visited_neighbor[0]],
             )
 
         elif current_element.type == "pump":
             element_result = self.__pump_method(
                 current_node,
-                child_node=self._prev_res[current_node.children[0]],
-                parent_node=self._prev_res[current_node.parents[0]],
+                child_node=self._prev_res[dont_visited_neighbors[0]],
+                parent_node=self._prev_res[visited_neighbor[0]],
             )
 
         elif current_element.type == "gate_valve":
             element_result = self.__gate_valve_method(
                 current_node,
-                child_node=self._prev_res[current_node.children[0]],
-                parent_node=self._prev_res[current_node.parents[0]],
+                child_node=self._prev_res[dont_visited_neighbors[0]],
+                parent_node=self._prev_res[visited_neighbor[0]],
             )
 
         elif current_element.type == "safe_valve":
             element_result = self.__safe_valve_method(
                 current_node,
-                child_node=self._prev_res[current_node.children[0]],
-                parent_node=self._prev_res[current_node.parents[0]],
+                child_node=self._prev_res[dont_visited_neighbors[0]],
+                parent_node=self._prev_res[visited_neighbor[0]],
             )
 
         elif current_element.type == "consumer":
+            neighbors = self.get_neighbors_of_node(node=current_node)
             element_result = self.__consumer_method(
                 current_node,
-                parent_node=self._prev_res[current_node.parents[0]],
+                parent_node=self._prev_res[neighbors[0]],
             )
         elif current_element.type == "tee":
-            neighours = self.get_neighbours_of_node(current_node)
+
             element_result = self.__tee_method(
                 current_node=current_node,
-                first_neighbour_node=self._prev_res[neighours[0]],
-                second_nieghbour=self._prev_res[neighours[1]],
-                third_neighbour=self._prev_res[neighours[2]],
+                first_neighbor_node=self._prev_res[neighbors[0]],
+                second_nieghbour=self._prev_res[neighbors[1]],
+                third_neighbor=self._prev_res[neighbors[2]],
             )
         return element_result
 
@@ -189,7 +198,7 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
                             p=one_section_res["p"],
                             V=one_section_res["V"],
                             H=one_section_res["H"],
-                        )
+                        ),
                     }
                 )
             elif i == sections_number - 1:
@@ -218,7 +227,7 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
                             p=one_section_res["p"],
                             V=one_section_res["V"],
                             H=one_section_res["H"],
-                        )
+                        ),
                     }
                 )
             else:
@@ -246,7 +255,6 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
                         )
                     }
                 )
-
 
             self._current_x += self._dx
 
@@ -627,33 +635,33 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
     def __tee_method(
         self,
         current_node: Recieved_element,
-        first_neighbour_node: Response_element,
+        first_neighbor_node: Response_element,
         second_nieghbour: Response_element,
-        third_neighbour: Response_element,
+        third_neighbor: Response_element,
     ) -> Response_element:
         Ja, i = self.calculate_invariant_and_sign_in_the_tee(
-            current_node, first_neighbour_node
+            current_node, first_neighbor_node
         )
         Jb, j = self.calculate_invariant_and_sign_in_the_tee(
             current_node, second_nieghbour
         )
         Jc, k = self.calculate_invariant_and_sign_in_the_tee(
-            current_node, third_neighbour
+            current_node, third_neighbor
         )
         # TODO Правильно посчитать площади
-        S1: float
-        S2: float
-        S3: float
+        S1: float = math.pi * self._current_diameter**2 / 4
+        S2: float = math.pi * self._current_diameter**2 / 4
+        S3: float = math.pi * self._current_diameter**2 / 4
         # fmt: off
-        V1 = (Ja*(S2+S3)-Jb*S2-Jc*S3)/i*self._density*C.c*(S1+S2+S3)
-        V2=(-Ja*S1+Jb*(S1+S3)-Jc*S3)/j*self._density*C.c*(S1+S2+S3)
-        V3=(-Ja*S1-Jb*S2+Jc*(S1+S2))/k*self._density*C.c*(S1+S2+S3)
+        V1 = (Ja*(S2+S3)-Jb*S2-Jc*S3)/(i*self._density*C.c*(S1+S2+S3))
+        V2=(-Ja*S1+Jb*(S1+S3)-Jc*S3)/(j*self._density*C.c*(S1+S2+S3))
+        V3=(-Ja*S1-Jb*S2+Jc*(S1+S2))/(k*self._density*C.c*(S1+S2+S3))
         p=Ja-i*self._density*C.c*V1
         H1=self.__count_H(p=p, V=V1)
         H2=self.__count_H(p=p, V=V2)
         H3=self.__count_H(p=p, V=V3)
         response_value = [{
-                first_neighbour_node.id:
+                first_neighbor_node.id:
                 One_section_response(
                     x=self._current_x,
                     p=p,
@@ -667,29 +675,32 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
                     V=V2,
                     H=H2,
                 ),
-                third_neighbour.id:
+                third_neighbor.id:
                 One_section_response(
                     x=self._current_x,
                     p=p,
                     V=V3,
                     H=H3,
                 ),
-            }],
+            }]
         self._current_x += self._dx
         return self.make_response_element(current_node=current_node, value=response_value)
         # fmt: on
 
-    @classmethod
     def calculate_invariant_and_sign_in_the_tee(
-        cls, current_node: Recieved_element, neighbour_node: Response_element
+        self, current_node: Recieved_element, neighbor_node: Response_element
     ):
-        if neighbour_node.id in current_node.parents:
-            J = cls.__find_Ja(
-                p=neighbour_node.value[-1].p, V=neighbour_node.value[-1].V
+        if neighbor_node.id in current_node.parents:
+            J = self.__find_Ja(
+                p=neighbor_node.value[-1][current_node.id].p,
+                V=neighbor_node.value[-1][current_node.id].V,
             )
             sign = 1
         else:
-            J = cls.__find_Jb(p=neighbour_node.value[0].p, V=neighbour_node.value[0].V)
+            J = self.__find_Jb(
+                p=neighbor_node.value[0][current_node.id].p,
+                V=neighbor_node.value[0][current_node.id].V,
+            )
             sign = -1
         return J, sign
 
