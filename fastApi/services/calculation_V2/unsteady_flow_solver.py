@@ -73,7 +73,10 @@ class Unsteady_flow_solver(Basic_functions):
                 if len(stack) == 0:
                     break
                 else:
-                    current_node = self._pipeline[stack.head()]
+                    if current_node.id == stack.head():
+                        break
+                    else:
+                        current_node = self._pipeline[stack.head()]
             elif len(dont_visited_neighbors) == 1:
                 if not stack.is_empty() and current_node.id == stack.head():
                     stack.remove()
@@ -151,25 +154,32 @@ if __name__ == "__main__":
                 },
                 "12": {
                     "id": "12",
-                    "value": {"type": "consumer", "mode": "pressure", "value": 0},
-                    "children": [],
-                    "parents": ["10"],
+                    "value": {"type": "tee"},
+                    "children": ["13"],
+                    "parents": ["6", "10"],
+                },
+                "13": {
+                    "id": "13",
+                    "value": {"type": "pipe", "length": 10, "diameter": 400},
+                    "children": ["7"],
+                    "parents": ["12"],
                 },
                 "6": {
                     "id": "6",
                     "value": {"type": "pipe", "length": 10, "diameter": 1000},
-                    "children": ["7"],
+                    "children": ["12"],
                     "parents": ["4"],
                 },
                 "7": {
                     "id": "7",
                     "value": {"type": "consumer", "mode": "pressure", "value": 0},
                     "children": [],
-                    "parents": ["6"],
+                    "parents": ["13"],
                 },
             },
         }
     )
+
     # data = Unsteady_data(
     #     **{
     #         "cond_params": {"time_to_iter": 200, "density": 850, "viscosity": 10},

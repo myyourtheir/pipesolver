@@ -15,6 +15,7 @@ from schemas.unsteady_flow_ws_scheme import (
 from typing import Literal, Union
 from functools import reduce
 import math
+from pprint import pprint
 
 
 class Basic_functions(Vis_otm, Unsteady_flow_core):
@@ -48,10 +49,19 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
                 child_node=self._prev_res[neighbors[0]],
             )
         elif current_element.type == "pipe":
+            # TODO правильно назначать родителя и ребенка
+            last_index_keys = self._prev_res[current_node.id].value[-1].keys()
+            # first_index_keys = self._prev_res[current_node.id].value[0].keys()
+            if neighbors[0] in last_index_keys:
+                child_node_id = neighbors[0]
+                parent_node_id = neighbors[1]
+            else:
+                child_node_id = neighbors[1]
+                parent_node_id = neighbors[0]
             element_result = self.__pipe_method(
                 current_node,
-                child_node=self._prev_res[dont_visited_neighbors[0]],
-                parent_node=self._prev_res[visited_neighbor[0]],
+                child_node=self._prev_res[child_node_id],
+                parent_node=self._prev_res[parent_node_id],
             )
 
         elif current_element.type == "pump":
@@ -86,8 +96,8 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
             element_result = self.__tee_method(
                 current_node=current_node,
                 first_neighbor_node=self._prev_res[neighbors[0]],
-                second_nieghbour=self._prev_res[neighbors[1]],
-                third_neighbor=self._prev_res[neighbors[2]],
+                second_nieghbour_node=self._prev_res[neighbors[1]],
+                third_neighbor_node=self._prev_res[neighbors[2]],
             )
         return element_result
 
@@ -636,22 +646,25 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
         self,
         current_node: Recieved_element,
         first_neighbor_node: Response_element,
-        second_nieghbour: Response_element,
-        third_neighbor: Response_element,
+        second_nieghbour_node: Response_element,
+        third_neighbor_node: Response_element,
     ) -> Response_element:
         Ja, i = self.calculate_invariant_and_sign_in_the_tee(
             current_node, first_neighbor_node
         )
         Jb, j = self.calculate_invariant_and_sign_in_the_tee(
-            current_node, second_nieghbour
+            current_node, second_nieghbour_node
         )
         Jc, k = self.calculate_invariant_and_sign_in_the_tee(
-            current_node, third_neighbor
+            current_node, third_neighbor_node
         )
         # TODO Правильно посчитать площади
-        S1: float = math.pi * self._current_diameter**2 / 4
-        S2: float = math.pi * self._current_diameter**2 / 4
-        S3: float = math.pi * self._current_diameter**2 / 4
+        diameter1 = self._pipeline[first_neighbor_node.id].value.diameter
+        diameter2 = self._pipeline[second_nieghbour_node.id].value.diameter
+        diameter3 = self._pipeline[third_neighbor_node.id].value.diameter
+        S1: float = math.pi * diameter1**2 / 4
+        S2: float = math.pi * diameter2**2 / 4
+        S3: float = math.pi * diameter3**2 / 4
         # fmt: off
         V1 = (Ja*(S2+S3)-Jb*S2-Jc*S3)/(i*self._density*C.c*(S1+S2+S3))
         V2=(-Ja*S1+Jb*(S1+S3)-Jc*S3)/(j*self._density*C.c*(S1+S2+S3))
@@ -668,14 +681,14 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
                     V=V1,
                     H=H1,
                 ),
-                second_nieghbour.id:
+                second_nieghbour_node.id:
                 One_section_response(
                     x=self._current_x,
                     p=p,
                     V=V2,
                     H=H2,
                 ),
-                third_neighbor.id:
+                third_neighbor_node.id:
                 One_section_response(
                     x=self._current_x,
                     p=p,

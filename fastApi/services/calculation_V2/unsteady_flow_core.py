@@ -306,6 +306,8 @@ class Unsteady_flow_core:
         visited_nodes: set[str] = set()
         stack = Stack()
         while True:
+
+            # sleep(0.5)
             element_result = select_initial_distribution_method(
                 current_node=current_node
             )
@@ -318,12 +320,18 @@ class Unsteady_flow_core:
             dont_visited_neighbors = self.get_dont_visited_neighbors(
                 current_node=current_node, visited_nodes=visited_nodes
             )
+            pprint(
+                f"узел: {current_node.id}  не посетил: {dont_visited_neighbors} стек выглядит так: {stack.stack}"
+            )
             # логика обхода
             if len(dont_visited_neighbors) == 0:
                 if len(stack) == 0:
                     break
                 else:
-                    current_node = pipeline[stack.head()]
+                    if current_node.id == stack.head():
+                        break
+                    else:
+                        current_node = pipeline[stack.head()]
             elif len(dont_visited_neighbors) == 1:
                 if not stack.is_empty() and current_node.id == stack.head():
                     stack.remove()
