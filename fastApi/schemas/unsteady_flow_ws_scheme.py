@@ -50,6 +50,10 @@ class Safe_valve_params(BaseModel):
     max_pressure: float
 
 
+class Tee_params(BaseModel):
+    type: Literal["tee"]
+
+
 Elements_model = Annotated[
     Union[
         Pipe_params,
@@ -58,6 +62,7 @@ Elements_model = Annotated[
         Safe_valve_params,
         Provider,
         Consumer,
+        Tee_params,
     ],
     Field(discriminator="type"),
 ]
@@ -77,10 +82,16 @@ class One_section_response(BaseModel):
     H: float
 
 
+ExtendedOneSectionResponse = dict[
+    str, One_section_response
+]  # В ключе лежит айди того, кому должен предоставляться ответ
+
+
 class Response_element(BaseModel):
     id: str
     type: str
-    value: list[One_section_response]
+    # value: list[One_section_response]
+    value: list[ExtendedOneSectionResponse]
     children: list[str]
     parents: list[str]
 

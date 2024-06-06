@@ -6,15 +6,15 @@ from schemas.unsteady_flow_ws_scheme import (
     Recieved_element,
     Response_element,
     Cond_params,
+    ExtendedOneSectionResponse,
     One_section_response,
     Pump_params,
     Gate_valve_params,
     Safe_valve_params,
 )
-from typing import Literal
+from typing import Literal, Union
 from functools import reduce
 import math
-from services.Utils.stack import Stack
 
 
 class Basic_functions(Vis_otm, Unsteady_flow_core):
@@ -32,102 +32,64 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
     _prev_res: dict[str, Response_element] = {}
     _pipeline: dict[str, Recieved_element]
 
-    def _make_initial_distribution(
-        self, pipeline: dict[str, Recieved_element]
-    ) -> dict[str, Response_element]:
-
-        initial_distribution = {}
-        start_element_id = reduce(
-            self.find_elements_without_parents, pipeline.values(), []
-        )[0]
-        current_node = pipeline[start_element_id]
-        current_x = 0
-        visited_nodes: set[str] = set()
-        stack = Stack()
-        while True:
-            res_value: list[One_section_response] = []
-
-            for i in range(self.get_iters_count(current_node)):
-                res_value.append(One_section_response(x=current_x, p=0, V=0, H=0))
-                if (
-                    current_node.value.type == "pipe"
-                    and i != self.get_iters_count(current_node) - 1
-                ):
-                    current_x += self._dx
-
-            initial_distribution[current_node.id] = self.make_response_element(
-                current_node=current_node, value=res_value
-            )
-            current_x += self._dx
-            # Добавляем элемент в посещенные
-            visited_nodes.add(current_node.id)
-
-            dont_visited_neighbours = self.get_dont_visited_neighbours(
-                current_node=current_node, visited_nodes=visited_nodes
-            )
-            # логика обхода
-            if len(dont_visited_neighbours) == 0:
-                if len(stack) == 0:
-                    break
-                else:
-                    current_node = pipeline[stack.head()]
-            elif len(dont_visited_neighbours) == 1:
-                if not stack.is_empty() and current_node.id == stack.head():
-                    stack.remove()
-                current_node = pipeline[dont_visited_neighbours[0]]
-            else:
-                stack.add(current_node.id)
-                current_node = pipeline[dont_visited_neighbours[0]]
-
-        return initial_distribution
-
-    def _select_solve_method(self, current_node):
+    def _select_solve_method(self, current_node: Recieved_element):
         current_element = current_node.value
         if current_element.type == "provider":
             element_result = self.__provider_method(
                 current_node,
-                child_element=self._prev_res[current_node.children[0]].value,
+                child_node=self._prev_res[current_node.children[0]],
             )
         elif current_element.type == "pipe":
             element_result = self.__pipe_method(
                 current_node,
-                child_element=self._prev_res[current_node.children[0]].value,
-                parent_element=self._prev_res[current_node.parents[0]].value,
+                child_node=self._prev_res[current_node.children[0]],
+                parent_node=self._prev_res[current_node.parents[0]],
             )
 
         elif current_element.type == "pump":
             element_result = self.__pump_method(
                 current_node,
-                child_element=self._prev_res[current_node.children[0]].value,
-                parent_element=self._prev_res[current_node.parents[0]].value,
+                child_node=self._prev_res[current_node.children[0]],
+                parent_node=self._prev_res[current_node.parents[0]],
             )
 
         elif current_element.type == "gate_valve":
             element_result = self.__gate_valve_method(
                 current_node,
-                child_element=self._prev_res[current_node.children[0]].value,
-                parent_element=self._prev_res[current_node.parents[0]].value,
+                child_node=self._prev_res[current_node.children[0]],
+                parent_node=self._prev_res[current_node.parents[0]],
             )
 
         elif current_element.type == "safe_valve":
             element_result = self.__safe_valve_method(
                 current_node,
-                child_element=self._prev_res[current_node.children[0]].value,
-                parent_element=self._prev_res[current_node.parents[0]].value,
+                child_node=self._prev_res[current_node.children[0]],
+                parent_node=self._prev_res[current_node.parents[0]],
             )
 
         elif current_element.type == "consumer":
             element_result = self.__consumer_method(
                 current_node,
-                parent_element=self._prev_res[current_node.parents[0]].value,
+                parent_node=self._prev_res[current_node.parents[0]],
+            )
+        elif current_element.type == "tee":
+            neighours = self.get_neighbours_of_node(current_node)
+            element_result = self.__tee_method(
+                current_node=current_node,
+                first_neighbour_node=self._prev_res[neighours[0]],
+                second_nieghbour=self._prev_res[neighours[1]],
+                third_neighbour=self._prev_res[neighours[2]],
             )
         return element_result
 
     def __provider_method(
-        self, current_node: Recieved_element, child_element: list[One_section_response]
+        self, current_node: Recieved_element, child_node: Response_element
     ) -> Response_element:
+        child_element = child_node.value
         current_element = current_node.value
-        Jb = self.__find_Jb(child_element[0].p, child_element[0].V)
+        Jb = self.__find_Jb(
+            child_element[0][current_node.id].p, child_element[0][current_node.id].V
+        )
         if current_element.mode == "pressure":
             p = current_element.value * 1000
             V = (p - Jb) / (self._density * C.c)
@@ -138,7 +100,16 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
                 V = current_element.value
             p = Jb + self._density * C.c * V
         H = self.__count_H(p, V)
-        response_value = [One_section_response(x=self._current_x, p=p, V=V, H=H)]
+        response_value = [
+            {
+                child_node.id: One_section_response(
+                    x=self._current_x,
+                    p=p,
+                    V=V,
+                    H=H,
+                )
+            }
+        ]
         # print(
         #     f"""
         #       type: {current_element.type}
@@ -159,10 +130,12 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
     def __pipe_method(
         self,
         current_node: Recieved_element,
-        child_element: list[One_section_response],
-        parent_element: list[One_section_response],
+        child_node: Response_element,
+        parent_node: Response_element,
     ) -> Response_element:
         current_element = current_node.value
+        child_element = child_node.value
+        parent_element = parent_node.value
 
         self._current_diameter = current_element.diameter / 1000
         sections_number = int(current_element.length * 1000 / self._dx)
@@ -194,38 +167,87 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
         for i in range(sections_number):
             if i == 0:
                 one_section_res = culc_one_section(
-                    prev_p=parent_element[-1].p,
-                    prev_V=parent_element[-1].V,
-                    next_p=self._prev_res[current_node.id].value[i + 1].p,
-                    next_V=self._prev_res[current_node.id].value[i + 1].V,
+                    prev_p=parent_element[-1][current_node.id].p,
+                    prev_V=parent_element[-1][current_node.id].V,
+                    next_p=self._prev_res[current_node.id]
+                    .value[i + 1][current_node.id]
+                    .p,
+                    next_V=self._prev_res[current_node.id]
+                    .value[i + 1][current_node.id]
+                    .V,
                 )
-
+                response_value.append(
+                    {
+                        current_node.id: One_section_response(
+                            x=self._current_x,
+                            p=one_section_res["p"],
+                            V=one_section_res["V"],
+                            H=one_section_res["H"],
+                        ),
+                        parent_node.id: One_section_response(
+                            x=self._current_x,
+                            p=one_section_res["p"],
+                            V=one_section_res["V"],
+                            H=one_section_res["H"],
+                        )
+                    }
+                )
             elif i == sections_number - 1:
                 one_section_res = culc_one_section(
-                    prev_p=self._prev_res[current_node.id].value[i - 1].p,
-                    prev_V=self._prev_res[current_node.id].value[i - 1].V,
-                    next_p=child_element[0].p,
-                    next_V=child_element[
-                        0
+                    prev_p=self._prev_res[current_node.id]
+                    .value[i - 1][current_node.id]
+                    .p,
+                    prev_V=self._prev_res[current_node.id]
+                    .value[i - 1][current_node.id]
+                    .V,
+                    next_p=child_element[0][current_node.id].p,
+                    next_V=child_element[0][
+                        current_node.id
                     ].V,  # next_V=child_element[0][current_node.id].V,
                 )
-
+                response_value.append(
+                    {
+                        current_node.id: One_section_response(
+                            x=self._current_x,
+                            p=one_section_res["p"],
+                            V=one_section_res["V"],
+                            H=one_section_res["H"],
+                        ),
+                        child_node.id: One_section_response(
+                            x=self._current_x,
+                            p=one_section_res["p"],
+                            V=one_section_res["V"],
+                            H=one_section_res["H"],
+                        )
+                    }
+                )
             else:
                 one_section_res = culc_one_section(
-                    prev_p=self._prev_res[current_node.id].value[i - 1].p,
-                    prev_V=self._prev_res[current_node.id].value[i - 1].V,
-                    next_p=self._prev_res[current_node.id].value[i + 1].p,
-                    next_V=self._prev_res[current_node.id].value[i + 1].V,
+                    prev_p=self._prev_res[current_node.id]
+                    .value[i - 1][current_node.id]
+                    .p,
+                    prev_V=self._prev_res[current_node.id]
+                    .value[i - 1][current_node.id]
+                    .V,
+                    next_p=self._prev_res[current_node.id]
+                    .value[i + 1][current_node.id]
+                    .p,
+                    next_V=self._prev_res[current_node.id]
+                    .value[i + 1][current_node.id]
+                    .V,
+                )
+                response_value.append(
+                    {
+                        current_node.id: One_section_response(
+                            x=self._current_x,
+                            p=one_section_res["p"],
+                            V=one_section_res["V"],
+                            H=one_section_res["H"],
+                        )
+                    }
                 )
 
-            response_value.append(
-                One_section_response(
-                    x=self._current_x,
-                    p=one_section_res["p"],
-                    V=one_section_res["V"],
-                    H=one_section_res["H"],
-                )
-            )
+
             self._current_x += self._dx
 
         return self.make_response_element(
@@ -235,9 +257,12 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
     def __pump_method(
         self,
         current_node: Recieved_element,
-        child_element: list[One_section_response],
-        parent_element: list[One_section_response],
+        child_node: Response_element,
+        parent_node: Response_element,
     ) -> Response_element:
+
+        child_element = child_node.value
+        parent_element = parent_node.value
         current_element: Pump_params = current_node.value
         start_time = current_element.start_time
         duration = current_element.duration
@@ -264,8 +289,12 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
             w / C.w0
         ) ** 2 * current_element.coef_a  # 302.06   Характеристика насоса # b = 8 * 10 ** (-7)
         S = np.pi * (self._current_diameter / 2) ** 2
-        Ja = self.__find_Ja(parent_element[-1].p, parent_element[-1].V)
-        Jb = self.__find_Jb(child_element[0].p, child_element[0].V)
+        Ja = self.__find_Ja(
+            parent_element[-1][current_node.id].p, parent_element[-1][current_node.id].V
+        )
+        Jb = self.__find_Jb(
+            child_element[0][current_node.id].p, child_element[0][current_node.id].V
+        )
         V = (
             -C.c / C.g
             + (
@@ -282,8 +311,22 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
         H1 = self.__count_H(p1, V)
         H2 = self.__count_H(p2, V)
         response_value = [
-            One_section_response(x=self._current_x, p=p1, V=V, H=H1),
-            One_section_response(x=self._current_x, p=p2, V=V, H=H2),
+            {
+                parent_node.id: One_section_response(
+                    x=self._current_x,
+                    p=p1,
+                    V=V,
+                    H=H1,
+                )
+            },
+            {
+                child_node.id: One_section_response(
+                    x=self._current_x,
+                    p=p2,
+                    V=V,
+                    H=H2,
+                )
+            },
         ]
         self._current_x += self._dx
         return self.make_response_element(
@@ -293,9 +336,11 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
     def __gate_valve_method(
         self,
         current_node: Recieved_element,
-        child_element: list[One_section_response],
-        parent_element: list[One_section_response],
+        child_node: Response_element,
+        parent_node: Response_element,
     ) -> Response_element:
+        child_element = child_node.value
+        parent_element = parent_node.value
         current_element: Gate_valve_params = current_node.value
         start_time = current_element.start_time
         duration = current_element.duration
@@ -350,8 +395,12 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
             nu = 100
             zet = find_zet(nu)
 
-        Ja = self.__find_Ja(parent_element[-1].p, parent_element[-1].V)
-        Jb = self.__find_Jb(child_element[0].p, child_element[0].V)
+        Ja = self.__find_Ja(
+            parent_element[-1][current_node.id].p, parent_element[-1][current_node.id].V
+        )
+        Jb = self.__find_Jb(
+            child_element[0][current_node.id].p, child_element[0][current_node.id].V
+        )
         V = (
             -2 * C.c * self._density
             + (
@@ -371,8 +420,22 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
         H1 = self.__count_H(p1, V)
         H2 = self.__count_H(p2, V)
         response_value = [
-            One_section_response(x=self._current_x, p=p1, V=V, H=H1),
-            One_section_response(x=self._current_x, p=p2, V=V, H=H2),
+            {
+                parent_node.id: One_section_response(
+                    x=self._current_x,
+                    p=p1,
+                    V=V,
+                    H=H1,
+                )
+            },
+            {
+                child_node.id: One_section_response(
+                    x=self._current_x,
+                    p=p2,
+                    V=V,
+                    H=H2,
+                )
+            },
         ]
         self._current_x += self._dx
         return self.make_response_element(
@@ -382,22 +445,41 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
     def __safe_valve_method(
         self,
         current_node: Recieved_element,
-        child_element: list[One_section_response],
-        parent_element: list[One_section_response],
+        child_node: Response_element,
+        parent_node: Response_element,
     ) -> Response_element:
+        child_element = child_node.value
+        parent_element = parent_node.value
         current_element: Safe_valve_params = current_node.value
         p_otkr = current_element.max_pressure
         Kvmax = current_element.coef_q
-        Ja = self.__find_Ja(parent_element[-1].p, parent_element[-1].V)
-        Jb = self.__find_Jb(child_element[0].p, child_element[0].V)
+        Ja = self.__find_Ja(
+            parent_element[-1][current_node.id].p, parent_element[-1][current_node.id].V
+        )
+        Jb = self.__find_Jb(
+            child_element[0][current_node.id].p, child_element[0][current_node.id].V
+        )
         p = (Ja + Jb) / (2)
         V = (Ja - Jb) / (2 * self._density * C.c)
         H = self.__count_H(p, V)
-        response_value: list[One_section_response]
         if p < p_otkr:
             response_value = [
-                One_section_response(x=self._current_x, p=p, V=V, H=H),
-                One_section_response(x=self._current_x, p=p, V=V, H=H),
+                {
+                    parent_node.id: One_section_response(
+                        x=self._current_x,
+                        p=p,
+                        V=V,
+                        H=H,
+                    )
+                },
+                {
+                    child_node.id: One_section_response(
+                        x=self._current_x,
+                        p=p,
+                        V=V,
+                        H=H,
+                    )
+                },
             ]
         else:
             p_poln_otkr = 1.3 * p_otkr
@@ -425,8 +507,22 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
                 H1 = self.__count_H(p, V1)
                 H2 = self.__count_H(p, V2)
                 response_value = [
-                    One_section_response(x=self._current_x, p=p, V=V1, H=H1),
-                    One_section_response(x=self._current_x, p=p, V=V2, H=H2),
+                    {
+                        parent_node.id: One_section_response(
+                            x=self._current_x,
+                            p=p,
+                            V=V1,
+                            H=H1,
+                        )
+                    },
+                    {
+                        child_node.id: One_section_response(
+                            x=self._current_x,
+                            p=p,
+                            V=V2,
+                            H=H2,
+                        )
+                    },
                 ]
             else:
                 # k =(pp-p_otkr)/( p_poln_otkr-p_otkr) * Kvmax
@@ -463,8 +559,22 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
                 H1 = self.__count_H(p, V1)
                 H2 = self.__count_H(p, V2)
                 response_value = [
-                    One_section_response(x=self._current_x, p=p, V=V1, H=H1),
-                    One_section_response(x=self._current_x, p=p, V=V2, H=H2),
+                    {
+                        parent_node.id: One_section_response(
+                            x=self._current_x,
+                            p=p,
+                            V=V1,
+                            H=H1,
+                        )
+                    },
+                    {
+                        child_node.id: One_section_response(
+                            x=self._current_x,
+                            p=p,
+                            V=V,
+                            H=H2,
+                        )
+                    },
                 ]
         self._current_x += self._dx
         return self.make_response_element(
@@ -472,10 +582,13 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
         )
 
     def __consumer_method(
-        self, current_node: Recieved_element, parent_element: list[One_section_response]
+        self, current_node: Recieved_element, parent_node: Response_element
     ) -> Response_element:
+        parent_element = parent_node.value
         current_element = current_node.value
-        Ja = self.__find_Ja(parent_element[-1].p, parent_element[-1].V)
+        Ja = self.__find_Ja(
+            parent_element[-1][current_node.id].p, parent_element[-1][current_node.id].V
+        )
         if current_element.mode == "pressure":
             p = current_element.value * 1000
             V = (Ja - p) / (self._density * C.c)
@@ -486,7 +599,16 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
                 V = current_element.value
             p = Ja - self._density * C.c * V
         H = self.__count_H(p, V)
-        response_value = [One_section_response(x=self._current_x, p=p, V=V, H=H)]
+        response_value = [
+            {
+                parent_node.id: One_section_response(
+                    x=self._current_x,
+                    p=p,
+                    V=V,
+                    H=H,
+                )
+            },
+        ]
         # print(
         #     f"""
         #       type: {current_element.type}
@@ -501,6 +623,75 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
         return self.make_response_element(
             current_node=current_node, value=response_value
         )
+
+    def __tee_method(
+        self,
+        current_node: Recieved_element,
+        first_neighbour_node: Response_element,
+        second_nieghbour: Response_element,
+        third_neighbour: Response_element,
+    ) -> Response_element:
+        Ja, i = self.calculate_invariant_and_sign_in_the_tee(
+            current_node, first_neighbour_node
+        )
+        Jb, j = self.calculate_invariant_and_sign_in_the_tee(
+            current_node, second_nieghbour
+        )
+        Jc, k = self.calculate_invariant_and_sign_in_the_tee(
+            current_node, third_neighbour
+        )
+        # TODO Правильно посчитать площади
+        S1: float
+        S2: float
+        S3: float
+        # fmt: off
+        V1 = (Ja*(S2+S3)-Jb*S2-Jc*S3)/i*self._density*C.c*(S1+S2+S3)
+        V2=(-Ja*S1+Jb*(S1+S3)-Jc*S3)/j*self._density*C.c*(S1+S2+S3)
+        V3=(-Ja*S1-Jb*S2+Jc*(S1+S2))/k*self._density*C.c*(S1+S2+S3)
+        p=Ja-i*self._density*C.c*V1
+        H1=self.__count_H(p=p, V=V1)
+        H2=self.__count_H(p=p, V=V2)
+        H3=self.__count_H(p=p, V=V3)
+        response_value = [{
+                first_neighbour_node.id:
+                One_section_response(
+                    x=self._current_x,
+                    p=p,
+                    V=V1,
+                    H=H1,
+                ),
+                second_nieghbour.id:
+                One_section_response(
+                    x=self._current_x,
+                    p=p,
+                    V=V2,
+                    H=H2,
+                ),
+                third_neighbour.id:
+                One_section_response(
+                    x=self._current_x,
+                    p=p,
+                    V=V3,
+                    H=H3,
+                ),
+            }],
+        self._current_x += self._dx
+        return self.make_response_element(current_node=current_node, value=response_value)
+        # fmt: on
+
+    @classmethod
+    def calculate_invariant_and_sign_in_the_tee(
+        cls, current_node: Recieved_element, neighbour_node: Response_element
+    ):
+        if neighbour_node.id in current_node.parents:
+            J = cls.__find_Ja(
+                p=neighbour_node.value[-1].p, V=neighbour_node.value[-1].V
+            )
+            sign = 1
+        else:
+            J = cls.__find_Jb(p=neighbour_node.value[0].p, V=neighbour_node.value[0].V)
+            sign = -1
+        return J, sign
 
     def __find_lyam(self, Re: int, eps: float):
         # print(

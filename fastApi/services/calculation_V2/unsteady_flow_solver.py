@@ -35,7 +35,7 @@ class Unsteady_flow_solver(Basic_functions):
             data.pipeline,
             reduce(self.find_elements_without_parents, data.pipeline.values(), [])[0],
         )
-        print(self._make_initial_distribution(data.pipeline))
+        pprint(self._make_initial_distribution(data.pipeline))
 
     def solve(self):
         while self._current_time <= self._time_to_iter:
