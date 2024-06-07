@@ -270,13 +270,13 @@ if __name__ == "__main__":
     solver = Unsteady_flow_solver(data)
     generator = solver.solve()
     ans = []
-    with open("test.json", "w") as file:
-        for i in range(200):
-            answer = next(generator)
-            ans.append(answer.model_dump())
-        file.write(json.dumps(ans).replace("/", r"\/"))
-    # while True:
-    #     pprint(next(generator).model_dump())
+    # with open("test.json", "w") as file:
+    #     for i in range(200):
+    #         answer = next(generator)
+    #         ans.append(answer.model_dump())
+    #     file.write(json.dumps(ans).replace("/", r"\/"))
+    while True:
+        pprint(next(generator).model_dump())
 
 
 # python3 -m services.calculation_V2.unsteady_flow_solver
