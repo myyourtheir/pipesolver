@@ -1,41 +1,57 @@
-import { Suspense, useState } from "react"
+import { Dispatch, MutableRefObject, SetStateAction, Suspense, createContext, useRef, useState } from "react"
 import { Canvas } from "@react-three/fiber"
-import { Plane, OrthographicCamera, OrbitControls } from "@react-three/drei"
+import { OrthographicCamera, OrbitControls } from "@react-three/drei"
+import { OthograthicConfig } from './OthograthicConfig'
+import MoveObj from './CanvasController/Objects/MoveObj'
+import OthograthicController from './CanvasController'
+import * as THREE from 'three'
 
-// Размеры сцены и квадрата
-const sceneSizes = { width: 800, height: 500 }
-const rectSizes = { width: 200, height: 200 }
+
+
+const { numberOrderScale } = OthograthicConfig
+export type CanvasContextProps = {
+	setIsDragging: Dispatch<SetStateAction<boolean>>,
+	floorPlane: THREE.Plane,
+	openPoints: [number, number][],
+	cameraRef: MutableRefObject<THREE.OrthographicCamera>
+}
+export const CanvasContext = createContext<CanvasContextProps | null>(null)
+
+const { frustumSize, aspect } = OthograthicConfig
+
 
 const OrtoCanvas = () => {
-	const [color, colorChange] = useState("blue") // Состояние отвечает за цвет квадрата
-
-	// Handler служит для того, чтобы
-	const colorChangeHandler = () => {
-		// Просто поочерёдно меняем цвет с серого на синий и с синего на белый
-		colorChange((prevColor) => (prevColor === "white" ? "blue" : "white"))
-	}
-
+	const cameraRef = useRef<THREE.OrthographicCamera>(null!)
+	const [isDragging, setIsDragging] = useState(false)
+	const floorPlane = new THREE.Plane(new THREE.Vector3(0, 0, 1))
+	const openPoints: [number, number][] = [[1, 0]]
 	return (
-		<Canvas className="container" >
+		<Canvas >
 			<Suspense fallback={null}>
-				<gridHelper args={[100, 100]} />
-				<OrbitControls
-					enableZoom={true}
-					enablePan={true}
-					enableRotate={false}
-					enableDamping={false}
-				/>
-				<OrthographicCamera makeDefault position={[0, 0, 1]} />
-				<Plane
-					// Обработка событий тут из коробки
-					onClick={colorChangeHandler}
-					// Аргументы те же и в том же порядке, как и в нативной three.js
-					args={[rectSizes.width, rectSizes.height, 1]}
-				>
-					{/* Материал задаётся по аналогии с нативной three.js, 
-              но нужно использовать attach для указания типа прикрепления узла*/}
-					<meshBasicMaterial attach="material" color={color} />
-				</Plane>
+				<CanvasContext.Provider value={{
+					setIsDragging,
+					floorPlane,
+					openPoints,
+					cameraRef
+				}}>
+					{/* <OrthographicCamera ref={cameraRef} makeDefault args={[(frustumSize * aspect) / -2,
+					(frustumSize * aspect) / 2,
+					frustumSize / 2,
+					frustumSize / -2,
+						1,
+						1000]} position={[0, 0, 10]} zoom={50} /> */}
+					<ambientLight />
+					<directionalLight castShadow args={['yellow', 1]} position={cameraRef.current ? [cameraRef.current.position.x, -10, 5] : [0, -10, 5]} />
+					<axesHelper args={[5]} />
+					<OrbitControls
+						enableZoom={true}
+						enablePan={true}
+						enableRotate={false}
+						enableDamping={false}
+						enabled={!isDragging}
+					/>
+					<OthograthicController />
+				</CanvasContext.Provider>
 			</Suspense>
 		</Canvas>
 

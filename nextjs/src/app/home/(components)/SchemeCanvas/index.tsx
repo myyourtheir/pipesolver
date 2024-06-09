@@ -39,14 +39,15 @@ const SchemeCanvas: FC<ElementsProps> = ({ containerRef }) => {
 				</ToggleGroup>
 			}
 		>
-
-			{
-				canvasView == '2d'
-					?
-					<OrtoCanvas />
-					:
-					<SCanvas />
-			}
+			<div id='mainCanvas' className='w-full h-full'>
+				{
+					canvasView == '2d'
+						?
+						<OrtoCanvas />
+						:
+						<SCanvas />
+				}
+			</div>
 		</DraggableLayout>
 	)
 }
