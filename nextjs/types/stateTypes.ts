@@ -6,9 +6,8 @@ export interface UnsteadyBaseParams {
 	duration: number
 }
 export interface UiConfig {
-	uiConfig: {
-		selected: boolean
-	}
+	selected: boolean
+
 }
 
 export interface CondParams {
@@ -72,7 +71,7 @@ export interface OneSectionResponse {
 	V: number,
 	H: number,
 }
-export interface ResonseElement {
+export interface ResponseElement {
 	id: string
 	type: string
 	value: Array<OneSectionResponse>
@@ -80,7 +79,7 @@ export interface ResonseElement {
 	parents: Array<string>
 }
 export interface ResultMomentData {
-	moment_result: Record<string, ResonseElement>
+	moment_result: Record<string, ResponseElement>
 	t: number
 }
 

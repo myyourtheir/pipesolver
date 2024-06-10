@@ -31,7 +31,7 @@ const useMovement = ({ position, objectRef }: useMovementProps) => {
 		let mea = new THREE.Vector3()
 		let box = new THREE.Box3().setFromObject(objectRef.current)
 		let dimensions = box.getSize(mea)
-		console.log(event)
+
 		event.stopPropagation()
 		if (active) {
 			event.ray.intersectPlane(floorPlane, planeIntersectPoint)

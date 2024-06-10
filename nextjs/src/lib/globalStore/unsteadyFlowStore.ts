@@ -6,9 +6,7 @@ import { Graph } from '@/utils/graph/Graph'
 import { GraphNode } from '@/utils/graph/GraphNode'
 
 const defaultUiConfig: UiConfig = {
-	uiConfig: {
-		selected: false
-	}
+	selected: false
 }
 export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActions>()((set) => ({
 	cond_params: {
@@ -26,8 +24,8 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 		)
 	},
 	addElement(element, sourceNode) {
-		const elementWithUiConfig = { ...element, ...defaultUiConfig }
-		const newElement = new GraphNode(elementWithUiConfig)
+
+		const newElement = new GraphNode(element, defaultUiConfig)
 		return set(state => {
 
 			state.pipeline.addNode(newElement)
@@ -40,9 +38,8 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 	},
 	updateElement(element, idx) {
 		return set((state: UnsteadyInputData) => {
-			const elementWithUiConfig = { ...element, ...defaultUiConfig }
 			const { children, parents, id } = state.pipeline.nodes[idx]
-			const newElement = new GraphNode(elementWithUiConfig)
+			const newElement = new GraphNode(element, defaultUiConfig)
 			newElement.id = id
 			newElement.children = children
 			newElement.parents = parents
@@ -57,18 +54,14 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 		return set((state) => {
 			state.pipeline.nodes.forEach((elem, i) => {
 				if (i !== idx) {
-					elem.value = {
-						...elem.value, uiConfig: {
-							...elem.value.uiConfig,
-							selected: false
-						}
+					elem.ui = {
+						...elem.ui,
+						selected: false
 					}
 				} else {
-					elem.value = {
-						...elem.value, uiConfig: {
-							...elem.value.uiConfig,
-							selected: true
-						}
+					elem.ui = {
+						...elem.ui,
+						selected: true
 					}
 				}
 			})

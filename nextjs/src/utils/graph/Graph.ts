@@ -37,16 +37,12 @@ export class Graph {
 	}
 
 
-	private getNodeValueWithoutUiConfig(elementsValue: ElementParamsUnionWithUI): ElementParamsUnion {
-		const { uiConfig, ...rest } = elementsValue
-		return rest
-	}
 
 	toObj() {
 		return this.nodes.reduce((acc: Record<string, PreparedElementsObjectForRequest>, node) => {
 			acc[node.id] = {
 				id: node.id,
-				value: this.getNodeValueWithoutUiConfig(node.value),
+				value: node.value,
 				children: node.children.map(child => child.id),
 				parents: node.parents.map(parent => parent.id)
 			}

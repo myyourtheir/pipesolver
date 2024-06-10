@@ -3,8 +3,9 @@ import { Canvas } from "@react-three/fiber"
 import { OrthographicCamera, OrbitControls } from "@react-three/drei"
 import { OthograthicConfig } from './OthograthicConfig'
 import MoveObj from './CanvasController/Objects/MoveObj'
-import OthograthicController from './CanvasController'
+
 import * as THREE from 'three'
+import OrthograthicController from './CanvasController/OrthograthicController'
 
 
 
@@ -24,22 +25,22 @@ const OrtoCanvas = () => {
 	const cameraRef = useRef<THREE.OrthographicCamera>(null!)
 	const [isDragging, setIsDragging] = useState(false)
 	const floorPlane = new THREE.Plane(new THREE.Vector3(0, 0, 1))
-	const openPoints: [number, number][] = [[1, 0]]
+	const openPointsRef = useRef<[number, number][]>([])
 	return (
 		<Canvas >
 			<Suspense fallback={null}>
 				<CanvasContext.Provider value={{
 					setIsDragging,
 					floorPlane,
-					openPoints,
+					openPoints: openPointsRef.current,
 					cameraRef
 				}}>
-					{/* <OrthographicCamera ref={cameraRef} makeDefault args={[(frustumSize * aspect) / -2,
+					<OrthographicCamera ref={cameraRef} makeDefault args={[(frustumSize * aspect) / -2,
 					(frustumSize * aspect) / 2,
 					frustumSize / 2,
 					frustumSize / -2,
 						1,
-						1000]} position={[0, 0, 10]} zoom={50} /> */}
+						1000]} position={[0, 0, 10]} zoom={50} />
 					<ambientLight />
 					<directionalLight castShadow args={['yellow', 1]} position={cameraRef.current ? [cameraRef.current.position.x, -10, 5] : [0, -10, 5]} />
 					<axesHelper args={[5]} />
@@ -50,7 +51,7 @@ const OrtoCanvas = () => {
 						enableDamping={false}
 						enabled={!isDragging}
 					/>
-					<OthograthicController />
+					<OrthograthicController />
 				</CanvasContext.Provider>
 			</Suspense>
 		</Canvas>

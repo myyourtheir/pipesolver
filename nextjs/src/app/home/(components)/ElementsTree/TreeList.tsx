@@ -51,7 +51,7 @@ const TreeList = () => {
 							pipeline.nodes.map((element, idx) => (
 								<TreeItemContextMenu
 									key={idx}
-									className={`${element.value.uiConfig.selected ? 'border-purple-700 border-1' : 'border-0'}`}
+									className={`${element.ui.selected ? 'border-purple-700 border-1' : 'border-0'}`}
 									element={element.value}
 									idx={idx}
 									trigger={<TreeItem element={element.value} onClick={() => setIsSelected(idx)} />}
