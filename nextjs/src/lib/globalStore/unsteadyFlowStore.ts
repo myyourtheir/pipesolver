@@ -4,11 +4,12 @@ import { UnsteadyFlowActions } from '../../../types/actionTypes'
 import { produce } from "immer"
 import { Graph } from '@/utils/graph/Graph'
 import { GraphNode } from '@/utils/graph/GraphNode'
-
+import { immer } from 'zustand/middleware/immer'
 const defaultUiConfig: UiConfig = {
+
 	selected: false
 }
-export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActions>()((set) => ({
+export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActions>()(immer((set) => ({
 	cond_params: {
 		time_to_iter: 200,
 		density: 850,
@@ -90,4 +91,4 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 			}
 		})
 	},
-}))
+})))

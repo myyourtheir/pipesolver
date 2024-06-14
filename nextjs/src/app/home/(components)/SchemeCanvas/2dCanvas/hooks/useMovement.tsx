@@ -11,11 +11,16 @@ type useMovementProps = {
 	objectRef: MutableRefObject<THREE.Mesh>
 }
 
+const mouse = new THREE.Vector2()
+
 const useMovement = ({ position, objectRef }: useMovementProps) => {
 	const { setIsDragging, floorPlane, openPoints } = useContext(CanvasContext) as CanvasContextProps
+
 	const posRef = useRef(position)
+
 	let planeIntersectPoint = new THREE.Vector3()
 	const { clingRadius, springConfig } = OthograthicConfig
+
 	const [spring, api] = useSpring(() => ({
 		position: posRef.current,
 		config: springConfig,
@@ -33,12 +38,18 @@ const useMovement = ({ position, objectRef }: useMovementProps) => {
 		let dimensions = box.getSize(mea)
 
 		event.stopPropagation()
+
+		mouse.x = (event.clientX / window.innerWidth) * 2 - 1
+		mouse.y = - (event.clientY / window.innerHeight) * 2 + 1
+
+		event.ray.intersectPlane(floorPlane, planeIntersectPoint)
 		if (active) {
-			event.ray.intersectPlane(floorPlane, planeIntersectPoint)
+			posRef.current = [planeIntersectPoint.x, planeIntersectPoint.y, 5]
+		}
+		else {
 			posRef.current = [planeIntersectPoint.x, planeIntersectPoint.y, 0]
 		}
 		setIsDragging(active)
-		// posRef.current = [x / camera.zoom, - y / camera.zoom, 0]
 		const currentElementVector = new THREE.Vector3(...posRef.current)
 		const newPos = openPoints.reduce<[number, number, number]>((acc, item) => {
 			const itemVector = new THREE.Vector3(item[0], item[1], 0)

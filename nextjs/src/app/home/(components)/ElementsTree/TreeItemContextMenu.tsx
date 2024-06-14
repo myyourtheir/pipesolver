@@ -15,7 +15,7 @@ import { TreeItemProps } from './TreeList'
 import { toast } from 'sonner'
 import { ElementContext } from '@/components/Element'
 
-interface ContextProps extends TreeItemProps {
+interface ContextProps extends Omit<TreeItemProps, 'isSelected'> {
 	children: ReactNode,
 	className: string,
 	idx: number,

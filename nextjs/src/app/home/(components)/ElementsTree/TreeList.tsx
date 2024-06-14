@@ -1,3 +1,4 @@
+'use client'
 import { useUnsteadyInputStore } from '@/lib/globalStore/unsteadyFlowStore'
 import React, { FC, ReactElement, memo, useMemo } from 'react'
 import { ElementParamsUnion, ElementsType, UnsteadyInputData } from '../../../../../types/stateTypes'
@@ -54,7 +55,13 @@ const TreeList = () => {
 									className={`${element.ui.selected ? 'border-purple-700 border-1' : 'border-0'}`}
 									element={element.value}
 									idx={idx}
-									trigger={<TreeItem element={element.value} onClick={() => setIsSelected(idx)} />}
+									trigger={
+										<TreeItem
+											element={element.value}
+											isSelected={element.ui.selected}
+											onClick={() => setIsSelected(idx)}
+										/>
+									}
 								>
 									{
 										TypeToTitles[element.value.type].form({
@@ -82,13 +89,14 @@ export default TreeList
 
 export interface TreeItemProps {
 	element: ElementParamsUnion,
-	onClick?: () => void
+	onClick?: () => void,
+	isSelected: boolean
 }
 
-const TreeItem: FC<TreeItemProps> = ({ element, onClick }) => {
+const TreeItem: FC<TreeItemProps> = ({ element, onClick, isSelected }) => {
 
 	return (
-		<li onClick={onClick} className='text-sm hover:ring-1 hover:ring-ring rounded-md w-full'>
+		<li onClick={onClick} className={`text-sm hover:ring-1 hover:ring-ring rounded-md w-full ${isSelected && 'border'}`}>
 			{TypeToTitles[element.type].title}
 		</li>
 	)
