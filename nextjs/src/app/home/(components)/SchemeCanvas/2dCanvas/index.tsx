@@ -2,9 +2,6 @@
 import { Dispatch, MutableRefObject, SetStateAction, Suspense, createContext, useRef, useState } from "react"
 import { Canvas } from "@react-three/fiber"
 import { OrthographicCamera, OrbitControls } from "@react-three/drei"
-import { OthograthicConfig } from './OthograthicConfig'
-
-
 import * as THREE from 'three'
 import OrthograthicController from './CanvasController/OrthograthicController'
 

@@ -1,4 +1,4 @@
-import { ElementParamsUnion, ElementParamsUnionWithUI } from '../../../types/stateTypes'
+import { ElementParamsUnion } from '../../../types/stateTypes'
 import { GraphNode } from './GraphNode'
 
 type PreparedElementsObjectForRequest = {

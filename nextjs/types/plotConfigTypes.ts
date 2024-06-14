@@ -1,42 +1,45 @@
+type SharedPlotConfig = {
+	length: number
+}
 export type PlotConfig = {
-	pipe: PipeConfig,
-	pump: PumpConfig,
-	provider: ProvConsConfig,
-	consumer: ProvConsConfig,
-	gateValve: GateValveConfig,
-	safeValve: SafeValveConfig,
+	pipe: PipeConfig & SharedPlotConfig,
+	pump: PumpConfig & SharedPlotConfig,
+	provider: ProvConsConfig & SharedPlotConfig,
+	consumer: ProvConsConfig & SharedPlotConfig,
+	gate_valve: GateValveConfig & SharedPlotConfig,
+	safe_valve: SafeValveConfig & SharedPlotConfig,
 	general: GeneralSettings
 }
 
-export interface PipeConfig {
+export type PipeConfig = {
 	diameter: number,
 	radialSegments: number
 }
-export interface PumpConfig {
+export type PumpConfig = {
 	width: number,
 	height: number,
 	depth: number
 }
-export interface ProvConsConfig {
+export type ProvConsConfig = {
 	radiusTop: number,
 	radiusBottom: number,
 	height: number,
 	radialSegments: number
 }
-export interface GateValveConfig {
+export type GateValveConfig = {
 	radiusTop: number,
 	radiusBottom: number,
 	height: number,
 	radialSegments: number
 }
-export interface SafeValveConfig {
+export type SafeValveConfig = {
 	radius: number,
 	segments: number,
 	boxWidth: number,
 	boxHeight: number,
 	boxDepth: number
 }
-export interface GeneralSettings {
+export type GeneralSettings = {
 	selectedColor: string
 }
 

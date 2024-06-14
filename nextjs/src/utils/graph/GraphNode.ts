@@ -1,4 +1,4 @@
-import { ElementParamsUnion, ElementParamsUnionWithUI, UiConfig } from '../../../types/stateTypes'
+import { ElementParamsUnion, UiConfig } from '../../../types/stateTypes'
 
 export class GraphNode {
 	id: string

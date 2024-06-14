@@ -37,7 +37,7 @@ const ElementsList = () => {
 	const submitButtonTitle = 'Добавить'
 	const { isConsumer, isProvider, isPipe } = isBoundaryElements
 	const onSubmit = (values: ElementParamsUnion) => {
-		addElement(values, pipeline.nodes[pipeline.nodes.length - 1])
+		addElement(values)
 	}
 	return (
 		<div className='grid grid-cols-1  md:grid-cols-2 gap-2 items-center content-center [&>*]:h-full '>

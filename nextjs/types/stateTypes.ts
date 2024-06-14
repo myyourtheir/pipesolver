@@ -1,13 +1,18 @@
 import { Graph } from '@/utils/graph/Graph'
+import { GraphNode } from '@/utils/graph/GraphNode'
 
 export interface UnsteadyBaseParams {
 	mode: 'open' | 'close'
 	start_time: number
 	duration: number
 }
-export interface UiConfig {
-	selected: boolean
 
+
+export interface UiConfig {
+	isSelected: boolean
+	direction: ['x', 'left-to-right' | 'right-to-left'] | ['y', 'top-to-bottom' | 'bottom-to-top']
+	position: [number, number, number]
+	length: number
 }
 
 export interface CondParams {
@@ -53,11 +58,10 @@ export interface SafeValveParams {
 
 export type ElementParamsUnion = PipeParams | PumpParams | GateValveParams | SafeValveParams | ConsumerParams | ProviderParams
 
-export type ElementParamsUnionWithUI = (ElementParamsUnion) & UiConfig
-
 export interface UnsteadyInputData {
 	cond_params: CondParams
-	pipeline: Graph
+	pipeline: Graph,
+	lastTouchedElement: GraphNode | null
 }
 
 export type ElementsType = PipeParams['type'] | PumpParams['type'] | GateValveParams['type'] | SafeValveParams['type'] | ConsumerParams['type'] | ProviderParams['type']
