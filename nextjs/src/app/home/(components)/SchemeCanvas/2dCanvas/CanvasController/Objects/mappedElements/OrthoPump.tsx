@@ -9,12 +9,13 @@ import { GraphNode } from '@/utils/graph/GraphNode'
 const OrthoPump: FC<{ element: GraphNode }> = ({ element }) => {
 	const { position, isSelected } = element.ui
 	const { width, height, depth } = defaultOrthoElementsConfig.pump
+	const { selectedColor, baseColor } = defaultOrthoElementsConfig.general
 	const objectRef = useRef<Mesh>(null!)
 	const { bind, spring } = useMovement({ position, objectRef })
 	return (
 		<animated.mesh ref={objectRef} {...bind() as any} {...spring}>
 			{
-				<meshStandardMaterial color={isSelected ? defaultOrthoElementsConfig.general.selectedColor : ''} />
+				<meshStandardMaterial color={isSelected ? selectedColor : baseColor} />
 			}
 			<boxGeometry args={[width, height, depth]} />
 		</animated.mesh>

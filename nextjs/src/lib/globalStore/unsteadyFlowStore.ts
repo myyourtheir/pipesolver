@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { UiConfig, UnsteadyInputData } from '../../../types/stateTypes'
+import { ElementDirection, UiConfig, UnsteadyInputData } from '../../../types/stateTypes'
 import { UnsteadyFlowActions } from '../../../types/actionTypes'
 import { produce } from "immer"
 import { Graph } from '@/utils/graph/Graph'
@@ -25,22 +25,23 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 	},
 	addElement(element) {
 		return set(state => {
-			const getPosition = (): [number, number, number] => {
+			const getPosition = (): [[number, number, number], ElementDirection] => {
 				if (!state.lastTouchedElement) {
-					return [0, 0, 0]
+					return [[0, 0, 0], ['x', 'left-to-right']]
 				} else {
 					const { direction: lastDirection, position: lastElementPosition, length } = state.lastTouchedElement.ui
 					if (lastDirection[0] === 'x') {
-						return [lastElementPosition[0] + length, lastElementPosition[1], lastElementPosition[2]]
+						return [[lastElementPosition[0] + length, lastElementPosition[1], lastElementPosition[2]], lastDirection]
 					} else {
-						return [lastElementPosition[0], lastElementPosition[1] + length, lastElementPosition[2]]
+						return [[lastElementPosition[0], lastElementPosition[1] + length, lastElementPosition[2]], lastDirection]
 					}
 				}
 			}
+			const [newElementPosition, newElementDirection] = getPosition()
 			const newUi: UiConfig = {
 				isSelected: false,
-				direction: ['x', 'left-to-right'],
-				position: getPosition(),
+				direction: newElementDirection,
+				position: newElementPosition,
 				length: defaultOrthoElementsConfig[element.type].length
 			}
 			const newElement = new GraphNode(element, newUi)
@@ -64,25 +65,27 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 			state.pipeline.nodes[idx] = newElement
 			return {
 				...state,
-				pipeline: state.pipeline
+				pipeline: state.pipeline,
+				lastTouchedElement: newElement
 			}
 		})
 	},
 	setIsSelected(idx) {
 		return set((state) => {
-			state.pipeline.nodes.forEach((elem, i) => {
-				if (i !== idx) {
-					elem.ui = {
-						...elem.ui,
-						isSelected: false
-					}
-				} else {
-					elem.ui = {
-						...elem.ui,
-						isSelected: true
-					}
-				}
-			})
+			state.pipeline.nodes[idx].ui.isSelected = !state.pipeline.nodes[idx].ui.isSelected
+			// state.pipeline.nodes.forEach((elem, i) => {
+			// 	if (i !== idx) {
+			// 		elem.ui = {
+			// 			...elem.ui,
+			// 			isSelected: false
+			// 		}
+			// 	} else {
+			// 		elem.ui = {
+			// 			...elem.ui,
+			// 			isSelected: true
+			// 		}
+			// 	}
+			// })
 			return {
 				...state,
 				pipeline: state.pipeline

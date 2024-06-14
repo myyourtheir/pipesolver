@@ -40,7 +40,8 @@ export type SafeValveConfig = {
 	boxDepth: number
 }
 export type GeneralSettings = {
-	selectedColor: string
+	selectedColor: string,
+	baseColor: string
 }
 
 

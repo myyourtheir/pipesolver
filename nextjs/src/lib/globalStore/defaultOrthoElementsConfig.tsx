@@ -47,6 +47,7 @@ export const defaultOrthoElementsConfig: PlotConfig = {
 		radius: 0.5,
 	},
 	general: {
-		selectedColor: 'orange'
+		selectedColor: 'orange',
+		baseColor: 'white'
 	}
 }

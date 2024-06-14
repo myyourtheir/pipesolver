@@ -9,6 +9,7 @@ import { GraphNode } from '@/utils/graph/GraphNode'
 const OrthoGateValve: FC<{ element: GraphNode }> = ({ element }) => {
 	const { position, isSelected } = element.ui
 	const { radiusBottom, radiusTop, radialSegments, height } = defaultOrthoElementsConfig.consumer
+	const { selectedColor, baseColor } = defaultOrthoElementsConfig.general
 	const objectRef = useRef<Mesh>(null!)
 	const { bind, spring } = useMovement({ position, objectRef })
 	return (
@@ -16,7 +17,7 @@ const OrthoGateValve: FC<{ element: GraphNode }> = ({ element }) => {
 
 			<Cylinder args={[radiusBottom, radiusTop, height, radialSegments]} rotation={[0, 0, Math.PI / 2]}>
 				{
-					<meshStandardMaterial color={isSelected ? defaultOrthoElementsConfig.general.selectedColor : ''} />
+					<meshStandardMaterial color={isSelected ? selectedColor : baseColor} />
 				}
 			</Cylinder>
 			<Cylinder args={[radiusTop, radiusBottom, height, radialSegments]} rotation={[0, 0, Math.PI / 2]}>

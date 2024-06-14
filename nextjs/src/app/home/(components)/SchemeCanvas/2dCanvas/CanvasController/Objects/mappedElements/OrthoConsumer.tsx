@@ -11,14 +11,13 @@ const AnimatedCylinder = animated(Cylinder)
 const OrthoConsumer: FC<{ element: GraphNode }> = ({ element }) => {
 	const { position, isSelected } = element.ui
 	const { radiusBottom, radiusTop, radialSegments, height } = defaultOrthoElementsConfig.consumer
+	const { selectedColor, baseColor } = defaultOrthoElementsConfig.general
 	const objectRef = useRef<Mesh>(null!)
 	const { bind, spring } = useMovement({ position, objectRef })
 	return (
 		<AnimatedCylinder ref={objectRef} args={[radiusTop, radiusBottom, height, radialSegments]} {...spring} {...bind() as any} rotation={[0, 0, Math.PI / 2]}>
 			{
-				isSelected
-					? <meshStandardMaterial color={defaultOrthoElementsConfig.general.selectedColor} />
-					: <meshStandardMaterial />
+				<meshStandardMaterial color={isSelected ? selectedColor : baseColor} />
 			}
 		</AnimatedCylinder>
 	)
