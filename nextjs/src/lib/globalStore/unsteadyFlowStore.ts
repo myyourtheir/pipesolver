@@ -47,7 +47,9 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 			const newElement = new GraphNode(element, newUi)
 
 			state.pipeline.addNode(newElement)
-			// state.pipeline.addEdge(sourceNode, newElement)
+			if (state.lastTouchedElement) {
+				state.pipeline.addEdge(state.lastTouchedElement, newElement)
+			}
 			return {
 				...state,
 				pipeline: state.pipeline,

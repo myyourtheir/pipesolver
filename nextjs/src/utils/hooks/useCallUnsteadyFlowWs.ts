@@ -39,6 +39,7 @@ export const useCallUnsteadyFlowWs = (
 			ws.onerror = (ev) => {
 				console.error
 			}
+			const timeToIter = cond_params.time_to_iter
 			const message2 = JSON.stringify(
 				{
 					cond_params,
@@ -50,9 +51,6 @@ export const useCallUnsteadyFlowWs = (
 				ws.send(message2)
 			}
 			ws.onmessage = (event) => {
-				if (chartData.length === 0) {
-					setIsLoading(false)
-				}
 				const data = JSON.parse(event.data)
 				pushNewData(data)
 			}
