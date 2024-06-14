@@ -73,19 +73,6 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 	setIsSelected(idx) {
 		return set((state) => {
 			state.pipeline.nodes[idx].ui.isSelected = !state.pipeline.nodes[idx].ui.isSelected
-			// state.pipeline.nodes.forEach((elem, i) => {
-			// 	if (i !== idx) {
-			// 		elem.ui = {
-			// 			...elem.ui,
-			// 			isSelected: false
-			// 		}
-			// 	} else {
-			// 		elem.ui = {
-			// 			...elem.ui,
-			// 			isSelected: true
-			// 		}
-			// 	}
-			// })
 			return {
 				...state,
 				pipeline: state.pipeline

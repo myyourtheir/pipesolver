@@ -1,14 +1,18 @@
 import { Button } from '@/components/ui/button'
 import { useResultsStore } from '@/lib/globalStore/resultsStore'
 import { useCallUnsteadyFlowWs } from '@/utils/hooks/useCallUnsteadyFlowWs'
+import { Loader } from 'lucide-react'
+import { useState } from 'react'
 
 const CalcButton = () => {
 	const { setIter } = useResultsStore()
-	const [calcUnsteadyFlow] = useCallUnsteadyFlowWs()
+	const [isLoading, setIsLoading] = useState(false)
+	const [calcUnsteadyFlow] = useCallUnsteadyFlowWs({ setIsLoading, isLoading })
 	return (
 		<Button
-			className='w-fit'
+			className='w-24'
 			onClick={() => {
+				if (isLoading) return
 				const promise = new Promise((res, rej) => {
 					res(setIter(0))
 				})
@@ -17,7 +21,11 @@ const CalcButton = () => {
 				)
 			}}
 		>
-			Расcчитать
+			{
+				isLoading
+					? <Loader />
+					: 'Расcчитать'
+			}
 		</Button>
 	)
 }
