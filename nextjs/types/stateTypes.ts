@@ -61,7 +61,8 @@ export type ElementParamsUnion = PipeParams | PumpParams | GateValveParams | Saf
 export interface UnsteadyInputData {
 	cond_params: CondParams
 	pipeline: Graph,
-	lastTouchedElement: GraphNode | null
+	lastTouchedElement: GraphNode | null,
+	openElements: Set<GraphNode>
 }
 
 export type ElementsType = PipeParams['type'] | PumpParams['type'] | GateValveParams['type'] | SafeValveParams['type'] | ConsumerParams['type'] | ProviderParams['type']

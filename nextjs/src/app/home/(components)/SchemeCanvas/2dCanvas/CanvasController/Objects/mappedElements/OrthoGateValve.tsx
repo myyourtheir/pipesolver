@@ -7,11 +7,11 @@ import useMovement from '../../../hooks/useMovement'
 import { GraphNode } from '@/utils/graph/GraphNode'
 
 const OrthoGateValve: FC<{ element: GraphNode }> = ({ element }) => {
-	const { position, isSelected } = element.ui
+	const { isSelected } = element.ui
 	const { radiusBottom, radiusTop, radialSegments, height } = defaultOrthoElementsConfig.consumer
 	const { selectedColor, baseColor } = defaultOrthoElementsConfig.general
 	const objectRef = useRef<Mesh>(null!)
-	const { bind, spring } = useMovement({ position, objectRef })
+	const { bind, spring } = useMovement({ objectRef, currentElement: element })
 	return (
 		<animated.group ref={objectRef} {...bind() as any} {...spring}>
 

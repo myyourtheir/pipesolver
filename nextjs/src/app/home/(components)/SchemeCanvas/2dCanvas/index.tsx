@@ -11,7 +11,8 @@ export type CanvasContextProps = {
 	setIsDragging: Dispatch<SetStateAction<boolean>>,
 	floorPlane: THREE.Plane,
 	openPoints: [number, number][],
-	cameraRef: MutableRefObject<THREE.OrthographicCamera>
+	cameraRef: MutableRefObject<THREE.OrthographicCamera>,
+	isDragging: boolean
 }
 export const CanvasContext = createContext<CanvasContextProps | null>(null)
 
@@ -28,6 +29,7 @@ const OrtoCanvas = () => {
 				<CanvasContext.Provider value={{
 					setIsDragging,
 					floorPlane,
+					isDragging,
 					openPoints: openPointsRef.current,
 					cameraRef
 				}}>

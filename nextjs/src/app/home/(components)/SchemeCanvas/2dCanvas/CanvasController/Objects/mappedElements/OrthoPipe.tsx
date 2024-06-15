@@ -13,11 +13,11 @@ const AnimatedCylinder = animated(Cylinder)
 
 const OrthoPipe: FC<{ element: GraphNode }> = ({ element }) => {
 	const { diameter, radialSegments } = defaultOrthoElementsConfig.pipe
-	const { position, isSelected } = element.ui
+	const { isSelected } = element.ui
 	const { selectedColor, baseColor } = defaultOrthoElementsConfig.general
 	const length = (element.value as PipeParams).length / 100
 	const objectRef = useRef<Mesh>(null!)
-	const { bind, spring } = useMovement({ position, objectRef })
+	const { bind, spring } = useMovement({ objectRef, currentElement: element })
 	return (
 		<AnimatedCylinder {...bind() as any} ref={objectRef} args={[diameter, diameter, length, radialSegments]} rotation={[0, 0, Math.PI / 2]}  {...spring}>
 			{

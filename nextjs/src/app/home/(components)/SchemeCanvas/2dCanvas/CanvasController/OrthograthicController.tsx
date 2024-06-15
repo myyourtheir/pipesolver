@@ -17,10 +17,8 @@ import { defaultOrthoElementsConfig } from '@/lib/globalStore/defaultOrthoElemen
 const ratio = 20
 const OrthograthicController = () => {
 	const { openPoints } = useContext(CanvasContext) as CanvasContextProps
-	const elements = useUnsteadyInputStore(state => state.pipeline)
-	let x = 0
-	let y = 1
-	let z = 0
+	const { pipeline: elements, openElements } = useUnsteadyInputStore()
+	console.log(openElements)
 	return (
 		<group>
 			{elements.nodes.map((elem, i) => { //TODO Тут логика добавления открытых точек
@@ -30,36 +28,27 @@ const OrthograthicController = () => {
 
 				if (elem.value.type === 'pipe') {
 					const length = elem.value.length / ratio
-					const startX = x + length / 2
-					x += length
+
 					return <OrthoPipe element={elem} key={i} />
 				}
 				else if (elem.value.type === 'pump') {
-					x += defaultOrthoElementsConfig.pump.width
+
 					return <OrthoPump element={elem} key={i} />
 				}
 				else if (elem.value.type === 'provider') {
 					const { height } = defaultOrthoElementsConfig.provider
-					const startX = x + height / 2
-					x += height
 					return <OrthoProvider element={elem} key={i} />
 				}
 				else if (elem.value.type === 'consumer') {
 					const { height } = defaultOrthoElementsConfig.consumer
-					const startX = x + height / 2
-					x += height
 					return <OrthoConsumer element={elem} key={i} />
 				}
 				else if (elem.value.type === 'gate_valve') {
 					const { height } = defaultOrthoElementsConfig.gate_valve
-					const startX = x + height / 2
-					x += height
 					return <OrthoGateValve element={elem} key={i} />
 				}
 				else if (elem.value.type === 'safe_valve') {
 					const { radius } = defaultOrthoElementsConfig.safe_valve
-					const startX = x + 2 / 3 * radius
-					x += 2 * 2 / 3 * radius
 					return <OrthoSafeValve element={elem} key={i} />
 				}
 			})}

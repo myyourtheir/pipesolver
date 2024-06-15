@@ -15,6 +15,9 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 	},
 	pipeline: new Graph(),
 	lastTouchedElement: null,
+	openElements: new Set,
+
+
 	updateCondParams(cond_params) {
 		return set((state) => ({
 			...state,
@@ -47,13 +50,17 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 			const newElement = new GraphNode(element, newUi)
 
 			state.pipeline.addNode(newElement)
+
 			if (state.lastTouchedElement) {
 				state.pipeline.addEdge(state.lastTouchedElement, newElement)
+				// state.removeOpenElement(state.lastTouchedElement)
 			}
+			state.openElements.add(newElement)
 			return {
 				...state,
 				pipeline: state.pipeline,
-				lastTouchedElement: newElement
+				lastTouchedElement: newElement,
+				openElements: state.openElements
 			}
 		})
 	},
@@ -78,6 +85,36 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 			return {
 				...state,
 				pipeline: state.pipeline
+			}
+		}
+		)
+	},
+	setPosition(element, position) {
+		return set((state) => {
+			element.ui.position = position
+			return {
+				...state,
+				pipeline: state.pipeline
+			}
+		}
+		)
+	},
+	addOpenElement(element) {
+		return set((state) => {
+			state.openElements.add(element)
+			return {
+				...state,
+				openElements: state.openElements
+			}
+		}
+		)
+	},
+	removeOpenElement(element) {
+		return set((state) => {
+			state.openElements.delete(element)
+			return {
+				...state,
+				openElements: state.openElements
 			}
 		}
 		)

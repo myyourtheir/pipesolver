@@ -7,11 +7,11 @@ import { UiConfig } from '../../../../../../../../../types/stateTypes'
 import { GraphNode } from '@/utils/graph/GraphNode'
 
 const OrthoPump: FC<{ element: GraphNode }> = ({ element }) => {
-	const { position, isSelected } = element.ui
+	const { isSelected } = element.ui
 	const { width, height, depth } = defaultOrthoElementsConfig.pump
 	const { selectedColor, baseColor } = defaultOrthoElementsConfig.general
 	const objectRef = useRef<Mesh>(null!)
-	const { bind, spring } = useMovement({ position, objectRef })
+	const { bind, spring } = useMovement({ objectRef, currentElement: element })
 	return (
 		<animated.mesh ref={objectRef} {...bind() as any} {...spring}>
 			{

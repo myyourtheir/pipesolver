@@ -15,7 +15,7 @@ interface ElementProps {
 	isHover?: boolean
 	hoverTitle?: string
 	children: React.ReactNode
-	disabled: boolean,
+
 
 }
 export type ElementContextType = {
@@ -24,12 +24,12 @@ export type ElementContextType = {
 
 export const ElementContext = createContext<ElementContextType>({ setOpen: () => { } })
 
-const Element: FC<ElementProps> = ({ TriggerContent, children, hoverTitle, disabled, isHover = true }) => {
+const Element: FC<ElementProps> = ({ TriggerContent, children, hoverTitle, isHover = true }) => {
 	const [open, setOpen] = useState(false)
 	return (
 		<ElementContext.Provider value={{ setOpen }}>
 			<Popover open={open} onOpenChange={setOpen}>
-				<PopoverTrigger disabled={disabled} className='disabled:cursor-not-allowed'>
+				<PopoverTrigger className='disabled:cursor-not-allowed'>
 					{
 						isHover ?
 							<HoverCard openDelay={100} closeDelay={100}>

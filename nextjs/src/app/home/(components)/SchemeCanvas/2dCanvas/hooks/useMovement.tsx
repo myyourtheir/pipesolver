@@ -1,74 +1,81 @@
-import { ThreeEvent } from '@react-three/fiber'
+import { Events, ThreeEvent } from '@react-three/fiber'
 import { useDrag } from '@use-gesture/react'
 import { OthograthicConfig } from '../OthograthicConfig'
 import { useSpring } from '@react-spring/three'
 import * as THREE from 'three'
-import { MutableRefObject, useContext, useRef } from 'react'
+import { MutableRefObject, useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { CanvasContext, CanvasContextProps } from '..'
+import { useUnsteadyInputStore } from '@/lib/globalStore/unsteadyFlowStore'
+import { GraphNode } from '@/utils/graph/GraphNode'
 
 type useMovementProps = {
-	position: [number, number, number],
-	objectRef: MutableRefObject<THREE.Mesh>
+	objectRef: MutableRefObject<THREE.Mesh>,
+	currentElement: GraphNode
 }
 
-const mouse = new THREE.Vector2()
+let planeIntersectPoint = new THREE.Vector3()
 
-const useMovement = ({ position, objectRef }: useMovementProps) => {
-	const { setIsDragging, floorPlane, openPoints } = useContext(CanvasContext) as CanvasContextProps
 
-	const posRef = useRef(position)
+const useMovement = ({ objectRef, currentElement }: useMovementProps) => {
+	const { openElements, setPosition, removeOpenElement, addOpenElement } = useUnsteadyInputStore()
+	const { isDragging, setIsDragging, floorPlane } = useContext(CanvasContext) as CanvasContextProps
+	const [isPointerDown, setIsPointerDown] = useState(false)
+	const posRef = useRef(currentElement.ui.position)
 
-	let planeIntersectPoint = new THREE.Vector3()
+
 	const { clingRadius, springConfig } = OthograthicConfig
-
 	const [spring, api] = useSpring(() => ({
-		position: posRef.current,
 		config: springConfig,
 		immediate: true,
+		position: posRef.current
 	}))
 
-
-
-
-	const bind = useDrag<ThreeEvent<MouseEvent>>(({ active, offset: [x, y], event, timeStamp }) => {
+	const bind = useDrag<ThreeEvent<MouseEvent>>(({ active, down, offset: [x, y], event, timeStamp }) => {
 		// Получаем размеры перетаскиваемого объекта
-
-		let mea = new THREE.Vector3()
-		let box = new THREE.Box3().setFromObject(objectRef.current)
-		let dimensions = box.getSize(mea)
-
-		event.stopPropagation()
-
-		mouse.x = (event.clientX / window.innerWidth) * 2 - 1
-		mouse.y = - (event.clientY / window.innerHeight) * 2 + 1
-
+		// let mea = new THREE.Vector3()
+		// let box = new THREE.Box3().setFromObject(objectRef.current)
+		// let dimensions = box.getSize(mea)
+		event.stopPropagation()//TODO Элементы не притягиваются, нужно исправить тут
 		event.ray.intersectPlane(floorPlane, planeIntersectPoint)
-		if (active) {
+		if (down) {
 			posRef.current = [planeIntersectPoint.x, planeIntersectPoint.y, 5]
 		}
 		else {
-			posRef.current = [planeIntersectPoint.x, planeIntersectPoint.y, 0]
+			let elementWithMinDistanceTo: GraphNode
+			let itemVectorWithMinDistanceTo: THREE.Vector2
+			let minDistance: number = clingRadius
+			const currentElementVector = new THREE.Vector2(posRef.current[0], posRef.current[1])
+			// ///////////////////////////////////////////////// to find min distance and nessecary vector
+			openElements.forEach(item => {
+				if (item === currentElement) return
+				const itemVector = new THREE.Vector2(item.ui.position[0], item.ui.position[1])
+				if (itemVector.distanceTo(currentElementVector) <= clingRadius) {
+					const newDistance = itemVector.distanceTo(currentElementVector)
+					if (newDistance < minDistance) {
+						minDistance = newDistance
+						itemVectorWithMinDistanceTo = itemVector
+						elementWithMinDistanceTo = item
+					}
+				}
+			})
+			// ////////////////////////////////////////////////////////////////////////////
+			if (elementWithMinDistanceTo!) {
+				if (elementWithMinDistanceTo.ui.direction[0] == 'x') {
+					posRef.current = [itemVectorWithMinDistanceTo!.x + elementWithMinDistanceTo.ui.length / 2, itemVectorWithMinDistanceTo!.y, 0]
+				} else {
+					posRef.current = [itemVectorWithMinDistanceTo!.x, itemVectorWithMinDistanceTo!.y + elementWithMinDistanceTo.ui.length / 2, 0]
+				}
+			}
+			setPosition(currentElement, posRef.current)
 		}
 		setIsDragging(active)
-		const currentElementVector = new THREE.Vector3(...posRef.current)
-		const newPos = openPoints.reduce<[number, number, number]>((acc, item) => {
-			const itemVector = new THREE.Vector3(item[0], item[1], 0)
-			if (itemVector.distanceTo(currentElementVector) <= clingRadius) {
-				posRef.current = [itemVector.x + dimensions.x / 2, itemVector.y, itemVector.z]
-			}
-			return acc
-		}, posRef.current)
-
-		// api.start({
-		// 	position: posRef.current,
-		// })
 
 		api.start({
-			position: newPos,
+			position: posRef.current,
 		})
-
 		return timeStamp
 	})
+
 	return { spring, bind }
 }
 

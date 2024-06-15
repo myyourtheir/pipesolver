@@ -8,6 +8,9 @@ export interface UnsteadyFlowActions {
 	deleteElement: (idx: number) => void
 	deleteAll: () => void
 	setIsSelected: (idx: number) => void
+	setPosition: (element: GraphNode, position: [number, number, number]) => void
+	addOpenElement: (element: GraphNode) => void
+	removeOpenElement: (element: GraphNode) => void
 }
 type fnOrValue<T> = T | ((prev: T) => T)
 export interface ResultsActions {
