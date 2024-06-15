@@ -1,4 +1,4 @@
-import { Events, ThreeEvent } from '@react-three/fiber'
+import { Events, ThreeEvent, useThree } from '@react-three/fiber'
 import { useDrag } from '@use-gesture/react'
 import { OthograthicConfig } from '../OthograthicConfig'
 import { useSpring } from '@react-spring/three'
@@ -18,10 +18,12 @@ let planeIntersectPoint = new THREE.Vector3()
 
 const useMovement = ({ objectRef, currentElement }: useMovementProps) => {
 	const { openElements, setPosition, removeOpenElement, addOpenElement } = useUnsteadyInputStore()
-	const { isDragging, setIsDragging, floorPlane } = useContext(CanvasContext) as CanvasContextProps
-	const [isPointerDown, setIsPointerDown] = useState(false)
-	const posRef = useRef(currentElement.ui.position)
+	const { scene } = useThree()
+	const { setIsDragging, floorPlane } = useContext(CanvasContext) as CanvasContextProps
+	const [isCirclesDrawn, setIsCirclesDrawn] = useState(false)
 
+	const posRef = useRef(currentElement.ui.position)
+	const circlesRef = useRef<THREE.LineSegments[]>([])
 
 	const { clingRadius, springConfig } = OthograthicConfig
 	const [spring, api] = useSpring(() => ({
@@ -31,12 +33,29 @@ const useMovement = ({ objectRef, currentElement }: useMovementProps) => {
 	}))
 
 	const bind = useDrag<ThreeEvent<MouseEvent>>(({ active, down, offset: [x, y], event, timeStamp }) => {
-		// Получаем размеры перетаскиваемого объекта
-		// let mea = new THREE.Vector3()
-		// let box = new THREE.Box3().setFromObject(objectRef.current)
-		// let dimensions = box.getSize(mea)
 		event.stopPropagation()//TODO Элементы не притягиваются, нужно исправить тут
 		event.ray.intersectPlane(floorPlane, planeIntersectPoint)
+		if (!isCirclesDrawn && down) {
+			console.log('drawn')
+			openElements.forEach((item => {
+				if (item === currentElement) return
+				const geometry = new THREE.CylinderGeometry(clingRadius, clingRadius, 0)
+				const edges = new THREE.EdgesGeometry(geometry)
+				const material = new THREE.LineDashedMaterial({
+					color: 0xffff00,
+					dashSize: 0.1,
+					gapSize: 0.1,
+					linewidth: 0.1,
+				})
+				const cylinder = new THREE.LineSegments(edges, material)
+				cylinder.position.set(...item.ui.position)
+				cylinder.rotateX(Math.PI / 2)
+				circlesRef.current.push(cylinder)
+				scene.add(cylinder)
+			}))
+			setIsCirclesDrawn(true)
+		}
+
 		if (down) {
 			posRef.current = [planeIntersectPoint.x, planeIntersectPoint.y, 5]
 		}
@@ -45,7 +64,7 @@ const useMovement = ({ objectRef, currentElement }: useMovementProps) => {
 			let itemVectorWithMinDistanceTo: THREE.Vector2
 			let minDistance: number = clingRadius
 			const currentElementVector = new THREE.Vector2(posRef.current[0], posRef.current[1])
-			// ///////////////////////////////////////////////// to find min distance and nessecary vector
+			// ///////////////////////////////////////////////// to find min distance and necessary vector
 			openElements.forEach(item => {
 				if (item === currentElement) return
 				const itemVector = new THREE.Vector2(item.ui.position[0], item.ui.position[1])
@@ -61,11 +80,16 @@ const useMovement = ({ objectRef, currentElement }: useMovementProps) => {
 			// ////////////////////////////////////////////////////////////////////////////
 			if (elementWithMinDistanceTo!) {
 				if (elementWithMinDistanceTo.ui.direction[0] == 'x') {
-					posRef.current = [itemVectorWithMinDistanceTo!.x + elementWithMinDistanceTo.ui.length / 2, itemVectorWithMinDistanceTo!.y, 0]
+					posRef.current = [itemVectorWithMinDistanceTo!.x + elementWithMinDistanceTo.ui.length / 2 + currentElement.ui.length / 2, itemVectorWithMinDistanceTo!.y, 0]
 				} else {
-					posRef.current = [itemVectorWithMinDistanceTo!.x, itemVectorWithMinDistanceTo!.y + elementWithMinDistanceTo.ui.length / 2, 0]
+					posRef.current = [itemVectorWithMinDistanceTo!.x, itemVectorWithMinDistanceTo!.y + elementWithMinDistanceTo.ui.length / 2 + currentElement.ui.length / 2, 0]
 				}
 			}
+			circlesRef.current.forEach((item) =>
+				scene.remove(item)
+			)
+			circlesRef.current = []
+			setIsCirclesDrawn(false)
 			setPosition(currentElement, posRef.current)
 		}
 		setIsDragging(active)
