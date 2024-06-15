@@ -66,16 +66,26 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 	},
 	updateElement(element, idx) {
 		return set((state: UnsteadyInputData) => {
-			const { children, parents, id, ui } = state.pipeline.nodes[idx]
-			const newElement = new GraphNode(element, ui)
-			newElement.id = id
-			newElement.children = children
-			newElement.parents = parents
-			state.pipeline.nodes[idx] = newElement
+			const elementNode = state.pipeline.nodes[idx]
+			const { children, parents, id, ui } = elementNode
+			const newElementNode = new GraphNode(element, ui)
+			newElementNode.id = id
+			newElementNode.children = children
+			newElementNode.parents = parents
+			if (element.type == 'pipe') {
+				newElementNode.ui = { ...elementNode.ui, length: element.length / 100 }
+			}
+			state.pipeline.nodes[idx] = newElementNode
+
+			if (state.openElements.has(elementNode)) {
+				state.openElements.delete(elementNode)
+				state.openElements.add(newElementNode)
+			}
 			return {
 				...state,
 				pipeline: state.pipeline,
-				lastTouchedElement: newElement
+				lastTouchedElement: newElementNode,
+				openElements: state.openElements
 			}
 		})
 	},
