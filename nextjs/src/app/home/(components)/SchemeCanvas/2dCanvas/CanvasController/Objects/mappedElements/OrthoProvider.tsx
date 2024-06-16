@@ -3,7 +3,7 @@ import { FC, useRef } from 'react'
 import { defaultOrthoElementsConfig } from '../../../../../../../../lib/globalStore/defaultOrthoElementsConfig'
 import { Mesh } from 'three'
 import { animated } from '@react-spring/three'
-import useMovement from '../../../hooks/useMovement'
+import useMovement from '../../../utils/hooks/useMovement'
 import { GraphNode } from '@/utils/graph/GraphNode'
 
 

@@ -3,7 +3,7 @@ import { FC, useRef } from 'react'
 import { defaultOrthoElementsConfig } from '../../../../../../../../lib/globalStore/defaultOrthoElementsConfig'
 import { animated } from '@react-spring/three'
 import { Mesh } from 'three'
-import useMovement from '../../../hooks/useMovement'
+import useMovement from '../../../utils/hooks/useMovement'
 import { GraphNode } from '@/utils/graph/GraphNode'
 
 const OrthoGateValve: FC<{ element: GraphNode }> = ({ element }) => {

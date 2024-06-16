@@ -21,8 +21,18 @@ export class GraphNode {
 	addParent(node: GraphNode) {
 		this.parents.push(node)
 	}
+	removeChild(child: GraphNode) {
+		this.children = this.children.filter(node => node !== child)
+	}
+	removeParent(parent: GraphNode) {
+		this.parents = this.parents.filter(node => node !== parent)
+	}
 
 	getNeighbours() {
 		return [...this.children, ...this.parents]
+	}
+	removeNeighbours() {
+		this.children = []
+		this.parents = []
 	}
 }

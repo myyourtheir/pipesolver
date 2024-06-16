@@ -5,6 +5,7 @@ import { produce } from "immer"
 import { Graph } from '@/utils/graph/Graph'
 import { GraphNode } from '@/utils/graph/GraphNode'
 import { defaultOrthoElementsConfig } from './defaultOrthoElementsConfig'
+import { set } from 'zod'
 
 
 export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActions>()((set) => ({
@@ -55,7 +56,10 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 				state.pipeline.addEdge(state.lastTouchedElement, newElement)
 				// state.removeOpenElement(state.lastTouchedElement)
 			}
-			state.openElements.add(newElement)
+			if (state.lastTouchedElement) {
+				state.removeOpenElement(state.lastTouchedElement)
+			}
+			state.addOpenElement(newElement)
 			return {
 				...state,
 				pipeline: state.pipeline,
@@ -65,7 +69,7 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 		})
 	},
 	updateElement(element, idx) {
-		return set((state: UnsteadyInputData) => {
+		return set((state) => {
 			const elementNode = state.pipeline.nodes[idx]
 			const { children, parents, id, ui } = elementNode
 			const newElementNode = new GraphNode(element, ui)
@@ -78,8 +82,8 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 			state.pipeline.nodes[idx] = newElementNode
 
 			if (state.openElements.has(elementNode)) {
-				state.openElements.delete(elementNode)
-				state.openElements.add(newElementNode)
+				state.removeOpenElement(elementNode)
+				state.addOpenElement(newElementNode)
 			}
 			return {
 				...state,
@@ -129,6 +133,25 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 		}
 		)
 	},
+	addEdge(sourceNode, destinationNode) {
+		return set((state) => {
+			state.pipeline.addEdge(sourceNode, destinationNode)
+			return {
+				...state,
+				pipeline: state.pipeline
+			}
+		})
+	},
+	removeEdge(sourceNode, destinationNode) {
+		return set((state) => {
+			state.pipeline.deleteEdge(sourceNode, destinationNode)
+			return {
+				...state,
+				pipeline: state.pipeline
+			}
+		})
+	},
+
 	deleteElement(idx) {
 		return set((state) => {
 			state.pipeline.deleteNode(idx)
@@ -141,9 +164,12 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 	deleteAll() {
 		return set((state) => {
 			state.pipeline = new Graph()
+			state.openElements = new Set()
 			return {
 				...state,
-				pipeline: state.pipeline
+				pipeline: state.pipeline,
+				openElements: state.openElements,
+				lastTouchedElement: null
 			}
 		})
 	},

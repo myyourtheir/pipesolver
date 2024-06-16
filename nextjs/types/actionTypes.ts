@@ -11,6 +11,8 @@ export interface UnsteadyFlowActions {
 	setPosition: (element: GraphNode, position: [number, number, number]) => void
 	addOpenElement: (element: GraphNode) => void
 	removeOpenElement: (element: GraphNode) => void
+	addEdge: (sourceNode: GraphNode, destinationNode: GraphNode) => void
+	removeEdge: (sourceNode: GraphNode, destinationNode: GraphNode) => void
 }
 type fnOrValue<T> = T | ((prev: T) => T)
 export interface ResultsActions {

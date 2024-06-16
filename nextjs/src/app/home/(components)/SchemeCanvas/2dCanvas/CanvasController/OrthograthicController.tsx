@@ -18,7 +18,6 @@ const ratio = 20
 const OrthograthicController = () => {
 	const { openPoints } = useContext(CanvasContext) as CanvasContextProps
 	const { pipeline: elements, openElements } = useUnsteadyInputStore()
-	console.log(openElements)
 	return (
 		<group>
 			{elements.nodes.map((elem, i) => { //TODO Тут логика добавления открытых точек

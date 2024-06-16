@@ -299,7 +299,7 @@ class Unsteady_flow_core:
 
         initial_distribution = {}
         start_element_id = reduce(
-            self.find_elements_without_parents, pipeline.values(), []
+            self.find_elements_with_one_neighbor, pipeline.values(), []
         )[0]
         current_node = pipeline[start_element_id]
         current_x = 0
@@ -368,8 +368,8 @@ class Unsteady_flow_core:
         return dont_visited_neighbors
 
     @staticmethod
-    def find_elements_without_parents(acc: list[str], elem: Recieved_element):
-        if len(elem.parents) == 0:
+    def find_elements_with_one_neighbor(acc: list[str], elem: Recieved_element):
+        if len(elem.parents) + len(elem.children) == 1:
             acc.append(elem.id)
         return acc
 

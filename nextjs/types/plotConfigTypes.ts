@@ -1,5 +1,6 @@
 type SharedPlotConfig = {
-	length: number
+	length: number,
+	maxNeighbors: number
 }
 export type PlotConfig = {
 	pipe: PipeConfig & SharedPlotConfig,
@@ -8,7 +9,8 @@ export type PlotConfig = {
 	consumer: ProvConsConfig & SharedPlotConfig,
 	gate_valve: GateValveConfig & SharedPlotConfig,
 	safe_valve: SafeValveConfig & SharedPlotConfig,
-	general: GeneralSettings
+	general: GeneralSettings,
+
 }
 
 export type PipeConfig = {

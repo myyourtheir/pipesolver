@@ -25,6 +25,12 @@ export class Graph {
 			destinationNode.addParent(sourceNode)
 		}
 	}
+	deleteEdge(sourceNode: GraphNode, destinationNode: GraphNode) {
+		sourceNode.removeChild(destinationNode)
+		sourceNode.removeParent(destinationNode)
+		destinationNode.removeChild(sourceNode)
+		destinationNode.removeParent(sourceNode)
+	}
 	deleteNode(idx: number) {
 		const selectedNode = this.nodes[idx]
 		this.nodes = this.nodes.filter((_, i) => i !== idx)

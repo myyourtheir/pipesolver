@@ -2,7 +2,7 @@
 import { Cylinder } from '@react-three/drei'
 import { FC, useRef } from 'react'
 
-import useMovement from '../../../hooks/useMovement'
+import useMovement from '../../../utils/hooks/useMovement'
 import { defaultOrthoElementsConfig } from '../../../../../../../../lib/globalStore/defaultOrthoElementsConfig'
 import { Mesh } from 'three'
 import { animated } from '@react-spring/three'

@@ -6,7 +6,7 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import { CanvasContext } from '../..'
 import { OthograthicConfig } from '../../OthograthicConfig'
 import * as THREE from 'three'
-import useMovement from '../../hooks/useMovement'
+import useMovement from '../../utils/hooks/useMovement'
 const AnimatedPlane = animated(Cylinder)
 
 const MoveObj = ({ position, color, w = 2, h = 2 }:
