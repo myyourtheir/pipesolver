@@ -15,6 +15,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select"
 import { getAllMomentDataPerIndex } from '@/utils/getAllMomentDataPerIndex'
+import buildChartData from './buildChartData'
 
 
 const ResultChart: FC<ElementsProps> = ({ containerRef }) => {
@@ -111,7 +112,7 @@ const ResultChart: FC<ElementsProps> = ({ containerRef }) => {
 					}
 				</div>
 
-				<MyChart data={getAllMomentDataPerIndex({ data: chartData, index: iter })} />
+				<MyChart data={buildChartData({ data: chartData, index: iter })} />
 
 			</DraggableLayout>
 		)
