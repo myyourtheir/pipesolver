@@ -14,7 +14,12 @@ export class GraphNode {
 		this.parents = []
 		this.ui = ui
 	}
-
+	hasChild() {
+		return this.children.length !== 0 ? true : false
+	}
+	hasParent() {
+		return this.parents.length !== 0 ? true : false
+	}
 	addChild(node: GraphNode) {
 		this.children.push(node)
 	}

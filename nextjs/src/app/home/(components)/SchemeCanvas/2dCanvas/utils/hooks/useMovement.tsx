@@ -9,6 +9,7 @@ import { useUnsteadyInputStore } from '@/lib/globalStore/unsteadyFlowStore'
 import { GraphNode } from '@/utils/graph/GraphNode'
 import useOpenElementsCircles from './useOpenElementsCircles'
 import findElementWithMinDistanceTo from '../findElementWithMinDistanceTo'
+import { defaultOrthoElementsConfig } from '@/lib/globalStore/defaultOrthoElementsConfig'
 
 type useMovementProps = {
 	objectRef: MutableRefObject<THREE.Mesh>,
@@ -59,14 +60,40 @@ const useMovement = ({ objectRef, currentElement }: useMovementProps) => {
 			})
 			if (elementWithMinDistanceTo!) {
 				if (elementWithMinDistanceTo.ui.direction[0] == 'x') {
-					posRef.current = [itemVectorWithMinDistanceTo!.x + elementWithMinDistanceTo.ui.length / 2 + currentElement.ui.length / 2, itemVectorWithMinDistanceTo!.y, 0]
+					if (posRef.current[0] >= elementWithMinDistanceTo.ui.position[0]) {
+						if (!elementWithMinDistanceTo.hasChild()) {
+							posRef.current = [itemVectorWithMinDistanceTo!.x + elementWithMinDistanceTo.ui.length / 2 + currentElement.ui.length / 2, itemVectorWithMinDistanceTo!.y, 0]
+							addEdge(elementWithMinDistanceTo, currentElement)
+						} else {
+							posRef.current = [itemVectorWithMinDistanceTo!.x - elementWithMinDistanceTo.ui.length / 2 - currentElement.ui.length / 2, itemVectorWithMinDistanceTo!.y, 0]
+							addEdge(currentElement, elementWithMinDistanceTo)
+						}
+					} else if (posRef.current[0] <= elementWithMinDistanceTo.ui.position[0]) {
+						if (!elementWithMinDistanceTo.hasParent()) {
+							posRef.current = [itemVectorWithMinDistanceTo!.x - elementWithMinDistanceTo.ui.length / 2 - currentElement.ui.length / 2, itemVectorWithMinDistanceTo!.y, 0]
+							addEdge(currentElement, elementWithMinDistanceTo)
+						} else {
+							posRef.current = [itemVectorWithMinDistanceTo!.x + elementWithMinDistanceTo.ui.length / 2 + currentElement.ui.length / 2, itemVectorWithMinDistanceTo!.y, 0]
+							addEdge(elementWithMinDistanceTo, currentElement)
+						}
+					}
 				} else {
 					posRef.current = [itemVectorWithMinDistanceTo!.x, itemVectorWithMinDistanceTo!.y + elementWithMinDistanceTo.ui.length / 2 + currentElement.ui.length / 2, 0]
 				}
-				removeOpenElement(elementWithMinDistanceTo)
-				addEdge(elementWithMinDistanceTo, currentElement)
+				if (elementWithMinDistanceTo.getNeighbours().length >= defaultOrthoElementsConfig[elementWithMinDistanceTo.value.type].maxNeighbors) {
+					removeOpenElement(elementWithMinDistanceTo)
+				}
+				if (currentElement.getNeighbours().length >= defaultOrthoElementsConfig[currentElement.value.type].maxNeighbors) {
+					removeOpenElement(elementWithMinDistanceTo)
+				}
+			} else {
+				currentElement.removeNeighbours()
+				prevNeighborsRef.current.forEach((neigbor) => {
+					removeEdge(currentElement, neigbor)
+					addOpenElement(neigbor)
+				})
+				addOpenElement(currentElement)
 			}
-			addOpenElement(currentElement)
 
 			setPosition(currentElement, posRef.current)
 
