@@ -76,9 +76,6 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 			newElementNode.id = id
 			newElementNode.children = children
 			newElementNode.parents = parents
-			if (element.type == 'pipe') {
-				newElementNode.ui = { ...elementNode.ui, length: element.length / 100 }
-			}
 			state.pipeline.nodes[idx] = newElementNode
 
 			if (state.openElements.has(elementNode)) {

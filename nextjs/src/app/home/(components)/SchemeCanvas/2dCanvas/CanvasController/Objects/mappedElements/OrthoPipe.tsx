@@ -15,7 +15,8 @@ const OrthoPipe: FC<{ element: GraphNode }> = ({ element }) => {
 	const { diameter, radialSegments } = defaultOrthoElementsConfig.pipe
 	const { isSelected } = element.ui
 	const { selectedColor, baseColor } = defaultOrthoElementsConfig.general
-	const length = (element.value as PipeParams).length / 100
+	// const length = (element.value as PipeParams).length / 100
+	const length = defaultOrthoElementsConfig.pipe.length
 	const objectRef = useRef<Mesh>(null!)
 	const { bind, spring } = useMovement({ objectRef, currentElement: element })
 	return (

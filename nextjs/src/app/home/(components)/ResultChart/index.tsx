@@ -14,7 +14,6 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select"
-import { getAllMomentDataPerIndex } from '@/utils/getAllMomentDataPerIndex'
 import buildChartData from './buildChartData'
 
 

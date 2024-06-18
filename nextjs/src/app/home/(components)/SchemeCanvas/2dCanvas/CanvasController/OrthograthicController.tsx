@@ -26,7 +26,6 @@ const OrthograthicController = () => {
 				}
 
 				if (elem.value.type === 'pipe') {
-					const length = elem.value.length / ratio
 
 					return <OrthoPipe element={elem} key={i} />
 				}

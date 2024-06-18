@@ -53,7 +53,6 @@ const useMovement = ({ objectRef, currentElement }: useMovementProps) => {
 		else {
 			const currentElementVector = new THREE.Vector2(posRef.current[0], posRef.current[1])
 			const { elementWithMinDistanceTo, itemVectorWithMinDistanceTo } = findElementWithMinDistanceTo({ openElements, currentElement, currentElementVector })
-
 			prevNeighborsRef.current.forEach((neighbor) => {
 				removeEdge(neighbor, currentElement)
 				addOpenElement(neighbor)
@@ -86,6 +85,7 @@ const useMovement = ({ objectRef, currentElement }: useMovementProps) => {
 				if (currentElement.getNeighbours().length >= defaultOrthoElementsConfig[currentElement.value.type].maxNeighbors) {
 					removeOpenElement(elementWithMinDistanceTo)
 				}
+				prevNeighborsRef.current = currentElement.getNeighbours()
 			} else {
 				currentElement.removeNeighbours()
 				prevNeighborsRef.current.forEach((neigbor) => {
