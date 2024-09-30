@@ -13,7 +13,8 @@ type State = Record<ElementParamsUnion['type'], ElementParamsUnion>
 function reducer(state: State, action: Actions): State {
 	switch (action.type) {
 		case 'setDefaultElementConfig':
-			return { ...state, ...action.value }
+			console.log(action.value)
+			return { ...state, [action.value.type]: { ...action.value } }
 	}
 }
 const initialState: State = {

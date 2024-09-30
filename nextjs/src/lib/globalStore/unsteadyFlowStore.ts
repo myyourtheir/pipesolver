@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { ElementDirection, UiConfig, UnsteadyInputData } from '../../../types/stateTypes'
+import { UiConfig, UnsteadyInputData } from '../../../types/stateTypes'
 import { UnsteadyFlowActions } from '../../../types/actionTypes'
 import { produce } from "immer"
 import { Graph } from '@/utils/graph/Graph'
@@ -27,44 +27,14 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 
 		)
 	},
-	addElement(element) {
+	addElement(element, newUi) {
 		return set(state => {
-			const getPosition = (): [[number, number, number], ElementDirection] => {
-				if (!state.lastTouchedElement) {
-					return [[0, 0, 0], ['x', 'left-to-right']]
-				} else {
-					const { direction: lastDirection, position: lastElementPosition, length } = state.lastTouchedElement.ui
-					if (lastDirection[0] === 'x') {
-						return [[lastElementPosition[0] + length, lastElementPosition[1], lastElementPosition[2]], lastDirection]
-					} else {
-						return [[lastElementPosition[0], lastElementPosition[1] + length, lastElementPosition[2]], lastDirection]
-					}
-				}
-			}
-			const [newElementPosition, newElementDirection] = getPosition()
-			const newUi: UiConfig = {
-				isSelected: false,
-				direction: newElementDirection,
-				position: newElementPosition,
-				length: defaultOrthoElementsConfig[element.type].length
-			}
 			const newElement = new GraphNode(element, newUi)
-
 			state.pipeline.addNode(newElement)
-
-			if (state.lastTouchedElement) {
-				state.pipeline.addEdge(state.lastTouchedElement, newElement)
-				// state.removeOpenElement(state.lastTouchedElement)
-			}
-			if (state.lastTouchedElement) {
-				state.removeOpenElement(state.lastTouchedElement)
-			}
-			state.addOpenElement(newElement)
 			return {
 				...state,
 				pipeline: state.pipeline,
-				lastTouchedElement: newElement,
-				openElements: state.openElements
+				lastTouchedElement: newElement
 			}
 		})
 	},

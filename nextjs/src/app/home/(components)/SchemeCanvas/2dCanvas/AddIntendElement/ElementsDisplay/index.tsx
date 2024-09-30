@@ -7,21 +7,26 @@ import PumpDisplay from './PumpDisplay'
 import SafeValveDisplay from './SafeValveDisplay'
 import { Group, Mesh } from 'three'
 
-const ElementsDisplay = forwardRef<Group, { elemType: ElementParamsUnion['type'] | null }>(function ElementsDisplay({ elemType }, ref) {
+type ElementsDisplayProps = {
+	onClick: () => void,
+	elemType: ElementParamsUnion['type'] | null
+}
+
+const ElementsDisplay = forwardRef<Group, ElementsDisplayProps>(function ElementsDisplay({ elemType, onClick }, ref) {
 	if (elemType === 'pump') {
-		return < PumpDisplay ref={ref} />
+		return < PumpDisplay onClick={onClick} ref={ref} />
 	}
 	else if (elemType === 'provider') {
-		return < ProviderDisplay ref={ref} />
+		return < ProviderDisplay onClick={onClick} ref={ref} />
 	}
 	else if (elemType === 'consumer') {
-		return < ConsumerDisplay ref={ref} />
+		return < ConsumerDisplay onClick={onClick} ref={ref} />
 	}
 	else if (elemType === 'gate_valve') {
-		return < GateValveDisplay ref={ref} />
+		return < GateValveDisplay onClick={onClick} ref={ref} />
 	}
 	else if (elemType === 'safe_valve') {
-		return < SafeValveDisplay ref={ref} />
+		return < SafeValveDisplay onClick={onClick} ref={ref} />
 	}
 	return null
 })

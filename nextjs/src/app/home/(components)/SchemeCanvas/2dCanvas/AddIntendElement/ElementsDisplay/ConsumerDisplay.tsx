@@ -4,11 +4,11 @@ import { defaultOrthoElementsConfig } from '@/lib/globalStore/defaultOrthoElemen
 import { forwardRef, ReactNode } from 'react'
 import { Group, Mesh } from 'three'
 
-const ConsumerDisplay = forwardRef<Group, {}>(function ConsumerDisplay(props, ref) {
+const ConsumerDisplay = forwardRef<Group, { onClick: () => void }>(function ConsumerDisplay({ onClick }, ref) {
 	const { radiusBottom, radiusTop, radialSegments, height } = defaultOrthoElementsConfig.consumer
 	const { baseColor } = defaultOrthoElementsConfig.general
 	return (
-		<group ref={ref}>
+		<group ref={ref} onClick={onClick}>
 			<Cylinder args={[radiusTop, radiusBottom, height, radialSegments]} rotation={[0, 0, Math.PI / 2]}>
 				{
 					<meshStandardMaterial color={baseColor} />

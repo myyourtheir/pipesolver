@@ -5,11 +5,11 @@ import { defaultOrthoElementsConfig } from '@/lib/globalStore/defaultOrthoElemen
 import { Group } from 'three'
 
 
-const GateValveDisplay = forwardRef<Group, {}>(function GateValveDisplay(props, ref) {
+const GateValveDisplay = forwardRef<Group, { onClick: () => void }>(function GateValveDisplay({ onClick }, ref) {
 	const { radiusBottom, radiusTop, radialSegments, height } = defaultOrthoElementsConfig.consumer
 	const { baseColor } = defaultOrthoElementsConfig.general
 	return (
-		<animated.group ref={ref}>
+		<animated.group ref={ref} onClick={onClick}>
 
 			<Cylinder args={[radiusBottom, radiusTop, height, radialSegments]} rotation={[0, 0, Math.PI / 2]}>
 				{

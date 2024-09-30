@@ -29,13 +29,13 @@ export const defaultElementsConfig = {
 		radiusTop: 0.2,
 		radiusBottom: 0.4
 	},
-	gateValve: {
+	gate_valve: {
 		height: 1,
 		radialSegments: 20,
 		radiusTop: 0.2,
 		radiusBottom: 0.4
 	},
-	safeValve: {
+	safe_valve: {
 		boxHeight: 0.4,
 		boxWidth: 0.3,
 		boxDepth: 0.3,

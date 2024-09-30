@@ -51,7 +51,7 @@ const OrtoCanvas = () => {
 						enableDamping={false}
 						enabled={!isDragging}
 					/>
-					{/* <OrthograthicController /> */}
+					<OrthograthicController />
 					{elementModeState.mode === 'noneLinierElement' &&
 
 						<AddIntendElement />

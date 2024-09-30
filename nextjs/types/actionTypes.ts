@@ -3,7 +3,7 @@ import { CondParams, ElementParamsUnion, ResultMomentData, UiConfig } from './st
 
 export interface UnsteadyFlowActions {
 	updateCondParams: (value: Partial<CondParams>) => void
-	addElement: (element: ElementParamsUnion) => void
+	addElement: (element: ElementParamsUnion, newUi: UiConfig) => void
 	updateElement: (element: ElementParamsUnion, idx: number) => void
 	deleteElement: (idx: number) => void
 	deleteAll: () => void

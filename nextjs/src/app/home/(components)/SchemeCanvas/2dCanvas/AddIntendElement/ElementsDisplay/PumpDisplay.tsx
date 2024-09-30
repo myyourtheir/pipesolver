@@ -3,11 +3,11 @@ import { animated } from '@react-spring/three'
 import { defaultOrthoElementsConfig } from '@/lib/globalStore/defaultOrthoElementsConfig'
 import { Group, Mesh } from 'three'
 
-const PumpDisplay = forwardRef<Group, {}>(function PumpDisplay(props, ref) {
+const PumpDisplay = forwardRef<Group, { onClick: () => void }>(function PumpDisplay({ onClick }, ref) {
 	const { width, height, depth } = defaultOrthoElementsConfig.pump
 	const { baseColor } = defaultOrthoElementsConfig.general
 	return (
-		<group ref={ref}>
+		<group ref={ref} onClick={onClick}>
 			<mesh >
 				{
 					<meshStandardMaterial color={baseColor} />

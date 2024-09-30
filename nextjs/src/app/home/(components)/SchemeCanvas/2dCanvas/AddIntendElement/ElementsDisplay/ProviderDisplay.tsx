@@ -5,11 +5,11 @@ import { defaultOrthoElementsConfig } from '@/lib/globalStore/defaultOrthoElemen
 import { Group, Mesh } from 'three'
 
 
-const ProviderDisplay = forwardRef<Group, {}>(function ProviderDisplay(props, ref) {
+const ProviderDisplay = forwardRef<Group, { onClick: () => void }>(function ProviderDisplay({ onClick }, ref) {
 	const { radiusBottom, radiusTop, radialSegments, height } = defaultOrthoElementsConfig.provider
 	const { selectedColor, baseColor } = defaultOrthoElementsConfig.general
 	return (
-		<group ref={ref}>
+		<group ref={ref} onClick={onClick}>
 			<Cylinder args={[radiusTop, radiusBottom, height, radialSegments]} rotation={[0, 0, Math.PI / 2]} >
 				{
 					<meshStandardMaterial color={baseColor} />

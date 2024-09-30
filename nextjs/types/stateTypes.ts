@@ -7,10 +7,9 @@ export interface UnsteadyBaseParams {
 	duration: number
 }
 
-export type ElementDirection = ['x', 'left-to-right' | 'right-to-left'] | ['y', 'top-to-bottom' | 'bottom-to-top']
+
 export interface UiConfig {
 	isSelected: boolean
-	direction: ElementDirection
 	position: [number, number, number]
 	length: number
 }

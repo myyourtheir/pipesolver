@@ -7,11 +7,11 @@ import { Group } from 'three'
 
 const AnimatedSphere = animated(Sphere)
 
-const SafeValveDisplay = forwardRef<Group, {}>(function SafeValveDisplay(props, ref) {
+const SafeValveDisplay = forwardRef<Group, { onClick: () => void }>(function SafeValveDisplay({ onClick }, ref) {
 	const { radius, segments } = defaultOrthoElementsConfig.safe_valve
 	const { baseColor } = defaultOrthoElementsConfig.general
 	return (
-		<group ref={ref}>
+		<group ref={ref} onClick={onClick}>
 			<AnimatedSphere args={[radius, segments, segments]}>
 				{
 					<meshStandardMaterial color={baseColor} />

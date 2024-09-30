@@ -1,15 +1,23 @@
 import { useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
 import * as THREE from 'three'
-import { ElementParamsUnion } from '../../../../../../../types/stateTypes'
+import { ElementParamsUnion, UiConfig } from '../../../../../../../types/stateTypes'
 import ElementsDisplay from './ElementsDisplay'
 import { useSelectedElementModeContext } from '@/app/home/(contexts)/useSelectedElementMode'
+import { useUnsteadyInputStore } from '@/lib/globalStore/unsteadyFlowStore'
+import { defaultOrthoElementsConfig } from '@/lib/globalStore/defaultOrthoElementsConfig'
+import { useDefaultElementsConfig } from '@/app/home/(contexts)/useDefaultElementsConfig'
+import { defaultElementsConfig } from '@/utils/defaultElementsConfig'
 
+const vec = new THREE.Vector3()
 
 const AddIntendElement = () => {
-	const vec = new THREE.Vector3()
 	const ref = useRef<THREE.Group>(null)
 	const { elementModeState: { modeElement } } = useSelectedElementModeContext()
+
+	const { addElement, pipeline } = useUnsteadyInputStore()
+	const { defaultValues } = useDefaultElementsConfig()
+
 	useFrame(({ pointer, viewport, camera }) => {
 		if (ref.current) {
 			ref.current.position.set(
@@ -20,8 +28,23 @@ const AddIntendElement = () => {
 			ref.current.getWorldPosition(vec)
 		}
 	})
+
+	const handleClick = () => {
+		if (ref.current && modeElement !== null) {
+			const newUi: UiConfig = {
+				isSelected: false,
+				position: Array.from(ref.current.position) as [number, number, number],
+				length: defaultOrthoElementsConfig[modeElement!].length
+			}
+			const element = defaultValues[modeElement]
+			addElement(element, newUi)
+		}
+	}
+
+	console.log(pipeline.nodes)
+	// TODO logic to add element in node
 	return (
-		<ElementsDisplay elemType={modeElement} ref={ref} />
+		<ElementsDisplay onClick={handleClick} elemType={modeElement} ref={ref} />
 	)
 }
 
