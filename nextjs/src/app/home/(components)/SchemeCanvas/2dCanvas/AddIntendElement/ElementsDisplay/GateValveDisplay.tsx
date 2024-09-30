@@ -10,16 +10,16 @@ const GateValveDisplay = forwardRef<Group, { onClick: (e: ThreeEvent<MouseEvent>
 	const { radiusBottom, radiusTop, radialSegments, height } = defaultOrthoElementsConfig.consumer
 	const { baseColor } = defaultOrthoElementsConfig.general
 	return (
-		<animated.group ref={ref} onClick={onClick}>
+		<animated.group ref={ref} onClick={onClick} >
 
 			<Cylinder args={[radiusBottom, radiusTop, height, radialSegments]} rotation={[0, 0, Math.PI / 2]}>
 				{
-					<meshStandardMaterial color={baseColor} />
+					<meshStandardMaterial color={baseColor} opacity={0.5} transparent />
 				}
 			</Cylinder>
 			<Cylinder args={[radiusTop, radiusBottom, height, radialSegments]} rotation={[0, 0, Math.PI / 2]}>
 				{
-					<meshStandardMaterial color={baseColor} />
+					<meshStandardMaterial color={baseColor} opacity={0.5} transparent />
 				}
 			</Cylinder>
 		</animated.group>

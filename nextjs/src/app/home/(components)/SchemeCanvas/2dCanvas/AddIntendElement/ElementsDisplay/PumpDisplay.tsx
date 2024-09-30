@@ -11,7 +11,7 @@ const PumpDisplay = forwardRef<Group, { onClick: (e: ThreeEvent<MouseEvent>) => 
 		<group ref={ref} onClick={onClick}>
 			<mesh >
 				{
-					<meshStandardMaterial color={baseColor} />
+					<meshStandardMaterial color={baseColor} opacity={0.5} transparent />
 				}
 				<boxGeometry args={[width, height, depth]} />
 			</mesh>

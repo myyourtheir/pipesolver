@@ -13,7 +13,7 @@ const ProviderDisplay = forwardRef<Group, { onClick: (e: ThreeEvent<MouseEvent>)
 		<group ref={ref} onClick={onClick}>
 			<Cylinder args={[radiusTop, radiusBottom, height, radialSegments]} rotation={[0, 0, Math.PI / 2]} >
 				{
-					<meshStandardMaterial color={baseColor} />
+					<meshStandardMaterial color={baseColor} opacity={0.5} transparent />
 				}
 			</Cylinder>
 		</group>

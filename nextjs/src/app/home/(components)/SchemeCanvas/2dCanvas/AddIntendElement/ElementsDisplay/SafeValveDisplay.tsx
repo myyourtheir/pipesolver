@@ -15,7 +15,7 @@ const SafeValveDisplay = forwardRef<Group, { onClick: (e: ThreeEvent<MouseEvent>
 		<group ref={ref} onClick={onClick}>
 			<AnimatedSphere args={[radius, segments, segments]}>
 				{
-					<meshStandardMaterial color={baseColor} />
+					<meshStandardMaterial color={baseColor} opacity={0.5} transparent />
 				}
 			</AnimatedSphere>
 		</group>
