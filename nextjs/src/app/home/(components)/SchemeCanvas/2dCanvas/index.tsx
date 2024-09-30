@@ -10,7 +10,7 @@ import { number } from 'zod'
 import { useSpring } from '@react-spring/three'
 import { useMove } from '@use-gesture/react'
 import { animated } from '@react-spring/three'
-import AddIntendElement from './AddIntentElement'
+import AddIntendElement from './AddIntendElement'
 
 export type CanvasContextProps = {
 	setIsDragging: Dispatch<SetStateAction<boolean>>,
