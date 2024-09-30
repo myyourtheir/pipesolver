@@ -30,14 +30,15 @@ const useMovement = ({ objectRef, currentElement }: useMovementProps) => {
 	const bind = useDrag<ThreeEvent<MouseEvent>>(({ active, down, offset: [x, y], event, timeStamp }) => {
 		event.stopPropagation()
 		event.ray.intersectPlane(floorPlane, planeIntersectPoint)
-
-		if (down) {
-			posRef.current = [planeIntersectPoint.x, planeIntersectPoint.y, 1]
+		if (!event.ctrlKey) {
+			if (down) {
+				posRef.current = [planeIntersectPoint.x, planeIntersectPoint.y, 1]
+			}
+			setIsDragging(active)
+			api.start({
+				position: posRef.current,
+			})
 		}
-		setIsDragging(active)
-		api.start({
-			position: posRef.current,
-		})
 	})
 
 	return { spring, bind }
