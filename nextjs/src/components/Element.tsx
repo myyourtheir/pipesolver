@@ -16,13 +16,16 @@ import {
 	ContextMenuItem,
 	ContextMenuTrigger,
 } from "@/components/ui/context-menu"
+import { ElementParamsUnion } from '../../types/stateTypes'
+import { useSelectedElementModeContext } from '@/app/home/(contexts)/useSelectedElementMode'
 
 
 interface ElementProps {
 	TriggerContent: any,
 	isHover?: boolean
 	hoverTitle?: string
-	children: React.ReactNode
+	children: React.ReactNode,
+	elementType: ElementParamsUnion['type']
 }
 
 export type ElementContextType = {
@@ -31,8 +34,12 @@ export type ElementContextType = {
 
 export const ElementContext = createContext<ElementContextType>({ setOpen: () => { } })
 
-const Element: FC<ElementProps> = ({ TriggerContent, children, hoverTitle, isHover = true }) => {
+const Element: FC<ElementProps> = ({ TriggerContent, children, hoverTitle, isHover = true, elementType }) => {
 	const [open, setOpen] = useState(false)
+	const { elementModeDispatch, elementModeState } = useSelectedElementModeContext()
+	const handleElementClick = () => {
+		elementModeDispatch({ type: 'setModeElement', value: elementType })
+	}
 	return (
 		<ElementContext.Provider value={{ setOpen }}>
 			<Popover
@@ -46,13 +53,22 @@ const Element: FC<ElementProps> = ({ TriggerContent, children, hoverTitle, isHov
 			>
 
 				<ContextMenu modal={true}>
-					<PopoverTrigger>
+					<PopoverTrigger >
 						<ContextMenuTrigger >
 							{
 								isHover ?
 									<HoverCard openDelay={100} closeDelay={100}>
-										<HoverCardTrigger >
-											<TriggerContent />
+										<HoverCardTrigger
+											onClick={handleElementClick}
+										>
+											<div
+												className={`
+														w-full h-full flex items-center justify-center hover:ring-1 hover:ring-ring rounded-sm 
+														${elementModeState.modeElement === elementType && 'shadow-inner-md bg-zinc-100'} 
+													`}
+											>
+												<TriggerContent />
+											</div>
 										</HoverCardTrigger>
 										<HoverCardContent className=' w-fit py-0 px-1 text-xs text-[#F5F5F5]  bg-[#333333] border-none shadow-none h-fit' side='bottom' align='center'>
 											{hoverTitle}

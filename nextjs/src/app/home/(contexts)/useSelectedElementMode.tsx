@@ -2,9 +2,7 @@ import { createContext, Dispatch, ReactNode, useContext, useReducer } from 'reac
 import { ElementParamsUnion } from '../../../../types/stateTypes'
 
 
-type Actions =
-	| { type: 'setMode', value: 'linierElement' | 'noneLinierElement' | 'default' }
-	| { type: 'setModeElement', value: ElementParamsUnion['type'] | null }
+type Actions = { type: 'setModeElement', value: ElementParamsUnion['type'] | null }
 
 type State = {
 	mode: 'linierElement' | 'noneLinierElement' | 'default',
@@ -15,10 +13,20 @@ type State = {
 
 function reducer(state: State, action: Actions): State {
 	switch (action.type) {
-		case 'setMode':
-			return { ...state, mode: action.value }
 		case 'setModeElement':
-			return { ...state, modeElement: action.value }
+			if (action.value === state.modeElement) {
+				return { mode: 'default', modeElement: null }
+			} else {
+				if (action.value === 'pipe') {
+					return { mode: 'linierElement', modeElement: action.value }
+				}
+				if (action.value === null) {
+					return { mode: 'default', modeElement: action.value }
+				}
+				else {
+					return { mode: 'noneLinierElement', modeElement: action.value }
+				}
+			}
 	}
 }
 
@@ -48,7 +56,7 @@ function SelectedElementModeContext({ children }: { children: ReactNode }) {
 
 function useSelectedElementModeContext() {
 	const context = useContext(Context) as TSelectedElementModeContext
-	return ({ context })
+	return ({ ...context })
 }
 
 export { useSelectedElementModeContext, SelectedElementModeContext }
