@@ -15,16 +15,17 @@ import SafeValveElementContent from '@/components/ElementsContent/SafeValveEleme
 import Element, { ElementContext } from '@/components/Element'
 import { ElementParamsUnion } from '../../../../../types/stateTypes'
 import PumpElementContent from '@/components/ElementsContent/PumpElementContent'
+import { useDefaultElementsConfig } from '../../(contexts)/useDefaultElementsConfig'
 
 const height = 60
 const width = 60
 
 const ElementsList = () => {
 
-	const { pipeline, addElement } = useUnsteadyInputStore(state => state)
 	const submitButtonTitle = 'Добавить'
+	const { defaultValues, defaultValuesDispatch } = useDefaultElementsConfig()
 	const onSubmit = (values: ElementParamsUnion) => {
-		addElement(values)
+		defaultValuesDispatch({ type: 'setDefaultElementConfig', value: values })
 	}
 	return (
 		<div className='grid grid-cols-1  md:grid-cols-2 gap-2 items-center content-center [&>*]:h-full '>
@@ -34,11 +35,7 @@ const ElementsList = () => {
 					TriggerContent={({ className }: { className: string }) => <ChevronsRight width={width} height={height} className={className} />}
 				>
 					<ProviderElementContent
-						defaultValues={{
-							type: 'provider',
-							mode: 'pressure',
-							value: 0
-						}}
+						defaultValues={defaultValues['provider']}
 						onSubmit={onSubmit}
 						submitButtonTitle={submitButtonTitle}
 					/>
@@ -50,11 +47,7 @@ const ElementsList = () => {
 					TriggerContent={({ className }: { className: string }) => <ChevronsLeft width={width} height={height} className={className} />}
 				>
 					<ConsumerElementContent
-						defaultValues={{
-							type: 'consumer',
-							mode: 'pressure',
-							value: 0
-						}}
+						defaultValues={defaultValues['consumer']}
 						onSubmit={onSubmit}
 						submitButtonTitle={submitButtonTitle}
 					/>
@@ -66,11 +59,7 @@ const ElementsList = () => {
 					TriggerContent={({ className }: { className: string }) => <PipeFav width={width} height={height} className={className} />}
 				>
 					<PipeElementContent
-						defaultValues={{
-							type: 'pipe',
-							length: 100,
-							diameter: 1000,
-						}}
+						defaultValues={defaultValues['pipe']}
 						onSubmit={onSubmit}
 						submitButtonTitle={submitButtonTitle}
 					/>
@@ -82,14 +71,7 @@ const ElementsList = () => {
 					TriggerContent={({ className }: { className: string }) => <PumpFav width={45} height={45} className={className} />}
 				>
 					<PumpElementContent
-						defaultValues={{
-							type: 'pump',
-							coef_a: 310,
-							coef_b: 0.0000008,
-							mode: 'open',
-							start_time: 0,
-							duration: 20,
-						}}
+						defaultValues={defaultValues['pump']}
 						onSubmit={onSubmit}
 						submitButtonTitle={submitButtonTitle}
 					/>
@@ -101,13 +83,7 @@ const ElementsList = () => {
 					TriggerContent={({ className }: { className: string }) => <GateValveFav width={width} height={height} className={className} />}
 				>
 					<GateValveElementContent
-						defaultValues={{
-							type: 'gate_valve',
-							mode: 'open',
-							start_time: 0,
-							duration: 100,
-							percentage: 100
-						}}
+						defaultValues={defaultValues['gate_valve']}
 						onSubmit={onSubmit}
 						submitButtonTitle={submitButtonTitle}
 					/>
@@ -119,11 +95,7 @@ const ElementsList = () => {
 					TriggerContent={({ className }: { className: string }) => <SafeValveFav width={55} height={55} className={className} />}
 				>
 					<SafeValveElementContent
-						defaultValues={{
-							type: 'safe_valve',
-							coef_q: 0.5,
-							max_pressure: 9
-						}}
+						defaultValues={defaultValues['safe_valve']}
 						onSubmit={onSubmit}
 						submitButtonTitle={submitButtonTitle}
 					/>

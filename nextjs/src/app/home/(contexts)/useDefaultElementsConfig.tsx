@@ -57,8 +57,8 @@ const initialState: State = {
 
 
 type TDefaultElementsConfigContext = {
-	elementModeState: State,
-	elementModeDispatch: Dispatch<Actions>
+	defaultValues: State,
+	defaultValuesDispatch: Dispatch<Actions>
 }
 
 const Context = createContext<TDefaultElementsConfigContext | null>(null)
@@ -66,7 +66,7 @@ const Context = createContext<TDefaultElementsConfigContext | null>(null)
 function DefaultElementsConfigContext({ children }: { children: ReactNode }) {
 	const [state, dispatch] = useReducer(reducer, initialState)
 	return (
-		<Context.Provider value={{ elementModeDispatch: dispatch, elementModeState: state }}>
+		<Context.Provider value={{ defaultValuesDispatch: dispatch, defaultValues: state }}>
 			{children}
 		</Context.Provider>
 	)
@@ -75,7 +75,7 @@ function DefaultElementsConfigContext({ children }: { children: ReactNode }) {
 
 function useDefaultElementsConfig() {
 	const context = useContext(Context) as TDefaultElementsConfigContext
-	return ({ context })
+	return ({ ...context })
 }
 
 export { useDefaultElementsConfig, DefaultElementsConfigContext }
