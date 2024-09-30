@@ -65,7 +65,7 @@ export interface UnsteadyInputData {
 	openElements: Set<GraphNode>
 }
 
-export type ElementsType = PipeParams['type'] | PumpParams['type'] | GateValveParams['type'] | SafeValveParams['type'] | ConsumerParams['type'] | ProviderParams['type']
+export type ElementsType = ElementParamsUnion['type']
 
 
 // Results 

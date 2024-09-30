@@ -23,7 +23,7 @@ const SchemeCanvas: FC<ElementsProps> = ({ containerRef }) => {
 		// 	resizable={true}
 		// 	extraHeaderElement={
 		<section className='absolute h-full w-full m-4 rounded border bg-white z-0'>
-			<ToggleGroup
+			{/* <ToggleGroup
 				onValueChange={(val: '2d' | '3d') => setCanvasView(val)}
 				value={canvasView}
 				className='flex font-mono'
@@ -36,17 +36,18 @@ const SchemeCanvas: FC<ElementsProps> = ({ containerRef }) => {
 				<ToggleGroupItem value="3d" aria-label="3d">
 					<span>3d</span>
 				</ToggleGroupItem>
-			</ToggleGroup>
+			</ToggleGroup> */}
 
 
 			<div id='mainCanvas' className='w-full h-full'>
-				{
+				{/* {
 					canvasView == '2d'
 						?
 						<OrtoCanvas />
 						:
 						<SCanvas />
-				}
+				} */}
+				<OrtoCanvas />
 			</div>
 		</section>
 		// </DraggableLayout>

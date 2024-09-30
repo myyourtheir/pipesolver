@@ -1,0 +1,54 @@
+import { createContext, Dispatch, ReactNode, useContext, useReducer } from 'react'
+import { ElementParamsUnion } from '../../../../types/stateTypes'
+
+
+type Actions =
+	| { type: 'setMode', value: 'linierElement' | 'noneLinierElement' | 'default' }
+	| { type: 'setModeElement', value: ElementParamsUnion['type'] | null }
+
+type State = {
+	mode: 'linierElement' | 'noneLinierElement' | 'default',
+	modeElement: ElementParamsUnion['type'] | null,
+}
+
+
+
+function reducer(state: State, action: Actions): State {
+	switch (action.type) {
+		case 'setMode':
+			return { ...state, mode: action.value }
+		case 'setModeElement':
+			return { ...state, modeElement: action.value }
+	}
+}
+
+const initialState: State = {
+	mode: "default",
+	modeElement: null
+}
+
+
+
+type TSelectedElementModeContext = {
+	elementModeState: State,
+	elementModeDispatch: Dispatch<Actions>
+}
+
+const Context = createContext<TSelectedElementModeContext | null>(null)
+
+function SelectedElementModeContext({ children }: { children: ReactNode }) {
+	const [state, dispatch] = useReducer(reducer, initialState)
+	return (
+		<Context.Provider value={{ elementModeDispatch: dispatch, elementModeState: state }}>
+			{children}
+		</Context.Provider>
+	)
+}
+
+
+function useSelectedElementModeContext() {
+	const context = useContext(Context) as TSelectedElementModeContext
+	return ({ context })
+}
+
+export { useSelectedElementModeContext, SelectedElementModeContext }
