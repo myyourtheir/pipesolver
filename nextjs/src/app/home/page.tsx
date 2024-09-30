@@ -11,7 +11,7 @@ import { useUnsteadyInputStore } from '@/lib/globalStore/unsteadyFlowStore'
 
 
 export default function Home() {
-	const { pipeline } = useUnsteadyInputStore()
+
 
 	const containerRef = useRef(null)
 	return (

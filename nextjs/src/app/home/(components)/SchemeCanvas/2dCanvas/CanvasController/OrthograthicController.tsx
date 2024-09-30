@@ -34,19 +34,15 @@ const OrthograthicController = () => {
 					return <OrthoPump element={elem} key={i} />
 				}
 				else if (elem.value.type === 'provider') {
-					const { height } = defaultOrthoElementsConfig.provider
 					return <OrthoProvider element={elem} key={i} />
 				}
 				else if (elem.value.type === 'consumer') {
-					const { height } = defaultOrthoElementsConfig.consumer
 					return <OrthoConsumer element={elem} key={i} />
 				}
 				else if (elem.value.type === 'gate_valve') {
-					const { height } = defaultOrthoElementsConfig.gate_valve
 					return <OrthoGateValve element={elem} key={i} />
 				}
 				else if (elem.value.type === 'safe_valve') {
-					const { radius } = defaultOrthoElementsConfig.safe_valve
 					return <OrthoSafeValve element={elem} key={i} />
 				}
 			})}

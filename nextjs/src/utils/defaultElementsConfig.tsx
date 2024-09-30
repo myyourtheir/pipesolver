@@ -7,7 +7,7 @@ interface ValuesProps extends ElemProps {
 	key: any
 }
 
-export const defaultElementsConfig: PlotConfig = {
+export const defaultElementsConfig = {
 	pipe: {
 		diameter: 0.2,
 		radialSegments: 20

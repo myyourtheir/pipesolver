@@ -22,7 +22,7 @@ const SchemeCanvas: FC<ElementsProps> = ({ containerRef }) => {
 		// 	hideable={true}
 		// 	resizable={true}
 		// 	extraHeaderElement={
-		<div className='absolute h-full w-full m-4 rounded border bg-white z-0'>
+		<section className='absolute h-full w-full m-4 rounded border bg-white z-0'>
 			<ToggleGroup
 				onValueChange={(val: '2d' | '3d') => setCanvasView(val)}
 				value={canvasView}
@@ -48,7 +48,7 @@ const SchemeCanvas: FC<ElementsProps> = ({ containerRef }) => {
 						<SCanvas />
 				}
 			</div>
-		</div>
+		</section>
 		// </DraggableLayout>
 	)
 }

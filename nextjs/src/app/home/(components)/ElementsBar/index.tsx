@@ -14,7 +14,9 @@ const ElementsBar: FC<ElementsProps> = ({ containerRef }) => {
 
 	return (
 		<DraggableLayout refContainer={containerRef} headerName='Элементы' className='left-5 top-10  w-fit self-start'>
-			<ElementsList />
+			<section>
+				<ElementsList />
+			</section>
 		</DraggableLayout>
 	)
 }

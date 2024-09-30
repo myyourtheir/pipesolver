@@ -68,51 +68,52 @@ const ResultChart: FC<ElementsProps> = ({ containerRef }) => {
 	if (chartData.length !== 0) {
 		return (
 			<DraggableLayout refContainer={containerRef} headerName='Результаты расчета' className='top-auto  self-center' hideable={true} defaultState={true} resizable={true}>
-				<div className='flex justify-between items-center w-full'>
-					<div className='flex gap-2 items-center'>
-						<Button
-							onClick={handlePlayPauseClick}
-							className='w-10 h-8 p-2'>
-							{
-								isPlaying
-									? <Pause size={18} />
-									: <PlayIcon size={18} />
-							}
-						</Button>
-						<Button
-							onClick={() => { setIter(0) }}
-							className='w-10 h-8 p-2'>
-							<TimerReset size={18} />
-						</Button>
+				<section>
+					<div className='flex justify-between items-center w-full'>
+						<div className='flex gap-2 items-center'>
+							<Button
+								onClick={handlePlayPauseClick}
+								className='w-10 h-8 p-2'>
+								{
+									isPlaying
+										? <Pause size={18} />
+										: <PlayIcon size={18} />
+								}
+							</Button>
+							<Button
+								onClick={() => { setIter(0) }}
+								className='w-10 h-8 p-2'>
+								<TimerReset size={18} />
+							</Button>
+						</div>
+						<Select value={speed.toString()} onValueChange={(value) => setSpeed(parseFloat(value))}>
+							<SelectTrigger className="w-20">
+								<SelectValue />
+							</SelectTrigger>
+							<SelectContent>
+								<SelectItem value={'100'}>1:10</SelectItem>
+								<SelectItem value={'500'}>1:2</SelectItem>
+								<SelectItem value={'1000'}>1:1</SelectItem>
+							</SelectContent>
+						</Select>
+						<div className='w-[102px]'>
+							Время: {chartData[iter]?.t} c
+						</div>
 					</div>
-					<Select value={speed.toString()} onValueChange={(value) => setSpeed(parseFloat(value))}>
-						<SelectTrigger className="w-20">
-							<SelectValue />
-						</SelectTrigger>
-						<SelectContent>
-							<SelectItem value={'100'}>1:10</SelectItem>
-							<SelectItem value={'500'}>1:2</SelectItem>
-							<SelectItem value={'1000'}>1:1</SelectItem>
-						</SelectContent>
-					</Select>
-					<div className='w-[102px]'>
-						Время: {chartData[iter]?.t} c
+					<div className='h-3 flex items-end'>
+						{
+							chartData.length >= duration &&
+							<Slider value={[iter]}
+								onValueChange={(value) => {
+									setIter(value[0])
+								}}
+								max={duration}
+								step={1} />
+						}
 					</div>
-				</div>
-				<div className='h-3 flex items-end'>
-					{
-						chartData.length >= duration &&
-						<Slider value={[iter]}
-							onValueChange={(value) => {
-								setIter(value[0])
-							}}
-							max={duration}
-							step={1} />
-					}
-				</div>
 
-				<MyChart data={buildChartData({ data: chartData, index: iter })} />
-
+					<MyChart data={buildChartData({ data: chartData, index: iter })} />
+				</section>
 			</DraggableLayout>
 		)
 	}
