@@ -1,4 +1,4 @@
-import { useFrame } from '@react-three/fiber'
+import { ThreeEvent, useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
 import * as THREE from 'three'
 import { ElementParamsUnion, UiConfig } from '../../../../../../../types/stateTypes'
@@ -7,7 +7,6 @@ import { useSelectedElementModeContext } from '@/app/home/(contexts)/useSelected
 import { useUnsteadyInputStore } from '@/lib/globalStore/unsteadyFlowStore'
 import { defaultOrthoElementsConfig } from '@/lib/globalStore/defaultOrthoElementsConfig'
 import { useDefaultElementsConfig } from '@/app/home/(contexts)/useDefaultElementsConfig'
-import { defaultElementsConfig } from '@/utils/defaultElementsConfig'
 
 const vec = new THREE.Vector3()
 
@@ -23,14 +22,15 @@ const AddIntendElement = () => {
 			ref.current.position.set(
 				((pointer.x * viewport.width / camera.zoom * 50) / 2 + camera.position.x),
 				((pointer.y * viewport.height) / camera.zoom * 50 / 2 + camera.position.y),
-				1
+				2
 			)
 			ref.current.getWorldPosition(vec)
 		}
 	})
 
-	const handleClick = () => {
-		if (ref.current && modeElement !== null) {
+	const handleClick = (e: ThreeEvent<MouseEvent>) => {
+		e.stopPropagation()
+		if (ref.current && modeElement !== null && !e.ctrlKey) {
 			const newUi: UiConfig = {
 				isSelected: false,
 				position: Array.from(ref.current.position) as [number, number, number],
@@ -40,9 +40,6 @@ const AddIntendElement = () => {
 			addElement(element, newUi)
 		}
 	}
-
-	console.log(pipeline.nodes)
-	// TODO logic to add element in node
 	return (
 		<ElementsDisplay onClick={handleClick} elemType={modeElement} ref={ref} />
 	)

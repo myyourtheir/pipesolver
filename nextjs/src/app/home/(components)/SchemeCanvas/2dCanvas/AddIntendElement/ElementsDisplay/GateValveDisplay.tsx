@@ -3,9 +3,10 @@ import { FC, forwardRef, useRef } from 'react'
 import { animated } from '@react-spring/three'
 import { defaultOrthoElementsConfig } from '@/lib/globalStore/defaultOrthoElementsConfig'
 import { Group } from 'three'
+import { ThreeEvent } from '@react-three/fiber'
 
 
-const GateValveDisplay = forwardRef<Group, { onClick: () => void }>(function GateValveDisplay({ onClick }, ref) {
+const GateValveDisplay = forwardRef<Group, { onClick: (e: ThreeEvent<MouseEvent>) => void }>(function GateValveDisplay({ onClick }, ref) {
 	const { radiusBottom, radiusTop, radialSegments, height } = defaultOrthoElementsConfig.consumer
 	const { baseColor } = defaultOrthoElementsConfig.general
 	return (

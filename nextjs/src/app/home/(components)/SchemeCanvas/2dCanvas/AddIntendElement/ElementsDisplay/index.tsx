@@ -6,9 +6,10 @@ import ProviderDisplay from './ProviderDisplay'
 import PumpDisplay from './PumpDisplay'
 import SafeValveDisplay from './SafeValveDisplay'
 import { Group, Mesh } from 'three'
+import { ThreeEvent } from '@react-three/fiber'
 
 type ElementsDisplayProps = {
-	onClick: () => void,
+	onClick: (e: ThreeEvent<MouseEvent>) => void,
 	elemType: ElementParamsUnion['type'] | null
 }
 

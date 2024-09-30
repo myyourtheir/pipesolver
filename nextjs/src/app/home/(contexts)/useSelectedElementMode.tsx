@@ -1,6 +1,6 @@
-import { createContext, Dispatch, ReactNode, useContext, useReducer } from 'react'
+import { createContext, Dispatch, ReactNode, useContext, useEffect, useReducer } from 'react'
 import { ElementParamsUnion } from '../../../../types/stateTypes'
-
+const ESCAPE_KEYS = ["27", "Escape"]
 
 type Actions = { type: 'setModeElement', value: ElementParamsUnion['type'] | null }
 
