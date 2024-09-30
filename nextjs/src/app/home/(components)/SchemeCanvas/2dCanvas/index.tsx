@@ -1,11 +1,16 @@
 'use client'
-import { Dispatch, MutableRefObject, SetStateAction, Suspense, createContext, useRef, useState } from "react"
-import { Canvas } from "@react-three/fiber"
+import { Dispatch, MutableRefObject, Ref, RefObject, SetStateAction, Suspense, createContext, useEffect, useRef, useState } from "react"
+import { Canvas, useFrame, useThree, Vector3 } from "@react-three/fiber"
 import { OrthographicCamera, OrbitControls } from "@react-three/drei"
 import * as THREE from 'three'
 import OrthograthicController from './CanvasController/OrthograthicController'
 import { Stats } from '@react-three/drei'
-
+import { useSelectedElementModeContext } from '@/app/home/(contexts)/useSelectedElementMode'
+import { number } from 'zod'
+import { useSpring } from '@react-spring/three'
+import { useMove } from '@use-gesture/react'
+import { animated } from '@react-spring/three'
+import AddIntendElement from './AddIntentElement'
 
 export type CanvasContextProps = {
 	setIsDragging: Dispatch<SetStateAction<boolean>>,
@@ -16,15 +21,16 @@ export type CanvasContextProps = {
 }
 export const CanvasContext = createContext<CanvasContextProps | null>(null)
 
-
 const OrtoCanvas = () => {
 	// const aspect = window?.innerWidth / window?.innerHeight
 	const cameraRef = useRef<THREE.OrthographicCamera>(null!)
 	const [isDragging, setIsDragging] = useState(false)
 	const floorPlane = new THREE.Plane(new THREE.Vector3(0, 0, 1))
 	const openPointsRef = useRef<[number, number][]>([])
+	const canvasRef = useRef<HTMLCanvasElement>(null)
+	const { elementModeState } = useSelectedElementModeContext()
 	return (
-		<Canvas >
+		<Canvas ref={canvasRef}>
 			<Suspense fallback={null}>
 				<CanvasContext.Provider value={{
 					setIsDragging,
@@ -45,7 +51,11 @@ const OrtoCanvas = () => {
 						enableDamping={false}
 						enabled={!isDragging}
 					/>
-					<OrthograthicController />
+					{/* <OrthograthicController /> */}
+					{elementModeState.mode === 'noneLinierElement' &&
+
+						<AddIntendElement />
+					}
 				</CanvasContext.Provider>
 			</Suspense>
 		</Canvas>
