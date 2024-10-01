@@ -6,6 +6,7 @@ import * as THREE from 'three'
 import { MutableRefObject, useContext, useRef, useState } from 'react'
 import { CanvasContext, CanvasContextProps } from '../..'
 import { GraphNode } from '@/utils/graph/GraphNode'
+import { useSelectedElementModeContext } from '@/app/home/(contexts)/useSelectedElementMode'
 
 
 type useMovementProps = {
@@ -22,22 +23,25 @@ const { springConfig } = OthograthicConfig
 const useMovement = ({ objectRef, currentElement }: useMovementProps) => {
 	const { setIsDragging, floorPlane } = useContext(CanvasContext) as CanvasContextProps
 	const posRef = useRef(currentElement.ui.position)
+	const { elementModeState: { mode } } = useSelectedElementModeContext()
 	const [spring, api] = useSpring(() => ({
 		config: springConfig,
 		immediate: true,
 		position: posRef.current
 	}))
 	const bind = useDrag<ThreeEvent<MouseEvent>>(({ active, down, offset: [x, y], event, timeStamp }) => {
-		event.stopPropagation()
-		event.ray.intersectPlane(floorPlane, planeIntersectPoint)
-		if (!event.ctrlKey) {
-			if (down) {
-				posRef.current = [planeIntersectPoint.x, planeIntersectPoint.y, 1]
+		if (mode === 'default') {
+			event.stopPropagation()
+			event.ray.intersectPlane(floorPlane, planeIntersectPoint)
+			if (!event.ctrlKey) {
+				if (down) {
+					posRef.current = [planeIntersectPoint.x, planeIntersectPoint.y, 1]
+				}
+				setIsDragging(active)
+				api.start({
+					position: posRef.current,
+				})
 			}
-			setIsDragging(active)
-			api.start({
-				position: posRef.current,
-			})
 		}
 	})
 

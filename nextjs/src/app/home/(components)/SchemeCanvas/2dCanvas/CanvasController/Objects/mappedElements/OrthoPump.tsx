@@ -5,6 +5,8 @@ import { Mesh } from 'three'
 import useMovement from '../../../utils/hooks/useMovement'
 import { UiConfig } from '../../../../../../../../../types/stateTypes'
 import { GraphNode } from '@/utils/graph/GraphNode'
+import LinkPoint from '../LinkPoint'
+import { useSelectedElementModeContext } from '@/app/home/(contexts)/useSelectedElementMode'
 
 const OrthoPump: FC<{ element: GraphNode }> = ({ element }) => {
 	const { isSelected } = element.ui
@@ -12,13 +14,31 @@ const OrthoPump: FC<{ element: GraphNode }> = ({ element }) => {
 	const { selectedColor, baseColor } = defaultOrthoElementsConfig.general
 	const objectRef = useRef<Mesh>(null!)
 	const { bind, spring } = useMovement({ objectRef, currentElement: element })
+	const { elementModeState: { mode } } = useSelectedElementModeContext()
 	return (
-		<animated.mesh ref={objectRef} {...bind() as any} {...spring}>
+		<animated.group ref={objectRef} {...bind() as any} {...spring}>
+			<mesh >
+				{
+					<meshStandardMaterial color={isSelected ? selectedColor : baseColor} />
+				}
+				<boxGeometry args={[width, height, depth]} />
+			</mesh>
 			{
-				<meshStandardMaterial color={isSelected ? selectedColor : baseColor} />
+				mode === 'linierElement' &&
+				<>
+					<LinkPoint
+						groupProps={{
+							position: [0.35, 0, 2]
+						}}
+					/>
+					<LinkPoint
+						groupProps={{
+							position: [-0.35, 0, 2]
+						}}
+					/>
+				</>
 			}
-			<boxGeometry args={[width, height, depth]} />
-		</animated.mesh>
+		</animated.group>
 	)
 }
 
