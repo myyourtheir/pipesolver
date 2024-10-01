@@ -44,10 +44,10 @@ const TreeList = () => {
 	const { pipeline, setIsSelected } = useUnsteadyInputStore(state => state)
 	const { updateElement } = useUnsteadyInputStore(state => state)
 	return (
-		<ScrollArea className='w-full h-full mt-2'>
+		<ScrollArea className='w-full h-[320px] mt-2'>
 			{
 				pipeline.nodes.length !== 0 ? (
-					<ul className='space-y-1 mt-1'>
+					<ul className='space-y-1 mt-1 mb-2 mr-2'>
 						{
 							pipeline.nodes.map((element, idx) => (
 								<TreeItemContextMenu
@@ -96,7 +96,7 @@ export interface TreeItemProps {
 const TreeItem: FC<TreeItemProps> = ({ element, onClick, isSelected }) => {
 
 	return (
-		<li onClick={onClick} className={`text-sm hover:ring-1 hover:ring-ring rounded-md w-full ${isSelected && 'border'}`}>
+		<li onClick={onClick} className={`text-sm hover:ring-1 hover:ring-ring rounded-md w-full border border-transparent ${isSelected && ' border-inherit'}`}>
 			{TypeToTitles[element.type].title}
 		</li>
 	)

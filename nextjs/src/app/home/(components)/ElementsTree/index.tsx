@@ -12,12 +12,12 @@ const ElementsTree: FC<ElementsProps> = ({ containerRef }) => {
 	}, [deleteAll])
 	return (
 		<DraggableLayout refContainer={containerRef} headerName='Дерево элементов' className='right-5 top-10  self-start w-64 h-96 min-w-64' hideable={true}>
-			{pipeline.nodes.length !== 0 &&
-				<section className='w-full'>
+			<section className='h-full'>
+				{pipeline.nodes.length !== 0 &&
 					<Button className='w-full' size={'xsm'} onClick={handleDeleteAll}>Удалить все элементы</Button>
-				</section>
-			}
-			<TreeList />
+				}
+				<TreeList />
+			</section>
 		</DraggableLayout>
 	)
 }
