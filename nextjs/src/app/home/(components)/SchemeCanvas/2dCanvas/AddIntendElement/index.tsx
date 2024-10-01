@@ -10,7 +10,7 @@ import { useDefaultElementsConfig } from '@/app/home/(contexts)/useDefaultElemen
 import PipeDisplay from './ElementsDisplay/PipeDisplay'
 import { redirect } from 'next/dist/server/api-utils'
 import { LineProps } from '@react-three/drei'
-import AddIntendNMonLinierElement from './AddIntendNonLinierElement'
+import AddIntendNonLinierElement from './AddIntendNonLinierElement'
 import AddIntendLinierElement from './AddIntendLinierElement'
 
 const vec = new THREE.Vector3()
@@ -21,7 +21,7 @@ const AddIntendElement = ({ mode }: { mode: ModeState['mode'] }) => {
 			{
 				mode == 'linierElement' ?
 					<AddIntendLinierElement />
-					: <AddIntendNMonLinierElement />
+					: <AddIntendNonLinierElement />
 			}
 		</>
 	)

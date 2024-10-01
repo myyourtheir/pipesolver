@@ -27,11 +27,13 @@ const OrthoPump: FC<{ element: GraphNode }> = ({ element }) => {
 				mode === 'linierElement' &&
 				<>
 					<LinkPoint
+						element={element}
 						groupProps={{
 							position: [0.35, 0, 2]
 						}}
 					/>
 					<LinkPoint
+						element={element}
 						groupProps={{
 							position: [-0.35, 0, 2]
 						}}

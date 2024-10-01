@@ -54,7 +54,6 @@ const OrtoCanvas = () => {
 					/>
 					<OrthograthicController />
 					{elementModeState.mode !== 'default' &&
-
 						<AddIntendElement mode={elementModeState.mode} />
 					}
 				</CanvasContext.Provider>

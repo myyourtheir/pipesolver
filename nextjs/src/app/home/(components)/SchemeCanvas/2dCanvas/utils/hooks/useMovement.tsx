@@ -7,6 +7,7 @@ import { MutableRefObject, useContext, useRef, useState } from 'react'
 import { CanvasContext, CanvasContextProps } from '../..'
 import { GraphNode } from '@/utils/graph/GraphNode'
 import { useSelectedElementModeContext } from '@/app/home/(contexts)/useSelectedElementMode'
+import { useUnsteadyInputStore } from '@/lib/globalStore/unsteadyFlowStore'
 
 
 type useMovementProps = {
@@ -21,6 +22,7 @@ const { springConfig } = OthograthicConfig
 
 
 const useMovement = ({ objectRef, currentElement }: useMovementProps) => {
+	const { setPosition } = useUnsteadyInputStore()
 	const { setIsDragging, floorPlane } = useContext(CanvasContext) as CanvasContextProps
 	const posRef = useRef(currentElement.ui.position)
 	const { elementModeState: { mode } } = useSelectedElementModeContext()
@@ -36,6 +38,8 @@ const useMovement = ({ objectRef, currentElement }: useMovementProps) => {
 			if (!event.ctrlKey) {
 				if (down) {
 					posRef.current = [planeIntersectPoint.x, planeIntersectPoint.y, 1]
+				} else {
+					setPosition(currentElement, posRef.current)
 				}
 				setIsDragging(active)
 				api.start({

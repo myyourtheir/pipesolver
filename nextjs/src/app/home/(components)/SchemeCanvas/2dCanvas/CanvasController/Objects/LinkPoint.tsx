@@ -1,16 +1,38 @@
+
+import { usePipeElementContext } from '@/app/home/(contexts)/useNewPipeElementContext'
+import { GraphNode } from '@/utils/graph/GraphNode'
 import { GroupProps } from '@react-three/fiber'
 import { useRef, useState } from 'react'
 import { Mesh } from 'three'
 
 type LinkPointProps = {
-	groupProps?: GroupProps
+	groupProps?: GroupProps,
+	element: GraphNode
 }
 
-function LinkPoint({ groupProps }: LinkPointProps) {
+function LinkPoint({ groupProps, element }: LinkPointProps) {
 	const innerCircleRef = useRef<Mesh>(null)
 	const [innerRadius, setInnerRadius] = useState<number>(0.07)
+	const { dispatch, state: { isActive } } = usePipeElementContext()
+
+	const handleClick = () => {
+		if (!isActive) {
+			dispatch({ type: 'setParentElement', value: element })
+			dispatch({ type: 'setIsActive', value: true })
+		} else {
+			dispatch({ type: 'setChildElement', value: element })
+			dispatch({ type: 'setIsActive', value: false })
+		}
+		// TODO Добавить логику доьавления узла
+	}
+
 	return (
-		<group position={[0, 0, 6]} {...groupProps}>
+		<group
+			onClick={handleClick}
+			position={[0, 0, 6]}
+			{...groupProps}
+
+		>
 			<mesh
 				onPointerOver={(e) => {
 					setInnerRadius(0.1)

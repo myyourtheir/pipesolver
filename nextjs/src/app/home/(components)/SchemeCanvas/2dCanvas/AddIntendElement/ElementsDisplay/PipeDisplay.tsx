@@ -1,20 +1,19 @@
 import { defaultOrthoElementsConfig } from '@/lib/globalStore/defaultOrthoElementsConfig'
-import { Line, Line2Props, LineProps } from '@react-three/drei'
-import { ForwardRefComponent } from '@react-three/drei/helpers/ts-utils'
-import { forwardRef, LegacyRef, Ref } from 'react'
+import { forwardRef } from 'react'
 import * as THREE from 'three'
 
 type PipeDisplayProps = {
 
 }
 
-const PipeDisplay = forwardRef<THREE.Mesh, PipeDisplayProps>(function PipeDisplay({ }, ref) {
-	const { diameter, radialSegments } = defaultOrthoElementsConfig.pipe
+const PipeDisplay = forwardRef<THREE.Line, PipeDisplayProps>(function PipeDisplay({ }, ref) {
 	const { baseColor } = defaultOrthoElementsConfig.general
 	return (
-		<mesh ref={ref}>
-			<lineBasicMaterial color={baseColor} transparent opacity={0.5} />
-		</mesh>
+		// @ts-ignore
+		<line ref={ref} >
+			<bufferGeometry />
+			<lineBasicMaterial color={baseColor} linewidth={4} />
+		</line>
 	)
 })
 

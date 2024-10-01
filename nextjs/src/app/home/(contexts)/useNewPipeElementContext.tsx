@@ -1,21 +1,38 @@
 import { createContext, Dispatch, ReactNode, useContext, useEffect, useReducer } from 'react'
 import { ElementParamsUnion } from '../../../../types/stateTypes'
+import { GraphNode } from '@/utils/graph/GraphNode'
 const ESCAPE_KEYS = ["27", "Escape"]
 
-type Actions = { type: 'setModeElement', value: ElementParamsUnion['type'] | null }
+type Actions =
+	| { type: 'setParentElement', value: GraphNode | null }
+	| { type: 'setChildElement', value: GraphNode | null }
+	| { type: 'setIsActive', value: boolean }
 
 export type PipeElementState = {
 	isActive: boolean,
-	parentElement: ElementParamsUnion | null,
-	childElement: ElementParamsUnion | null
+	parentElement: GraphNode | null,
+	childElement: GraphNode | null
 }
 
 
 
 function reducer(state: PipeElementState, action: Actions): PipeElementState {
 	switch (action.type) {
-		case 'setModeElement':
-			return state
+		case 'setParentElement':
+			return {
+				...state,
+				parentElement: action.value
+			}
+		case 'setChildElement':
+			return {
+				...state,
+				childElement: action.value
+			}
+		case 'setIsActive':
+			return {
+				...state,
+				isActive: action.value
+			}
 	}
 }
 
@@ -25,17 +42,17 @@ const initialState: PipeElementState = {
 	childElement: null
 }
 
-
-
 type TusePipeElementContext = {
 	state: PipeElementState,
 	dispatch: Dispatch<Actions>
 }
 
+
 const Context = createContext<TusePipeElementContext | null>(null)
 
 function PipeElementContextProvider({ children }: { children: ReactNode }) {
 	const [state, dispatch] = useReducer(reducer, initialState)
+	console.log(state)
 	return (
 		<Context.Provider value={{ dispatch, state }}>
 			{children}

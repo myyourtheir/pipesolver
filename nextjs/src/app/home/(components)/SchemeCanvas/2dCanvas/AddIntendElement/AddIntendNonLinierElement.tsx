@@ -7,7 +7,7 @@ import * as THREE from 'three'
 import { useSelectedElementModeContext } from '@/app/home/(contexts)/useSelectedElementMode'
 import { useUnsteadyInputStore } from '@/lib/globalStore/unsteadyFlowStore'
 import { useDefaultElementsConfig } from '@/app/home/(contexts)/useDefaultElementsConfig'
-const AddIntendNMonLinierElement = () => {
+const AddIntendNonLinierElement = () => {
 	const ref = useRef<THREE.Group>(null)
 	const { elementModeState: { modeElement } } = useSelectedElementModeContext()
 
@@ -41,4 +41,4 @@ const AddIntendNMonLinierElement = () => {
 	)
 }
 
-export default AddIntendNMonLinierElement
+export default AddIntendNonLinierElement

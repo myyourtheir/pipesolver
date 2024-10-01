@@ -8,26 +8,32 @@ import { useDefaultElementsConfig } from '@/app/home/(contexts)/useDefaultElemen
 import PipeDisplay from './ElementsDisplay/PipeDisplay'
 import { UiConfig } from '../../../../../../../types/stateTypes'
 import { Line, LineProps } from '@react-three/drei'
+import { usePipeElementContext } from '@/app/home/(contexts)/useNewPipeElementContext'
 
 const vec = new THREE.Vector3()
 
 const AddIntendLinierElement = () => {
-	const ref = useRef<THREE.Mesh>(null)
-	const { elementModeState: { modeElement } } = useSelectedElementModeContext()
-
+	const ref = useRef<THREE.Line>(null)
 	const { addElement, pipeline } = useUnsteadyInputStore()
 	const { defaultValues } = useDefaultElementsConfig()
-
+	const { state: { isActive, parentElement } } = usePipeElementContext()
 	useFrame(({ pointer, viewport, camera }) => {
 		const line = ref.current
 		if (line) {
-
+			if (isActive && parentElement) {
+				const [fx, fy, fz] = parentElement.ui.position
+				const firstPoint = new THREE.Vector3(fx, fy, fz)
+				const secondPoint = new THREE.Vector3(
+					(pointer.x * viewport.width / camera.zoom * 50) / 2 + camera.position.x,
+					(pointer.y * viewport.height) / camera.zoom * 50 / 2 + camera.position.y,
+					2
+				)
+				console.log(line.visible)
+				line.geometry.setFromPoints([firstPoint, secondPoint])
+			}
 		}
 	})
 
-	const handleClick = (e: ThreeEvent<MouseEvent>) => {
-
-	}
 	return (
 		<PipeDisplay ref={ref} />
 	)
