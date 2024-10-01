@@ -8,7 +8,7 @@ import { PlotConfig } from '../../../types/plotConfigTypes'
 export const defaultOrthoElementsConfig: PlotConfig = {
 	pipe: {
 		length: 1,
-		diameter: 0.2,
+		diameter: 0.1,
 		radialSegments: 20,
 		maxNeighbors: 2,
 	},

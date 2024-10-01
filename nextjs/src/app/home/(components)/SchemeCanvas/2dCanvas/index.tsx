@@ -11,6 +11,7 @@ import { useSpring } from '@react-spring/three'
 import { useMove } from '@use-gesture/react'
 import { animated } from '@react-spring/three'
 import AddIntendElement from './AddIntendElement'
+import LinkPoint from './CanvasController/Objects/LinkPoint'
 
 export type CanvasContextProps = {
 	setIsDragging: Dispatch<SetStateAction<boolean>>,
@@ -52,9 +53,9 @@ const OrtoCanvas = () => {
 						enabled={!isDragging}
 					/>
 					<OrthograthicController />
-					{elementModeState.mode === 'noneLinierElement' &&
+					{elementModeState.mode !== 'default' &&
 
-						<AddIntendElement />
+						<AddIntendElement mode={elementModeState.mode} />
 					}
 				</CanvasContext.Provider>
 			</Suspense>

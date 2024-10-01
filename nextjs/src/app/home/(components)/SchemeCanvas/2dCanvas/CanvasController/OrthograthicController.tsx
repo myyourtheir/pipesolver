@@ -16,14 +16,14 @@ import { defaultOrthoElementsConfig } from '@/lib/globalStore/defaultOrthoElemen
 
 const ratio = 20
 const OrthograthicController = () => {
-	const { openPoints } = useContext(CanvasContext) as CanvasContextProps
-	const { pipeline: elements, openElements } = useUnsteadyInputStore()
+	// const { openPoints } = useContext(CanvasContext) as CanvasContextProps
+	const { pipeline: elements, } = useUnsteadyInputStore()
 	return (
 		<group>
 			{elements.nodes.map((elem, i) => { //TODO Тут логика добавления открытых точек
-				if (elem.getNeighbours().length == 0) {
-					openPoints.push([i + 1, i + 1])
-				}
+				// if (elem.getNeighbours().length == 0) {
+				// 	openPoints.push([i + 1, i + 1])
+				// }
 
 				if (elem.value.type === 'pipe') {
 

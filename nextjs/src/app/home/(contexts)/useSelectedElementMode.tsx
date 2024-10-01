@@ -4,14 +4,14 @@ const ESCAPE_KEYS = ["27", "Escape"]
 
 type Actions = { type: 'setModeElement', value: ElementParamsUnion['type'] | null }
 
-type State = {
+export type ModeState = {
 	mode: 'linierElement' | 'noneLinierElement' | 'default',
 	modeElement: ElementParamsUnion['type'] | null,
 }
 
 
 
-function reducer(state: State, action: Actions): State {
+function reducer(state: ModeState, action: Actions): ModeState {
 	switch (action.type) {
 		case 'setModeElement':
 			if (action.value === state.modeElement) {
@@ -30,7 +30,7 @@ function reducer(state: State, action: Actions): State {
 	}
 }
 
-const initialState: State = {
+const initialState: ModeState = {
 	mode: "default",
 	modeElement: null
 }
@@ -38,7 +38,7 @@ const initialState: State = {
 
 
 type TSelectedElementModeContext = {
-	elementModeState: State,
+	elementModeState: ModeState,
 	elementModeDispatch: Dispatch<Actions>
 }
 
