@@ -25,6 +25,7 @@ const OrthoGateValve: FC<{ element: GraphNode }> = ({ element }) => {
 					<meshStandardMaterial color={isSelected ? defaultOrthoElementsConfig.general.selectedColor : ''} />
 				}
 			</Cylinder>
+
 		</animated.group>
 	)
 }

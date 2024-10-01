@@ -28,14 +28,18 @@ const AddIntendLinierElement = () => {
 					(pointer.y * viewport.height) / camera.zoom * 50 / 2 + camera.position.y,
 					2
 				)
-				console.log(line.visible)
 				line.geometry.setFromPoints([firstPoint, secondPoint])
 			}
 		}
 	})
 
 	return (
-		<PipeDisplay ref={ref} />
+		<>
+			{
+				parentElement &&
+				<PipeDisplay ref={ref} />
+			}
+		</>
 	)
 }
 

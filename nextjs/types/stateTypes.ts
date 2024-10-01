@@ -7,11 +7,13 @@ export interface UnsteadyBaseParams {
 	duration: number
 }
 
-
+export type Sides = 'left' | 'right' | 'top' | 'bottom'
 export interface UiConfig {
 	isSelected: boolean
 	position: [number, number, number]
-	length: number
+	length: number,
+	openPoints: Sides[]
+	// TODO Добавить определители открытх точек
 }
 
 export interface CondParams {

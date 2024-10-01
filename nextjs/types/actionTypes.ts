@@ -1,5 +1,5 @@
 import { GraphNode } from '@/utils/graph/GraphNode'
-import { CondParams, ElementParamsUnion, ResultMomentData, UiConfig } from './stateTypes'
+import { CondParams, ElementParamsUnion, ResultMomentData, Sides, UiConfig } from './stateTypes'
 
 export interface UnsteadyFlowActions {
 	updateCondParams: (value: Partial<CondParams>) => void
@@ -13,6 +13,8 @@ export interface UnsteadyFlowActions {
 	removeOpenElement: (element: GraphNode) => void
 	addEdge: (sourceNode: GraphNode, destinationNode: GraphNode) => void
 	removeEdge: (sourceNode: GraphNode, destinationNode: GraphNode) => void
+	removeOpenSide: (element: GraphNode, side: Sides) => void
+	addPipe: (element: ElementParamsUnion, newUi: UiConfig, sourceNode: GraphNode, destinationNode: GraphNode) => void
 }
 type fnOrValue<T> = T | ((prev: T) => T)
 export interface ResultsActions {

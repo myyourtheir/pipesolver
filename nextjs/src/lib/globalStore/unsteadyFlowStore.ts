@@ -38,6 +38,19 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 			}
 		})
 	},
+	addPipe(element, newUi, sourceNode, destinationNode) {
+		return set(state => {
+			const newElement = new GraphNode(element, newUi)
+			state.pipeline.addNode(newElement)
+			state.pipeline.addEdge(sourceNode, newElement)
+			state.pipeline.addEdge(newElement, destinationNode)
+			return {
+				...state,
+				pipeline: state.pipeline,
+				lastTouchedElement: newElement
+			}
+		})
+	},
 	updateElement(element, idx) {
 		return set((state) => {
 			const elementNode = state.pipeline.nodes[idx]
@@ -139,5 +152,15 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 				lastTouchedElement: null
 			}
 		})
+	},
+	removeOpenSide(element, side) {
+		return set((state) => {
+			element.ui.openPoints = element.ui.openPoints.filter(s => s !== side)
+			return {
+				...state,
+				pipeline: state.pipeline
+			}
+		}
+		)
 	},
 }))

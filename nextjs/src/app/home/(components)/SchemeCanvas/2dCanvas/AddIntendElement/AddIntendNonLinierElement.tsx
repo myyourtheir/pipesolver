@@ -1,12 +1,24 @@
 import { defaultOrthoElementsConfig } from '@/lib/globalStore/defaultOrthoElementsConfig'
 import ElementsDisplay from './ElementsDisplay'
-import { UiConfig } from '../../../../../../../types/stateTypes'
+import { ElementParamsUnion, UiConfig } from '../../../../../../../types/stateTypes'
 import { ThreeEvent, useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
 import * as THREE from 'three'
 import { useSelectedElementModeContext } from '@/app/home/(contexts)/useSelectedElementMode'
 import { useUnsteadyInputStore } from '@/lib/globalStore/unsteadyFlowStore'
 import { useDefaultElementsConfig } from '@/app/home/(contexts)/useDefaultElementsConfig'
+
+
+const elementsDefaultOpenPoints: Record<ElementParamsUnion['type'], UiConfig['openPoints']> = {
+	pipe: [],
+	pump: ['left', 'right'],
+	gate_valve: ['left', 'right'],
+	safe_valve: ['left', 'right'],
+	provider: ['right'],
+	consumer: ['left']
+
+}
+
 const AddIntendNonLinierElement = () => {
 	const ref = useRef<THREE.Group>(null)
 	const { elementModeState: { modeElement } } = useSelectedElementModeContext()
@@ -30,7 +42,8 @@ const AddIntendNonLinierElement = () => {
 			const newUi: UiConfig = {
 				isSelected: false,
 				position: Array.from(ref.current.position) as [number, number, number],
-				length: defaultOrthoElementsConfig[modeElement!].length
+				length: defaultOrthoElementsConfig[modeElement!].length,
+				openPoints: elementsDefaultOpenPoints[modeElement]
 			}
 			const element = defaultValues[modeElement]
 			addElement(element, newUi)

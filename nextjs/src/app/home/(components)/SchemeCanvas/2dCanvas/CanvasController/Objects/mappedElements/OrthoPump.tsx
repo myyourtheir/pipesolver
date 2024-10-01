@@ -26,18 +26,26 @@ const OrthoPump: FC<{ element: GraphNode }> = ({ element }) => {
 			{
 				mode === 'linierElement' &&
 				<>
-					<LinkPoint
-						element={element}
-						groupProps={{
-							position: [0.35, 0, 2]
-						}}
-					/>
-					<LinkPoint
-						element={element}
-						groupProps={{
-							position: [-0.35, 0, 2]
-						}}
-					/>
+					{
+						element.ui.openPoints.includes('right') &&
+						<LinkPoint
+							side='right'
+							element={element}
+							groupProps={{
+								position: [0.35, 0, 2]
+							}}
+						/>
+					}
+					{
+						element.ui.openPoints.includes('left') &&
+						<LinkPoint
+							side='left'
+							element={element}
+							groupProps={{
+								position: [-0.35, 0, 2]
+							}}
+						/>
+					}
 				</>
 			}
 		</animated.group>

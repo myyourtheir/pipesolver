@@ -52,7 +52,6 @@ const Context = createContext<TusePipeElementContext | null>(null)
 
 function PipeElementContextProvider({ children }: { children: ReactNode }) {
 	const [state, dispatch] = useReducer(reducer, initialState)
-	console.log(state)
 	return (
 		<Context.Provider value={{ dispatch, state }}>
 			{children}
