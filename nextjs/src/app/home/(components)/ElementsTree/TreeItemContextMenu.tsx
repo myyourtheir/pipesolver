@@ -17,7 +17,7 @@ import { ElementContext } from '@/components/Element'
 
 interface ContextProps extends Omit<TreeItemProps, 'isSelected'> {
 	children: ReactNode,
-	className: string,
+	className?: string,
 	idx: number,
 	trigger: JSX.Element
 }
@@ -25,10 +25,9 @@ interface ContextProps extends Omit<TreeItemProps, 'isSelected'> {
 const TreeItemContextMenu: FC<ContextProps> = ({ children, idx, element, className, trigger }) => {
 	const { deleteElement, pipeline } = useUnsteadyInputStore(state => state)
 	const hanldeDelete = () => {
-
 		deleteElement(idx)
-
 	}
+
 	const [popoverOpen, setPopoverOpen] = useState(false)
 	return (
 		<ElementContext.Provider value={{ setOpen: setPopoverOpen }}>

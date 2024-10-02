@@ -52,8 +52,7 @@ const TreeList = () => {
 						{
 							pipeline.nodes.map((element, idx) => (
 								<TreeItemContextMenu
-									key={idx}
-									className={`${element.ui.isSelected ? 'border-purple-700 border-1' : 'border-0'}`}
+									key={element.id}
 									element={element.value}
 									idx={idx}
 									trigger={
@@ -95,8 +94,9 @@ export interface TreeItemProps {
 }
 
 const TreeItem: FC<TreeItemProps> = ({ element, onClick, isSelected }) => {
+	console.log(isSelected)
 	return (
-		<li onClick={onClick} className={`text-sm hover:ring-1 hover:ring-ring rounded-md w-full border border-transparent ${isSelected && ' border-gray-500'}`}>
+		<li onClick={onClick} className={`text-sm hover:ring-1 hover:ring-ring rounded-md w-full border border-transparent ${isSelected && ' border-gray-400'}`}>
 			{TypeToTitles[element.type].title}
 		</li>
 	)
