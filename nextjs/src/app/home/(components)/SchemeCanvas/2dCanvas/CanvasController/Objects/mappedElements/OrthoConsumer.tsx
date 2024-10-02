@@ -5,6 +5,8 @@ import { animated } from '@react-spring/three'
 import { Mesh } from 'three'
 import useMovement from '../../../utils/hooks/useMovement'
 import { GraphNode } from '@/utils/graph/GraphNode'
+import { useSelectedElementModeContext } from '@/app/home/(contexts)/useSelectedElementMode'
+import LinkPoint from '../LinkPoint'
 
 const AnimatedCylinder = animated(Cylinder)
 
@@ -14,12 +16,27 @@ const OrthoConsumer: FC<{ element: GraphNode }> = ({ element }) => {
 	const { selectedColor, baseColor } = defaultOrthoElementsConfig.general
 	const objectRef = useRef<Mesh>(null!)
 	const { bind, spring } = useMovement({ objectRef, currentElement: element })
+	const { elementModeState: { mode } } = useSelectedElementModeContext()
 	return (
-		<AnimatedCylinder ref={objectRef} args={[radiusTop, radiusBottom, height, radialSegments]} {...spring} {...bind() as any} rotation={[0, 0, Math.PI / 2]}>
+		<animated.group ref={objectRef} {...spring} {...bind() as any}>
+			<Cylinder args={[radiusTop, radiusBottom, height, radialSegments]} rotation={[0, 0, Math.PI / 2]}>
+				{
+					<meshStandardMaterial color={isSelected ? selectedColor : baseColor} />
+				}
+			</Cylinder>
 			{
-				<meshStandardMaterial color={isSelected ? selectedColor : baseColor} />
+				mode === 'linierElement' &&
+				<>
+					{
+						element.ui.openPoints.includes('left') &&
+						<LinkPoint
+							side='left'
+							element={element}
+						/>
+					}
+				</>
 			}
-		</AnimatedCylinder>
+		</animated.group>
 	)
 }
 

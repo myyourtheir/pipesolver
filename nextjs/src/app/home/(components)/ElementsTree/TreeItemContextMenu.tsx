@@ -25,11 +25,9 @@ interface ContextProps extends Omit<TreeItemProps, 'isSelected'> {
 const TreeItemContextMenu: FC<ContextProps> = ({ children, idx, element, className, trigger }) => {
 	const { deleteElement, pipeline } = useUnsteadyInputStore(state => state)
 	const hanldeDelete = () => {
-		if (pipeline.nodes.length > 1 && element.type === 'provider') {
-			toast.warning("Невозможно удалить поставщика")
-		} else {
-			deleteElement(idx)
-		}
+
+		deleteElement(idx)
+
 	}
 	const [popoverOpen, setPopoverOpen] = useState(false)
 	return (

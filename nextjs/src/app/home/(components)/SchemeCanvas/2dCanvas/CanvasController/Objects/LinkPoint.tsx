@@ -50,6 +50,10 @@ function LinkPoint({ groupProps, element, side }: LinkPointProps) {
 		}
 	}
 
+	if (element === parentElement) {
+		return null
+	}
+
 	return (
 		<group
 			// @ts-ignore 

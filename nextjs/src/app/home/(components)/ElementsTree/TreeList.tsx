@@ -43,6 +43,7 @@ const TypeToTitles: Record<ElementsType, { title: string, form: FC<ElementConten
 const TreeList = () => {
 	const { pipeline, setIsSelected } = useUnsteadyInputStore(state => state)
 	const { updateElement } = useUnsteadyInputStore(state => state)
+
 	return (
 		<ScrollArea className='w-full h-[320px] mt-2'>
 			{
@@ -94,9 +95,8 @@ export interface TreeItemProps {
 }
 
 const TreeItem: FC<TreeItemProps> = ({ element, onClick, isSelected }) => {
-
 	return (
-		<li onClick={onClick} className={`text-sm hover:ring-1 hover:ring-ring rounded-md w-full border border-transparent ${isSelected && ' border-inherit'}`}>
+		<li onClick={onClick} className={`text-sm hover:ring-1 hover:ring-ring rounded-md w-full border border-transparent ${isSelected && ' border-gray-500'}`}>
 			{TypeToTitles[element.type].title}
 		</li>
 	)

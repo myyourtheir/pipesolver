@@ -31,14 +31,15 @@ export const useCallUnsteadyFlowWs = (
 	})
 
 	const calcUnsteadyFlow = () => {
-		console.log(pipeline.nodes.map(el => {
-			return {
-				id: el.id,
-				type: el.value.type,
-				parents: el.parents.map(el => el.id),
-				children: el.children.map(el => el.id)
-			}
-		}))
+		// console.log(pipeline.nodes.map(el => {
+		// 	return {
+		// 		id: el.id,
+		// 		type: el.value.type,
+		// 		parents: el.parents.map(el => el.id),
+		// 		children: el.children.map(el => el.id)
+		// 	}
+		// }))
+		console.log(pipeline.nodes)
 		if (isValidPipeline.isConusmer == true && isValidPipeline.isPipe == true) {
 			setIsLoading(true)
 			resetResult()

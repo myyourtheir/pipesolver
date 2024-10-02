@@ -14,36 +14,31 @@ import { CanvasContext, CanvasContextProps } from '..'
 import { defaultOrthoElementsConfig } from '@/lib/globalStore/defaultOrthoElementsConfig'
 
 
-const ratio = 20
 const OrthograthicController = () => {
-	// const { openPoints } = useContext(CanvasContext) as CanvasContextProps
-	const { pipeline: elements, } = useUnsteadyInputStore()
+	const { pipeline: elements } = useUnsteadyInputStore()
 	return (
 		<group>
-			{elements.nodes.map((elem, i) => { //TODO Тут логика добавления открытых точек
-				// if (elem.getNeighbours().length == 0) {
-				// 	openPoints.push([i + 1, i + 1])
-				// }
+			{elements.nodes.map((elem, i) => {
 
 				if (elem.value.type === 'pipe') {
 
-					return <OrthoPipe element={elem} key={i} />
+					return <OrthoPipe element={elem} key={elem.id} />
 				}
 				else if (elem.value.type === 'pump') {
 
-					return <OrthoPump element={elem} key={i} />
+					return <OrthoPump element={elem} key={elem.id} />
 				}
 				else if (elem.value.type === 'provider') {
-					return <OrthoProvider element={elem} key={i} />
+					return <OrthoProvider element={elem} key={elem.id} />
 				}
 				else if (elem.value.type === 'consumer') {
-					return <OrthoConsumer element={elem} key={i} />
+					return <OrthoConsumer element={elem} key={elem.id} />
 				}
 				else if (elem.value.type === 'gate_valve') {
-					return <OrthoGateValve element={elem} key={i} />
+					return <OrthoGateValve element={elem} key={elem.id} />
 				}
 				else if (elem.value.type === 'safe_valve') {
-					return <OrthoSafeValve element={elem} key={i} />
+					return <OrthoSafeValve element={elem} key={elem.id} />
 				}
 			})}
 		</group>

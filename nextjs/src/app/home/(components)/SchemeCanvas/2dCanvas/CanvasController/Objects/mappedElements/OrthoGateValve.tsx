@@ -5,6 +5,8 @@ import { animated } from '@react-spring/three'
 import { Mesh } from 'three'
 import useMovement from '../../../utils/hooks/useMovement'
 import { GraphNode } from '@/utils/graph/GraphNode'
+import LinkPoint from '../LinkPoint'
+import { useSelectedElementModeContext } from '@/app/home/(contexts)/useSelectedElementMode'
 
 const OrthoGateValve: FC<{ element: GraphNode }> = ({ element }) => {
 	const { isSelected } = element.ui
@@ -12,6 +14,7 @@ const OrthoGateValve: FC<{ element: GraphNode }> = ({ element }) => {
 	const { selectedColor, baseColor } = defaultOrthoElementsConfig.general
 	const objectRef = useRef<Mesh>(null!)
 	const { bind, spring } = useMovement({ objectRef, currentElement: element })
+	const { elementModeState: { mode } } = useSelectedElementModeContext()
 	return (
 		<animated.group ref={objectRef} {...bind() as any} {...spring}>
 
@@ -25,7 +28,25 @@ const OrthoGateValve: FC<{ element: GraphNode }> = ({ element }) => {
 					<meshStandardMaterial color={isSelected ? defaultOrthoElementsConfig.general.selectedColor : ''} />
 				}
 			</Cylinder>
-
+			{
+				mode === 'linierElement' &&
+				<>
+					{
+						element.ui.openPoints.includes('right') &&
+						<LinkPoint
+							side='right'
+							element={element}
+						/>
+					}
+					{
+						element.ui.openPoints.includes('left') &&
+						<LinkPoint
+							side='left'
+							element={element}
+						/>
+					}
+				</>
+			}
 		</animated.group>
 	)
 }

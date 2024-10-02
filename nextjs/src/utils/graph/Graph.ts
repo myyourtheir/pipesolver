@@ -12,11 +12,12 @@ type PreparedElementsObjectForRequest = {
 export class Graph {
 	nodes: GraphNode[]
 
-	constructor() {
-		this.nodes = []
+	constructor(nodes: GraphNode[] = []) {
+		this.nodes = nodes
 	}
 
 	addNode(node: GraphNode) {
+
 		this.nodes.push(node)
 	}
 
@@ -36,7 +37,7 @@ export class Graph {
 		const selectedNode = this.nodes[idx]
 		this.nodes = this.nodes.filter((_, i) => i !== idx)
 		if (selectedNode.value.type === 'pipe') {
-			const pipeNeighbours = selectedNode.ui.pipeNeighbours
+			const { pipeNeighbours } = selectedNode.ui
 			if (pipeNeighbours) {
 				Object.keys(pipeNeighbours).forEach(id => {
 					const neighbour = this.nodes.find(node => node.id === id)
