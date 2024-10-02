@@ -16,7 +16,6 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 	},
 	pipeline: new Graph(),
 	lastTouchedElement: null,
-	openElements: new Set,
 
 
 	updateCondParams(cond_params) {
@@ -60,16 +59,11 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 			newElementNode.children = children
 			newElementNode.parents = parents
 			state.pipeline.nodes[idx] = newElementNode
-
-			if (state.openElements.has(elementNode)) {
-				state.removeOpenElement(elementNode)
-				state.addOpenElement(newElementNode)
-			}
 			return {
 				...state,
 				pipeline: state.pipeline,
 				lastTouchedElement: newElementNode,
-				openElements: state.openElements
+
 			}
 		})
 	},
@@ -93,44 +87,7 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 		}
 		)
 	},
-	addOpenElement(element) {
-		return set((state) => {
-			state.openElements.add(element)
-			return {
-				...state,
-				openElements: state.openElements
-			}
-		}
-		)
-	},
-	removeOpenElement(element) {
-		return set((state) => {
-			state.openElements.delete(element)
-			return {
-				...state,
-				openElements: state.openElements
-			}
-		}
-		)
-	},
-	addEdge(sourceNode, destinationNode) {
-		return set((state) => {
-			state.pipeline.addEdge(sourceNode, destinationNode)
-			return {
-				...state,
-				pipeline: state.pipeline
-			}
-		})
-	},
-	removeEdge(sourceNode, destinationNode) {
-		return set((state) => {
-			state.pipeline.deleteEdge(sourceNode, destinationNode)
-			return {
-				...state,
-				pipeline: state.pipeline
-			}
-		})
-	},
+
 
 	deleteElement(idx) {
 		return set((state) => {
@@ -144,11 +101,9 @@ export const useUnsteadyInputStore = create<UnsteadyInputData & UnsteadyFlowActi
 	deleteAll() {
 		return set((state) => {
 			state.pipeline = new Graph()
-			state.openElements = new Set()
 			return {
 				...state,
 				pipeline: state.pipeline,
-				openElements: state.openElements,
 				lastTouchedElement: null
 			}
 		})

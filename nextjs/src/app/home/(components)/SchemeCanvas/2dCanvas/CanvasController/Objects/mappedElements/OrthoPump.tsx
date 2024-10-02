@@ -31,9 +31,6 @@ const OrthoPump: FC<{ element: GraphNode }> = ({ element }) => {
 						<LinkPoint
 							side='right'
 							element={element}
-							groupProps={{
-								position: [0.35, 0, 2]
-							}}
 						/>
 					}
 					{
@@ -41,9 +38,6 @@ const OrthoPump: FC<{ element: GraphNode }> = ({ element }) => {
 						<LinkPoint
 							side='left'
 							element={element}
-							groupProps={{
-								position: [-0.35, 0, 2]
-							}}
 						/>
 					}
 				</>

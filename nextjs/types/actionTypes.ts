@@ -9,10 +9,6 @@ export interface UnsteadyFlowActions {
 	deleteAll: () => void
 	setIsSelected: (idx: number) => void
 	setPosition: (element: GraphNode, position: [number, number, number]) => void
-	addOpenElement: (element: GraphNode) => void
-	removeOpenElement: (element: GraphNode) => void
-	addEdge: (sourceNode: GraphNode, destinationNode: GraphNode) => void
-	removeEdge: (sourceNode: GraphNode, destinationNode: GraphNode) => void
 	removeOpenSide: (element: GraphNode, side: Sides) => void
 	addPipe: (element: ElementParamsUnion, newUi: UiConfig, sourceNode: GraphNode, destinationNode: GraphNode) => void
 }

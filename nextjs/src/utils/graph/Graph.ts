@@ -1,3 +1,4 @@
+import { elements } from 'chart.js'
 import { ElementParamsUnion } from '../../../types/stateTypes'
 import { GraphNode } from './GraphNode'
 
@@ -34,10 +35,28 @@ export class Graph {
 	deleteNode(idx: number) {
 		const selectedNode = this.nodes[idx]
 		this.nodes = this.nodes.filter((_, i) => i !== idx)
+		if (selectedNode.value.type === 'pipe') {
+			const pipeNeighbours = selectedNode.ui.pipeNeighbours
+			if (pipeNeighbours) {
+				Object.keys(pipeNeighbours).forEach(id => {
+					const neighbour = this.nodes.find(node => node.id === id)
+					neighbour?.ui.openPoints.push(pipeNeighbours[id])
+				})
+			}
+		}
 		selectedNode.children.forEach(childNode => {
+			if (childNode.value.type === 'pipe') {
+				const pipeIdx = this.nodes.findIndex(node => node === childNode)
+				this.deleteNode(pipeIdx)
+			}
 			childNode.parents = childNode.parents.filter(parent => parent !== selectedNode)
 		})
+
 		selectedNode.parents.forEach(parentNode => {
+			if (parentNode.value.type === 'pipe') {
+				const pipeIdx = this.nodes.findIndex(node => node === parentNode)
+				this.deleteNode(pipeIdx)
+			}
 			parentNode.children = parentNode.children.filter(child => child !== selectedNode)
 		})
 	}

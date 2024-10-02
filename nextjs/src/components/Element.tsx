@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/context-menu"
 import { ElementParamsUnion } from '../../types/stateTypes'
 import { useSelectedElementModeContext } from '@/app/home/(contexts)/useSelectedElementMode'
+import { usePipeElementContext } from '@/app/home/(contexts)/useNewPipeElementContext'
 
 
 interface ElementProps {
@@ -37,8 +38,12 @@ export const ElementContext = createContext<ElementContextType>({ setOpen: () =>
 const Element: FC<ElementProps> = ({ TriggerContent, children, hoverTitle, isHover = true, elementType }) => {
 	const [open, setOpen] = useState(false)
 	const { elementModeDispatch, elementModeState } = useSelectedElementModeContext()
+	const { dispatch } = usePipeElementContext()
 	const handleElementClick = () => {
 		elementModeDispatch({ type: 'setModeElement', value: elementType })
+		if (elementType === 'pipe') {
+			dispatch({ type: 'resetParentElement' })
+		}
 	}
 	return (
 		<ElementContext.Provider value={{ setOpen }}>

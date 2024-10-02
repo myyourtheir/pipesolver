@@ -39,7 +39,7 @@ const useMovement = ({ objectRef, currentElement }: useMovementProps) => {
 				if (down) {
 					posRef.current = [planeIntersectPoint.x, planeIntersectPoint.y, 1]
 				} else {
-					setPosition(currentElement, posRef.current)
+					setPosition(currentElement, posRef.current) //TODO Может вызывать проблемы с производительностью
 				}
 				setIsDragging(active)
 				api.start({

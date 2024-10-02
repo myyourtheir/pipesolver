@@ -7,6 +7,7 @@ import { Mesh } from 'three'
 import { Sides, UiConfig } from '../../../../../../../../types/stateTypes'
 import { useUnsteadyInputStore } from '@/lib/globalStore/unsteadyFlowStore'
 import { useDefaultElementsConfig } from '@/app/home/(contexts)/useDefaultElementsConfig'
+import { ElementLinksPointPosition } from './utils/ElementLinksPointPosition'
 
 type LinkPointProps = {
 	groupProps?: GroupProps,
@@ -17,34 +18,42 @@ type LinkPointProps = {
 function LinkPoint({ groupProps, element, side }: LinkPointProps) {
 	const innerCircleRef = useRef<Mesh>(null)
 	const [innerRadius, setInnerRadius] = useState<number>(0.07)
-	const { dispatch, state: { isActive, parentElement } } = usePipeElementContext()
+	const { dispatch, state: { isActive, parentElement, parentElementSide } } = usePipeElementContext()
 	const { removeOpenSide, addPipe } = useUnsteadyInputStore()
 	const { defaultValues } = useDefaultElementsConfig()
 	const handleClick = () => {
 		if (!isActive) {
-			dispatch({ type: 'setParentElement', value: element })
-			dispatch({ type: 'setIsActive', value: true })
-			removeOpenSide(element, side)
+			dispatch({
+				type: 'setParentElement', value: {
+					parentElement: element,
+					parentElementSide: side
+				}
+			})
 		} else {
 			if (parentElement) {
-				removeOpenSide(element, side)
 				const newElem = defaultValues['pipe']
 				const newUi: UiConfig = {
 					isSelected: false,
 					position: [0, 0, 0],
 					length: 0,
-					openPoints: element.ui.openPoints
+					openPoints: element.ui.openPoints,
+					pipeNeighbours: {
+						[element.id]: side,
+						[parentElement.id]: parentElementSide as Sides
+					}
 				}
+				removeOpenSide(element, side)
+				removeOpenSide(parentElement, parentElementSide as Sides)
 				addPipe(newElem, newUi, parentElement!, element)
-				dispatch({ type: 'setParentElement', value: null })
-				dispatch({ type: 'setIsActive', value: false })
+				dispatch({ type: 'resetParentElement' })
 			}
 		}
 	}
 
 	return (
 		<group
-			position={[0, 0, 6]}
+			// @ts-ignore 
+			position={ElementLinksPointPosition[element.value.type][side]}
 			{...groupProps}
 
 		>

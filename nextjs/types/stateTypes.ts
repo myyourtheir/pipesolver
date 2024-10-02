@@ -12,7 +12,8 @@ export interface UiConfig {
 	isSelected: boolean
 	position: [number, number, number]
 	length: number,
-	openPoints: Sides[]
+	openPoints: Sides[],
+	pipeNeighbours?: Record<string, Sides>
 	// TODO Добавить определители открытх точек
 }
 
@@ -62,8 +63,7 @@ export type ElementParamsUnion = PipeParams | PumpParams | GateValveParams | Saf
 export interface UnsteadyInputData {
 	cond_params: CondParams
 	pipeline: Graph,
-	lastTouchedElement: GraphNode | null,
-	openElements: Set<GraphNode>
+
 }
 
 export type ElementsType = ElementParamsUnion['type']
