@@ -12,6 +12,7 @@ import OrthoGateValve from './Objects/mappedElements/OrthoGateValve'
 import OrthoSafeValve from './Objects/mappedElements/OrthoSafeValve'
 import { CanvasContext, CanvasContextProps } from '..'
 import { defaultOrthoElementsConfig } from '@/lib/globalStore/defaultOrthoElementsConfig'
+import OrthoTee from './Objects/mappedElements/OrthoTee'
 
 
 const OrthograthicController = () => {
@@ -39,6 +40,9 @@ const OrthograthicController = () => {
 				}
 				else if (elem.value.type === 'safe_valve') {
 					return <OrthoSafeValve element={elem} key={elem.id} />
+				}
+				else if (elem.value.type === 'tee') {
+					return <OrthoTee element={elem} key={elem.id} />
 				}
 			})}
 		</group>

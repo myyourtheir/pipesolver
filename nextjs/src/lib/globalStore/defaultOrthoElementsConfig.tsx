@@ -1,7 +1,3 @@
-
-
-
-import { ElemProps } from '@/app/home/(components)/SchemeCanvas/3dCanvas/mappedElements/types'
 import { PlotConfig } from '../../../types/plotConfigTypes'
 
 
@@ -55,5 +51,12 @@ export const defaultOrthoElementsConfig: PlotConfig = {
 	general: {
 		selectedColor: 'orange',
 		baseColor: 'white'
+	},
+	tee: {
+		length: 1,
+		width: 1,
+		height: 0.5,
+		maxNeighbors: 3,
+		depth: 1
 	}
 }

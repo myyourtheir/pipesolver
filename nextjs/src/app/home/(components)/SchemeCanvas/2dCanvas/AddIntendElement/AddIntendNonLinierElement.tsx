@@ -15,7 +15,8 @@ export const elementsDefaultOpenPoints = {
 	gate_valve: ['left', 'right'],
 	safe_valve: ['left', 'right'],
 	provider: ['right'],
-	consumer: ['left']
+	consumer: ['left'],
+	tee: ['left', 'right', 'top']
 }
 
 const AddIntendNonLinierElement = () => {

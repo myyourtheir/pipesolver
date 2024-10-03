@@ -7,6 +7,7 @@ import PumpDisplay from './PumpDisplay'
 import SafeValveDisplay from './SafeValveDisplay'
 import { Group, Mesh } from 'three'
 import { ThreeEvent } from '@react-three/fiber'
+import TeeDisplay from './TeeDispaly'
 
 type ElementsDisplayProps = {
 	onClick: (e: ThreeEvent<MouseEvent>) => void,
@@ -28,6 +29,9 @@ const ElementsDisplay = forwardRef<Group, ElementsDisplayProps>(function Element
 	}
 	else if (elemType === 'safe_valve') {
 		return < SafeValveDisplay onClick={onClick} ref={ref} />
+	}
+	else if (elemType === 'tee') {
+		return < TeeDisplay onClick={onClick} ref={ref} />
 	}
 	return null
 })

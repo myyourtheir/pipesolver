@@ -52,6 +52,9 @@ const initialState: State = {
 		type: 'safe_valve',
 		coef_q: 0.5,
 		max_pressure: 9
+	},
+	tee: {
+		type: 'tee'
 	}
 }
 

@@ -9,8 +9,16 @@ export type PlotConfig = {
 	consumer: ProvConsConfig & SharedPlotConfig,
 	gate_valve: GateValveConfig & SharedPlotConfig,
 	safe_valve: SafeValveConfig & SharedPlotConfig,
+	tee: TeeCongig & SharedPlotConfig,
 	general: GeneralSettings,
 
+}
+
+export type TeeCongig = {
+	length: number,
+	width: number,
+	height: number,
+	depth: number
 }
 
 export type PipeConfig = {

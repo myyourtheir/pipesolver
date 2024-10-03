@@ -13,7 +13,7 @@ import GateValveElementContent from '@/components/ElementsContent/GateValveEleme
 import SafeValveElementContent from '@/components/ElementsContent/SafeValveElementContent'
 import { ElementContentType } from '@/components/ElementsContent/ContentType'
 
-const TypeToTitles: Record<ElementsType, { title: string, form: FC<ElementContentType> }> = {
+const TypeToTitles: Record<ElementsType, { title: string, form?: FC<ElementContentType> }> = {
 	pipe: {
 		title: 'Труба',
 		form: (props) => <PipeElementContent {...props} />
@@ -37,6 +37,9 @@ const TypeToTitles: Record<ElementsType, { title: string, form: FC<ElementConten
 	safe_valve: {
 		title: 'Клапан',
 		form: (props) => <SafeValveElementContent {...props} />
+	},
+	tee: {
+		title: 'Тройник',
 	}
 }
 
@@ -64,11 +67,14 @@ const TreeList = () => {
 									}
 								>
 									{
-										TypeToTitles[element.value.type].form({
-											defaultValues: element.value,
-											submitButtonTitle: "Изменить",
-											onSubmit: (values) => { updateElement(values, idx) }
-										})
+										TypeToTitles[element.value.type].hasOwnProperty('form') ?
+											//@ts-ignore
+											TypeToTitles[element.value.type].form({
+												defaultValues: element.value,
+												submitButtonTitle: "Изменить",
+												onSubmit: (values) => { updateElement(values, idx) }
+											})
+											: null
 									}
 								</TreeItemContextMenu>
 							))

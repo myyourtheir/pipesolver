@@ -53,7 +53,10 @@ const TreeItemContextMenu: FC<ContextProps> = ({ children, idx, element, classNa
 						</ContextMenuTrigger>
 					</PopoverTrigger>
 					<ContextMenuContent>
-						<ContextMenuItem onClick={() => setPopoverOpen(true)}>Параметры</ContextMenuItem>
+						{
+							children &&
+							<ContextMenuItem onClick={() => setPopoverOpen(true)}>Параметры</ContextMenuItem>
+						}
 						<ContextMenuItem onClick={hanldeDelete}>Удалить</ContextMenuItem>
 					</ContextMenuContent>
 				</ContextMenu>

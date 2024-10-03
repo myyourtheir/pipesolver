@@ -26,6 +26,11 @@ export const ElementLinksPointPosition:
 	},
 	provider: {
 		right: [0.35, 0, 2]
+	},
+	tee: {
+		left: [-0.35, 0, 2],
+		right: [0.35, 0, 2],
+		top: [0, 0.43, 2]
 	}
 }
 
