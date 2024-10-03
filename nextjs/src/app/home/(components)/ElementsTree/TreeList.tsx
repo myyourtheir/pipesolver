@@ -94,7 +94,6 @@ export interface TreeItemProps {
 }
 
 const TreeItem: FC<TreeItemProps> = ({ element, onClick, isSelected }) => {
-	console.log(isSelected)
 	return (
 		<li onClick={onClick} className={`text-sm hover:ring-1 hover:ring-ring rounded-md w-full border border-transparent ${isSelected && ' border-gray-400'}`}>
 			{TypeToTitles[element.type].title}

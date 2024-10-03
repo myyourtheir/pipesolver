@@ -16,6 +16,7 @@ import Element, { ElementContext } from '@/components/Element'
 import { ElementParamsUnion } from '../../../../../types/stateTypes'
 import PumpElementContent from '@/components/ElementsContent/PumpElementContent'
 import { useDefaultElementsConfig } from '../../(contexts)/useDefaultElementsConfig'
+import TeeFav from '@/components/ui/TeeFav'
 
 const height = 60
 const width = 60
@@ -99,6 +100,11 @@ const ElementsList = () => {
 					submitButtonTitle={submitButtonTitle}
 				/>
 			</Element>
+			<Element
+				elementType='tee'
+				hoverTitle='Тройник'
+				TriggerContent={({ className }: { className: string }) => <TeeFav width={55} height={55} className={className} />}
+			/>
 		</div>
 
 	)

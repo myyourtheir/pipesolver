@@ -41,7 +41,7 @@ export const useCallUnsteadyFlowWs = (
 		// }))
 		console.log(pipeline.nodes)
 		if (isValidPipeline.isConusmer == true && isValidPipeline.isPipe == true) {
-			setIsLoading(true)
+			// setIsLoading(true)
 			resetResult()
 			const ws = new WebSocket(`ws://${url}/unsteady_flow`)
 			ws.onerror = (ev) => {

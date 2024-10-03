@@ -58,7 +58,11 @@ export interface SafeValveParams {
 	max_pressure: number
 }
 
-export type ElementParamsUnion = PipeParams | PumpParams | GateValveParams | SafeValveParams | ConsumerParams | ProviderParams
+export type TeeParams = {
+	type: 'tee'
+}
+
+export type ElementParamsUnion = PipeParams | PumpParams | GateValveParams | SafeValveParams | ConsumerParams | ProviderParams | TeeParams
 
 export interface UnsteadyInputData {
 	cond_params: CondParams

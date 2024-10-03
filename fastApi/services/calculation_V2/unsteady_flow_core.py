@@ -252,7 +252,9 @@ class Unsteady_flow_core:
             if current_element.type == "provider":
                 element_result = provider_method(
                     current_node,
-                    child_node=pipeline[current_node.children[0]],
+                    child_node=pipeline[
+                        current_node.children[0]
+                    ],  # TODO возможно тут ошибка
                 )
             elif current_element.type == "pipe":
                 element_result = pipe_method(

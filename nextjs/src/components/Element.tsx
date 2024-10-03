@@ -25,7 +25,7 @@ interface ElementProps {
 	TriggerContent: any,
 	isHover?: boolean
 	hoverTitle?: string
-	children: React.ReactNode,
+	children?: React.ReactNode,
 	elementType: ElementParamsUnion['type']
 }
 
@@ -45,6 +45,35 @@ const Element: FC<ElementProps> = ({ TriggerContent, children, hoverTitle, isHov
 			dispatch({ type: 'resetParentElement' })
 		}
 	}
+
+	if (!children) {
+		return (
+			<>
+				{
+					isHover ?
+						<HoverCard openDelay={100} closeDelay={100}>
+							<HoverCardTrigger
+								onClick={handleElementClick}
+							>
+								<div
+									className={`
+										w-full h-full flex items-center justify-center hover:ring-1 hover:ring-ring rounded-sm 
+										${elementModeState.modeElement === elementType && 'shadow-inner-md bg-zinc-100'} 
+									`}
+								>
+									<TriggerContent />
+								</div>
+							</HoverCardTrigger>
+							<HoverCardContent className=' w-fit py-0 px-1 text-xs text-[#F5F5F5]  bg-[#333333] border-none shadow-none h-fit' side='bottom' align='center'>
+								{hoverTitle}
+							</HoverCardContent>
+						</HoverCard>
+						: <TriggerContent />
+				}
+			</>
+		)
+	}
+
 	return (
 		<ElementContext.Provider value={{ setOpen }}>
 			<Popover
@@ -90,26 +119,8 @@ const Element: FC<ElementProps> = ({ TriggerContent, children, hoverTitle, isHov
 				<PopoverContent side='bottom'>
 					{children}
 				</PopoverContent>
+
 			</Popover>
-			{/* <Popover open={open} onOpenChange={setOpen}>
-				<PopoverTrigger className='disabled:cursor-not-allowed'>
-					{
-						isHover ?
-							<HoverCard openDelay={100} closeDelay={100}>
-								<HoverCardTrigger >
-									<TriggerContent />
-								</HoverCardTrigger>
-								<HoverCardContent className=' w-fit py-0 px-1 text-xs text-[#F5F5F5]  bg-[#333333] border-none shadow-none h-fit' side='bottom' align='center'>
-									{hoverTitle}
-								</HoverCardContent>
-							</HoverCard>
-							: <TriggerContent />
-					}
-				</PopoverTrigger>
-				<PopoverContent side='right'>
-					{children}
-				</PopoverContent>
-			</Popover> */}
 		</ElementContext.Provider>
 	)
 }
