@@ -12,34 +12,28 @@ import PumpElementContent from '@/components/ElementsContent/PumpElementContent'
 import GateValveElementContent from '@/components/ElementsContent/GateValveElementContent'
 import SafeValveElementContent from '@/components/ElementsContent/SafeValveElementContent'
 import { ElementContentType } from '@/components/ElementsContent/ContentType'
+import { GraphNode } from '@/utils/graph/GraphNode'
 
-const TypeToTitles: Record<ElementsType, { title: string, form?: FC<ElementContentType> }> = {
+const TypeToTitles: Record<ElementsType, { form?: FC<ElementContentType> }> = {
 	pipe: {
-		title: 'Труба',
 		form: (props) => <PipeElementContent {...props} />
 	},
 	pump: {
-		title: 'Насос',
 		form: (props) => <PumpElementContent {...props} />
 	},
 	consumer: {
-		title: 'Потребитель',
 		form: (props) => <ConsumerElementContent {...props} />
 	},
 	provider: {
-		title: 'Поставщик',
 		form: (props) => <ProviderElementContent {...props} />
 	},
 	gate_valve: {
-		title: 'Задвижка',
 		form: (props) => <GateValveElementContent {...props} />
 	},
 	safe_valve: {
-		title: 'Клапан',
 		form: (props) => <SafeValveElementContent {...props} />
 	},
 	tee: {
-		title: 'Тройник',
 	}
 }
 
@@ -56,11 +50,11 @@ const TreeList = () => {
 							pipeline.nodes.map((element, idx) => (
 								<TreeItemContextMenu
 									key={element.id}
-									element={element.value}
+									element={element}
 									idx={idx}
 									trigger={
 										<TreeItem
-											element={element.value}
+											element={element}
 											isSelected={element.ui.isSelected}
 											onClick={() => setIsSelected(idx)}
 										/>
@@ -94,7 +88,7 @@ export default TreeList
 
 
 export interface TreeItemProps {
-	element: ElementParamsUnion,
+	element: GraphNode,
 	onClick?: () => void,
 	isSelected: boolean
 }
@@ -102,7 +96,7 @@ export interface TreeItemProps {
 const TreeItem: FC<TreeItemProps> = ({ element, onClick, isSelected }) => {
 	return (
 		<li onClick={onClick} className={`text-sm hover:ring-1 hover:ring-ring rounded-md w-full border border-transparent ${isSelected && ' border-gray-400'}`}>
-			{TypeToTitles[element.type].title}
+			{element.name}
 		</li>
 	)
 }

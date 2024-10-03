@@ -3,6 +3,7 @@ import { useResultsStore } from '../../lib/globalStore/resultsStore'
 import { useUnsteadyInputStore } from '../../lib/globalStore/unsteadyFlowStore'
 import { GraphNode } from '../graph/GraphNode'
 import { Dispatch, FC, SetStateAction } from 'react'
+import { ResultMomentData } from '../../../types/stateTypes'
 
 
 const url = process.env.BASE_URL
@@ -31,14 +32,14 @@ export const useCallUnsteadyFlowWs = (
 	})
 
 	const calcUnsteadyFlow = () => {
-		console.log(pipeline.nodes.map(el => {
-			return {
-				id: el.id,
-				type: el.value.type,
-				parents: el.parents.map(el => el.id),
-				children: el.children.map(el => el.id)
-			}
-		}))
+		// console.log(pipeline.nodes.map(el => {
+		// 	return {
+		// 		id: el.id,
+		// 		type: el.value.type,
+		// 		parents: el.parents.map(el => el.id),
+		// 		children: el.children.map(el => el.id)
+		// 	}
+		// }))
 		// console.log(pipeline.nodes)
 		if (isValidPipeline.isConusmer == true && isValidPipeline.isPipe == true) {
 			// setIsLoading(true)
@@ -54,12 +55,12 @@ export const useCallUnsteadyFlowWs = (
 					pipeline: pipeline.toObj()
 				}
 			)
-			console.log(pipeline.toObj())
+			// console.log(pipeline.toObj())
 			ws.onopen = (ev) => {
 				ws.send(message2)
 			}
 			ws.onmessage = (event) => {
-				const data = JSON.parse(event.data)
+				const data: ResultMomentData = JSON.parse(event.data)
 				pushNewData(data)
 			}
 		} else {

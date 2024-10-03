@@ -1,19 +1,23 @@
 import { ElementParamsUnion, UiConfig } from '../../../types/stateTypes'
+import { typesToNames } from './typesToNames'
 
 export class GraphNode {
 	id: string
+	name: string
 	value: ElementParamsUnion
 	children: GraphNode[]
 	parents: GraphNode[]
 	ui: UiConfig
 
 	constructor(value: ElementParamsUnion, ui: UiConfig) {
-		this.id = `${Date.now()}`.slice(9, 13)
-		// this.id = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`
+		const id = `${Date.now()}`.slice(9, 13)
+		// const id = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`
+		this.id = id
 		this.value = value
 		this.children = []
 		this.parents = []
 		this.ui = ui
+		this.name = typesToNames[value.type].name + ' ' + id
 	}
 	hasChild() {
 		return this.children.length !== 0 ? true : false

@@ -1,8 +1,8 @@
 import { useResultsStore } from '@/lib/globalStore/resultsStore'
 import { Chart, Scatter } from 'react-chartjs-2'
-import { DavleniyaOptions, NaporyOptions, SkorostyOptions } from './chartOprions'
+import { DavleniyaOptions, NaporyOptions, SkorostyOptions } from '../chartOprions'
 import { ChartData, } from 'chart.js'
-import { OneSectionResponse, ResultMomentData } from '../../../../../types/stateTypes'
+import { OneSectionResponse, ResultMomentData } from '../../../../../../types/stateTypes'
 import { FC } from 'react'
 
 import {
@@ -16,6 +16,7 @@ import {
 	Legend,
 	registerables
 } from 'chart.js'
+import ChartElementSelector from './ChartElementSelector'
 
 ChartJS.register(
 	...registerables,
@@ -85,10 +86,12 @@ const MyChart: FC<chartProps> = ({ data }) => {
 			},
 		]
 	}
-
+	console.log(davleniyaData.datasets[0].data)
 
 	return (
-		<div>
+
+		<div className='flex flex-col'>
+			<ChartElementSelector />
 			<Scatter
 				options={NaporyOptions}
 				data={naporyData} />
@@ -100,6 +103,7 @@ const MyChart: FC<chartProps> = ({ data }) => {
 				data={skorostyData} />
 
 		</div>
+
 	)
 }
 
