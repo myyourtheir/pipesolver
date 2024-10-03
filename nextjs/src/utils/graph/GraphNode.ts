@@ -8,7 +8,8 @@ export class GraphNode {
 	ui: UiConfig
 
 	constructor(value: ElementParamsUnion, ui: UiConfig) {
-		this.id = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`
+		this.id = `${Date.now()}`.slice(9, 13)
+		// this.id = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`
 		this.value = value
 		this.children = []
 		this.parents = []
