@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useReducer } from 'react'
+import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useReducer } from 'react'
 
 
 type State = {
@@ -18,6 +18,11 @@ const initialState: State = {
 type ContextType = {
 	state: State,
 	dispatch: React.Dispatch<Actions>
+} & ExtraState
+
+type ExtraState = {
+	setCharts: Dispatch<SetStateAction<string[]>>,
+	chartId: string,
 }
 
 const SelectedElementsChartContext = createContext<ContextType | null>(null)
@@ -37,10 +42,10 @@ const reducer = (state: State, action: Actions): State => {
 	}
 }
 
-export function SelectedElementsChartContextProvider({ children }: { children: ReactNode }) {
+export function SelectedElementsChartContextProvider({ children, chartId, setCharts }: { children: ReactNode } & ExtraState) {
 	const [state, dispatch] = useReducer(reducer, initialState)
 	return (
-		<SelectedElementsChartContext.Provider value={{ state, dispatch }}>
+		<SelectedElementsChartContext.Provider value={{ state, dispatch, chartId, setCharts }}>
 			{children}
 		</SelectedElementsChartContext.Provider>
 	)

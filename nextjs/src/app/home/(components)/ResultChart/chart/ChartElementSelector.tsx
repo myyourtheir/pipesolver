@@ -5,21 +5,24 @@ import { useUnsteadyInputStore } from '@/lib/globalStore/unsteadyFlowStore'
 import { GraphNode } from '@/utils/graph/GraphNode'
 import { useSelectedElementsChartContext } from './SelectedElementsChartContext'
 
+
 function ChartElementSelector() {
-	const { dispatch } = useSelectedElementsChartContext()
+	const { chartId, setCharts } = useSelectedElementsChartContext()
 	return (
 		<Popover>
 			<div className='flex justify-between items-center w-full'>
-				<PopoverTrigger asChild>
+				<PopoverTrigger asChild >
 					<Button className='h-8 w-fit self-center p-4 my-3' >
 						Выбрать элементы
 					</Button>
 				</PopoverTrigger>
-				<Button onClick={() => dispatch({ type: 'reset' })} className='h-8 w-fit self-center p-4 my-3' >
-					Сброс
+				<Button onClick={() => {
+					setCharts(prev => prev.filter(el => el !== chartId))
+				}}>
+					-
 				</Button>
 			</div>
-			<PopoverContent>
+			<PopoverContent side='left' align='start'>
 				<ChartElementSlectorContent />
 			</PopoverContent>
 		</Popover>
@@ -28,10 +31,13 @@ function ChartElementSelector() {
 
 
 function ChartElementSlectorContent() {
-
+	const { dispatch } = useSelectedElementsChartContext()
 	const { pipeline } = useUnsteadyInputStore()
 	return (
-		<div className=''>
+		<div className='flex flex-col justify-center items-center'>
+			<Button onClick={() => dispatch({ type: 'reset' })} className='self-end h-8 w-fit  p-4 ' >
+				Сброс
+			</Button>
 			<ScrollArea className='w-full h-[320px] mt-2'>
 				{
 					pipeline.nodes.length !== 0 ? (

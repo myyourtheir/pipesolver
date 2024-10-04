@@ -20,6 +20,7 @@ import { SelectedElementsChartContextProvider } from './chart/SelectedElementsCh
 
 const ResultChart: FC<ElementsProps> = ({ containerRef }) => {
 	const { chartData, iter, setIter } = useResultsStore(state => state)
+	const [charts, setCharts] = useState<string[]>([])
 	const intervalRef = useRef<NodeJS.Timeout>()
 	// const [iter, setIter] = useState(0)
 	const [isPlaying, setIsPlaying] = useState(false)
@@ -29,23 +30,12 @@ const ResultChart: FC<ElementsProps> = ({ containerRef }) => {
 		if (intervalRef.current)
 			clearInterval(intervalRef.current)
 		intervalRef.current = setInterval(() => {
-			// console.log(iter)
-			// if (chartData[iter].t >= duration) {
-			// 	setIsPlaying(false)
-			// } else {
 			if (isPlaying) {
 				setIter(prevIter => prevIter + 1)
 			}
-			// }
 		}, ms)
 	}
 
-	// Для первого запуска
-	useEffect(() => {
-		if (chartData.length === Math.floor(0.2 * duration)) {
-			setIsPlaying(true)
-		}
-	}, [chartData.length, duration])
 	// Проверка на конец итераций
 	useEffect(() => {
 		if (chartData.length !== 0 && chartData[iter]?.t >= duration) {
@@ -65,10 +55,9 @@ const ResultChart: FC<ElementsProps> = ({ containerRef }) => {
 	const handlePlayPauseClick = () => {
 		setIsPlaying(prev => !prev)
 	}
-
 	// if (chartData.length !== 0) {
 	return (
-		<DraggableLayout refContainer={containerRef} headerName='Результаты расчета' className='top-auto  self-center' hideable={true} defaultState={true} resizable={true}>
+		<DraggableLayout refContainer={containerRef} headerName='Результаты расчета' className='top-auto  self-center' hideable={true} defaultState={true} >
 			<section>
 				<div className='flex justify-between items-center w-full'>
 					<div className='flex gap-2 items-center'>
@@ -112,9 +101,20 @@ const ResultChart: FC<ElementsProps> = ({ containerRef }) => {
 							step={1} />
 					}
 				</div>
-				<SelectedElementsChartContextProvider>
-					<MyChart data={buildChartData({ data: chartData, index: iter })} />
-				</SelectedElementsChartContextProvider>
+				<Button onClick={() => setCharts(prev => [...prev, Date.now().toString()])} className='m-2'>
+					+
+				</Button>
+
+				<div className='flex gap-4'>
+					{
+						charts.map(id =>
+							<SelectedElementsChartContextProvider key={id} chartId={id} setCharts={setCharts}>
+								<MyChart chartData={chartData} index={iter} />
+							</SelectedElementsChartContextProvider>
+
+						)
+					}
+				</div>
 			</section>
 		</DraggableLayout>
 	)
