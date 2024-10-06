@@ -3,7 +3,7 @@ import { BlockDisplayStoreActions } from '../../../types/actionTypes'
 import { BlockDisplayStoreState } from '../../../types/stateTypes'
 
 export const useBlockDisplayStore = create<BlockDisplayStoreActions & BlockDisplayStoreState>((set) => ({
-	conditionsBarDisplay: true,
+	conditionsBarDisplay: false,
 	elementsBarDisplay: true,
 	elementsTreeDisplay: true,
 	resultChartDisplay: false,

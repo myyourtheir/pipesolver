@@ -23,7 +23,6 @@ interface DraggableLayoutProps {
 const DraggableLayout: FC<DraggableLayoutProps> = ({ refContainer, children, extraHeaderElement, headerName, className, hideable = true, defaultState = true, resizable = false, open, toggleOpen }) => {
 	const toolBarRef = useRef<HTMLDivElement>(null)
 	const toolBarHeaderRef = useRef(null)
-	const HeaderRef = useRef<HTMLDivElement>(null)
 	const lastSize = useRef<{ height: string; width: string }>({ height: '0px', width: '0px' })
 	useEffect(() => {
 		if (toolBarRef.current)
@@ -37,10 +36,9 @@ const DraggableLayout: FC<DraggableLayoutProps> = ({ refContainer, children, ext
 
 	return (
 
-		<Card ref={toolBarRef} className={`absolute h-fit w-fit rounded-md border bg-white ${open ? 'block' : 'hidden'}  ${className}  ${resizable && 'resize overflow-hidden'} ${'p-1'}`}>
+		<Card ref={toolBarRef} className={`absolute h-fit w-fit rounded-md border bg-white ${open ? 'visible' : 'invisible'}  ${className}  ${resizable && 'resize overflow-hidden'} ${'p-1'}`}>
 			<CardHeader
 				className='flex-row justify-between items-center border-b p-0  gap-4 space-y-0 pb-1'
-				ref={HeaderRef}
 			>
 				<GripHorizontal ref={toolBarHeaderRef} className='cursor-pointer ml-1 touch-none' size={15} />
 				<CardTitle className='whitespace-nowrap text-base'>
@@ -55,19 +53,6 @@ const DraggableLayout: FC<DraggableLayoutProps> = ({ refContainer, children, ext
 						className='border-none my-1 mr-1'
 						size={'xsm'}
 						onClick={() => {
-							if (toolBarRef.current) {
-								if (open) {
-									lastSize.current = {
-										height: `${toolBarRef.current.style.height}`,
-										width: `${toolBarRef.current.style.width}`
-									}
-									toolBarRef.current.style.height = `${HeaderRef.current?.clientHeight}px`
-									toolBarRef.current.style.width = `${HeaderRef.current?.clientWidth}px`
-								} else {
-									toolBarRef.current.style.height = lastSize.current.height
-									toolBarRef.current.style.width = lastSize.current.width
-								}
-							}
 							toggleOpen()
 						}
 						}
