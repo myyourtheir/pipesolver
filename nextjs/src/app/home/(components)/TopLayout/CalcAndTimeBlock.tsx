@@ -7,7 +7,7 @@ import { useUnsteadyInputStore } from '@/lib/globalStore/unsteadyFlowStore'
 const CalcAndTimeBlock = () => {
 	const { cond_params, updateCondParams } = useUnsteadyInputStore()
 	return (
-		<div className='justify-between flex gap-2 px-4'>
+		<div className='justify-end flex gap-10 px-4'>
 			<TimeToIterForm defaultValues={cond_params} onSubmit={updateCondParams} />
 			<CalcButton />
 		</div>

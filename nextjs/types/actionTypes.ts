@@ -18,3 +18,10 @@ export interface ResultsActions {
 	resetResult: () => void,
 	setIter: (val: fnOrValue<number>) => void
 }
+
+export type BlockDisplayStoreActions = {
+	toggleElementsBar: () => void
+	toggleElementsTree: () => void
+	toggleResultChart: () => void
+	toggleConditionsBar: () => void
+}

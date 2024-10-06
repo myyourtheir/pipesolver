@@ -97,3 +97,11 @@ export interface ResultsData {
 	chartData: Array<ResultMomentData>,
 	iter: number
 }
+
+
+export type BlockDisplayStoreState = {
+	conditionsBarDisplay: boolean,
+	elementsBarDisplay: boolean,
+	elementsTreeDisplay: boolean,
+	resultChartDisplay: boolean,
+}

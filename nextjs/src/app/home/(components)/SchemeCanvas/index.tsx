@@ -2,12 +2,8 @@
 import React, { FC, useEffect, useRef, useState } from 'react'
 import DraggableLayout from '@/components/ui/draggableLayout'
 import { RefObject } from 'react'
-import SCanvas from './3dCanvas/SCanvas'
 import OrtoCanvas from './2dCanvas'
-import {
-	ToggleGroup,
-	ToggleGroupItem,
-} from "@/components/ui/toggle-group"
+
 
 export interface ElementsProps {
 	containerRef: RefObject<HTMLElement>

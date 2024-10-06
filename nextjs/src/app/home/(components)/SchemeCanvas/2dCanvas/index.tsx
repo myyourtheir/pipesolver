@@ -40,7 +40,7 @@ const OrtoCanvas = () => {
 					openPoints: openPointsRef.current,
 					cameraRef
 				}}>
-					<Stats />
+					{/* <Stats /> */}
 					<OrthographicCamera ref={cameraRef} makeDefault position={[0, 0, 10]} zoom={50} />
 					<ambientLight />
 					<directionalLight castShadow args={['yellow', 1]} position={cameraRef.current ? [cameraRef.current.position.x, -10, 5] : [0, -10, 5]} />

@@ -18,7 +18,7 @@ import buildChartData from './buildChartData'
 import { SelectedElementsChartContextProvider } from './chart/SelectedElementsChartContext'
 
 
-const ResultChart: FC<ElementsProps> = ({ containerRef }) => {
+const ResultChart: FC<ElementsProps> = ({ containerRef, open, toggleOpen }) => {
 	const { chartData, iter, setIter } = useResultsStore(state => state)
 	const [charts, setCharts] = useState<string[]>([])
 	const intervalRef = useRef<NodeJS.Timeout>()
@@ -57,7 +57,7 @@ const ResultChart: FC<ElementsProps> = ({ containerRef }) => {
 	}
 	// if (chartData.length !== 0) {
 	return (
-		<DraggableLayout refContainer={containerRef} headerName='Результаты расчета' className='top-auto  self-center' hideable={true} defaultState={true} >
+		<DraggableLayout open={open} toggleOpen={toggleOpen} refContainer={containerRef} headerName='Результаты расчета' className='top-10  left-52' hideable={true} defaultState={true} >
 			<section>
 				<div className='flex justify-between items-center w-full'>
 					<div className='flex gap-2 items-center'>

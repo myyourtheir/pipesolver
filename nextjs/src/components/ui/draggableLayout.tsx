@@ -16,9 +16,11 @@ interface DraggableLayoutProps {
 	hideable?: boolean,
 	defaultState?: boolean,
 	resizable?: boolean,
+	open: boolean,
+	toggleOpen: () => void
 }
 
-const DraggableLayout: FC<DraggableLayoutProps> = ({ refContainer, children, extraHeaderElement, headerName, className, hideable = true, defaultState = true, resizable = false, }) => {
+const DraggableLayout: FC<DraggableLayoutProps> = ({ refContainer, children, extraHeaderElement, headerName, className, hideable = true, defaultState = true, resizable = false, open, toggleOpen }) => {
 	const toolBarRef = useRef<HTMLDivElement>(null)
 	const toolBarHeaderRef = useRef(null)
 	const HeaderRef = useRef<HTMLDivElement>(null)
@@ -30,12 +32,12 @@ const DraggableLayout: FC<DraggableLayoutProps> = ({ refContainer, children, ext
 				width: `${toolBarRef.current.style.width}px`
 			}
 	}, [])
-	const [isOpen, setIsOpen] = useState(defaultState)
 
 	useDraggable({ refEventsElement: toolBarHeaderRef, refTransformElement: toolBarRef, refContainer, })
 
 	return (
-		<Card ref={toolBarRef} className={`absolute h-fit w-fit rounded-md border bg-white   ${className}  ${resizable && isOpen ? 'resize overflow-hidden' : 'resize-none'} ${isOpen ? 'p-1' : 'p-0 w-fit h-fit'}`}>
+
+		<Card ref={toolBarRef} className={`absolute h-fit w-fit rounded-md border bg-white ${open ? 'block' : 'hidden'}  ${className}  ${resizable && 'resize overflow-hidden'} ${'p-1'}`}>
 			<CardHeader
 				className='flex-row justify-between items-center border-b p-0  gap-4 space-y-0 pb-1'
 				ref={HeaderRef}
@@ -54,7 +56,7 @@ const DraggableLayout: FC<DraggableLayoutProps> = ({ refContainer, children, ext
 						size={'xsm'}
 						onClick={() => {
 							if (toolBarRef.current) {
-								if (isOpen) {
+								if (open) {
 									lastSize.current = {
 										height: `${toolBarRef.current.style.height}`,
 										width: `${toolBarRef.current.style.width}`
@@ -66,24 +68,18 @@ const DraggableLayout: FC<DraggableLayoutProps> = ({ refContainer, children, ext
 									toolBarRef.current.style.width = lastSize.current.width
 								}
 							}
-							setIsOpen(prev => !prev)
+							toggleOpen()
 						}
 						}
 					>
-						{
-							isOpen
-								? '-'
-								: <Maximize2 size={14} />
-						}
+						-
 					</Button> :
 					<>
 					</>
 				}
 			</CardHeader>
-			<CardContent className={` w-full h-[calc(100%-1em-8px)] ${isOpen ? 'p-1' : 'hidden p-0 w-0 h-0'}`}>
-				{isOpen &&
-					children
-				}
+			<CardContent className={` w-full h-[calc(100%-1em-8px)] p-1 `}>
+				{children}
 			</CardContent>
 		</Card>
 	)

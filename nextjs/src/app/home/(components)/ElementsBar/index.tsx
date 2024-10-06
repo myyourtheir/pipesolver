@@ -6,14 +6,16 @@ import ElementsList from './ElementsList'
 import { useUnsteadyInputStore } from '@/lib/globalStore/unsteadyFlowStore'
 
 export interface ElementsProps {
-	containerRef: RefObject<HTMLElement>
+	containerRef: RefObject<HTMLElement>,
+	open: boolean,
+	toggleOpen: () => void
 }
 
-const ElementsBar: FC<ElementsProps> = ({ containerRef }) => {
+const ElementsBar: FC<ElementsProps> = ({ containerRef, open, toggleOpen }) => {
 
 
 	return (
-		<DraggableLayout refContainer={containerRef} headerName='Элементы' className='left-5 top-10  w-fit self-start'>
+		<DraggableLayout open={open} toggleOpen={toggleOpen} refContainer={containerRef} headerName='Элементы' className='left-5 top-10  w-fit self-start'>
 			<section>
 				<ElementsList />
 			</section>
