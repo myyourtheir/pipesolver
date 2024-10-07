@@ -10,7 +10,7 @@ function BarsOpenController() {
 	const openController = useBlockDisplayStore()
 
 	return (
-		<aside className='flex gap-2 items-center mx-4' >
+		<aside className='flex gap-2 items-center ' >
 			<BarsOpenElement
 				hoverContent={
 					'Элементы'
@@ -62,7 +62,7 @@ const BarsOpenElement = ({ toggle, open, trigger, hoverContent }: BarsOpenElemen
 	return (
 		<TooltipProvider delayDuration={100}>
 			<Tooltip >
-				<TooltipTrigger asChild>
+				<TooltipTrigger asChild >
 					<Button
 						variant={'outline'}
 						className={`${open ? 'shadow-inner bg-zinc-200 hover:bg-zinc-200' : 'bg-white'} `}
@@ -71,7 +71,7 @@ const BarsOpenElement = ({ toggle, open, trigger, hoverContent }: BarsOpenElemen
 						{trigger}
 					</Button>
 				</TooltipTrigger>
-				<TooltipContent>
+				<TooltipContent side='bottom'>
 					{hoverContent}
 				</TooltipContent>
 			</Tooltip>

@@ -1,12 +1,13 @@
 import { elements } from 'chart.js'
-import { ElementParamsUnion } from '../../../types/stateTypes'
+import { ElementParamsUnion, UiConfig } from '../../../types/stateTypes'
 import { GraphNode } from './GraphNode'
 
 type PreparedElementsObjectForRequest = {
 	id: string,
 	value: ElementParamsUnion,
 	children: string[],
-	parents: string[]
+	parents: string[],
+	ui?: UiConfig
 }
 
 export class Graph {
@@ -64,13 +65,14 @@ export class Graph {
 
 
 
-	toObj() {
+	toObj({ withUi }: { withUi?: boolean }) {
 		return this.nodes.reduce((acc: Record<string, PreparedElementsObjectForRequest>, node) => {
 			acc[node.id] = {
 				id: node.id,
 				value: node.value,
 				children: node.children.map(child => child.id),
-				parents: node.parents.map(parent => parent.id)
+				parents: node.parents.map(parent => parent.id),
+				ui: withUi ? node.ui : undefined
 			}
 			return acc
 		},

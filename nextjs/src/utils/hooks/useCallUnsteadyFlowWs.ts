@@ -52,7 +52,7 @@ export const useCallUnsteadyFlowWs = (
 			const message2 = JSON.stringify(
 				{
 					cond_params,
-					pipeline: pipeline.toObj()
+					pipeline: pipeline.toObj({ withUi: false })
 				}
 			)
 			// console.log(pipeline.toObj())
