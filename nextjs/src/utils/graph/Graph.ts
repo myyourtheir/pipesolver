@@ -1,14 +1,7 @@
 import { elements } from 'chart.js'
-import { ElementParamsUnion, UiConfig } from '../../../types/stateTypes'
+import { ElementParamsUnion, JsonGraphNode, UiConfig } from '../../../types/stateTypes'
 import { GraphNode } from './GraphNode'
 
-type PreparedElementsObjectForRequest = {
-	id: string,
-	value: ElementParamsUnion,
-	children: string[],
-	parents: string[],
-	ui?: UiConfig
-}
 
 export class Graph {
 	nodes: GraphNode[]
@@ -65,14 +58,15 @@ export class Graph {
 
 
 
-	toObj({ withUi }: { withUi?: boolean }) {
-		return this.nodes.reduce((acc: Record<string, PreparedElementsObjectForRequest>, node) => {
+	toObj() {
+		return this.nodes.reduce((acc: Record<string, JsonGraphNode>, node) => {
 			acc[node.id] = {
 				id: node.id,
+				name: node.name,
 				value: node.value,
 				children: node.children.map(child => child.id),
 				parents: node.parents.map(parent => parent.id),
-				ui: withUi ? node.ui : undefined
+				ui: node.ui
 			}
 			return acc
 		},

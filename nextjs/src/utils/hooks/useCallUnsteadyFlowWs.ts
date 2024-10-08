@@ -47,7 +47,7 @@ export const useCallUnsteadyFlowWs = (
 			const message2 = JSON.stringify(
 				{
 					cond_params,
-					pipeline: pipeline.toObj({ withUi: false })
+					pipeline: pipeline.toObj()
 				}
 			)
 			// console.log(pipeline.toObj())
@@ -56,7 +56,6 @@ export const useCallUnsteadyFlowWs = (
 			}
 			ws.onmessage = (event) => {
 				const data: Recieved = JSON.parse(event.data)
-				console.log(data)
 				if (data.status === "OK") {
 					const result = data.data
 					if (result) {
