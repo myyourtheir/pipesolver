@@ -86,10 +86,13 @@ const SaveFormContent = ({ setOpen }: SaveFormContentProps) => {
 				<Input
 					value={title}
 					onChange={e => setTitle(e.target.value)}
+					className='mb-4'
 				/>
-				<Button type='submit'>
-					Сохранить
-				</Button>
+				<div className='flex justify-end'>
+					<Button type='submit'>
+						Сохранить
+					</Button>
+				</div>
 			</form>
 		</DialogContent>
 	)
