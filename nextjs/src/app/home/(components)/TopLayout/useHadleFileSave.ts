@@ -2,8 +2,9 @@ import { useUnsteadyInputStore } from '@/lib/globalStore/unsteadyFlowStore'
 import { CondParams, ElementParamsUnion, JsonGraphNode, UiConfig, zCondParams, zElementParamsUnion, zJsonGraphNode, zUiConfig } from '../../../../../types/stateTypes'
 import { Graph } from '@/utils/graph/Graph'
 import { GraphNode } from '@/utils/graph/GraphNode'
-import { z } from 'zod'
+import { set, z } from 'zod'
 import { toast } from 'sonner'
+import { useState } from 'react'
 
 
 // type JsonGraphNode = {
@@ -28,13 +29,13 @@ const zSchema = z.object({
 	})
 })
 function useHandleFileSave() {
-
-	const handleSaveToPC = (jsonData: object, filename: string) => {
+	const [title, setTitle] = useState<string>('Схема от ' + new Date().toLocaleString())
+	const handleSaveToPC = (jsonData: object) => {
 		const fileData = JSON.stringify(jsonData)
 		const blob = new Blob([fileData], { type: "text/plain" })
 		const url = URL.createObjectURL(blob)
 		const link = document.createElement('a')
-		link.download = `${filename}.json`
+		link.download = `${title}.json`
 		link.href = url
 		link.click()
 	}
@@ -103,7 +104,7 @@ function useHandleFileSave() {
 			}
 		}
 	}
-	return { handleGetFileFromPC, handleSaveToPC }
+	return { handleGetFileFromPC, handleSaveToPC, setTitle, title }
 }
 
 
