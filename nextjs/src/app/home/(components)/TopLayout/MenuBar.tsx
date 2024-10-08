@@ -85,8 +85,6 @@ function TopMenuBar() {
 						})
 					}
 				})
-				console.log(edges)
-				console.log(graph)
 				useUnsteadyInputStore.setState({
 					cond_params,
 					pipeline: graph

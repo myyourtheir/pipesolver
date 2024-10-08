@@ -28,18 +28,17 @@ async def unsteady_flow_ws(websocket: WebSocket):
         await manager.send_json({"message": "Валидация данных не пройдена"}, websocket)
         manager.disconnect(websocket)
         return
-    unstedy_flow_solver = Unsteady_flow_solver(valid_data)
-    generator = unstedy_flow_solver.solve()
-    canContinue = True
-    while canContinue:
-        try:
+    try:
+        unstedy_flow_solver = Unsteady_flow_solver(valid_data)
+        generator = unstedy_flow_solver.solve()
+        max = valid_data.cond_params.time_to_iter
+        current = 0
+        while current < max:
             next_val = next(generator)
-            if next_val:
-                await manager.send_json(next_val.model_dump(), websocket)
-            else:
-                canContinue = False
-        except Exception as e:
-            logger.error(e)
-            manager.disconnect(websocket)
-            return
-    manager.disconnect(websocket)
+            await manager.send_json(next_val.model_dump(), websocket)
+            current = next_val.t
+        await manager.send_info("Расчет завершен", websocket)
+    except:
+        await manager.send_error("Ошибка при расчете", websocket)
+    finally:
+        manager.disconnect(websocket)

@@ -323,9 +323,9 @@ class Unsteady_flow_core:
             dont_visited_neighbors = self.get_dont_visited_neighbors(
                 current_node=current_node, visited_nodes=visited_nodes
             )
-            pprint(
-                f"узел: {current_node.id}  не посетил: {dont_visited_neighbors} стек выглядит так: {stack.stack}"
-            )
+            # pprint(
+            #     f"узел: {current_node.id}  не посетил: {dont_visited_neighbors} стек выглядит так: {stack.stack}"
+            # )
             # логика обхода
             if len(dont_visited_neighbors) == 0:
                 if len(stack) == 0:

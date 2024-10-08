@@ -98,7 +98,6 @@ def calculate(data: Unsteady_data):
     pipes: list[Pipe_params] = list(filter(lambda elem: elem.type == "pipe", elements))
     for elem in pipes:
         elem.diameter = elem.diameter / 1000
-    print(pipes)
     while t <= t_rab:
         count_pipe_iter: int = 0
         iter = 0

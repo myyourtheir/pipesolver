@@ -8,7 +8,11 @@ import { ResultMomentData } from '../../../types/stateTypes'
 
 const url = process.env.BASE_URL
 
-
+type Recieved = {
+	status: "OK" | "ERROR" | "INFO",
+	data?: ResultMomentData
+	message?: string
+}
 export const useCallUnsteadyFlowWs = (
 	{ setIsLoading, isLoading }
 		: {
@@ -32,17 +36,8 @@ export const useCallUnsteadyFlowWs = (
 	})
 
 	const calcUnsteadyFlow = () => {
-		// console.log(pipeline.nodes.map(el => {
-		// 	return {
-		// 		id: el.id,
-		// 		type: el.value.type,
-		// 		parents: el.parents.map(el => el.id),
-		// 		children: el.children.map(el => el.id)
-		// 	}
-		// }))
-		// console.log(pipeline.nodes)
 		if (isValidPipeline.isConusmer == true && isValidPipeline.isPipe == true) {
-			// setIsLoading(true)
+			setIsLoading(true)
 			resetResult()
 			const ws = new WebSocket(`ws://${url}/unsteady_flow`)
 			ws.onerror = (ev) => {
@@ -60,8 +55,28 @@ export const useCallUnsteadyFlowWs = (
 				ws.send(message2)
 			}
 			ws.onmessage = (event) => {
-				const data: ResultMomentData = JSON.parse(event.data)
-				pushNewData(data)
+				const data: Recieved = JSON.parse(event.data)
+				console.log(data)
+				if (data.status === "OK") {
+					const result = data.data
+					if (result) {
+						pushNewData(result)
+					}
+				}
+				if (data.status === 'ERROR') {
+					const message = data.message ? data.message : 'Неизвестная ошибка'
+					toast.warning(
+						message
+					)
+					setIsLoading(false)
+				}
+				if (data.status === 'INFO') {
+					const message = data.message ? data.message : 'Неизвестная ошибка'
+					toast(
+						message
+					)
+					setIsLoading(false)
+				}
 
 			}
 		} else {
