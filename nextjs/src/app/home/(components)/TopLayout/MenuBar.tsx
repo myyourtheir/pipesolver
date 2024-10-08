@@ -59,19 +59,34 @@ function TopMenuBar() {
 					const { ui, value, id, name } = elem
 					graph.addNode(new GraphNode(value, ui, id, name))
 				})
+				// Добавляем связи
+				const edges = new Set<string>()
 				nodesArr.forEach((elem) => {
 					const { id, children, parents } = elem
 					if (children) {
 						children.forEach((child) => {
-							graph.addEdge(graph.nodes.find(node => node.id === child)!, graph.nodes.find(node => node.id === id)!)
+							const sourceNode = graph.nodes.find(node => node.id === id)!
+							const destinationNode = graph.nodes.find(node => node.id === child)!
+							if (!edges.has(sourceNode.id + '' + destinationNode.id)) {
+								edges.add(sourceNode.id + '' + destinationNode.id)
+								graph.addEdge(sourceNode, destinationNode)
+							}
+
 						})
 					}
 					if (parents) {
 						parents.forEach((parent) => {
-							graph.addEdge(graph.nodes.find(node => node.id === id)!, graph.nodes.find(node => node.id === parent)!)
+							const sourceNode = graph.nodes.find(node => node.id === parent)!
+							const destinationNode = graph.nodes.find(node => node.id === id)!
+							if (!edges.has(sourceNode.id + '' + destinationNode.id)) {
+								edges.add(sourceNode.id + '' + destinationNode.id)
+								graph.addEdge(sourceNode, destinationNode)
+							}
 						})
 					}
 				})
+				console.log(edges)
+				console.log(graph)
 				useUnsteadyInputStore.setState({
 					cond_params,
 					pipeline: graph
