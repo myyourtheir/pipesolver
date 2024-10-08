@@ -250,11 +250,10 @@ class Unsteady_flow_core:
         def select_initial_distribution_method(current_node: Recieved_element):
             current_element = current_node.value
             if current_element.type == "provider":
+                child_node_id = self.get_neighbors_of_node(current_node)[0]
                 element_result = provider_method(
                     current_node,
-                    child_node=pipeline[
-                        current_node.children[0]
-                    ],  # TODO возможно тут ошибка
+                    child_node=pipeline[child_node_id],  # TODO возможно тут ошибка
                 )
             elif current_element.type == "pipe":
                 element_result = pipe_method(
@@ -285,9 +284,10 @@ class Unsteady_flow_core:
                 )
 
             elif current_element.type == "consumer":
+                parent_node_id = self.get_neighbors_of_node(current_node)[0]
                 element_result = consumer_method(
                     current_node,
-                    parent_node=pipeline[current_node.parents[0]],
+                    parent_node=pipeline[parent_node_id],
                 )
             elif current_element.type == "tee":
                 neighours = self.get_neighbors_of_node(current_node)
@@ -390,11 +390,15 @@ class Unsteady_flow_core:
         cls, pipeline: dict[str, Recieved_element], start_element_id
     ):
         current_node = pipeline[start_element_id]
-        while len(current_node.children) != 0:
+        while len(current_node.children) != 0 or len(current_node.parents) != 0:
+
             if current_node.value.type == "pipe":
                 diameter = current_node.value.diameter
                 break
-            current_node = pipeline[current_node.children[0]]
+            if len(current_node.children) != 0:
+                current_node = pipeline[current_node.children[0]]
+            else:
+                current_node = pipeline[current_node.parents[0]]
         return diameter / 1000
 
     @classmethod

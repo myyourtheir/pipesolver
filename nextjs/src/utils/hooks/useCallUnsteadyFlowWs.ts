@@ -62,6 +62,7 @@ export const useCallUnsteadyFlowWs = (
 			ws.onmessage = (event) => {
 				const data: ResultMomentData = JSON.parse(event.data)
 				pushNewData(data)
+
 			}
 		} else {
 			toast.warning("Трубопровод должен содержать минимум 1 трубу и потребителя")
