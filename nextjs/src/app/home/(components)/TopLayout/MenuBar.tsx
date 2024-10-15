@@ -71,7 +71,8 @@ const SaveFormContent = ({ setOpen }: SaveFormContentProps) => {
 					Укажите название файла
 				</DialogDescription>
 			</DialogHeader>
-			<form onSubmit={() => {
+			<form onSubmit={(e) => {
+				e.preventDefault()
 				setOpen(false)
 				handleSaveToPC(
 					{

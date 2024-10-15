@@ -16,6 +16,7 @@ from typing import Literal, Union
 from functools import reduce
 import math
 from pprint import pprint
+import logging
 
 
 class Basic_functions(Vis_otm, Unsteady_flow_core):
@@ -157,6 +158,7 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
         parent_element = parent_node.value
 
         self._current_diameter = current_element.diameter / 1000
+        # logging.info(f"current_diameter: {self._current_diameter}")
         sections_number = int(current_element.length * 1000 / self._dx)
         response_value: list[One_section_response] = []
 

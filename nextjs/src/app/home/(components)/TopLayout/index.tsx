@@ -15,7 +15,7 @@ const TopLayout: FC<TopLayoutProps> = ({ className }) => {
 			<div className='mb-2'>
 				<TopMenuBar />
 			</div>
-			<div className='flex gap-2 justify-between items-center mx-4 my-2'>
+			<div className='flex  justify-between items-center mx-4 my-2'>
 				<BarsOpenController />
 				<CalcAndTimeBlock />
 			</div>

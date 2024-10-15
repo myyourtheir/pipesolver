@@ -60,7 +60,7 @@ const TimeToIterForm: FC<FCParams> = ({ defaultValues, onSubmit }) => {
 								<FormLabel>Время расчета: </FormLabel>
 								<FormControl>
 									<div className='flex items-center gap-1'>
-										<Input className='w-16' placeholder="Введите значение" {...field} />
+										<Input className='w-14' placeholder="Введите значение" {...field} />
 										<span>{'c'}</span>
 									</div>
 								</FormControl>

@@ -1,11 +1,10 @@
 import { create } from 'zustand'
 import { BlockDisplayStoreActions } from '../../../types/actionTypes'
 import { BlockDisplayStoreState } from '../../../types/stateTypes'
-
 export const useBlockDisplayStore = create<BlockDisplayStoreActions & BlockDisplayStoreState>((set) => ({
 	conditionsBarDisplay: false,
-	elementsBarDisplay: true,
-	elementsTreeDisplay: true,
+	elementsBarDisplay: false,
+	elementsTreeDisplay: false,
 	resultChartDisplay: false,
 	toggleElementsBar() {
 		return set((state) => ({

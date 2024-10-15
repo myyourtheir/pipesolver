@@ -4,7 +4,7 @@ import { Graph } from '@/utils/graph/Graph'
 import { GraphNode } from '@/utils/graph/GraphNode'
 import { set, z } from 'zod'
 import { toast } from 'sonner'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 
 // type JsonGraphNode = {
@@ -30,7 +30,7 @@ const zSchema = z.object({
 })
 function useHandleFileSave() {
 	const [title, setTitle] = useState<string>('Схема от ' + new Date().toLocaleString())
-	const handleSaveToPC = (jsonData: object) => {
+	const handleSaveToPC = useCallback((jsonData: object) => {
 		const fileData = JSON.stringify(jsonData)
 		const blob = new Blob([fileData], { type: "text/plain" })
 		const url = URL.createObjectURL(blob)
@@ -38,9 +38,9 @@ function useHandleFileSave() {
 		link.download = `${title}.json`
 		link.href = url
 		link.click()
-	}
+	}, [title])
 
-	const handleGetFileFromPC = () => {
+	const handleGetFileFromPC = useCallback(() => {
 		const input = document.createElement('input')
 		input.type = 'file'
 		input.accept = 'text/json'
@@ -103,7 +103,7 @@ function useHandleFileSave() {
 
 			}
 		}
-	}
+	}, [])
 	return { handleGetFileFromPC, handleSaveToPC, setTitle, title }
 }
 
