@@ -62,21 +62,31 @@ export const useCallUnsteadyFlowWs = (
 						pushNewData(result)
 					}
 				}
-				if (data.status === 'ERROR') {
-					const message = data.message ? data.message : 'Неизвестная ошибка'
-					toast.warning(
-						message
-					)
-					setIsLoading(false)
+				// if (data.status === 'ERROR') {
+				// 	const message = data.message ? data.message : 'Неизвестная ошибка'
+				// 	toast.warning(
+				// 		message
+				// 	)
+				// 	setIsLoading(false)
+				// }
+				// if (data.status === 'INFO') {
+				// 	const message = data.message ? data.message : 'Неизвестная ошибка'
+				// 	toast(
+				// 		message
+				// 	)
+				// 	setIsLoading(false)
+				// }
+			}
+			ws.onclose = (e) => {
+				const message = e.reason
+				const code = e.code
+				if (code === 1000) {
+					toast(message)
 				}
-				if (data.status === 'INFO') {
-					const message = data.message ? data.message : 'Неизвестная ошибка'
-					toast(
-						message
-					)
-					setIsLoading(false)
+				else {
+					toast.warning(message)
 				}
-
+				setIsLoading(false)
 			}
 		} else {
 			toast.warning("Трубопровод должен содержать минимум 1 трубу и потребителя")
