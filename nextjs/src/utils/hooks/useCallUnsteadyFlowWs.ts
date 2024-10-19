@@ -62,20 +62,6 @@ export const useCallUnsteadyFlowWs = (
 						pushNewData(result)
 					}
 				}
-				// if (data.status === 'ERROR') {
-				// 	const message = data.message ? data.message : 'Неизвестная ошибка'
-				// 	toast.warning(
-				// 		message
-				// 	)
-				// 	setIsLoading(false)
-				// }
-				// if (data.status === 'INFO') {
-				// 	const message = data.message ? data.message : 'Неизвестная ошибка'
-				// 	toast(
-				// 		message
-				// 	)
-				// 	setIsLoading(false)
-				// }
 			}
 			ws.onclose = (e) => {
 				const message = e.reason
