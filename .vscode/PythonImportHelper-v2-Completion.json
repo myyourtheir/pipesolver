@@ -1,0 +1,1646 @@
+[
+    {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "Field",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "Union",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Literal",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Annotated",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Literal",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Union",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Literal",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Literal",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Literal",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Union",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Literal",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "math",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "math",
+        "description": "math",
+        "detail": "math",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "Constants",
+        "importPath": "services.calculation_V2.constants",
+        "description": "services.calculation_V2.constants",
+        "isExtraImport": true,
+        "detail": "services.calculation_V2.constants",
+        "documentation": {}
+    },
+    {
+        "label": "Constants",
+        "importPath": "services.calculation_V2.constants",
+        "description": "services.calculation_V2.constants",
+        "isExtraImport": true,
+        "detail": "services.calculation_V2.constants",
+        "documentation": {}
+    },
+    {
+        "label": "Constants",
+        "importPath": "services.calculation_V2.constants",
+        "description": "services.calculation_V2.constants",
+        "isExtraImport": true,
+        "detail": "services.calculation_V2.constants",
+        "documentation": {}
+    },
+    {
+        "label": "Constants",
+        "importPath": "services.calculation_V2.constants",
+        "description": "services.calculation_V2.constants",
+        "isExtraImport": true,
+        "detail": "services.calculation_V2.constants",
+        "documentation": {}
+    },
+    {
+        "label": "Constants",
+        "importPath": "services.calculation_V2.constants",
+        "description": "services.calculation_V2.constants",
+        "isExtraImport": true,
+        "detail": "services.calculation_V2.constants",
+        "documentation": {}
+    },
+    {
+        "label": "Constants",
+        "importPath": "services.calculation_V2.constants",
+        "description": "services.calculation_V2.constants",
+        "isExtraImport": true,
+        "detail": "services.calculation_V2.constants",
+        "documentation": {}
+    },
+    {
+        "label": "Constants",
+        "importPath": "services.calculation_V2.constants",
+        "description": "services.calculation_V2.constants",
+        "isExtraImport": true,
+        "detail": "services.calculation_V2.constants",
+        "documentation": {}
+    },
+    {
+        "label": "Constants",
+        "importPath": "services.calculation_V2.constants",
+        "description": "services.calculation_V2.constants",
+        "isExtraImport": true,
+        "detail": "services.calculation_V2.constants",
+        "documentation": {}
+    },
+    {
+        "label": "Vis_otm",
+        "importPath": "services.calculation_V2.vis_otm",
+        "description": "services.calculation_V2.vis_otm",
+        "isExtraImport": true,
+        "detail": "services.calculation_V2.vis_otm",
+        "documentation": {}
+    },
+    {
+        "label": "Unsteady_flow_core",
+        "importPath": "services.calculation_V2.unsteady_flow_core",
+        "description": "services.calculation_V2.unsteady_flow_core",
+        "isExtraImport": true,
+        "detail": "services.calculation_V2.unsteady_flow_core",
+        "documentation": {}
+    },
+    {
+        "label": "Recieved_element",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Response_element",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Cond_params",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "ExtendedOneSectionResponse",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "One_section_response",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Pump_params",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Gate_valve_params",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Safe_valve_params",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Recieved_element",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Result_unsteady_data",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Response_element",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "ExtendedOneSectionResponse",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "One_section_response",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Unsteady_data",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Result_unsteady_data",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Response_element",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Recieved_element",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Response_element",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Result_unsteady_data",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "One_section_response",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "One_section_response",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Recieved_element",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "One_section_response",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Response_element",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Result_unsteady_data",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "One_section_response",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Result_unsteady_data",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "One_section_response",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Response_element",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Result_unsteady_data",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "One_section_response",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Response_element",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Result_unsteady_data",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Unsteady_data",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Result_unsteady_data",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Unsteady_data",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Elements_model",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Cond_params",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Pipe_params",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Pump_params",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Gate_valve_params",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Safe_valve_params",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Unsteady_data",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "reduce",
+        "importPath": "functools",
+        "description": "functools",
+        "isExtraImport": true,
+        "detail": "functools",
+        "documentation": {}
+    },
+    {
+        "label": "reduce",
+        "importPath": "functools",
+        "description": "functools",
+        "isExtraImport": true,
+        "detail": "functools",
+        "documentation": {}
+    },
+    {
+        "label": "reduce",
+        "importPath": "functools",
+        "description": "functools",
+        "isExtraImport": true,
+        "detail": "functools",
+        "documentation": {}
+    },
+    {
+        "label": "reduce",
+        "importPath": "functools",
+        "description": "functools",
+        "isExtraImport": true,
+        "detail": "functools",
+        "documentation": {}
+    },
+    {
+        "label": "pprint",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pprint",
+        "description": "pprint",
+        "detail": "pprint",
+        "documentation": {}
+    },
+    {
+        "label": "pprint",
+        "importPath": "pprint",
+        "description": "pprint",
+        "isExtraImport": true,
+        "detail": "pprint",
+        "documentation": {}
+    },
+    {
+        "label": "pprint",
+        "importPath": "pprint",
+        "description": "pprint",
+        "isExtraImport": true,
+        "detail": "pprint",
+        "documentation": {}
+    },
+    {
+        "label": "pprint",
+        "importPath": "pprint",
+        "description": "pprint",
+        "isExtraImport": true,
+        "detail": "pprint",
+        "documentation": {}
+    },
+    {
+        "label": "pprint",
+        "importPath": "pprint",
+        "description": "pprint",
+        "isExtraImport": true,
+        "detail": "pprint",
+        "documentation": {}
+    },
+    {
+        "label": "pprint",
+        "importPath": "pprint",
+        "description": "pprint",
+        "isExtraImport": true,
+        "detail": "pprint",
+        "documentation": {}
+    },
+    {
+        "label": "pprint",
+        "importPath": "pprint",
+        "description": "pprint",
+        "isExtraImport": true,
+        "detail": "pprint",
+        "documentation": {}
+    },
+    {
+        "label": "logging",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "logging",
+        "description": "logging",
+        "detail": "logging",
+        "documentation": {}
+    },
+    {
+        "label": "Stack",
+        "importPath": "services.Utils.stack",
+        "description": "services.Utils.stack",
+        "isExtraImport": true,
+        "detail": "services.Utils.stack",
+        "documentation": {}
+    },
+    {
+        "label": "Stack",
+        "importPath": "services.Utils.stack",
+        "description": "services.Utils.stack",
+        "isExtraImport": true,
+        "detail": "services.Utils.stack",
+        "documentation": {}
+    },
+    {
+        "label": "Stack",
+        "importPath": "services.Utils.stack",
+        "description": "services.Utils.stack",
+        "isExtraImport": true,
+        "detail": "services.Utils.stack",
+        "documentation": {}
+    },
+    {
+        "label": "sleep",
+        "importPath": "time",
+        "description": "time",
+        "isExtraImport": true,
+        "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "Basic_functions",
+        "importPath": "services.calculation_V2.basic_functions",
+        "description": "services.calculation_V2.basic_functions",
+        "isExtraImport": true,
+        "detail": "services.calculation_V2.basic_functions",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "ABC",
+        "importPath": "abc",
+        "description": "abc",
+        "isExtraImport": true,
+        "detail": "abc",
+        "documentation": {}
+    },
+    {
+        "label": "abstractmethod",
+        "importPath": "abc",
+        "description": "abc",
+        "isExtraImport": true,
+        "detail": "abc",
+        "documentation": {}
+    },
+    {
+        "label": "Hydraulics",
+        "importPath": "services.calculation_V3.hydraulics",
+        "description": "services.calculation_V3.hydraulics",
+        "isExtraImport": true,
+        "detail": "services.calculation_V3.hydraulics",
+        "documentation": {}
+    },
+    {
+        "label": "Hydraulics",
+        "importPath": "services.calculation_V3.hydraulics",
+        "description": "services.calculation_V3.hydraulics",
+        "isExtraImport": true,
+        "detail": "services.calculation_V3.hydraulics",
+        "documentation": {}
+    },
+    {
+        "label": "Hydraulics",
+        "importPath": "services.calculation_V3.hydraulics",
+        "description": "services.calculation_V3.hydraulics",
+        "isExtraImport": true,
+        "detail": "services.calculation_V3.hydraulics",
+        "documentation": {}
+    },
+    {
+        "label": "AbstractElement",
+        "importPath": "services.calculation_V3.elements.abstractions",
+        "description": "services.calculation_V3.elements.abstractions",
+        "isExtraImport": true,
+        "detail": "services.calculation_V3.elements.abstractions",
+        "documentation": {}
+    },
+    {
+        "label": "AbstractElement",
+        "importPath": "services.calculation_V3.elements.abstractions",
+        "description": "services.calculation_V3.elements.abstractions",
+        "isExtraImport": true,
+        "detail": "services.calculation_V3.elements.abstractions",
+        "documentation": {}
+    },
+    {
+        "label": "AbstractElement",
+        "importPath": "services.calculation_V3.elements.abstractions",
+        "description": "services.calculation_V3.elements.abstractions",
+        "isExtraImport": true,
+        "detail": "services.calculation_V3.elements.abstractions",
+        "documentation": {}
+    },
+    {
+        "label": "AbstractElement",
+        "importPath": "services.calculation_V3.elements.abstractions",
+        "description": "services.calculation_V3.elements.abstractions",
+        "isExtraImport": true,
+        "detail": "services.calculation_V3.elements.abstractions",
+        "documentation": {}
+    },
+    {
+        "label": "AbstractElement",
+        "importPath": "services.calculation_V3.elements.abstractions",
+        "description": "services.calculation_V3.elements.abstractions",
+        "isExtraImport": true,
+        "detail": "services.calculation_V3.elements.abstractions",
+        "documentation": {}
+    },
+    {
+        "label": "AbstractElement",
+        "importPath": "services.calculation_V3.elements.abstractions",
+        "description": "services.calculation_V3.elements.abstractions",
+        "isExtraImport": true,
+        "detail": "services.calculation_V3.elements.abstractions",
+        "documentation": {}
+    },
+    {
+        "label": "Provider_Element",
+        "importPath": "services.calculation_V3.elements.provider_element",
+        "description": "services.calculation_V3.elements.provider_element",
+        "isExtraImport": true,
+        "detail": "services.calculation_V3.elements.provider_element",
+        "documentation": {}
+    },
+    {
+        "label": "Pipe_Element",
+        "importPath": "services.calculation_V3.elements.pipe_element",
+        "description": "services.calculation_V3.elements.pipe_element",
+        "isExtraImport": true,
+        "detail": "services.calculation_V3.elements.pipe_element",
+        "documentation": {}
+    },
+    {
+        "label": "Pump_Element",
+        "importPath": "services.calculation_V3.elements.pump_element",
+        "description": "services.calculation_V3.elements.pump_element",
+        "isExtraImport": true,
+        "detail": "services.calculation_V3.elements.pump_element",
+        "documentation": {}
+    },
+    {
+        "label": "Consumer_Element",
+        "importPath": "services.calculation_V3.elements.consumer_element",
+        "description": "services.calculation_V3.elements.consumer_element",
+        "isExtraImport": true,
+        "detail": "services.calculation_V3.elements.consumer_element",
+        "documentation": {}
+    },
+    {
+        "label": "Tee_Element",
+        "importPath": "services.calculation_V3.elements.tee_element",
+        "description": "services.calculation_V3.elements.tee_element",
+        "isExtraImport": true,
+        "detail": "services.calculation_V3.elements.tee_element",
+        "documentation": {}
+    },
+    {
+        "label": "Constants",
+        "importPath": "services.calculation_V3.constants",
+        "description": "services.calculation_V3.constants",
+        "isExtraImport": true,
+        "detail": "services.calculation_V3.constants",
+        "documentation": {}
+    },
+    {
+        "label": "Constants",
+        "importPath": "services.calculation_V3.constants",
+        "description": "services.calculation_V3.constants",
+        "isExtraImport": true,
+        "detail": "services.calculation_V3.constants",
+        "documentation": {}
+    },
+    {
+        "label": "Elements_Factory",
+        "importPath": "services.calculation_V3.elements.elements_factory",
+        "description": "services.calculation_V3.elements.elements_factory",
+        "isExtraImport": true,
+        "detail": "services.calculation_V3.elements.elements_factory",
+        "documentation": {}
+    },
+    {
+        "label": "Unsteady_Utils",
+        "importPath": "services.calculation_V3.unsteady_utils",
+        "description": "services.calculation_V3.unsteady_utils",
+        "isExtraImport": true,
+        "detail": "services.calculation_V3.unsteady_utils",
+        "documentation": {}
+    },
+    {
+        "label": "services.Utils.basic_functions",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "services.Utils.basic_functions",
+        "description": "services.Utils.basic_functions",
+        "detail": "services.Utils.basic_functions",
+        "documentation": {}
+    },
+    {
+        "label": "APIRouter",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "WebSocket",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "FastAPI",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Unsteady_flow_solver",
+        "importPath": "services.calculation_V2.unsteady_flow_solver",
+        "description": "services.calculation_V2.unsteady_flow_solver",
+        "isExtraImport": true,
+        "detail": "services.calculation_V2.unsteady_flow_solver",
+        "documentation": {}
+    },
+    {
+        "label": "ConnectionManager",
+        "importPath": "wsockets",
+        "description": "wsockets",
+        "isExtraImport": true,
+        "detail": "wsockets",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "importPath": "logger_config",
+        "description": "logger_config",
+        "isExtraImport": true,
+        "detail": "logger_config",
+        "documentation": {}
+    },
+    {
+        "label": "Unsteady_Solver",
+        "importPath": "services.calculation_V3.solver",
+        "description": "services.calculation_V3.solver",
+        "isExtraImport": true,
+        "detail": "services.calculation_V3.solver",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "importPath": "wsockets.unsteady_flow_ws",
+        "description": "wsockets.unsteady_flow_ws",
+        "isExtraImport": true,
+        "detail": "wsockets.unsteady_flow_ws",
+        "documentation": {}
+    },
+    {
+        "label": "uvicorn",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "uvicorn",
+        "description": "uvicorn",
+        "detail": "uvicorn",
+        "documentation": {}
+    },
+    {
+        "label": "stringify",
+        "importPath": "flatted",
+        "description": "flatted",
+        "isExtraImport": true,
+        "detail": "flatted",
+        "documentation": {}
+    },
+    {
+        "label": "parse",
+        "importPath": "flatted",
+        "description": "flatted",
+        "isExtraImport": true,
+        "detail": "flatted",
+        "documentation": {}
+    },
+    {
+        "label": "Unstedy_base_params",
+        "kind": 6,
+        "importPath": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "description": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "peekOfCode": "class Unstedy_base_params(BaseModel):\n    mode: Union[Literal[\"open\"], Literal[\"close\"]]\n    start_time: float\n    duration: float\nclass Cond_params(BaseModel):\n    time_to_iter: float\n    density: float\n    viscosity: float\nclass Boundary_params(BaseModel):\n    mode: Union[Literal[\"speed\"], Literal[\"pressure\"]]",
+        "detail": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Cond_params",
+        "kind": 6,
+        "importPath": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "description": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "peekOfCode": "class Cond_params(BaseModel):\n    time_to_iter: float\n    density: float\n    viscosity: float\nclass Boundary_params(BaseModel):\n    mode: Union[Literal[\"speed\"], Literal[\"pressure\"]]\n    value: float\nclass Provider(Boundary_params):\n    type: Literal[\"provider\"]\nclass Consumer(Boundary_params):",
+        "detail": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Boundary_params",
+        "kind": 6,
+        "importPath": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "description": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "peekOfCode": "class Boundary_params(BaseModel):\n    mode: Union[Literal[\"speed\"], Literal[\"pressure\"]]\n    value: float\nclass Provider(Boundary_params):\n    type: Literal[\"provider\"]\nclass Consumer(Boundary_params):\n    type: Literal[\"consumer\"]\nclass Pipe_params(BaseModel):\n    type: Literal[\"pipe\"]\n    length: float",
+        "detail": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Provider",
+        "kind": 6,
+        "importPath": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "description": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "peekOfCode": "class Provider(Boundary_params):\n    type: Literal[\"provider\"]\nclass Consumer(Boundary_params):\n    type: Literal[\"consumer\"]\nclass Pipe_params(BaseModel):\n    type: Literal[\"pipe\"]\n    length: float\n    diameter: float\nclass Pump_params(Unstedy_base_params):\n    type: Literal[\"pump\"]",
+        "detail": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Consumer",
+        "kind": 6,
+        "importPath": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "description": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "peekOfCode": "class Consumer(Boundary_params):\n    type: Literal[\"consumer\"]\nclass Pipe_params(BaseModel):\n    type: Literal[\"pipe\"]\n    length: float\n    diameter: float\nclass Pump_params(Unstedy_base_params):\n    type: Literal[\"pump\"]\n    coef_a: float\n    coef_b: float",
+        "detail": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Pipe_params",
+        "kind": 6,
+        "importPath": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "description": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "peekOfCode": "class Pipe_params(BaseModel):\n    type: Literal[\"pipe\"]\n    length: float\n    diameter: float\nclass Pump_params(Unstedy_base_params):\n    type: Literal[\"pump\"]\n    coef_a: float\n    coef_b: float\nclass Gate_valve_params(Unstedy_base_params):\n    type: Literal[\"gate_valve\"]",
+        "detail": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Pump_params",
+        "kind": 6,
+        "importPath": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "description": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "peekOfCode": "class Pump_params(Unstedy_base_params):\n    type: Literal[\"pump\"]\n    coef_a: float\n    coef_b: float\nclass Gate_valve_params(Unstedy_base_params):\n    type: Literal[\"gate_valve\"]\n    percentage: float\nclass Safe_valve_params(BaseModel):\n    type: Literal[\"safe_valve\"]\n    coef_q: float",
+        "detail": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Gate_valve_params",
+        "kind": 6,
+        "importPath": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "description": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "peekOfCode": "class Gate_valve_params(Unstedy_base_params):\n    type: Literal[\"gate_valve\"]\n    percentage: float\nclass Safe_valve_params(BaseModel):\n    type: Literal[\"safe_valve\"]\n    coef_q: float\n    max_pressure: float\nclass Tee_params(BaseModel):\n    type: Literal[\"tee\"]\nElements_model = Annotated[",
+        "detail": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Safe_valve_params",
+        "kind": 6,
+        "importPath": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "description": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "peekOfCode": "class Safe_valve_params(BaseModel):\n    type: Literal[\"safe_valve\"]\n    coef_q: float\n    max_pressure: float\nclass Tee_params(BaseModel):\n    type: Literal[\"tee\"]\nElements_model = Annotated[\n    Union[\n        Pipe_params,\n        Pump_params,",
+        "detail": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Tee_params",
+        "kind": 6,
+        "importPath": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "description": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "peekOfCode": "class Tee_params(BaseModel):\n    type: Literal[\"tee\"]\nElements_model = Annotated[\n    Union[\n        Pipe_params,\n        Pump_params,\n        Gate_valve_params,\n        Safe_valve_params,\n        Provider,\n        Consumer,",
+        "detail": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Recieved_element",
+        "kind": 6,
+        "importPath": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "description": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "peekOfCode": "class Recieved_element(BaseModel):\n    id: str\n    value: Elements_model\n    children: list[str]\n    parents: list[str]\nclass One_section_response(BaseModel):\n    x: float\n    p: float\n    V: float\n    H: float",
+        "detail": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "One_section_response",
+        "kind": 6,
+        "importPath": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "description": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "peekOfCode": "class One_section_response(BaseModel):\n    x: float\n    p: float\n    V: float\n    H: float\nExtendedOneSectionResponse = dict[\n    str, One_section_response\n]  # В ключе лежит айди того, кому должен предоставляться ответ\nclass Response_element(BaseModel):\n    id: str",
+        "detail": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Response_element",
+        "kind": 6,
+        "importPath": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "description": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "peekOfCode": "class Response_element(BaseModel):\n    id: str\n    type: str\n    # value: list[One_section_response]\n    value: list[ExtendedOneSectionResponse]\n    children: list[str]\n    parents: list[str]\nclass Unsteady_data(BaseModel):\n    cond_params: Cond_params\n    pipeline: dict[str, Recieved_element]",
+        "detail": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Unsteady_data",
+        "kind": 6,
+        "importPath": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "description": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "peekOfCode": "class Unsteady_data(BaseModel):\n    cond_params: Cond_params\n    pipeline: dict[str, Recieved_element]\nclass Result_unsteady_data(BaseModel):\n    moment_result: dict[str, Response_element]  # key is an id of element\n    t: float\nif __name__ == \"__main__\":\n    params = Unsteady_data(\n        **{\n            \"cond_params\": {\"time_to_iter\": 20, \"density\": 200, \"viscosity\": 200},",
+        "detail": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Result_unsteady_data",
+        "kind": 6,
+        "importPath": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "description": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "peekOfCode": "class Result_unsteady_data(BaseModel):\n    moment_result: dict[str, Response_element]  # key is an id of element\n    t: float\nif __name__ == \"__main__\":\n    params = Unsteady_data(\n        **{\n            \"cond_params\": {\"time_to_iter\": 20, \"density\": 200, \"viscosity\": 200},\n            \"pipeline\": [\n                {\"type\": \"pipe\", \"diameter\": 20, \"length\": 20},\n                {\"type\": \"pipe\", \"diameter\": 20, \"length\": 20},",
+        "detail": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "Elements_model",
+        "kind": 5,
+        "importPath": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "description": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "peekOfCode": "Elements_model = Annotated[\n    Union[\n        Pipe_params,\n        Pump_params,\n        Gate_valve_params,\n        Safe_valve_params,\n        Provider,\n        Consumer,\n        Tee_params,\n    ],",
+        "detail": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "ExtendedOneSectionResponse",
+        "kind": 5,
+        "importPath": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "description": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "peekOfCode": "ExtendedOneSectionResponse = dict[\n    str, One_section_response\n]  # В ключе лежит айди того, кому должен предоставляться ответ\nclass Response_element(BaseModel):\n    id: str\n    type: str\n    # value: list[One_section_response]\n    value: list[ExtendedOneSectionResponse]\n    children: list[str]\n    parents: list[str]",
+        "detail": "fastApi.schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "find_lyam",
+        "kind": 2,
+        "importPath": "fastApi.services.Utils.basic_functions",
+        "description": "fastApi.services.Utils.basic_functions",
+        "peekOfCode": "def find_lyam(Re, eps):\n    if Re == 0:\n        return 0\n    if Re < 2320:\n        lyam1 = 68 / Re\n    elif (10 / eps) > Re >= 2320:\n        lyam1 = 0.3164 / Re**0.25\n    elif (10 / eps) <= Re < (500 / eps):\n        lyam1 = 0.11 * (eps + 68 / Re) ** 0.25\n    else:",
+        "detail": "fastApi.services.Utils.basic_functions",
+        "documentation": {}
+    },
+    {
+        "label": "find_Jb",
+        "kind": 2,
+        "importPath": "fastApi.services.Utils.basic_functions",
+        "description": "fastApi.services.Utils.basic_functions",
+        "peekOfCode": "def find_Jb(Davleniya, Skorosty, d, i, v, ro, T):\n    Vjb = Skorosty\n    Re = abs(Vjb) * d / v\n    lyamjb = find_lyam(Re, o / d)\n    Jb = (\n        Davleniya\n        - ro * c * Skorosty\n        + lyamjb * ro * Skorosty * abs(Skorosty) * T * c / (2 * d)\n        + T * ro * c * g * (vis_otm[i + 1] - vis_otm[i]) / 1000\n    )",
+        "detail": "fastApi.services.Utils.basic_functions",
+        "documentation": {}
+    },
+    {
+        "label": "find_Ja",
+        "kind": 2,
+        "importPath": "fastApi.services.Utils.basic_functions",
+        "description": "fastApi.services.Utils.basic_functions",
+        "peekOfCode": "def find_Ja(Davleniya, Skorosty, d, i, v, ro, T):\n    Vja = Skorosty\n    Re = abs(Vja) * d / v\n    lyamja = find_lyam(Re, o / d)\n    Ja = (\n        Davleniya\n        + ro * c * Skorosty\n        - lyamja * ro * Skorosty * abs(Skorosty) * T * c / (2 * d)\n        - T * ro * c * g * (vis_otm[i] - vis_otm[i - 1]) / 1000\n    )",
+        "detail": "fastApi.services.Utils.basic_functions",
+        "documentation": {}
+    },
+    {
+        "label": "count_H",
+        "kind": 2,
+        "importPath": "fastApi.services.Utils.basic_functions",
+        "description": "fastApi.services.Utils.basic_functions",
+        "peekOfCode": "def count_H(p, i, V, ro):\n    H = p / (ro * g) + vis_otm[i] + (V**2) / (2 * g)\n    return H\ndef pump_method(P, V, i, a, b, char, chto_vivodim, d, t_vkl, t_char, t, v, ro, T):\n    \"\"\"char( 0 - насоса всегда работает, 1 - насос вкл на tt секунде, 2 - насос выкл на tt сек, другое - выключен)\"\"\"\n    if char == 0:\n        w = w0\n    elif char == 1:  # Включение на tt сек\n        if t_char <= t <= t_char + t_vkl:\n            w = w0 / t_vkl * (t - t_char)",
+        "detail": "fastApi.services.Utils.basic_functions",
+        "documentation": {}
+    },
+    {
+        "label": "pump_method",
+        "kind": 2,
+        "importPath": "fastApi.services.Utils.basic_functions",
+        "description": "fastApi.services.Utils.basic_functions",
+        "peekOfCode": "def pump_method(P, V, i, a, b, char, chto_vivodim, d, t_vkl, t_char, t, v, ro, T):\n    \"\"\"char( 0 - насоса всегда работает, 1 - насос вкл на tt секунде, 2 - насос выкл на tt сек, другое - выключен)\"\"\"\n    if char == 0:\n        w = w0\n    elif char == 1:  # Включение на tt сек\n        if t_char <= t <= t_char + t_vkl:\n            w = w0 / t_vkl * (t - t_char)\n        elif t < t_char:\n            w = 0\n        else:",
+        "detail": "fastApi.services.Utils.basic_functions",
+        "documentation": {}
+    },
+    {
+        "label": "pipe_method",
+        "kind": 2,
+        "importPath": "fastApi.services.Utils.basic_functions",
+        "description": "fastApi.services.Utils.basic_functions",
+        "peekOfCode": "def pipe_method(P, V, i, d, v, ro, T):\n    \"\"\"Условие, может быть, нужно будет переписать\"\"\"\n    Ja = find_Ja(P[-1][i - 1], V[-1][i - 1], d, i, v, ro, T)\n    Jb = find_Jb(P[-1][i + 1], V[-1][i + 1], d, i, v, ro, T)\n    pp = (Ja + Jb) / (2)\n    VV = (Ja - Jb) / (2 * ro * c)\n    H = count_H(pp, i, VV, ro)\n    return [pp, VV, H]\ndef tap_method(P, V, i, chto_vivodim, char, t_char, d, t_otkr, procent, t, v, ro, T):\n    \"\"\"char( 0 - кран всегда открыт, 1 - кран открывается на tt секунде, 2 - кран закр на tt сек, другое - закрыт)\"\"\"",
+        "detail": "fastApi.services.Utils.basic_functions",
+        "documentation": {}
+    },
+    {
+        "label": "tap_method",
+        "kind": 2,
+        "importPath": "fastApi.services.Utils.basic_functions",
+        "description": "fastApi.services.Utils.basic_functions",
+        "peekOfCode": "def tap_method(P, V, i, chto_vivodim, char, t_char, d, t_otkr, procent, t, v, ro, T):\n    \"\"\"char( 0 - кран всегда открыт, 1 - кран открывается на tt секунде, 2 - кран закр на tt сек, другое - закрыт)\"\"\"\n    # угол открытия крана(стр 446, Идельчик)\n    def find_zet(nu):\n        if 0 <= nu < 10:\n            zet = (0.32 / 10) * nu + 0.04\n        elif 10 <= nu < 20:\n            zet = (1.6 - 0.36) / 10 * (nu - 10) + 0.36\n        elif 20 <= nu < 30:\n            zet = (5 - 1.6) / 10 * (nu - 20) + 1.6",
+        "detail": "fastApi.services.Utils.basic_functions",
+        "documentation": {}
+    },
+    {
+        "label": "right_boundary_method",
+        "kind": 2,
+        "importPath": "fastApi.services.Utils.basic_functions",
+        "description": "fastApi.services.Utils.basic_functions",
+        "peekOfCode": "def right_boundary_method(P, V, i, char, p_V_const, d, v, ro, T):\n    Ja = find_Ja(P[-1][i - 1], V[-1][i - 1], d, i, v, ro, T)\n    if char == 1:\n        pp = p_V_const\n        VV = (Ja - pp) / (ro * c)\n    else:\n        if p_V_const == 0:\n            p_V_const += 10 ** (-6)\n        VV = p_V_const\n        pp = Ja - ro * c * VV",
+        "detail": "fastApi.services.Utils.basic_functions",
+        "documentation": {}
+    },
+    {
+        "label": "left_boundary_method",
+        "kind": 2,
+        "importPath": "fastApi.services.Utils.basic_functions",
+        "description": "fastApi.services.Utils.basic_functions",
+        "peekOfCode": "def left_boundary_method(P, V, i, char, p_V_const, d, v, ro, T):\n    Jb = find_Jb(P[-1][i + 1], V[-1][i + 1], d, i, v, ro, T)\n    if char == 1:\n        pp = p_V_const\n        VV = (pp - Jb) / (ro * c)\n    else:\n        if p_V_const == 0:\n            p_V_const += 10 ** (-6)\n        VV = p_V_const\n        pp = Jb + ro * c * VV",
+        "detail": "fastApi.services.Utils.basic_functions",
+        "documentation": {}
+    },
+    {
+        "label": "safe_valve_method",
+        "kind": 2,
+        "importPath": "fastApi.services.Utils.basic_functions",
+        "description": "fastApi.services.Utils.basic_functions",
+        "peekOfCode": "def safe_valve_method(P, V, i, chto_vivodim, Kvmax, p_otkr, d1, d2, v, ro, T):\n    Ja = find_Ja(P[-1][i - 1], V[-1][i - 1], d1, i, v, ro, T)\n    Jb = find_Jb(P[-1][i + 2], V[-1][i + 2], d2, i, v, ro, T)\n    pp = (Ja + Jb) / (2)\n    VV = (Ja - Jb) / (2 * ro * c)\n    H = count_H(pp, i, VV, ro)\n    if pp < p_otkr:\n        return [pp, VV, H, 0]\n    else:\n        p_poln_otkr = 1.3 * p_otkr",
+        "detail": "fastApi.services.Utils.basic_functions",
+        "documentation": {}
+    },
+    {
+        "label": "o",
+        "kind": 5,
+        "importPath": "fastApi.services.Utils.basic_functions",
+        "description": "fastApi.services.Utils.basic_functions",
+        "peekOfCode": "o = 0.01 / 1000\nw0 = 3000\ng = 9.81\nc = 1000\nwith open(\n    os.path.join(os.path.dirname(os.path.abspath(__file__)), \"Example.txt\"), \"r\"\n) as text_z:\n    vis_otm_str = text_z.read().split(\",\")\n    global vis_otm\n    vis_otm = []",
+        "detail": "fastApi.services.Utils.basic_functions",
+        "documentation": {}
+    },
+    {
+        "label": "w0",
+        "kind": 5,
+        "importPath": "fastApi.services.Utils.basic_functions",
+        "description": "fastApi.services.Utils.basic_functions",
+        "peekOfCode": "w0 = 3000\ng = 9.81\nc = 1000\nwith open(\n    os.path.join(os.path.dirname(os.path.abspath(__file__)), \"Example.txt\"), \"r\"\n) as text_z:\n    vis_otm_str = text_z.read().split(\",\")\n    global vis_otm\n    vis_otm = []\n    for x in vis_otm_str:",
+        "detail": "fastApi.services.Utils.basic_functions",
+        "documentation": {}
+    },
+    {
+        "label": "g",
+        "kind": 5,
+        "importPath": "fastApi.services.Utils.basic_functions",
+        "description": "fastApi.services.Utils.basic_functions",
+        "peekOfCode": "g = 9.81\nc = 1000\nwith open(\n    os.path.join(os.path.dirname(os.path.abspath(__file__)), \"Example.txt\"), \"r\"\n) as text_z:\n    vis_otm_str = text_z.read().split(\",\")\n    global vis_otm\n    vis_otm = []\n    for x in vis_otm_str:\n        x = int(x)",
+        "detail": "fastApi.services.Utils.basic_functions",
+        "documentation": {}
+    },
+    {
+        "label": "c",
+        "kind": 5,
+        "importPath": "fastApi.services.Utils.basic_functions",
+        "description": "fastApi.services.Utils.basic_functions",
+        "peekOfCode": "c = 1000\nwith open(\n    os.path.join(os.path.dirname(os.path.abspath(__file__)), \"Example.txt\"), \"r\"\n) as text_z:\n    vis_otm_str = text_z.read().split(\",\")\n    global vis_otm\n    vis_otm = []\n    for x in vis_otm_str:\n        x = int(x)\n        vis_otm.append(x)",
+        "detail": "fastApi.services.Utils.basic_functions",
+        "documentation": {}
+    },
+    {
+        "label": "Stack",
+        "kind": 6,
+        "importPath": "fastApi.services.Utils.stack",
+        "description": "fastApi.services.Utils.stack",
+        "peekOfCode": "class Stack:\n    def __init__(self):\n        self.stack: list[str] = []\n    def __iter__(self):\n        for elem in self.stack:\n            yield elem\n    def add(self, element_id: str):\n        self.stack.append(element_id)\n    def remove(self):\n        return self.stack.pop()",
+        "detail": "fastApi.services.Utils.stack",
+        "documentation": {}
+    },
+    {
+        "label": "Basic_functions",
+        "kind": 6,
+        "importPath": "fastApi.services.calculation_V2.basic_functions",
+        "description": "fastApi.services.calculation_V2.basic_functions",
+        "peekOfCode": "class Basic_functions(Vis_otm, Unsteady_flow_core):\n    _current_time: float = 0\n    _vis_otm_iter: int = 0\n    _cond_params: Cond_params\n    _density: int\n    _viscosity: int\n    _current_diameter: float\n    _vis_otm_iter: int = 0\n    _current_time: float = 0\n    _current_x = 0",
+        "detail": "fastApi.services.calculation_V2.basic_functions",
+        "documentation": {}
+    },
+    {
+        "label": "Constants",
+        "kind": 6,
+        "importPath": "fastApi.services.calculation_V2.constants",
+        "description": "fastApi.services.calculation_V2.constants",
+        "peekOfCode": "class Constants:\n    o = 0.1 / 1000\n    w0 = 3000\n    g = 9.81\n    c = 1000",
+        "detail": "fastApi.services.calculation_V2.constants",
+        "documentation": {}
+    },
+    {
+        "label": "Unsteady_flow_core",
+        "kind": 6,
+        "importPath": "fastApi.services.calculation_V2.unsteady_flow_core",
+        "description": "fastApi.services.calculation_V2.unsteady_flow_core",
+        "peekOfCode": "class Unsteady_flow_core:\n    _dx: int\n    def _make_initial_distribution(\n        self, pipeline: dict[str, Recieved_element]\n    ) -> dict[str, Response_element]:\n        def provider_method(\n            current_node: Recieved_element, child_node: Response_element\n        ) -> Response_element:\n            response_value = [\n                {",
+        "detail": "fastApi.services.calculation_V2.unsteady_flow_core",
+        "documentation": {}
+    },
+    {
+        "label": "Unsteady_flow_solver",
+        "kind": 6,
+        "importPath": "fastApi.services.calculation_V2.unsteady_flow_solver",
+        "description": "fastApi.services.calculation_V2.unsteady_flow_solver",
+        "peekOfCode": "class Unsteady_flow_solver(Basic_functions):\n    _dx = 1000\n    result: Result_unsteady_data\n    def __init__(self, data: Unsteady_data):\n        cond_params = data.cond_params\n        self._time_to_iter = cond_params.time_to_iter\n        self._density = cond_params.density\n        self._viscosity = cond_params.viscosity * 10 ** (-6)\n        self._pipeline = data.pipeline\n        self.start_element_ids = reduce(",
+        "detail": "fastApi.services.calculation_V2.unsteady_flow_solver",
+        "documentation": {}
+    },
+    {
+        "label": "Vis_otm",
+        "kind": 6,
+        "importPath": "fastApi.services.calculation_V2.vis_otm",
+        "description": "fastApi.services.calculation_V2.vis_otm",
+        "peekOfCode": "class Vis_otm:\n  _vis_otm = [\n    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0\n  ]",
+        "detail": "fastApi.services.calculation_V2.vis_otm",
+        "documentation": {}
+    },
+    {
+        "label": "AbstractElement",
+        "kind": 6,
+        "importPath": "fastApi.services.calculation_V3.elements.abstractions",
+        "description": "fastApi.services.calculation_V3.elements.abstractions",
+        "peekOfCode": "class AbstractElement(ABC):\n    def __init__(\n        self,\n        element: Recieved_element,\n        hydraulics: Hydraulics,\n        elements: dict[str, Recieved_element],\n    ):\n        self.recieve_element = element\n        self.neighbours: list[str] = [*element.children, *element.parents]\n        self.value = element.value",
+        "detail": "fastApi.services.calculation_V3.elements.abstractions",
+        "documentation": {}
+    },
+    {
+        "label": "Consumer_Element",
+        "kind": 6,
+        "importPath": "fastApi.services.calculation_V3.elements.consumer_element",
+        "description": "fastApi.services.calculation_V3.elements.consumer_element",
+        "peekOfCode": "class Consumer_Element(AbstractElement):\n    def unsteady_solve(self, prev_res):\n        prev_self_res = prev_res.moment_result[self.id].value\n        neighbor_id = self.neighbours[0]\n        neighbor_result = prev_res.moment_result[neighbor_id].value[-1][self.id]\n        current_element = self.value\n        hidraulics = self.hydraulics\n        Ja = hidraulics.find_Ja(neighbor_result.p, neighbor_result.V, self.diameter)\n        if current_element.mode == \"pressure\":\n            p = current_element.value * 1000",
+        "detail": "fastApi.services.calculation_V3.elements.consumer_element",
+        "documentation": {}
+    },
+    {
+        "label": "Elements_Factory",
+        "kind": 6,
+        "importPath": "fastApi.services.calculation_V3.elements.elements_factory",
+        "description": "fastApi.services.calculation_V3.elements.elements_factory",
+        "peekOfCode": "class Elements_Factory:\n    type_to_instance_dict = {\n        \"provider\": Provider_Element,\n        \"pipe\": Pipe_Element,\n        \"pump\": Pump_Element,\n        # \"gate_valve\": Gate_valve_Element,\n        # \"safe_valve\": Safe_valve_Element,\n        \"consumer\": Consumer_Element,\n        \"tee\": Tee_Element,\n    }",
+        "detail": "fastApi.services.calculation_V3.elements.elements_factory",
+        "documentation": {}
+    },
+    {
+        "label": "Pipe_Element",
+        "kind": 6,
+        "importPath": "fastApi.services.calculation_V3.elements.pipe_element",
+        "description": "fastApi.services.calculation_V3.elements.pipe_element",
+        "peekOfCode": "class Pipe_Element(AbstractElement):\n    def unsteady_solve(self, prev_res: Result_unsteady_data) -> Response_element:\n        prev_self_res = prev_res.moment_result[self.id].value\n        hydraulics = self.hydraulics\n        current_element = self.value\n        child_id = self.child_id\n        parent_id = self.parent_id\n        child_res = prev_res.moment_result[child_id].value[0][self.id]\n        parent_res = prev_res.moment_result[parent_id].value[-1][self.id]\n        diameter = self.diameter",
+        "detail": "fastApi.services.calculation_V3.elements.pipe_element",
+        "documentation": {}
+    },
+    {
+        "label": "Provider_Element",
+        "kind": 6,
+        "importPath": "fastApi.services.calculation_V3.elements.provider_element",
+        "description": "fastApi.services.calculation_V3.elements.provider_element",
+        "peekOfCode": "class Provider_Element(AbstractElement):\n    def unsteady_solve(self, prev_res: Result_unsteady_data):\n        neighbor_id = self.neighbours[0]\n        prev_self_res = prev_res.moment_result[self.id].value\n        prev_neighbor_results = prev_res.moment_result[neighbor_id].value\n        neighbor_result = (\n            prev_neighbor_results[-1][self.id]\n            if prev_neighbor_results[-1].get(self.id)\n            else prev_neighbor_results[0][self.id]\n        )",
+        "detail": "fastApi.services.calculation_V3.elements.provider_element",
+        "documentation": {}
+    },
+    {
+        "label": "Pump_Element",
+        "kind": 6,
+        "importPath": "fastApi.services.calculation_V3.elements.pump_element",
+        "description": "fastApi.services.calculation_V3.elements.pump_element",
+        "peekOfCode": "class Pump_Element(AbstractElement):\n    def unsteady_solve(self, prev_res: Result_unsteady_data) -> Response_element:\n        hydraulics = self.hydraulics\n        current_element = self.value\n        child_id = self.child_id\n        parent_id = self.parent_id\n        prev_self_res = prev_res.moment_result[self.id].value\n        child_res = prev_res.moment_result[child_id].value[0][self.id]\n        parent_res = prev_res.moment_result[parent_id].value[-1][self.id]\n        current_time = prev_res.t + hydraulics.dt",
+        "detail": "fastApi.services.calculation_V3.elements.pump_element",
+        "documentation": {}
+    },
+    {
+        "label": "Tee_Element",
+        "kind": 6,
+        "importPath": "fastApi.services.calculation_V3.elements.tee_element",
+        "description": "fastApi.services.calculation_V3.elements.tee_element",
+        "peekOfCode": "class Tee_Element(AbstractElement):\n    def unsteady_solve(self, prev_res):\n        diameter1 = self.diameter_first\n        diameter2 = self.diameter_second\n        diameter3 = self.diameter_third\n        S1: float = math.pi * diameter1**2 / 4\n        S2: float = math.pi * diameter2**2 / 4\n        S3: float = math.pi * diameter3**2 / 4\n        prev_self_res = prev_res.moment_result[self.id].value\n        prev_first_res = (",
+        "detail": "fastApi.services.calculation_V3.elements.tee_element",
+        "documentation": {}
+    },
+    {
+        "label": "Constants",
+        "kind": 6,
+        "importPath": "fastApi.services.calculation_V3.constants",
+        "description": "fastApi.services.calculation_V3.constants",
+        "peekOfCode": "class Constants:\n    o = 0.1 / 1000\n    w0 = 3000\n    g = 9.81\n    c = 1000",
+        "detail": "fastApi.services.calculation_V3.constants",
+        "documentation": {}
+    },
+    {
+        "label": "Hydraulics",
+        "kind": 6,
+        "importPath": "fastApi.services.calculation_V3.hydraulics",
+        "description": "fastApi.services.calculation_V3.hydraulics",
+        "peekOfCode": "class Hydraulics:\n    _vis_otm = 0\n    def __init__(self, density, viscosity, dt, dx):\n        self.density = density\n        self.dt = dt\n        self.viscosity = viscosity\n        self.dx = dx\n    def find_lyam(self, Re: int, eps: float):\n        # print(\n        #     f\"\"\"",
+        "detail": "fastApi.services.calculation_V3.hydraulics",
+        "documentation": {}
+    },
+    {
+        "label": "Unsteady_Solver",
+        "kind": 6,
+        "importPath": "fastApi.services.calculation_V3.solver",
+        "description": "fastApi.services.calculation_V3.solver",
+        "peekOfCode": "class Unsteady_Solver(Unsteady_Utils):\n    _dx = 1000\n    _current_time = 0\n    _prev_res: Result_unsteady_data\n    def __init__(self, data: Unsteady_data):\n        cond_params = data.cond_params\n        self._time_to_iter = cond_params.time_to_iter\n        self._dt = self._dx / Constants.c\n        hydraulics = Hydraulics(\n            cond_params.density, cond_params.viscosity * 10 ** (-6), self._dt, self._dx",
+        "detail": "fastApi.services.calculation_V3.solver",
+        "documentation": {}
+    },
+    {
+        "label": "Unsteady_Utils",
+        "kind": 6,
+        "importPath": "fastApi.services.calculation_V3.unsteady_utils",
+        "description": "fastApi.services.calculation_V3.unsteady_utils",
+        "peekOfCode": "class Unsteady_Utils:\n    @classmethod\n    def transform_pressure_to_Pa(cls, result_once_time: Result_unsteady_data):\n        result_once_time_copy = result_once_time.model_dump()\n        def divide_p_by_million(data):\n            if isinstance(data, dict):\n                for key, value in data.items():\n                    if key == \"p\":\n                        data[key] /= 1_000_000\n                    else:",
+        "detail": "fastApi.services.calculation_V3.unsteady_utils",
+        "documentation": {}
+    },
+    {
+        "label": "L_and_num_of_elems",
+        "kind": 6,
+        "importPath": "fastApi.services.unsteady_flow_calculation",
+        "description": "fastApi.services.unsteady_flow_calculation",
+        "peekOfCode": "class L_and_num_of_elems(BaseModel):\n    L: float\n    N: int\n    num_of_x_grid_nodes: int\nk_list = []\n# step:int=1000 #метры\ndef count_l_and_num_of_elems(\n    elements: list[Elements_model],\n):\n    def sum_element_props(acc: L_and_num_of_elems, element: Elements_model) -> int:",
+        "detail": "fastApi.services.unsteady_flow_calculation",
+        "documentation": {}
+    },
+    {
+        "label": "count_l_and_num_of_elems",
+        "kind": 2,
+        "importPath": "fastApi.services.unsteady_flow_calculation",
+        "description": "fastApi.services.unsteady_flow_calculation",
+        "peekOfCode": "def count_l_and_num_of_elems(\n    elements: list[Elements_model],\n):\n    def sum_element_props(acc: L_and_num_of_elems, element: Elements_model) -> int:\n        if element.type == \"pipe\":\n            acc.L += element.length * 1000\n            acc.N += element.length\n            acc.num_of_x_grid_nodes += element.length\n        elif element.type in [\"provider\", \"consumer\"]:\n            acc.L += 1000",
+        "detail": "fastApi.services.unsteady_flow_calculation",
+        "documentation": {}
+    },
+    {
+        "label": "make_x",
+        "kind": 2,
+        "importPath": "fastApi.services.unsteady_flow_calculation",
+        "description": "fastApi.services.unsteady_flow_calculation",
+        "peekOfCode": "def make_x(elements: list[Elements_model], L, N):\n    dx = L / N\n    x = 0\n    xx = []\n    for elem in elements:\n        type_ = elem.type\n        if type_ == \"pump\" or type_ == \"gate_valve\" or type_ == \"safe_valve\":\n            xx.extend([x, x])\n            x += dx\n        elif type_ == \"pipe\":",
+        "detail": "fastApi.services.unsteady_flow_calculation",
+        "documentation": {}
+    },
+    {
+        "label": "calculate",
+        "kind": 2,
+        "importPath": "fastApi.services.unsteady_flow_calculation",
+        "description": "fastApi.services.unsteady_flow_calculation",
+        "peekOfCode": "def calculate(data: Unsteady_data):\n    cond_params: Cond_params = data.cond_params\n    elements: list[Elements_model] = data.pipeline\n    t = 0\n    g = 9.81\n    c = bf.c\n    v = cond_params.viscosity * 10 ** (-6)\n    ro = cond_params.density\n    t_rab = cond_params.time_to_iter\n    L, N, num_of_x_grid_nodes = count_l_and_num_of_elems(elements)",
+        "detail": "fastApi.services.unsteady_flow_calculation",
+        "documentation": {}
+    },
+    {
+        "label": "k_list",
+        "kind": 5,
+        "importPath": "fastApi.services.unsteady_flow_calculation",
+        "description": "fastApi.services.unsteady_flow_calculation",
+        "peekOfCode": "k_list = []\n# step:int=1000 #метры\ndef count_l_and_num_of_elems(\n    elements: list[Elements_model],\n):\n    def sum_element_props(acc: L_and_num_of_elems, element: Elements_model) -> int:\n        if element.type == \"pipe\":\n            acc.L += element.length * 1000\n            acc.N += element.length\n            acc.num_of_x_grid_nodes += element.length",
+        "detail": "fastApi.services.unsteady_flow_calculation",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "kind": 5,
+        "importPath": "fastApi.wsockets.unsteady_flow_ws",
+        "description": "fastApi.wsockets.unsteady_flow_ws",
+        "peekOfCode": "router = APIRouter()\nmanager = ConnectionManager()\n@router.websocket(\"/unsteady_flow\")\nasync def unsteady_flow_ws(websocket: WebSocket):\n    await manager.connect(websocket)\n    try:\n        json_data = await websocket.receive_json()\n    except:\n        await manager.disconnect(websocket, \"Неверный формат\", 1007)\n        return",
+        "detail": "fastApi.wsockets.unsteady_flow_ws",
+        "documentation": {}
+    },
+    {
+        "label": "manager",
+        "kind": 5,
+        "importPath": "fastApi.wsockets.unsteady_flow_ws",
+        "description": "fastApi.wsockets.unsteady_flow_ws",
+        "peekOfCode": "manager = ConnectionManager()\n@router.websocket(\"/unsteady_flow\")\nasync def unsteady_flow_ws(websocket: WebSocket):\n    await manager.connect(websocket)\n    try:\n        json_data = await websocket.receive_json()\n    except:\n        await manager.disconnect(websocket, \"Неверный формат\", 1007)\n        return\n    try:",
+        "detail": "fastApi.wsockets.unsteady_flow_ws",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "fastApi.app",
+        "description": "fastApi.app",
+        "peekOfCode": "app = FastAPI(\n    openapi_url=\"/core/openapi.json\", docs_url=\"/core/docs\", debug=True, version=\"0.0.1\"\n)\napp.include_router(unsteady_flow_ws_router)\nif __name__ == \"__main__\":\n    uvicorn.run(\"app:app\", host=\"0.0.0.0\", port=8000, reload=True)",
+        "detail": "fastApi.app",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "kind": 5,
+        "importPath": "fastApi.logger_config",
+        "description": "fastApi.logger_config",
+        "peekOfCode": "logger = logging.getLogger(\"print\")",
+        "detail": "fastApi.logger_config",
+        "documentation": {}
+    },
+    {
+        "label": "_Known",
+        "kind": 6,
+        "importPath": "nextjs.node_modules.flatted.python.flatted",
+        "description": "nextjs.node_modules.flatted.python.flatted",
+        "peekOfCode": "class _Known:\n    def __init__(self):\n        self.key = []\n        self.value = []\nclass _String:\n    def __init__(self, value):\n        self.value = value\ndef _array_keys(value):\n    keys = []\n    i = 0",
+        "detail": "nextjs.node_modules.flatted.python.flatted",
+        "documentation": {}
+    },
+    {
+        "label": "_String",
+        "kind": 6,
+        "importPath": "nextjs.node_modules.flatted.python.flatted",
+        "description": "nextjs.node_modules.flatted.python.flatted",
+        "peekOfCode": "class _String:\n    def __init__(self, value):\n        self.value = value\ndef _array_keys(value):\n    keys = []\n    i = 0\n    for _ in value:\n        keys.append(i)\n        i += 1\n    return keys",
+        "detail": "nextjs.node_modules.flatted.python.flatted",
+        "documentation": {}
+    },
+    {
+        "label": "parse",
+        "kind": 2,
+        "importPath": "nextjs.node_modules.flatted.python.flatted",
+        "description": "nextjs.node_modules.flatted.python.flatted",
+        "peekOfCode": "def parse(value, *args, **kwargs):\n    json = _json.loads(value, *args, **kwargs)\n    wrapped = []\n    for value in json:\n        wrapped.append(_wrap(value))\n    input = []\n    for value in wrapped:\n        if isinstance(value, _String):\n            input.append(value.value)\n        else:",
+        "detail": "nextjs.node_modules.flatted.python.flatted",
+        "documentation": {}
+    },
+    {
+        "label": "stringify",
+        "kind": 2,
+        "importPath": "nextjs.node_modules.flatted.python.flatted",
+        "description": "nextjs.node_modules.flatted.python.flatted",
+        "peekOfCode": "def stringify(value, *args, **kwargs):\n    known = _Known()\n    input = []\n    output = []\n    i = int(_index(known, input, value))\n    while i < len(input):\n        output.append(_transform(known, input, input[i]))\n        i += 1\n    return _json.dumps(output, *args, **kwargs)",
+        "detail": "nextjs.node_modules.flatted.python.flatted",
+        "documentation": {}
+    },
+    {
+        "label": "stringify",
+        "kind": 2,
+        "importPath": "nextjs.node_modules.flatted.python.test",
+        "description": "nextjs.node_modules.flatted.python.test",
+        "peekOfCode": "def stringify(value):\n    return _stringify(value, separators=(',', ':'))\nassert stringify([None, None]) == '[[null,null]]'\na = []\no = {}\nassert stringify(a) == '[[]]'\nassert stringify(o) == '[{}]'\na.append(a)\no['o'] = o\nassert stringify(a) == '[[\"0\"]]'",
+        "detail": "nextjs.node_modules.flatted.python.test",
+        "documentation": {}
+    },
+    {
+        "label": "a",
+        "kind": 5,
+        "importPath": "nextjs.node_modules.flatted.python.test",
+        "description": "nextjs.node_modules.flatted.python.test",
+        "peekOfCode": "a = []\no = {}\nassert stringify(a) == '[[]]'\nassert stringify(o) == '[{}]'\na.append(a)\no['o'] = o\nassert stringify(a) == '[[\"0\"]]'\nassert stringify(o) == '[{\"o\":\"0\"}]'\nb = parse(stringify(a))\nassert isinstance(b, list) and b[0] == b",
+        "detail": "nextjs.node_modules.flatted.python.test",
+        "documentation": {}
+    },
+    {
+        "label": "o",
+        "kind": 5,
+        "importPath": "nextjs.node_modules.flatted.python.test",
+        "description": "nextjs.node_modules.flatted.python.test",
+        "peekOfCode": "o = {}\nassert stringify(a) == '[[]]'\nassert stringify(o) == '[{}]'\na.append(a)\no['o'] = o\nassert stringify(a) == '[[\"0\"]]'\nassert stringify(o) == '[{\"o\":\"0\"}]'\nb = parse(stringify(a))\nassert isinstance(b, list) and b[0] == b\na.append(1)",
+        "detail": "nextjs.node_modules.flatted.python.test",
+        "documentation": {}
+    },
+    {
+        "label": "o['o']",
+        "kind": 5,
+        "importPath": "nextjs.node_modules.flatted.python.test",
+        "description": "nextjs.node_modules.flatted.python.test",
+        "peekOfCode": "o['o'] = o\nassert stringify(a) == '[[\"0\"]]'\nassert stringify(o) == '[{\"o\":\"0\"}]'\nb = parse(stringify(a))\nassert isinstance(b, list) and b[0] == b\na.append(1)\na.append('two')\na.append(True)\no['one'] = 1\no['two'] = 'two'",
+        "detail": "nextjs.node_modules.flatted.python.test",
+        "documentation": {}
+    },
+    {
+        "label": "b",
+        "kind": 5,
+        "importPath": "nextjs.node_modules.flatted.python.test",
+        "description": "nextjs.node_modules.flatted.python.test",
+        "peekOfCode": "b = parse(stringify(a))\nassert isinstance(b, list) and b[0] == b\na.append(1)\na.append('two')\na.append(True)\no['one'] = 1\no['two'] = 'two'\no['three'] = True\nassert stringify(a) == '[[\"0\",1,\"1\",true],\"two\"]'\nassert stringify(o) == '[{\"o\":\"0\",\"one\":1,\"two\":\"1\",\"three\":true},\"two\"]'",
+        "detail": "nextjs.node_modules.flatted.python.test",
+        "documentation": {}
+    },
+    {
+        "label": "o['one']",
+        "kind": 5,
+        "importPath": "nextjs.node_modules.flatted.python.test",
+        "description": "nextjs.node_modules.flatted.python.test",
+        "peekOfCode": "o['one'] = 1\no['two'] = 'two'\no['three'] = True\nassert stringify(a) == '[[\"0\",1,\"1\",true],\"two\"]'\nassert stringify(o) == '[{\"o\":\"0\",\"one\":1,\"two\":\"1\",\"three\":true},\"two\"]'\na.append(o)\no['a'] = a\nassert stringify(a) == '[[\"0\",1,\"1\",true,\"2\"],\"two\",{\"o\":\"2\",\"one\":1,\"two\":\"1\",\"three\":true,\"a\":\"0\"}]'\nassert stringify(o) == '[{\"o\":\"0\",\"one\":1,\"two\":\"1\",\"three\":true,\"a\":\"2\"},\"two\",[\"2\",1,\"1\",true,\"0\"]]'\na.append({'test': 'OK'})",
+        "detail": "nextjs.node_modules.flatted.python.test",
+        "documentation": {}
+    },
+    {
+        "label": "o['two']",
+        "kind": 5,
+        "importPath": "nextjs.node_modules.flatted.python.test",
+        "description": "nextjs.node_modules.flatted.python.test",
+        "peekOfCode": "o['two'] = 'two'\no['three'] = True\nassert stringify(a) == '[[\"0\",1,\"1\",true],\"two\"]'\nassert stringify(o) == '[{\"o\":\"0\",\"one\":1,\"two\":\"1\",\"three\":true},\"two\"]'\na.append(o)\no['a'] = a\nassert stringify(a) == '[[\"0\",1,\"1\",true,\"2\"],\"two\",{\"o\":\"2\",\"one\":1,\"two\":\"1\",\"three\":true,\"a\":\"0\"}]'\nassert stringify(o) == '[{\"o\":\"0\",\"one\":1,\"two\":\"1\",\"three\":true,\"a\":\"2\"},\"two\",[\"2\",1,\"1\",true,\"0\"]]'\na.append({'test': 'OK'})\na.append([1, 2, 3])",
+        "detail": "nextjs.node_modules.flatted.python.test",
+        "documentation": {}
+    },
+    {
+        "label": "o['three']",
+        "kind": 5,
+        "importPath": "nextjs.node_modules.flatted.python.test",
+        "description": "nextjs.node_modules.flatted.python.test",
+        "peekOfCode": "o['three'] = True\nassert stringify(a) == '[[\"0\",1,\"1\",true],\"two\"]'\nassert stringify(o) == '[{\"o\":\"0\",\"one\":1,\"two\":\"1\",\"three\":true},\"two\"]'\na.append(o)\no['a'] = a\nassert stringify(a) == '[[\"0\",1,\"1\",true,\"2\"],\"two\",{\"o\":\"2\",\"one\":1,\"two\":\"1\",\"three\":true,\"a\":\"0\"}]'\nassert stringify(o) == '[{\"o\":\"0\",\"one\":1,\"two\":\"1\",\"three\":true,\"a\":\"2\"},\"two\",[\"2\",1,\"1\",true,\"0\"]]'\na.append({'test': 'OK'})\na.append([1, 2, 3])\no['test'] = {'test': 'OK'}",
+        "detail": "nextjs.node_modules.flatted.python.test",
+        "documentation": {}
+    },
+    {
+        "label": "o['a']",
+        "kind": 5,
+        "importPath": "nextjs.node_modules.flatted.python.test",
+        "description": "nextjs.node_modules.flatted.python.test",
+        "peekOfCode": "o['a'] = a\nassert stringify(a) == '[[\"0\",1,\"1\",true,\"2\"],\"two\",{\"o\":\"2\",\"one\":1,\"two\":\"1\",\"three\":true,\"a\":\"0\"}]'\nassert stringify(o) == '[{\"o\":\"0\",\"one\":1,\"two\":\"1\",\"three\":true,\"a\":\"2\"},\"two\",[\"2\",1,\"1\",true,\"0\"]]'\na.append({'test': 'OK'})\na.append([1, 2, 3])\no['test'] = {'test': 'OK'}\no['array'] = [1, 2, 3]\nassert stringify(a) == '[[\"0\",1,\"1\",true,\"2\",\"3\",\"4\"],\"two\",{\"o\":\"2\",\"one\":1,\"two\":\"1\",\"three\":true,\"a\":\"0\",\"test\":\"3\",\"array\":\"4\"},{\"test\":\"5\"},[1,2,3],\"OK\"]'\nassert stringify(o) == '[{\"o\":\"0\",\"one\":1,\"two\":\"1\",\"three\":true,\"a\":\"2\",\"test\":\"3\",\"array\":\"4\"},\"two\",[\"2\",1,\"1\",true,\"0\",\"3\",\"4\"],{\"test\":\"5\"},[1,2,3],\"OK\"]'\na2 = parse(stringify(a));",
+        "detail": "nextjs.node_modules.flatted.python.test",
+        "documentation": {}
+    },
+    {
+        "label": "o['test']",
+        "kind": 5,
+        "importPath": "nextjs.node_modules.flatted.python.test",
+        "description": "nextjs.node_modules.flatted.python.test",
+        "peekOfCode": "o['test'] = {'test': 'OK'}\no['array'] = [1, 2, 3]\nassert stringify(a) == '[[\"0\",1,\"1\",true,\"2\",\"3\",\"4\"],\"two\",{\"o\":\"2\",\"one\":1,\"two\":\"1\",\"three\":true,\"a\":\"0\",\"test\":\"3\",\"array\":\"4\"},{\"test\":\"5\"},[1,2,3],\"OK\"]'\nassert stringify(o) == '[{\"o\":\"0\",\"one\":1,\"two\":\"1\",\"three\":true,\"a\":\"2\",\"test\":\"3\",\"array\":\"4\"},\"two\",[\"2\",1,\"1\",true,\"0\",\"3\",\"4\"],{\"test\":\"5\"},[1,2,3],\"OK\"]'\na2 = parse(stringify(a));\no2 = parse(stringify(o));\nassert a2[0] == a2\nassert o2['o'] == o2\nassert a2[1] == 1 and a2[2] == 'two' and a2[3] == True and isinstance(a2[4], dict)\nassert a2[4] == a2[4]['o'] and a2 == a2[4]['o']['a']",
+        "detail": "nextjs.node_modules.flatted.python.test",
+        "documentation": {}
+    },
+    {
+        "label": "o['array']",
+        "kind": 5,
+        "importPath": "nextjs.node_modules.flatted.python.test",
+        "description": "nextjs.node_modules.flatted.python.test",
+        "peekOfCode": "o['array'] = [1, 2, 3]\nassert stringify(a) == '[[\"0\",1,\"1\",true,\"2\",\"3\",\"4\"],\"two\",{\"o\":\"2\",\"one\":1,\"two\":\"1\",\"three\":true,\"a\":\"0\",\"test\":\"3\",\"array\":\"4\"},{\"test\":\"5\"},[1,2,3],\"OK\"]'\nassert stringify(o) == '[{\"o\":\"0\",\"one\":1,\"two\":\"1\",\"three\":true,\"a\":\"2\",\"test\":\"3\",\"array\":\"4\"},\"two\",[\"2\",1,\"1\",true,\"0\",\"3\",\"4\"],{\"test\":\"5\"},[1,2,3],\"OK\"]'\na2 = parse(stringify(a));\no2 = parse(stringify(o));\nassert a2[0] == a2\nassert o2['o'] == o2\nassert a2[1] == 1 and a2[2] == 'two' and a2[3] == True and isinstance(a2[4], dict)\nassert a2[4] == a2[4]['o'] and a2 == a2[4]['o']['a']\nstr = parse('[{\"prop\":\"1\",\"a\":\"2\",\"b\":\"3\"},{\"value\":123},[\"4\",\"5\"],{\"e\":\"6\",\"t\":\"7\",\"p\":4},{},{\"b\":\"8\"},\"f\",{\"a\":\"9\"},[\"10\"],\"sup\",{\"a\":1,\"d\":2,\"c\":\"7\",\"z\":\"11\",\"h\":1},{\"g\":2,\"a\":\"7\",\"b\":\"12\",\"f\":6},{\"r\":4,\"u\":\"7\",\"c\":5}]')",
+        "detail": "nextjs.node_modules.flatted.python.test",
+        "documentation": {}
+    },
+    {
+        "label": "a2",
+        "kind": 5,
+        "importPath": "nextjs.node_modules.flatted.python.test",
+        "description": "nextjs.node_modules.flatted.python.test",
+        "peekOfCode": "a2 = parse(stringify(a));\no2 = parse(stringify(o));\nassert a2[0] == a2\nassert o2['o'] == o2\nassert a2[1] == 1 and a2[2] == 'two' and a2[3] == True and isinstance(a2[4], dict)\nassert a2[4] == a2[4]['o'] and a2 == a2[4]['o']['a']\nstr = parse('[{\"prop\":\"1\",\"a\":\"2\",\"b\":\"3\"},{\"value\":123},[\"4\",\"5\"],{\"e\":\"6\",\"t\":\"7\",\"p\":4},{},{\"b\":\"8\"},\"f\",{\"a\":\"9\"},[\"10\"],\"sup\",{\"a\":1,\"d\":2,\"c\":\"7\",\"z\":\"11\",\"h\":1},{\"g\":2,\"a\":\"7\",\"b\":\"12\",\"f\":6},{\"r\":4,\"u\":\"7\",\"c\":5}]')\nassert str['b']['t']['a'] == 'sup' and str['a'][1]['b'][0]['c'] == str['b']['t']\noo = parse('[{\"a\":\"1\",\"b\":\"0\",\"c\":\"2\"},{\"aa\":\"3\"},{\"ca\":\"4\",\"cb\":\"5\",\"cc\":\"6\",\"cd\":\"7\",\"ce\":\"8\",\"cf\":\"9\"},{\"aaa\":\"10\"},{\"caa\":\"4\"},{\"cba\":\"5\"},{\"cca\":\"2\"},{\"cda\":\"4\"},\"value2\",\"value3\",\"value1\"]');\nassert oo['a']['aa']['aaa'] == 'value1' and oo == oo['b'] and oo['c']['ca']['caa'] == oo['c']['ca']",
+        "detail": "nextjs.node_modules.flatted.python.test",
+        "documentation": {}
+    },
+    {
+        "label": "o2",
+        "kind": 5,
+        "importPath": "nextjs.node_modules.flatted.python.test",
+        "description": "nextjs.node_modules.flatted.python.test",
+        "peekOfCode": "o2 = parse(stringify(o));\nassert a2[0] == a2\nassert o2['o'] == o2\nassert a2[1] == 1 and a2[2] == 'two' and a2[3] == True and isinstance(a2[4], dict)\nassert a2[4] == a2[4]['o'] and a2 == a2[4]['o']['a']\nstr = parse('[{\"prop\":\"1\",\"a\":\"2\",\"b\":\"3\"},{\"value\":123},[\"4\",\"5\"],{\"e\":\"6\",\"t\":\"7\",\"p\":4},{},{\"b\":\"8\"},\"f\",{\"a\":\"9\"},[\"10\"],\"sup\",{\"a\":1,\"d\":2,\"c\":\"7\",\"z\":\"11\",\"h\":1},{\"g\":2,\"a\":\"7\",\"b\":\"12\",\"f\":6},{\"r\":4,\"u\":\"7\",\"c\":5}]')\nassert str['b']['t']['a'] == 'sup' and str['a'][1]['b'][0]['c'] == str['b']['t']\noo = parse('[{\"a\":\"1\",\"b\":\"0\",\"c\":\"2\"},{\"aa\":\"3\"},{\"ca\":\"4\",\"cb\":\"5\",\"cc\":\"6\",\"cd\":\"7\",\"ce\":\"8\",\"cf\":\"9\"},{\"aaa\":\"10\"},{\"caa\":\"4\"},{\"cba\":\"5\"},{\"cca\":\"2\"},{\"cda\":\"4\"},\"value2\",\"value3\",\"value1\"]');\nassert oo['a']['aa']['aaa'] == 'value1' and oo == oo['b'] and oo['c']['ca']['caa'] == oo['c']['ca']\nprint('OK')",
+        "detail": "nextjs.node_modules.flatted.python.test",
+        "documentation": {}
+    },
+    {
+        "label": "str",
+        "kind": 5,
+        "importPath": "nextjs.node_modules.flatted.python.test",
+        "description": "nextjs.node_modules.flatted.python.test",
+        "peekOfCode": "str = parse('[{\"prop\":\"1\",\"a\":\"2\",\"b\":\"3\"},{\"value\":123},[\"4\",\"5\"],{\"e\":\"6\",\"t\":\"7\",\"p\":4},{},{\"b\":\"8\"},\"f\",{\"a\":\"9\"},[\"10\"],\"sup\",{\"a\":1,\"d\":2,\"c\":\"7\",\"z\":\"11\",\"h\":1},{\"g\":2,\"a\":\"7\",\"b\":\"12\",\"f\":6},{\"r\":4,\"u\":\"7\",\"c\":5}]')\nassert str['b']['t']['a'] == 'sup' and str['a'][1]['b'][0]['c'] == str['b']['t']\noo = parse('[{\"a\":\"1\",\"b\":\"0\",\"c\":\"2\"},{\"aa\":\"3\"},{\"ca\":\"4\",\"cb\":\"5\",\"cc\":\"6\",\"cd\":\"7\",\"ce\":\"8\",\"cf\":\"9\"},{\"aaa\":\"10\"},{\"caa\":\"4\"},{\"cba\":\"5\"},{\"cca\":\"2\"},{\"cda\":\"4\"},\"value2\",\"value3\",\"value1\"]');\nassert oo['a']['aa']['aaa'] == 'value1' and oo == oo['b'] and oo['c']['ca']['caa'] == oo['c']['ca']\nprint('OK')",
+        "detail": "nextjs.node_modules.flatted.python.test",
+        "documentation": {}
+    },
+    {
+        "label": "oo",
+        "kind": 5,
+        "importPath": "nextjs.node_modules.flatted.python.test",
+        "description": "nextjs.node_modules.flatted.python.test",
+        "peekOfCode": "oo = parse('[{\"a\":\"1\",\"b\":\"0\",\"c\":\"2\"},{\"aa\":\"3\"},{\"ca\":\"4\",\"cb\":\"5\",\"cc\":\"6\",\"cd\":\"7\",\"ce\":\"8\",\"cf\":\"9\"},{\"aaa\":\"10\"},{\"caa\":\"4\"},{\"cba\":\"5\"},{\"cca\":\"2\"},{\"cda\":\"4\"},\"value2\",\"value3\",\"value1\"]');\nassert oo['a']['aa']['aaa'] == 'value1' and oo == oo['b'] and oo['c']['ca']['caa'] == oo['c']['ca']\nprint('OK')",
+        "detail": "nextjs.node_modules.flatted.python.test",
+        "documentation": {}
+    }
+]

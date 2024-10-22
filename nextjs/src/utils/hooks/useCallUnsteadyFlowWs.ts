@@ -36,23 +36,22 @@ export const useCallUnsteadyFlowWs = (
 	})
 
 	const calcUnsteadyFlow = () => {
-		if (isValidPipeline.isConusmer == true && isValidPipeline.isPipe == true) {
+		if (isValidPipeline.isConusmer && isValidPipeline.isPipe) {
 			setIsLoading(true)
 			resetResult()
 			const ws = new WebSocket(`ws://${url}/unsteady_flow`)
 			ws.onerror = (ev) => {
 				console.error
 			}
-			const timeToIter = cond_params.time_to_iter
-			const message2 = JSON.stringify(
+			const message = JSON.stringify(
 				{
 					cond_params,
 					pipeline: pipeline.toObj()
 				}
 			)
-			// console.log(pipeline.toObj())
+			console.log(pipeline.toObj())
 			ws.onopen = (ev) => {
-				ws.send(message2)
+				ws.send(message)
 			}
 			ws.onmessage = (event) => {
 				const data: Recieved = JSON.parse(event.data)

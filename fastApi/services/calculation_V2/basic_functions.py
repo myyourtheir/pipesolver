@@ -50,40 +50,43 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
                 child_node=self._prev_res[neighbors[0]],
             )
         elif current_element.type == "pipe":
-            # TODO правильно назначать родителя и ребенка
-            last_index_keys = self._prev_res[current_node.id].value[-1].keys()
-            # first_index_keys = self._prev_res[current_node.id].value[0].keys()
-            if neighbors[0] in last_index_keys:
-                child_node_id = neighbors[0]
-                parent_node_id = neighbors[1]
-            else:
-                child_node_id = neighbors[1]
-                parent_node_id = neighbors[0]
+            child_id, parent_id = self.extract_orientation_child_parent(
+                current_node, self._visited_nodes
+            )
             element_result = self.__pipe_method(
                 current_node,
-                child_node=self._prev_res[child_node_id],
-                parent_node=self._prev_res[parent_node_id],
+                child_node=self._prev_res[child_id],
+                parent_node=self._prev_res[parent_id],
             )
 
         elif current_element.type == "pump":
+            child_id, parent_id = self.extract_orientation_child_parent(
+                current_node, self._visited_nodes
+            )
             element_result = self.__pump_method(
                 current_node,
-                child_node=self._prev_res[dont_visited_neighbors[0]],
-                parent_node=self._prev_res[visited_neighbor[0]],
+                child_node=self._prev_res[child_id],
+                parent_node=self._prev_res[parent_id],
             )
 
         elif current_element.type == "gate_valve":
+            child_id, parent_id = self.extract_orientation_child_parent(
+                current_node, self._visited_nodes
+            )
             element_result = self.__gate_valve_method(
                 current_node,
-                child_node=self._prev_res[dont_visited_neighbors[0]],
-                parent_node=self._prev_res[visited_neighbor[0]],
+                child_node=self._prev_res[child_id],
+                parent_node=self._prev_res[parent_id],
             )
 
         elif current_element.type == "safe_valve":
+            child_id, parent_id = self.extract_orientation_child_parent(
+                current_node, self._visited_nodes
+            )
             element_result = self.__safe_valve_method(
                 current_node,
-                child_node=self._prev_res[dont_visited_neighbors[0]],
-                parent_node=self._prev_res[visited_neighbor[0]],
+                child_node=self._prev_res[child_id],
+                parent_node=self._prev_res[parent_id],
             )
 
         elif current_element.type == "consumer":
@@ -93,22 +96,29 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
                 parent_node=self._prev_res[neighbors[0]],
             )
         elif current_element.type == "tee":
-
+            visited_node = [node for node in neighbors if node in self._visited_nodes]
+            neighbors.remove(visited_node[0])
             element_result = self.__tee_method(
                 current_node=current_node,
-                first_neighbor_node=self._prev_res[neighbors[0]],
-                second_nieghbour_node=self._prev_res[neighbors[1]],
-                third_neighbor_node=self._prev_res[neighbors[2]],
+                first_neighbor_node=self._prev_res[visited_node[0]],
+                second_nieghbour_node=self._prev_res[neighbors[0]],
+                third_neighbor_node=self._prev_res[neighbors[1]],
             )
         return element_result
 
     def __provider_method(
         self, current_node: Recieved_element, child_node: Response_element
     ) -> Response_element:
-        child_element = child_node.value
+        child_element = (
+            child_node.value[0]
+            if child_node.value[0].get(current_node.id)
+            else child_node.value[-1]
+        )
         current_element = current_node.value
         Jb = self.__find_Jb(
-            child_element[0][current_node.id].p, child_element[0][current_node.id].V
+            child_element[current_node.id].p,
+            child_element[current_node.id].V,
+            #                         ^ тут может быть последний индекс    ^
         )
         if current_element.mode == "pressure":
             p = current_element.value * 1000
@@ -604,10 +614,14 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
     def __consumer_method(
         self, current_node: Recieved_element, parent_node: Response_element
     ) -> Response_element:
-        parent_element = parent_node.value
+        parent_element = (
+            parent_node.value[0]
+            if parent_node.value[0].get(current_node.id)
+            else parent_node.value[-1]
+        )
         current_element = current_node.value
         Ja = self.__find_Ja(
-            parent_element[-1][current_node.id].p, parent_element[-1][current_node.id].V
+            parent_element[current_node.id].p, parent_element[current_node.id].V
         )
         if current_element.mode == "pressure":
             p = current_element.value * 1000
@@ -705,7 +719,10 @@ class Basic_functions(Vis_otm, Unsteady_flow_core):
     def calculate_invariant_and_sign_in_the_tee(
         self, current_node: Recieved_element, neighbor_node: Response_element
     ):
-        if neighbor_node.id in current_node.parents:
+        logging.info(
+            f"current_node: {neighbor_node}  neighbor_node: {neighbor_node.id}"
+        )
+        if neighbor_node.id in self._visited_nodes:
             J = self.__find_Ja(
                 p=neighbor_node.value[-1][current_node.id].p,
                 V=neighbor_node.value[-1][current_node.id].V,

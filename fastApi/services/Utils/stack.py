@@ -2,6 +2,10 @@ class Stack:
     def __init__(self):
         self.stack: list[str] = []
 
+    def __iter__(self):
+        for elem in self.stack:
+            yield elem
+
     def add(self, element_id: str):
         self.stack.append(element_id)
 

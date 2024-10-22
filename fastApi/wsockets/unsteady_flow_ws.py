@@ -7,6 +7,7 @@ from services.calculation_V2.unsteady_flow_solver import Unsteady_flow_solver
 from pprint import pprint
 from wsockets import ConnectionManager
 from logger_config import logger
+from services.calculation_V3.solver import Unsteady_Solver
 
 router = APIRouter()
 
@@ -28,7 +29,7 @@ async def unsteady_flow_ws(websocket: WebSocket):
         await manager.disconnect(websocket, "Валидация данных не пройдена", 1007)
         return
     try:
-        unstedy_flow_solver = Unsteady_flow_solver(valid_data)
+        unstedy_flow_solver = Unsteady_Solver(valid_data)
         generator = unstedy_flow_solver.solve()
         max = valid_data.cond_params.time_to_iter
         current = 0

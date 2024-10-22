@@ -256,31 +256,43 @@ class Unsteady_flow_core:
                     child_node=pipeline[child_node_id],  # TODO возможно тут ошибка
                 )
             elif current_element.type == "pipe":
+                child_id, parent_id = self.extract_orientation_child_parent(
+                    current_node, visited_nodes
+                )
                 element_result = pipe_method(
                     current_node,
-                    child_node=pipeline[current_node.children[0]],
-                    parent_node=pipeline[current_node.parents[0]],
+                    child_node=pipeline[child_id],
+                    parent_node=pipeline[parent_id],
                 )
 
             elif current_element.type == "pump":
+                child_id, parent_id = self.extract_orientation_child_parent(
+                    current_node, visited_nodes
+                )
                 element_result = pump_method(
                     current_node,
-                    child_node=pipeline[current_node.children[0]],
-                    parent_node=pipeline[current_node.parents[0]],
+                    child_node=pipeline[child_id],
+                    parent_node=pipeline[parent_id],
                 )
 
             elif current_element.type == "gate_valve":
+                child_id, parent_id = self.extract_orientation_child_parent(
+                    current_node, visited_nodes
+                )
                 element_result = gate_valve_method(
                     current_node,
-                    child_node=pipeline[current_node.children[0]],
-                    parent_node=pipeline[current_node.parents[0]],
+                    child_node=pipeline[child_id],
+                    parent_node=pipeline[parent_id],
                 )
 
             elif current_element.type == "safe_valve":
+                child_id, parent_id = self.extract_orientation_child_parent(
+                    current_node, visited_nodes
+                )
                 element_result = safe_valve_method(
                     current_node,
-                    child_node=pipeline[current_node.children[0]],
-                    parent_node=pipeline[current_node.parents[0]],
+                    child_node=pipeline[child_id],
+                    parent_node=pipeline[parent_id],
                 )
 
             elif current_element.type == "consumer":
@@ -291,18 +303,18 @@ class Unsteady_flow_core:
                 )
             elif current_element.type == "tee":
                 neighours = self.get_neighbors_of_node(current_node)
+                visited_node = [node for node in neighours if node in visited_nodes]
+                neighours.remove(visited_node[0])
                 element_result = tee_method(
                     current_node=current_node,
-                    first_neighbor_node=pipeline[neighours[0]],
-                    second_nieghbour=pipeline[neighours[1]],
-                    third_neighbor=pipeline[neighours[2]],
+                    first_neighbor_node=pipeline[visited_node[0]],
+                    second_nieghbour=pipeline[neighours[0]],
+                    third_neighbor=pipeline[neighours[1]],
                 )
             return element_result
 
         initial_distribution = {}
-        start_element_id = reduce(
-            self.find_elements_with_one_neighbor, pipeline.values(), []
-        )[0]
+        start_element_id = reduce(self.find_providers, pipeline.values(), [])[0]
         current_node = pipeline[start_element_id]
         current_x = 0
         visited_nodes: set[str] = set()
@@ -345,15 +357,15 @@ class Unsteady_flow_core:
 
         return initial_distribution
 
-    def get_iters_count(self, node: Recieved_element):
-        elements_with_two_sections = ["safe_valve", "gate_valve", "pump"]
-        element = node.value
-        if element.type == "pipe":
-            return int(element.length * 1000 / self._dx)
-        elif element.type in elements_with_two_sections:
-            return 2
-        else:
-            return 1
+    @staticmethod
+    def extract_orientation_child_parent(
+        node: Recieved_element, visited_nodes: set[str]
+    ):
+        child_id = node.children[0]
+        parent_id = node.parents[0]
+        visited_id = parent_id if parent_id in visited_nodes else child_id
+        next_node_id = child_id if visited_id != child_id else parent_id
+        return next_node_id, visited_id
 
     @staticmethod
     def get_neighbors_of_node(node: Recieved_element):
@@ -371,9 +383,10 @@ class Unsteady_flow_core:
         return dont_visited_neighbors
 
     @staticmethod
-    def find_elements_with_one_neighbor(acc: list[str], elem: Recieved_element):
+    def find_providers(acc: list[str], elem: Recieved_element):
         if len(elem.parents) + len(elem.children) == 1:
-            acc.append(elem.id)
+            if elem.value.type == "provider":
+                acc.append(elem.id)
         return acc
 
     @staticmethod

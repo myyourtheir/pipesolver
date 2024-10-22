@@ -27,13 +27,13 @@ class Unsteady_flow_solver(Basic_functions):
         self._viscosity = cond_params.viscosity * 10 ** (-6)
         self._pipeline = data.pipeline
         self.start_element_ids = reduce(
-            self.find_elements_with_one_neighbor, data.pipeline.values(), []
+            self.find_providers, data.pipeline.values(), []
         )  # Учитываем пока как будто в массиве 1 стартовый id
         self._dt = self._dx / C.c
         self._moment_result = self._make_initial_distribution(data.pipeline)
         self._current_diameter = self.find_next_pipe_diameter(
             data.pipeline,
-            reduce(self.find_elements_with_one_neighbor, data.pipeline.values(), [])[0],
+            reduce(self.find_providers, data.pipeline.values(), [])[0],
         )
         # pprint(self._make_initial_distribution(data.pipeline))
 
@@ -42,6 +42,7 @@ class Unsteady_flow_solver(Basic_functions):
             # Обнуление всего перед след расчетом
             self._current_x = 0
             self._prev_res = self._moment_result.copy()
+            # logging.info(self._moment_result)
             self._moment_result = {}
             self.__calculate_the_entire_graph_one_time()
             self.result = Result_unsteady_data(
