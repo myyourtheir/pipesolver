@@ -1351,7 +1351,7 @@
         "kind": 6,
         "importPath": "fastApi.services.calculation_V3.elements.tee_element",
         "description": "fastApi.services.calculation_V3.elements.tee_element",
-        "peekOfCode": "class Tee_Element(AbstractElement):\n    def unsteady_solve(self, prev_res):\n        diameter1 = self.diameter_first\n        diameter2 = self.diameter_second\n        diameter3 = self.diameter_third\n        S1: float = math.pi * diameter1**2 / 4\n        S2: float = math.pi * diameter2**2 / 4\n        S3: float = math.pi * diameter3**2 / 4\n        prev_self_res = prev_res.moment_result[self.id].value\n        prev_first_res = (",
+        "peekOfCode": "class Tee_Element(AbstractElement):\n    def unsteady_solve(self, prev_res):\n        diameter1 = self.diameter_first\n        diameter2 = self.diameter_second\n        diameter3 = self.diameter_third\n        S1: float = math.pi * diameter1**2 / 4\n        S2: float = math.pi * diameter2**2 / 4\n        S3: float = math.pi * diameter3**2 / 4\n        prev_self_res = prev_res.moment_result[self.id].value\n        prev_first_res, sign1 = (",
         "detail": "fastApi.services.calculation_V3.elements.tee_element",
         "documentation": {}
     },

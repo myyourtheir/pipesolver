@@ -15,29 +15,32 @@ class Tee_Element(AbstractElement):
         S3: float = math.pi * diameter3**2 / 4
 
         prev_self_res = prev_res.moment_result[self.id].value
-        prev_first_res = (
-            prev_res.moment_result[self.first_neighbour_id].value[0][self.id]
+        prev_first_res, sign1 = (
+            (prev_res.moment_result[self.first_neighbour_id].value[0][self.id], -1)
             if prev_res.moment_result[self.first_neighbour_id].value[0].get(self.id)
-            else prev_res.moment_result[self.first_neighbour_id].value[-1][self.id]
+            else (prev_res.moment_result[self.first_neighbour_id].value[-1][self.id], 1)
         )
-        prev_second_res = (
-            prev_res.moment_result[self.second_neighbour_id].value[0][self.id]
+        prev_second_res, sign2 = (
+            (prev_res.moment_result[self.second_neighbour_id].value[0][self.id], -1)
             if prev_res.moment_result[self.second_neighbour_id].value[0].get(self.id)
-            else prev_res.moment_result[self.second_neighbour_id].value[-1][self.id]
+            else (
+                prev_res.moment_result[self.second_neighbour_id].value[-1][self.id],
+                1,
+            )
         )
-        prev_third_res = (
-            prev_res.moment_result[self.third_neighbour_id].value[0][self.id]
+        prev_third_res, sign3 = (
+            (prev_res.moment_result[self.third_neighbour_id].value[0][self.id], -1)
             if prev_res.moment_result[self.third_neighbour_id].value[0].get(self.id)
-            else prev_res.moment_result[self.third_neighbour_id].value[-1][self.id]
+            else (prev_res.moment_result[self.third_neighbour_id].value[-1][self.id], 1)
         )
         Ja, i = self.calculate_invariant_and_sign_in_the_tee(
-            self.first_neighbour_id, prev_first_res, diameter1
+            sign1, prev_first_res, diameter1
         )
         Jb, j = self.calculate_invariant_and_sign_in_the_tee(
-            self.second_neighbour_id, prev_second_res, diameter2
+            sign2, prev_second_res, diameter2
         )
         Jc, k = self.calculate_invariant_and_sign_in_the_tee(
-            self.third_neighbour_id, prev_third_res, diameter3
+            sign3, prev_third_res, diameter3
         )
         # fmt: off
         V1 = (Ja*(S2+S3)-Jb*S2-Jc*S3)/(i*self.hydraulics.density*C.c*(S1+S2+S3))
@@ -74,22 +77,20 @@ class Tee_Element(AbstractElement):
         # fmt: on
 
     def calculate_invariant_and_sign_in_the_tee(
-        self, neighbour_id: str, neighbour_res: One_section_response, diameter: float
+        self, sign: int, neighbour_res: One_section_response, diameter: float
     ):
-        if neighbour_id in self.visited:
+        if sign == 1:
             J = self.hydraulics.find_Ja(
                 p=neighbour_res.p,
                 V=neighbour_res.V,
                 diameter=diameter,
             )
-            sign = 1
         else:
             J = self.hydraulics.find_Jb(
                 p=neighbour_res.p,
                 V=neighbour_res.V,
                 diameter=diameter,
             )
-            sign = -1
         return J, sign
 
     def make_initial_distribution(self, x, visited):
