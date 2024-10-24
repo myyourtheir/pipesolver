@@ -1,6 +1,8 @@
 from schemas.unsteady_flow_ws_scheme import Recieved_element
 from services.calculation_V3.elements.abstractions import AbstractElement
+from services.calculation_V3.elements.gate_valve_element import Gate_Valve_Element
 from services.calculation_V3.elements.provider_element import Provider_Element
+from services.calculation_V3.elements.safe_valve_element import Safe_Valve_Element
 from services.calculation_V3.hydraulics import Hydraulics
 from services.calculation_V3.elements.pipe_element import Pipe_Element
 from services.calculation_V3.elements.pump_element import Pump_Element
@@ -13,8 +15,8 @@ class Elements_Factory:
         "provider": Provider_Element,
         "pipe": Pipe_Element,
         "pump": Pump_Element,
-        # "gate_valve": Gate_valve_Element,
-        # "safe_valve": Safe_valve_Element,
+        "gate_valve": Gate_Valve_Element,
+        "safe_valve": Safe_Valve_Element,
         "consumer": Consumer_Element,
         "tee": Tee_Element,
     }

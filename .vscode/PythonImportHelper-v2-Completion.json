@@ -195,6 +195,14 @@
         "documentation": {}
     },
     {
+        "label": "Constants",
+        "importPath": "services.calculation_V2.constants",
+        "description": "services.calculation_V2.constants",
+        "isExtraImport": true,
+        "detail": "services.calculation_V2.constants",
+        "documentation": {}
+    },
+    {
         "label": "Vis_otm",
         "importPath": "services.calculation_V2.vis_otm",
         "description": "services.calculation_V2.vis_otm",
@@ -380,6 +388,14 @@
     },
     {
         "label": "Recieved_element",
+        "importPath": "schemas.unsteady_flow_ws_scheme",
+        "description": "schemas.unsteady_flow_ws_scheme",
+        "isExtraImport": true,
+        "detail": "schemas.unsteady_flow_ws_scheme",
+        "documentation": {}
+    },
+    {
+        "label": "One_section_response",
         "importPath": "schemas.unsteady_flow_ws_scheme",
         "description": "schemas.unsteady_flow_ws_scheme",
         "isExtraImport": true,
@@ -790,6 +806,14 @@
         "documentation": {}
     },
     {
+        "label": "AbstractElement",
+        "importPath": "services.calculation_V3.elements.abstractions",
+        "description": "services.calculation_V3.elements.abstractions",
+        "isExtraImport": true,
+        "detail": "services.calculation_V3.elements.abstractions",
+        "documentation": {}
+    },
+    {
         "label": "Provider_Element",
         "importPath": "services.calculation_V3.elements.provider_element",
         "description": "services.calculation_V3.elements.provider_element",
@@ -827,6 +851,14 @@
         "description": "services.calculation_V3.elements.tee_element",
         "isExtraImport": true,
         "detail": "services.calculation_V3.elements.tee_element",
+        "documentation": {}
+    },
+    {
+        "label": "Gate_Valve_Element",
+        "importPath": "services.calculation_V3.elements.gate_valve_element",
+        "description": "services.calculation_V3.elements.gate_valve_element",
+        "isExtraImport": true,
+        "detail": "services.calculation_V3.elements.gate_valve_element",
         "documentation": {}
     },
     {
@@ -1315,8 +1347,17 @@
         "kind": 6,
         "importPath": "fastApi.services.calculation_V3.elements.elements_factory",
         "description": "fastApi.services.calculation_V3.elements.elements_factory",
-        "peekOfCode": "class Elements_Factory:\n    type_to_instance_dict = {\n        \"provider\": Provider_Element,\n        \"pipe\": Pipe_Element,\n        \"pump\": Pump_Element,\n        # \"gate_valve\": Gate_valve_Element,\n        # \"safe_valve\": Safe_valve_Element,\n        \"consumer\": Consumer_Element,\n        \"tee\": Tee_Element,\n    }",
+        "peekOfCode": "class Elements_Factory:\n    type_to_instance_dict = {\n        \"provider\": Provider_Element,\n        \"pipe\": Pipe_Element,\n        \"pump\": Pump_Element,\n        \"gate_valve\": Gate_Valve_Element,\n        # \"safe_valve\": Safe_valve_Element,\n        \"consumer\": Consumer_Element,\n        \"tee\": Tee_Element,\n    }",
         "detail": "fastApi.services.calculation_V3.elements.elements_factory",
+        "documentation": {}
+    },
+    {
+        "label": "Gate_Valve_Element",
+        "kind": 6,
+        "importPath": "fastApi.services.calculation_V3.elements.gate_valve_element",
+        "description": "fastApi.services.calculation_V3.elements.gate_valve_element",
+        "peekOfCode": "class Gate_Valve_Element(AbstractElement):\n    def unsteady_solve(self, prev_res):\n        prev_self_res = prev_res.moment_result[self.id].value\n        neighbor_id = self.neighbours[0]\n        neighbor_result = prev_res.moment_result[neighbor_id].value[-1][self.id]\n        current_element = self.value\n        hidraulics = self.hydraulics\n        Ja = hidraulics.find_Ja(neighbor_result.p, neighbor_result.V, self.diameter)\n        if current_element.mode == \"pressure\":\n            p = current_element.value * 1000",
+        "detail": "fastApi.services.calculation_V3.elements.gate_valve_element",
         "documentation": {}
     },
     {
